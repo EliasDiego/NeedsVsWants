@@ -27,9 +27,7 @@ namespace NeedsVsWants.Patterns
 
             transform.parent = _ObjectPool.parent;
             
-            //_ObjectPool.Return(this);
-        }
-
-        public void ParentToPool() => transform.parent = _ObjectPool.parent;
-}
+            _ObjectPool.Return(this);
+        }   
+    }
 }

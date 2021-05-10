@@ -133,19 +133,17 @@ namespace NeedsVsWants.Patterns
             return instanceList.Select(i => i.gameObject).ToArray();
         }
 
-        async public void Return(ObjectPoolInstance instance)
+        public void Return(ObjectPoolInstance instance)
         {
             if(instance.objectPool == this)
             {
                 _ActivePool = new Queue<ObjectPoolInstance>(_ActivePool.Where(i => i != instance));
 
                 _InactivePool.Push(instance);
-                
-                await System.Threading.Tasks.Task.Delay(1);
 
                 Debug.Log(instance != null);
-                
-                instance.ParentToPool();
+
+                instance.transform.parent = parent;
             }
         }
     }
