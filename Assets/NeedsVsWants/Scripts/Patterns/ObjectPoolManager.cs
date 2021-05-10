@@ -5,6 +5,8 @@ using System.Linq;
 
 using UnityEngine;
 
+using UnityEditor;
+
 namespace NeedsVsWants.Patterns
 {
     public class ObjectPoolManager : SimpleSingleton<ObjectPoolManager>
@@ -12,6 +14,13 @@ namespace NeedsVsWants.Patterns
         [SerializeField]
         ObjectPool[] _ObjectPools;
 
+#if UNITY_EDITOR
+        [MenuItem("GameObject/Patterns/Object Pool Manager", false, 10)]
+        static void CreateObjectPoolManager(MenuCommand menuCommand)
+        {
+            ObjectPoolManager objectPoolManager = new GameObject("ObjectPoolManager").AddComponent<ObjectPoolManager>();
+        }
+#endif
         public void Instantiate()
         {
             foreach(ObjectPool objectPool in _ObjectPools)
