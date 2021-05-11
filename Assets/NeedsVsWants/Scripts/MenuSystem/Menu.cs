@@ -90,7 +90,6 @@ namespace NeedsVsWants.MenuSystem
             {
                 Selectable selectable = _EventSystem.currentSelectedGameObject?.GetComponent<Selectable>();
 
-
                 if(selectable)
                 {
                     if(selectable is TMP_InputField)
@@ -196,6 +195,10 @@ namespace NeedsVsWants.MenuSystem
             // _InputHandler["Menu", "Move"].started -= _OnMoveEvent;
         }
 
+        protected abstract void OnEnableMenu();
+        protected abstract void OnDisableMenu();
+        protected abstract void OnReturn();
+
         public virtual void EnableMenu()
         {
             _IsActive = true;
@@ -203,6 +206,8 @@ namespace NeedsVsWants.MenuSystem
             _EventSystem.SetSelectedGameObject(null);
 
             _CurrentSelected = _FirstSelected.gameObject;
+
+            OnEnableMenu();
             
             HookEvents();
         }
@@ -214,6 +219,8 @@ namespace NeedsVsWants.MenuSystem
             _EventSystem.SetSelectedGameObject(null);
             
             _CurrentSelected = null;
+
+            OnDisableMenu();
             
             UnhookEvents();
         }
@@ -223,6 +230,8 @@ namespace NeedsVsWants.MenuSystem
             if(_ReturnMenu)
             {
                 _ReturnMenu.EnableMenu();
+                
+                OnReturn();
 
                 DisableMenu();
             }
