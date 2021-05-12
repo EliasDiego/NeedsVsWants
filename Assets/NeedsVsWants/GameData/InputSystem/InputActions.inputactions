@@ -17,7 +17,7 @@
                     "name": "ScrollWheel",
                     "type": "Value",
                     "id": "d774f107-541d-4784-a8fc-5c0e56f8bf0d",
-                    "expectedControlType": "Analog",
+                    "expectedControlType": "Vector2",
                     "processors": "",
                     "interactions": ""
                 },
@@ -74,8 +74,8 @@
                 },
                 {
                     "name": "",
-                    "id": "7fa7fd39-52c5-4a17-91f9-b32bb994dd23",
-                    "path": "<Mouse>/scroll/y",
+                    "id": "608a7824-3c75-4e5b-a707-e854c9374231",
+                    "path": "<Mouse>/scroll",
                     "interactions": "",
                     "processors": "",
                     "groups": "",

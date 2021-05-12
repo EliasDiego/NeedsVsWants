@@ -1,16 +1,31 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
+using System.Linq;
+using System.Globalization;
 
 using UnityEngine;
+
 using UnityEditor;
+
+using TMPro;
 
 namespace NeedsVsWants.CalendarSystem
 {
         
     public class Calendar : MonoBehaviour
     {
-        Week[] _Weeks;
+        [Header("Colors")]
+        [SerializeField]
+        Color _NotInCurrentMonthColor = Color.white;
+        [SerializeField]
+        Color _InCurrentMonthColor = Color.white;
+        [SerializeField]
+        Color _HasEventsColor = Color.white;
+        [SerializeField]
+        Color _CurrentDayColor = Color.white;
+        
+        TMP_Text _MonthYearText;
+
+        CalendarDay[] _CalendarDays;
 
 #if UNITY_EDITOR
         [CustomEditor(typeof(Calendar))]
@@ -31,11 +46,14 @@ namespace NeedsVsWants.CalendarSystem
 
                 if(Application.isPlaying)
                 {
+                    EditorGUILayout.Space();
+                    EditorGUILayout.LabelField("Debug", EditorStyles.boldLabel);
+
                     _Year = EditorGUILayout.IntField("Year", _Year);
                     _Month = EditorGUILayout.IntField("Month", _Month);
 
                     if(GUILayout.Button("Setup Calendar"))
-                        calendar.SetupCalendar(_Year, _Month);
+                        calendar.SetUpCalendar(_Year, _Month);
                 }
             }
         }
@@ -43,14 +61,18 @@ namespace NeedsVsWants.CalendarSystem
 
         void Awake() 
         {
-            _Weeks = GetComponentsInChildren<Week>();
+            _CalendarDays = GetComponentsInChildren<CalendarDay>();
+
+            _MonthYearText = GetComponentInChildren<TMP_Text>();
         }
 
         void Start() 
         {
-            SetupCalendar(2021, 5);    
+            SetUpCalendar(2021, 5);    
+
+            MarkCurrentDay(2021, 5, 12);
         }
-        
+
         int GetWeekOfMonth(int year, int month, int day)
         {
             System.DateTime dateTime = new System.DateTime(year, month, 1);
@@ -58,71 +80,56 @@ namespace NeedsVsWants.CalendarSystem
             return Mathf.CeilToInt(((int)dateTime.DayOfWeek + day) / 7f);
         }
 
-        public void SetupCalendar(int year, int month)
+        public void SetUpCalendar(int year, int month)
         {
-            DateTime dateTime;
+            DateTime tempDate;
 
-            int tempMonth;
-            int tempYear;
+            int currentMonth = month;
+            
+            tempDate = new DateTime(year, month, 1);
+            
+            _MonthYearText.text = CultureInfo.CurrentCulture.DateTimeFormat.GetMonthName(month) + " " + year.ToString();
 
-            int daysInMonth = 0;
-
-            int currentWeek = 0;
-
-            foreach(Week week in _Weeks)
-                week.ClearDays();
-
-            // For current Month
-            for(int day = 1; day <= DateTime.DaysInMonth(year, month); day++)
-            {
-                dateTime = new DateTime(year, month, day);
-
-                _Weeks[GetWeekOfMonth(year, month, day) - 1].days[(int)dateTime.DayOfWeek].day = dateTime.Day;
-            }
-
-            // For previous Month 
-            tempMonth = month - 1;
-            tempYear = year;
-
-            if(tempMonth < 1)
-            {
-                tempMonth = 12;
-
-                tempYear -= 1;
-            }
-
-            daysInMonth = DateTime.DaysInMonth(tempYear, tempMonth);
-
-            dateTime = new DateTime(year, month, 1);
-
-            if(dateTime.DayOfWeek != DayOfWeek.Sunday)
-            {
-                for(int dayOfWeek = (int)dateTime.DayOfWeek; dayOfWeek > 0; dayOfWeek--)
+            // Check if prev month can be seen
+            if(tempDate.DayOfWeek != DayOfWeek.Sunday)
+            { 
+                month -= 1;
+                
+                // If Month is less than January
+                if(month < 1)
                 {
-                    _Weeks[0].days[dayOfWeek - 1].day = daysInMonth;
-                    
-                    daysInMonth--;
+                    month = 12;
+
+                    year -= 1;
                 }
+
+                // Set start date, to draw, at the prev month date where it can be seen
+                tempDate = new DateTime(year, month, DateTime.DaysInMonth(year, month) - ((int)tempDate.DayOfWeek) + 1);
             }
 
-            // For Next Month
- 
+            foreach(CalendarDay day in _CalendarDays)
+            {
+                // Save a copy of the date to CalendarDay
+                day.dateTime = tempDate;
+                
+                // If not current month
+                if(tempDate.Month != currentMonth)
+                    day.color = _NotInCurrentMonthColor;
 
-            // V1
-            // foreach(Week week in _Weeks)
-            //     week.ClearDays();
+                else
+                    day.color = _InCurrentMonthColor;
 
-            // for(int day = 1; day <= DateTime.DaysInMonth(year, month); day++)
-            // {
-            //     dateTime = new DateTime(year, month, day);
-
-            //     _Weeks[GetWeekOfMonth(year, month, day) - 1].days[(int)dateTime.DayOfWeek].day = dateTime.Day;
-            // }
+                // Go to next day
+                tempDate = tempDate.AddDays(1);
+            }
         }
 
         public void MarkCurrentDay(int year, int month, int day)
         {
-
+            CalendarDay calendarDay = _CalendarDays.First(d => d.dateTime.Year == year && d.dateTime.Month == month && d.dateTime.Day == day);
+            
+            if(calendarDay)
+                calendarDay.color = _CurrentDayColor;
         }
     }
 }
