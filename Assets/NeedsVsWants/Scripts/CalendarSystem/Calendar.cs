@@ -8,10 +8,12 @@ using UnityEditor;
 
 using TMPro;
 
+using NeedsVsWants.Patterns;
+
 namespace NeedsVsWants.CalendarSystem
 {
         
-    public class Calendar : MonoBehaviour
+    public class Calendar : SimpleSingleton<Calendar>
     {
         [Header("Colors")]
         [SerializeField]
@@ -24,6 +26,8 @@ namespace NeedsVsWants.CalendarSystem
         Color _CurrentDayColor = Color.white;
         
         TMP_Text _MonthYearText;
+
+        CalendarDay _CurrentDay;
 
         CalendarDay[] _CalendarDays;
 
@@ -53,24 +57,19 @@ namespace NeedsVsWants.CalendarSystem
                     _Month = EditorGUILayout.IntField("Month", _Month);
 
                     if(GUILayout.Button("Setup Calendar"))
-                        calendar.SetUpCalendar(_Year, _Month);
+                        calendar.SetupCalendar(_Year, _Month);
                 }
             }
         }
 #endif
 
-        void Awake() 
+        protected override void Awake() 
         {
+            base.Awake();
+            
             _CalendarDays = GetComponentsInChildren<CalendarDay>();
 
             _MonthYearText = GetComponentInChildren<TMP_Text>();
-        }
-
-        void Start() 
-        {
-            SetUpCalendar(2021, 5);    
-
-            MarkCurrentDay(2021, 5, 12);
         }
 
         int GetWeekOfMonth(int year, int month, int day)
@@ -80,15 +79,17 @@ namespace NeedsVsWants.CalendarSystem
             return Mathf.CeilToInt(((int)dateTime.DayOfWeek + day) / 7f);
         }
 
-        public void SetUpCalendar(int year, int month)
+        public void SetupCalendar(int year, int month)
         {
             DateTime tempDate;
 
             int currentMonth = month;
+
+            _CurrentDay = null; // Reset Current Day
             
-            tempDate = new DateTime(year, month, 1);
+            tempDate = new DateTime(year, month, 1); // Get First Day of the current Month
             
-            _MonthYearText.text = CultureInfo.CurrentCulture.DateTimeFormat.GetMonthName(month) + " " + year.ToString();
+            _MonthYearText.text = CultureInfo.CurrentCulture.DateTimeFormat.GetMonthName(month) + " " + year.ToString(); // Write the current month and year
 
             // Check if prev month can be seen
             if(tempDate.DayOfWeek != DayOfWeek.Sunday)
@@ -124,12 +125,23 @@ namespace NeedsVsWants.CalendarSystem
             }
         }
 
+        public void SetupCalendar(DateTime dateTime) => SetupCalendar(dateTime.Year, dateTime.Month);
+
         public void MarkCurrentDay(int year, int month, int day)
         {
             CalendarDay calendarDay = _CalendarDays.First(d => d.dateTime.Year == year && d.dateTime.Month == month && d.dateTime.Day == day);
             
             if(calendarDay)
-                calendarDay.color = _CurrentDayColor;
+            {
+                if(_CurrentDay) // Reset Day
+                    _CurrentDay.color = _InCurrentMonthColor;
+
+                _CurrentDay = calendarDay;
+
+                _CurrentDay.color = _CurrentDayColor;
+            }
         }
+
+        public void MarkCurrentDay(DateTime dateTime) => MarkCurrentDay(dateTime.Year, dateTime.Month, dateTime.Day);
     }
 }
