@@ -13,7 +13,7 @@ namespace NeedsVsWants.WelfareSystem
         [SerializeField]
         string _Id;
         [SerializeField]
-        FloatMinMax _SliderMinMax = new FloatMinMax(0, 1);
+        float _MaxValue;
         [SerializeField]
         float _ValueChangeSpeed = 1;
         
@@ -37,14 +37,12 @@ namespace NeedsVsWants.WelfareSystem
         }
 
         public float maxValue { get => _Slider.maxValue; set => _Slider.maxValue = value; }
-        public float minValue { get => _Slider.minValue; set => _Slider.minValue = value; }
 
         void Awake() 
         {
             _Slider = GetComponentInChildren<Slider>();
 
-            maxValue = _SliderMinMax.max;
-            minValue = _SliderMinMax.min;
+            maxValue = _MaxValue;
         }
 
         void Update()

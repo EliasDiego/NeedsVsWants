@@ -25,7 +25,7 @@ namespace NeedsVsWants.WelfareSystem
             {
                 EditorGUILayout.LabelField(welfareSlider.id, EditorStyles.boldLabel);
 
-                welfareSlider.value = EditorGUILayout.Slider(welfareSlider.value, welfareSlider.minValue, welfareSlider.maxValue);
+                welfareSlider.value = EditorGUILayout.Slider(welfareSlider.value, 0, welfareSlider.maxValue);
                 
                 EditorGUILayout.Space();
             }
