@@ -12,26 +12,25 @@ using TMPro;
 
 namespace NeedsVsWants.MenuSystem
 {
+    [RequireComponent(typeof(AudioSource))]
     public abstract class Menu : MonoBehaviour
     {
         [SerializeField]
-        bool _ActiveOnStart = false;
-        [SerializeField]
-        Selectable _FirstSelected;
+        bool _ActiveOnAwake = false;
 
-        GameObject _CurrentSelected;
-
-        //InputHandler _InputHandler;
+        AudioSource _AudioSource;
 
         Menu _ReturnMenu;
-
-        Action<InputAction.CallbackContext> _OnReturnEvent, _OnPointEvent, _OnMoveEvent;
-
-        UnityEngine.EventSystems.EventSystem _EventSystem;
 
         bool _IsActive = false;
 
         public bool isActive => _IsActive;
+
+        protected AudioSource audioSource => _AudioSource;
+
+        public static Menu _CurrentMenu;
+
+        public static Menu current => _CurrentMenu;
 
         #if UNITY_EDITOR
         [CustomEditor(typeof(Menu), true)]    
@@ -82,117 +81,19 @@ namespace NeedsVsWants.MenuSystem
 
         protected virtual void Awake()
         {
-            //_InputHandler = Resources.Load<InputHandler>("YSInputHandler");
-
-            _EventSystem = UnityEngine.EventSystems.EventSystem.current;
-
-            _OnReturnEvent = context =>
-            {
-                Selectable selectable = _EventSystem.currentSelectedGameObject?.GetComponent<Selectable>();
-
-                if(selectable)
-                {
-                    if(selectable is TMP_InputField)
-                    {
-                        TMP_InputField inputField = selectable as TMP_InputField;
-
-                        if(inputField)
-                        {
-                            if(!inputField.isFocused)
-                                Return();
-
-                            else
-                                inputField.DeactivateInputField();
-                        }
-                    }
-
-                    else if(selectable is Toggle)
-                    {
-                        Toggle toggle = selectable as Toggle;
-
-                        if(toggle)
-                        {
-                            Transform toggleParent = toggle.transform?.parent?.parent?.parent?.parent;
-                            
-                            if(!toggleParent)
-                                Return();
-                        }
-                    }
-
-                    else if(selectable is Button)
-                    {
-                        Button button = selectable as Button;
-
-                        if(button)
-                            Return();
-                    }
-
-                    else if(selectable is Slider)
-                    {
-                        Slider slider = selectable as Slider;
-
-                        if(slider)
-                            Return();
-                    }
-
-                    else
-                        Return();
-                }
-
-                else
-                    Return();
-            };
-
-
-
-            _OnPointEvent = context =>
-            {
-                if(_EventSystem.currentSelectedGameObject)
-                {
-                    _CurrentSelected = _EventSystem.currentSelectedGameObject;
-
-                    _EventSystem.SetSelectedGameObject(null);
-                }
-            };
-
-            _OnMoveEvent = context =>
-            {
-                if(!_EventSystem.currentSelectedGameObject)
-                    _EventSystem.SetSelectedGameObject(_CurrentSelected);
-            };
-
-            if(_ActiveOnStart)
+            if(_ActiveOnAwake)
             {
                 // _InputHandler.Enable("Menu");
                 // _InputHandler.Disable("Game");
 
-                EnableMenu();
+                if(!_CurrentMenu)
+                    EnableMenu();
             }
 
             else    
                 DisableMenu();
 
-        }
-
-        void OnDisable() 
-        {
-            if(_IsActive)
-                UnhookEvents();
-        }
-
-        void HookEvents()
-        {
-            // _InputHandler["Menu", "Return"].started += _OnReturnEvent;
-            // _InputHandler["Menu", "Point"].performed += _OnPointEvent;
-            // _InputHandler["Menu", "Move"].started += _OnMoveEvent;
-
-        }
-
-        void UnhookEvents()
-        {
-            // _InputHandler["Menu", "Return"].started -= _OnReturnEvent;
-            // _InputHandler["Menu", "Point"].performed -= _OnPointEvent;
-            // _InputHandler["Menu", "Move"].started -= _OnMoveEvent;
+            _AudioSource = GetComponent<AudioSource>();
         }
 
         protected abstract void OnEnableMenu();
@@ -203,29 +104,21 @@ namespace NeedsVsWants.MenuSystem
         {
             _IsActive = true;
 
-            _EventSystem.SetSelectedGameObject(null);
-
-            _CurrentSelected = _FirstSelected.gameObject;
-
             OnEnableMenu();
-            
-            HookEvents();
+
+            _CurrentMenu = this;
         }
 
         public virtual void DisableMenu()
         {
             _IsActive = false;
 
-            _EventSystem.SetSelectedGameObject(null);
-            
-            _CurrentSelected = null;
-
             OnDisableMenu();
             
-            UnhookEvents();
+            _CurrentMenu = null;
         }
 
-        public virtual void Return()
+        public virtual void Return() // Needs to be redo for Confirmation Menus and such
         {
             if(_ReturnMenu)
             {
@@ -336,13 +229,13 @@ namespace NeedsVsWants.MenuSystem
 
         public void SwitchTo(Menu menu, bool disableMenu)
         {
-            menu.SetReturnMenu(this);
-            menu.EnableMenu();
-
             SetReturnMenu(null);
 
             if(disableMenu)
                 DisableMenu();
+                
+            menu.SetReturnMenu(this);
+            menu.EnableMenu();
         }
 
         public void SwitchTo(Menu menu) => SwitchTo(menu, true);
