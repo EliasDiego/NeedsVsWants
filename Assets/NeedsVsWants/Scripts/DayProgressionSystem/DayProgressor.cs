@@ -4,11 +4,14 @@ using System.Collections.Generic;
 
 using UnityEngine;
 
+using NeedsVsWants.Patterns;
 using NeedsVsWants.CalendarSystem;
+
+using TMPro;
 
 namespace NeedsVsWants.DayProgressionSystem
 {
-    public class DayProgressor : MonoBehaviour
+    public class DayProgressor : SimpleSingleton<DayProgressor>
     {
         [Header("Start Date")]
         [SerializeField]
@@ -24,20 +27,28 @@ namespace NeedsVsWants.DayProgressionSystem
         [SerializeField]
         float _HourTimeScale = 1;
         
-        DateTime _CurrentDateTime;
-
         int _CurrentMonth;
         int _CurrentDay;
 
         bool _IsPaused = false;
+        
+        DateTime _CurrentDateTime;
 
-        void Awake()
+        TMP_Text _TimeText;
+
+        public DateTime currentDateTime => _CurrentDateTime;
+
+        protected override void Awake()
         {
+            base.Awake();
+
             _CurrentDateTime = new DateTime(_StartYear, _StartMonth, _StartDay);    
 
             _CurrentDay = _CurrentDateTime.Day;
 
             _CurrentMonth = _CurrentDateTime.Month;
+
+            _TimeText = GetComponentInChildren<TMP_Text>();
         }
 
         void Start() 
@@ -52,23 +63,44 @@ namespace NeedsVsWants.DayProgressionSystem
                 return;
 
             if(_CurrentDay == _CurrentDateTime.Day) // if still the same day
-                _CurrentDateTime = _CurrentDateTime.AddHours(_HourTimeDelta * _HourTimeScale * Time.deltaTime);
+                OnSameDay();
 
             else // if next day
+                OnNextDay();
+        }
+
+        void OnSameDay()
+        {
+            int hour;
+
+            _CurrentDateTime = _CurrentDateTime.AddHours(_HourTimeDelta * _HourTimeScale * Time.deltaTime);
+
+            if(_CurrentDateTime.Hour > 12)
             {
-                _CurrentDay = _CurrentDateTime.Day; // Update day checker
+                hour = _CurrentDateTime.Hour - 12;
 
-                if(_CurrentMonth != _CurrentDateTime.Month) // If current month has passed
-                {
-                    _CurrentMonth = _CurrentDateTime.Month;
-
-                    Calendar.instance.SetupCalendar(_CurrentDateTime); // Update Calendar
-                }
-                
-                Calendar.instance.MarkCurrentDay(_CurrentDateTime);
+                if(hour <= 0)
+                    hour = 1; 
             }
 
-            Debug.Log(_CurrentDateTime);
+            else
+                hour = _CurrentDateTime.Hour;
+            
+            _TimeText.text = (hour < 10 ? "0" : "") + hour + ":00" + (_CurrentDateTime.Hour > 12 ? " PM" : " AM");
+        }
+
+        void OnNextDay()
+        {
+            _CurrentDay = _CurrentDateTime.Day; // Update day checker
+
+            if(_CurrentMonth != _CurrentDateTime.Month) // If current month has passed
+            {
+                _CurrentMonth = _CurrentDateTime.Month;
+
+                Calendar.instance.SetupCalendar(_CurrentDateTime); // Update Calendar
+            }
+            
+            Calendar.instance.MarkCurrentDay(_CurrentDateTime);
         }
 
         public void SetTimeScale(float scale) => _HourTimeScale = scale;
