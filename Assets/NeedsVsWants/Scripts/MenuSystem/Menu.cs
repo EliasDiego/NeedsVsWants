@@ -16,7 +16,7 @@ namespace NeedsVsWants.MenuSystem
     public abstract class Menu : MonoBehaviour
     {
         [SerializeField]
-        bool _ActiveOnAwake = false;
+        bool _ActiveOnStart = false;
 
         AudioSource _AudioSource;
 
@@ -36,8 +36,6 @@ namespace NeedsVsWants.MenuSystem
         [CustomEditor(typeof(Menu), true)]    
         public class MenuCustomEditor : Editor
         {
-            bool _IsActiveOnAwake = false;
-
             public override void OnInspectorGUI()
             {
                 Menu menu = target as Menu;
@@ -79,9 +77,11 @@ namespace NeedsVsWants.MenuSystem
         }
         #endif
 
-        protected virtual void Awake()
+        protected virtual void Start()
         {
-            if(_ActiveOnAwake)
+            _AudioSource = GetComponent<AudioSource>();
+
+            if(_ActiveOnStart)
             {
                 // _InputHandler.Enable("Menu");
                 // _InputHandler.Disable("Game");
@@ -92,8 +92,6 @@ namespace NeedsVsWants.MenuSystem
 
             else    
                 DisableMenu();
-
-            _AudioSource = GetComponent<AudioSource>();
         }
 
         protected abstract void OnEnableMenu();
@@ -112,7 +110,7 @@ namespace NeedsVsWants.MenuSystem
         public virtual void DisableMenu()
         {
             _IsActive = false;
-
+            
             OnDisableMenu();
             
             _CurrentMenu = null;

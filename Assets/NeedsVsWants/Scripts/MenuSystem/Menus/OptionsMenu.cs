@@ -6,15 +6,28 @@ namespace NeedsVsWants.MenuSystem
 {
     public class OptionsMenu : Menu
     {
+        Tab[] _Tabs;
+
+        protected override void Start() 
+        {
+            _Tabs = GetComponentsInChildren<Tab>(true);
+
+            base.Start();  
+        }
 
         protected override void OnDisableMenu()
         {
+            for(int i = 0; i < _Tabs.Length; i++)
+                _Tabs[i].DisableTab();
+                
             transform.SetActiveChildren(false);
         }
 
         protected override void OnEnableMenu()
         {
             transform.SetActiveChildren(true);
+            
+            _Tabs[0].EnableTab();
         }
 
         protected override void OnReturn()
