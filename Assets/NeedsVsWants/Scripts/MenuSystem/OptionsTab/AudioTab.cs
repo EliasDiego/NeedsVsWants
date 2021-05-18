@@ -21,10 +21,8 @@ namespace NeedsVsWants.MenuSystem
 
         float VolumeClamp(float value) => Mathf.Log10(Mathf.Clamp(value, 0.0001f, 1)) * 20;
 
-        protected override void Start() 
+        void Awake() 
         {
-            base.Start();
-
             _MasterVolume.value = PlayerPrefs.GetFloat("MasterVolume", 0.5f);
             _MasterVolume.onValueChanged.AddListener(volume => 
             {

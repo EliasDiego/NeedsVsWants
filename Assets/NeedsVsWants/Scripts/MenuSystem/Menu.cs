@@ -83,9 +83,6 @@ namespace NeedsVsWants.MenuSystem
 
             if(_ActiveOnStart)
             {
-                // _InputHandler.Enable("Menu");
-                // _InputHandler.Disable("Game");
-
                 if(!_CurrentMenu)
                     EnableMenu();
             }

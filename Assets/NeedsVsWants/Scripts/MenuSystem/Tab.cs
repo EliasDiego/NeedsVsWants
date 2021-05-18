@@ -62,11 +62,6 @@ namespace NeedsVsWants.MenuSystem
             }
         }
 
-        protected virtual void Start() 
-        {
-            DisableTab();
-        }
-
         protected abstract void OnEnableTab();
         protected abstract void OnDisableTab();
 

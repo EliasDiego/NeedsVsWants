@@ -8,11 +8,9 @@ namespace NeedsVsWants.MenuSystem
     {
         Tab[] _Tabs;
 
-        protected override void Start() 
+        void Awake() 
         {
             _Tabs = GetComponentsInChildren<Tab>(true);
-
-            base.Start();  
         }
 
         protected override void OnDisableMenu()

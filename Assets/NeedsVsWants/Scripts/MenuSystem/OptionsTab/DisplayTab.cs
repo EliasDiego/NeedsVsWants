@@ -1,5 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
+
 using UnityEngine;
 
 using TMPro;
@@ -13,16 +15,17 @@ namespace NeedsVsWants.MenuSystem
         [SerializeField]
         TMP_Dropdown _DisplayModeDropdown;
 
-        Resolution _Resolutions;
+        IEnumerable<Resolution> _Resolutions;
 
-        protected override void Start()
+        void Awake()
         {
-            base.Start();
-
             List<TMP_Dropdown.OptionData> optionDataList = new List<TMP_Dropdown.OptionData>();
 
             // Resolution
-            foreach(Resolution resolution in Screen.resolutions)
+            _Resolutions = Screen.resolutions.Where(resolution => resolution.width >= 1280 && resolution.height >= 720).
+                GroupBy(resolution => new Vector2(resolution.width, resolution.height)).Select(resolution => resolution.First());
+            
+            foreach(Resolution resolution in _Resolutions)
                 optionDataList.Add(new TMP_Dropdown.OptionData(resolution.width.ToString() + " x " + resolution.height.ToString()));
             
             _ResolutionDropdown.options = optionDataList;

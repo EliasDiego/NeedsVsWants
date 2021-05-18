@@ -10,7 +10,7 @@ namespace NeedsVsWants.MenuSystem
     {
         Button _TabButton;
 
-        protected virtual void Awake()
+        void GetTabButton()
         {
             _TabButton = GetComponentInChildren<Button>(true);
 
@@ -26,15 +26,23 @@ namespace NeedsVsWants.MenuSystem
 
         protected override void OnEnableTab()
         {
+            if(!_TabButton)
+                GetTabButton();
+
             transform.SetActiveChildren(true);
+
+            Debug.Log(transform.GetChild(0).gameObject.activeSelf);
 
             _TabButton.image.color = Color.white;
         }
 
         protected override void OnDisableTab()
         {
-            transform.SetActiveChildren(false);
+            if(!_TabButton)
+                GetTabButton();
 
+            transform.SetActiveChildren(false);
+            
             _TabButton.gameObject.SetActive(true);
             _TabButton.image.color = Color.grey;
         }
