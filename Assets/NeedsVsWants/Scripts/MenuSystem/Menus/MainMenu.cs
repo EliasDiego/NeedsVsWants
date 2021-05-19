@@ -2,13 +2,21 @@ using System.Collections;
 using System.Collections.Generic;
 
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
-using NeedsVsWants;
+using NeedsVsWants.Player;
 
 namespace NeedsVsWants.MenuSystem
 {
     public class MainMenu : Menu
     {
+        PlayerStat _PlayerStat;
+
+        protected override void Start() 
+        {
+            base.Start();
+        }
+
         protected override void OnDisableMenu()
         {
             transform.SetActiveChildren(false);
@@ -22,6 +30,11 @@ namespace NeedsVsWants.MenuSystem
         protected override void OnReturn()
         {
             
+        }
+
+        public void NextLevel(int levelIndex)
+        {
+            SceneManager.LoadScene(levelIndex, LoadSceneMode.Single);
         }
     }
 }
