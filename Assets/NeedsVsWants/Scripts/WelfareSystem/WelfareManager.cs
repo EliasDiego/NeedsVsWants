@@ -6,19 +6,24 @@ using UnityEngine.UI;
 
 using NeedsVsWants.Patterns;
 
+using NeedsVsWants.Player;
+
 namespace NeedsVsWants.WelfareSystem
 {
-    public class WelfareManager : SimpleSingleton<WelfareManager>
+    public class WelfareManager : MonoBehaviour
     {
-        WelfareSlider[] _WelfareSliders;
+        [SerializeField]
+        WelfareSlider _HealthWelfare;
+        [SerializeField]
+        WelfareSlider _HungerWelfare;
+        [SerializeField]
+        WelfareSlider _HappinessWelfare;
+        [SerializeField]
+        WelfareSlider _SocialWelfare;
 
-        public WelfareSlider[] welfareSliders => _WelfareSliders;
-
-        protected override void Awake() 
+        void Start() 
         {
-            base.Awake();
-
-            _WelfareSliders = GetComponentsInChildren<WelfareSlider>();
+            
         }
     }
 }

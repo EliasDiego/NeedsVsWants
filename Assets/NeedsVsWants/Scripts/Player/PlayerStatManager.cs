@@ -11,18 +11,6 @@ namespace NeedsVsWants.Player
 {
     public class PlayerStatManager : SimpleSingleton<PlayerStatManager>
     {
-        [Header("Debug")]
-        [SerializeField]
-        float _CurrentMoney;
-        [SerializeField]
-        int _CurrentYear;
-        [SerializeField]
-        int _CurrentMonth;
-        [SerializeField]
-        int _CurrentDay;
-        [SerializeField]
-        int _CurrentHour;
-
         PlayerStat _PlayerStat;
 
         public float currentMoney
@@ -57,18 +45,6 @@ namespace NeedsVsWants.Player
             base.Awake();
 
             _PlayerStat = PlayerStat.instance;
-        }
-
-        void Update() 
-        {
-            if(_PlayerStat)
-            {
-                _CurrentYear = _PlayerStat.currentDateTime.Year;
-                _CurrentMonth = _PlayerStat.currentDateTime.Month;
-                _CurrentDay = _PlayerStat.currentDateTime.Day;
-                _CurrentHour = _PlayerStat.currentDateTime.Hour;
-                _CurrentMoney = _PlayerStat.currentMoney;
-            }
         }
     }
 }

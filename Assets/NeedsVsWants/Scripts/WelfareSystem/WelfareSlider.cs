@@ -13,8 +13,6 @@ namespace NeedsVsWants.WelfareSystem
         [SerializeField]
         string _Id;
         [SerializeField]
-        float _MaxValue;
-        [SerializeField]
         float _ValueChangeSpeed = 1;
         
         bool _IsValueChanged = false;
@@ -41,8 +39,6 @@ namespace NeedsVsWants.WelfareSystem
         void Awake() 
         {
             _Slider = GetComponentInChildren<Slider>();
-
-            maxValue = _MaxValue;
         }
 
         void Update()
