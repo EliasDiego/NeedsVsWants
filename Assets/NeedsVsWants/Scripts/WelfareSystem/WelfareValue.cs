@@ -6,9 +6,14 @@ namespace NeedsVsWants.WelfareSystem
 {
     public struct WelfareValue
     {
-        public string id;
-
         public float value;
         public float maxValue;
+
+        public WelfareValue(float value, float maxValue)
+        {
+            this.value = value;
+
+            this.maxValue = maxValue;
+        }
     }
 }

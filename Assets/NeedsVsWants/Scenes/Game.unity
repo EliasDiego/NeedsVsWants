@@ -132,6 +132,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 262003200}
+  - component: {fileID: 262003201}
   m_Layer: 5
   m_Name: MoneyDisplay
   m_TagString: Untagged
@@ -157,9 +158,21 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 189.7, y: -43}
-  m_SizeDelta: {x: 350, y: 60}
+  m_AnchoredPosition: {x: 164.3, y: -43.8}
+  m_SizeDelta: {x: 300, y: 60}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &262003201
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 262003199}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e08a7fe1fa1fb9b40b0ed6b6eba384d6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &278929246
 GameObject:
   m_ObjectHideFlags: 0
@@ -195,7 +208,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0.0000038146973, y: 0}
-  m_SizeDelta: {x: 350, y: 60}
+  m_SizeDelta: {x: 300, y: 60}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &278929248
 MonoBehaviour:
@@ -514,6 +527,54 @@ MonoBehaviour:
   m_RequiresDepthTexture: 0
   m_RequiresColorTexture: 0
   m_Version: 2
+--- !u!1 &1793755230
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1793755232}
+  - component: {fileID: 1793755231}
+  m_Layer: 0
+  m_Name: Manager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1793755231
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1793755230}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 71b7e1d0019f8cc4097409a3d374550e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _CurrentMoney: 0
+  _CurrentYear: 0
+  _CurrentMonth: 0
+  _CurrentDay: 0
+  _CurrentHour: 0
+--- !u!4 &1793755232
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1793755230}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 50, y: 1055, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1857033396
 GameObject:
   m_ObjectHideFlags: 0
@@ -571,7 +632,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: P 999, 999,999.00
+  m_text: P 999,999,999.00
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -1947,7 +2008,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _Id: Happiness
-  _MaxValue: 0
   _ValueChangeSpeed: 1
 --- !u!224 &9180394270701525679
 RectTransform:
@@ -5916,6 +5976,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b4f080bc947c8c14da520f5f52256826, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _HealthWelfare: {fileID: 9180394271393493740}
+  _HungerWelfare: {fileID: 9180394272220931121}
+  _HappinessWelfare: {fileID: 9180394270701525678}
+  _SocialWelfare: {fileID: 9180394272646212949}
 --- !u!1 &9180394271247742446
 GameObject:
   m_ObjectHideFlags: 0
@@ -6972,7 +7036,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _Id: Health
-  _MaxValue: 0
   _ValueChangeSpeed: 1
 --- !u!224 &9180394271393493741
 RectTransform:
@@ -10824,9 +10887,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b1b6ced9dfe18f949a1c16d217f2707a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _StartYear: 2021
-  _StartMonth: 1
-  _StartDay: 1
   _HourTimeDelta: 6
   _HourTimeScale: 1
 --- !u!224 &9180394271851067757
@@ -14396,7 +14456,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _Id: Hunger
-  _MaxValue: 0
   _ValueChangeSpeed: 1
 --- !u!224 &9180394272220931134
 RectTransform:
@@ -17475,7 +17534,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _Id: Social
-  _MaxValue: 0
   _ValueChangeSpeed: 1
 --- !u!224 &9180394272649841788
 RectTransform:
