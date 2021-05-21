@@ -21,14 +21,14 @@ namespace NeedsVsWants.WelfareSystem
 
             EditorGUILayout.LabelField("Welfare Sliders", EditorStyles.boldLabel);
 
-            foreach(WelfareSlider welfareSlider in welfareManager.welfareSliders)
-            {
-                EditorGUILayout.LabelField(welfareSlider.id, EditorStyles.boldLabel);
+            // foreach(WelfareSlider welfareSlider in welfareManager.welfareSliders)
+            // {
+            //     EditorGUILayout.LabelField(welfareSlider.id, EditorStyles.boldLabel);
 
-                welfareSlider.value = EditorGUILayout.Slider(welfareSlider.value, 0, welfareSlider.maxValue);
+            //     welfareSlider.value = EditorGUILayout.Slider(welfareSlider.value, 0, welfareSlider.maxValue);
                 
-                EditorGUILayout.Space();
-            }
+            //     EditorGUILayout.Space();
+            // }
         }
     }
 }

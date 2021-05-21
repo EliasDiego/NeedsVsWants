@@ -9,18 +9,12 @@ using NeedsVsWants.CalendarSystem;
 
 using TMPro;
 
+using NeedsVsWants.Player;
+
 namespace NeedsVsWants.DayProgressionSystem
 {
     public class DayProgressor : SimpleSingleton<DayProgressor>
     {
-        [Header("Start Date")]
-        [SerializeField]
-        int _StartYear;
-        [SerializeField]
-        int _StartMonth;
-        [SerializeField]
-        int _StartDay;
-
         [Header("Day Speed")]
         [SerializeField]
         float _HourTimeDelta = 1;
@@ -32,29 +26,29 @@ namespace NeedsVsWants.DayProgressionSystem
 
         bool _IsPaused = false;
         
-        DateTime _CurrentDateTime;
+        //DateTime _CurrentDateTime;
 
         TMP_Text _TimeText;
 
-        public DateTime currentDateTime => _CurrentDateTime;
-
         protected override void Awake()
         {
-            base.Awake();
+            base.Awake(); 
 
-            _CurrentDateTime = new DateTime(_StartYear, _StartMonth, _StartDay);    
+            DateTime dateTime = PlayerStatManager.instance.currentDateTime;  
 
-            _CurrentDay = _CurrentDateTime.Day;
+            _CurrentDay = dateTime.Day;
 
-            _CurrentMonth = _CurrentDateTime.Month;
+            _CurrentMonth = dateTime.Month;
 
             _TimeText = GetComponentInChildren<TMP_Text>();
         }
 
         void Start() 
         {
-            Calendar.instance.SetupCalendar(_CurrentDateTime);
-            Calendar.instance.MarkCurrentDay(_CurrentDateTime);
+            DateTime dateTime = PlayerStatManager.instance.currentDateTime;  
+
+            Calendar.instance.SetupCalendar(PlayerStatManager.instance.currentDateTime);
+            Calendar.instance.MarkCurrentDay(PlayerStatManager.instance.currentDateTime);
         }
 
         void Update()
@@ -62,7 +56,7 @@ namespace NeedsVsWants.DayProgressionSystem
             if(_IsPaused)
                 return;
 
-            if(_CurrentDay == _CurrentDateTime.Day) // if still the same day
+            if(_CurrentDay == PlayerStatManager.instance.currentDateTime.Day) // if still the same day
                 OnSameDay();
 
             else // if next day
@@ -73,34 +67,42 @@ namespace NeedsVsWants.DayProgressionSystem
         {
             int hour;
 
-            _CurrentDateTime = _CurrentDateTime.AddHours(_HourTimeDelta * _HourTimeScale * Time.deltaTime);
+            DateTime dateTime = PlayerStatManager.instance.currentDateTime;  
 
-            if(_CurrentDateTime.Hour > 12)
+            dateTime = dateTime.AddHours(_HourTimeDelta * _HourTimeScale * Time.deltaTime);
+
+            if(dateTime.Hour > 12)
             {
-                hour = _CurrentDateTime.Hour - 12;
+                hour = dateTime.Hour - 12;
 
                 if(hour <= 0)
                     hour = 1; 
             }
 
             else
-                hour = _CurrentDateTime.Hour;
+                hour = dateTime.Hour;
             
-            _TimeText.text = (hour < 10 ? "0" : "") + hour + ":00" + (_CurrentDateTime.Hour > 12 ? " PM" : " AM");
+            _TimeText.text = (hour < 10 ? "0" : "") + hour + ":00" + (dateTime.Hour > 12 ? " PM" : " AM");
+
+            PlayerStatManager.instance.currentDateTime = dateTime;
         }
 
         void OnNextDay()
         {
-            _CurrentDay = _CurrentDateTime.Day; // Update day checker
+            DateTime dateTime = PlayerStatManager.instance.currentDateTime;  
 
-            if(_CurrentMonth != _CurrentDateTime.Month) // If current month has passed
+            _CurrentDay = dateTime.Day; // Update day checker
+
+            if(_CurrentMonth != dateTime.Month) // If current month has passed
             {
-                _CurrentMonth = _CurrentDateTime.Month;
+                _CurrentMonth = dateTime.Month;
 
-                Calendar.instance.SetupCalendar(_CurrentDateTime); // Update Calendar
+                Calendar.instance.SetupCalendar(dateTime); // Update Calendar
             }
             
-            Calendar.instance.MarkCurrentDay(_CurrentDateTime);
+            Calendar.instance.MarkCurrentDay(dateTime);
+
+            PlayerStatManager.instance.currentDateTime = dateTime;
         }
 
         public void SetTimeScale(float scale) => _HourTimeScale = scale;
