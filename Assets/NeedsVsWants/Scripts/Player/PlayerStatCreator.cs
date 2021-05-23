@@ -51,10 +51,10 @@ namespace NeedsVsWants.Player
 
             PlayerStat.instance.currentMoney = _Money;
 
-            PlayerStat.instance.healthValue = new WelfareSystem.WelfareValue(_HealthValue, _HealthMaxValue);
-            PlayerStat.instance.hungerValue = new WelfareSystem.WelfareValue(_HungerValue, _HungerMaxValue);
-            PlayerStat.instance.happinessValue = new WelfareSystem.WelfareValue(_HappinessValue, _HappinessMaxValue);
-            PlayerStat.instance.socialValue = new WelfareSystem.WelfareValue(_SocialValue, _SocialMaxValue);
+            PlayerStat.instance.healthWelfare = new WelfareSystem.WelfareValue(_HealthValue, _HealthMaxValue);
+            PlayerStat.instance.hungerWelfare = new WelfareSystem.WelfareValue(_HungerValue, _HungerMaxValue);
+            PlayerStat.instance.happinessWelfare = new WelfareSystem.WelfareValue(_HappinessValue, _HappinessMaxValue);
+            PlayerStat.instance.socialWelfare = new WelfareSystem.WelfareValue(_SocialValue, _SocialMaxValue);
         }
 
         public void LoadPlayerStat(int slot)
