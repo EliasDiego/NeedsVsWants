@@ -4,14 +4,15 @@ using System.Linq;
 
 using UnityEngine;
 
-using NeedsVsWants;
-using NeedsVsWants.Player;
+using UnityEditor;
+
+using NeedsVsWants.Patterns;
 
 using TMPro;
 
-namespace NeedsVsWants.CalendarSystem
+namespace NeedsVsWants.Test.CalendarySystem
 {
-    public class Calendar : MonoBehaviour
+    public class Calendar : SimpleSingleton<Calendar>
     {
         [Header("Colors")]
         [SerializeField]
@@ -27,43 +28,56 @@ namespace NeedsVsWants.CalendarSystem
         [SerializeField]
         TMP_Text _MonthYearText;
 
-        CalendarDay _MarkedCurrentDay;
+        CalendarDay _CurrentDay;
 
         CalendarDay[] _CalendarDays;
 
         DateTime _CurrentDisplayMonthYear;
-
         DateTime _CurrentDisplayDate;
 
-        public DateTime currentDisplayDate 
-        { 
-            get => _CurrentDisplayDate;
-            set
-            {
-                MarkCurrentDay(value);
 
-                _CurrentDisplayDate = value;
-            } 
-        }
+// #if UNITY_EDITOR
+//         [CustomEditor(typeof(Calendar))]
+//         class CalendarCustomEditor : Editor
+//         {
+//             int _Year;
+//             int _Month;
+//             int _Day;
 
-        void Awake() 
+//             public override void OnInspectorGUI()
+//             {
+//                 base.OnInspectorGUI();
+
+//                 Calendar calendar = target as Calendar;
+
+//                 if(!calendar)
+//                     return;
+
+//                 if(Application.isPlaying)
+//                 {
+//                     EditorGUILayout.Space();
+//                     EditorGUILayout.LabelField("Debug", EditorStyles.boldLabel);
+
+//                     _Year = EditorGUILayout.IntField("Year", _Year);
+//                     _Month = EditorGUILayout.IntField("Month", _Month);
+
+//                     if(GUILayout.Button("Setup Calendar"))
+//                         calendar.SetupCalendar(_Year, _Month);
+//                 }
+//             }
+//         }
+// #endif
+
+        protected override void Awake() 
         {
+            base.Awake();
+            
             _CalendarDays = GetComponentsInChildren<CalendarDay>();
         }
 
         void Start() 
         {
-            PlayerStatManager.instance.onDateChange += date => 
-            {
-                if(!_CurrentDisplayMonthYear.IsOnSameMonth(date))
-                    SetupCalendar(date);
-
-                currentDisplayDate = date;
-            };
-
-            SetupCalendar(PlayerStatManager.instance.currentDate);
-
-            currentDisplayDate = PlayerStatManager.instance.currentDate;
+            SetupCalendar(2020, 1);    
         }
 
         int GetWeekOfMonth(int year, int month, int day)
@@ -72,26 +86,6 @@ namespace NeedsVsWants.CalendarSystem
 
             return Mathf.CeilToInt(((int)dateTime.DayOfWeek + day) / 7f);
         }
-        
-        void MarkCurrentDay(int year, int month, int day)
-        {
-            if(_CurrentDisplayMonthYear.Year != year || _CurrentDisplayMonthYear.Month != month)
-                return;
-
-            CalendarDay calendarDay = _CalendarDays.First(d => d.dateTime.Year == year && d.dateTime.Month == month && d.dateTime.Day == day);
-            
-            if(calendarDay)
-            {
-                if(_MarkedCurrentDay) // Reset Day
-                    _MarkedCurrentDay.color = _InMonthColor;
-
-                _MarkedCurrentDay = calendarDay; // switch to new date
-
-                _MarkedCurrentDay.color = _CurrentDayColor;
-            }
-        }
-
-        void MarkCurrentDay(DateTime dateTime) => MarkCurrentDay(dateTime.Year, dateTime.Month, dateTime.Day);
 
         public void SetupCalendar(int year, int month)
         {
@@ -99,9 +93,9 @@ namespace NeedsVsWants.CalendarSystem
 
             int currentMonth = month;
 
-            _CurrentDisplayMonthYear = new DateTime(year, month, 1); // Update Current Displayed Month & Year
+            _CurrentDisplayMonthYear = new DateTime(year, month, 1);
 
-            _MarkedCurrentDay = null; // Reset Current Day, to return previous current day to normal colors
+            _CurrentDay = null; // Reset Current Day
             
             tempDate = new DateTime(year, month, 1); // Get First Day of the current Month
             
@@ -133,13 +127,6 @@ namespace NeedsVsWants.CalendarSystem
                 if(tempDate.Month != currentMonth)
                     day.color = _NotInMonthColor;
 
-                else if(tempDate.IsOnSameDay(currentDisplayDate))
-                {
-                    day.color = _CurrentDayColor;
-
-                    _MarkedCurrentDay = day;
-                }
-
                 else
                     day.color = _InMonthColor;
 
@@ -150,8 +137,31 @@ namespace NeedsVsWants.CalendarSystem
 
         public void SetupCalendar(DateTime dateTime) => SetupCalendar(dateTime.Year, dateTime.Month);
 
-        public void DisplayNextMonth() => SetupCalendar(_CurrentDisplayMonthYear.AddMonths(1));
+        public void DisplayNextMonth()
+        {
+            SetupCalendar(_CurrentDisplayMonthYear.AddMonths(1));
+        }
 
-        public void DisplayPreviousMonth() => SetupCalendar(_CurrentDisplayMonthYear.AddMonths(-1));
+        public void DisplayPreviousMonth()
+        {
+            SetupCalendar(_CurrentDisplayMonthYear.AddMonths(-1));
+        }
+
+        public void MarkCurrentDay(int year, int month, int day)
+        {
+            CalendarDay calendarDay = _CalendarDays.First(d => d.dateTime.Year == year && d.dateTime.Month == month && d.dateTime.Day == day);
+            
+            if(calendarDay)
+            {
+                if(_CurrentDay) // Reset Day
+                    _CurrentDay.color = _InMonthColor;
+
+                _CurrentDay = calendarDay;
+
+                _CurrentDay.color = _CurrentDayColor;
+            }
+        }
+
+        public void MarkCurrentDay(DateTime dateTime) => MarkCurrentDay(dateTime.Year, dateTime.Month, dateTime.Day);
     }
 }

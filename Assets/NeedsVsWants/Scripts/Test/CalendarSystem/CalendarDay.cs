@@ -1,13 +1,11 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 
 using UnityEngine;
 using UnityEngine.UI;
 
 using TMPro;
 
-namespace NeedsVsWants.CalendarSystem
+namespace NeedsVsWants.Test.CalendarySystem
 {
     public class CalendarDay : MonoBehaviour
     {

@@ -36,6 +36,16 @@ namespace NeedsVsWants.WelfareSystem
 
         public float maxValue { get => _Slider.maxValue; set => _Slider.maxValue = value; }
 
+        public WelfareValue welfareValue 
+        {
+            get => new WelfareValue(_NewValue, maxValue);
+            set
+            {
+                _Slider.maxValue = value.maxValue;
+                _Slider.value = value.value;
+            }
+        }
+
         void Awake() 
         {
             _Slider = GetComponentInChildren<Slider>();
