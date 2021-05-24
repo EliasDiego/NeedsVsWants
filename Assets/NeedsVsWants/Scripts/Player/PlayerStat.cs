@@ -1,14 +1,20 @@
 using System;
+using System.Collections;
+using System.Collections.Generic;
 
 using UnityEngine;
 
 using NeedsVsWants.WelfareSystem;
+using NeedsVsWants.CalendarSystem;
 
 namespace NeedsVsWants.Player
 {
     public class PlayerStat : ScriptableObject
     {
+        List<CalendarEvent> _CalendarEventList = new List<CalendarEvent>();
+
         public DateTime currentDateTime { get; set; } 
+        public List<CalendarEvent> calendarEventList => _CalendarEventList;
 
         public float currentMoney { get; set; }
 
@@ -29,7 +35,7 @@ namespace NeedsVsWants.Player
 
                     // For Testing, To Be Deleted
                     PlayerStat.instance.currentDateTime = new DateTime(2020, 1, 1);
-
+                    
                     PlayerStat.instance.currentMoney = 10000;
                     
                     PlayerStat.instance.healthWelfare = new WelfareSystem.WelfareValue(100, 100);

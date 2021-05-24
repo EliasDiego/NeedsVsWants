@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 
@@ -35,6 +36,8 @@ namespace NeedsVsWants.CalendarSystem
 
         DateTime _CurrentDisplayDate;
 
+        Action<DateTime> _OnDateChange;
+
         public DateTime currentDisplayDate 
         { 
             get => _CurrentDisplayDate;
@@ -49,21 +52,31 @@ namespace NeedsVsWants.CalendarSystem
         void Awake() 
         {
             _CalendarDays = GetComponentsInChildren<CalendarDay>();
-        }
 
-        void Start() 
-        {
-            PlayerStatManager.instance.onDateChange += date => 
+            _OnDateChange = date => 
             {
                 if(!_CurrentDisplayMonthYear.IsOnSameMonth(date))
                     SetupCalendar(date);
 
                 currentDisplayDate = date;
             };
+        }
 
+        void OnEnable() 
+        {
+            PlayerStatManager.instance.onDateChange += _OnDateChange;    
+        }
+
+        void Start() 
+        {
             SetupCalendar(PlayerStatManager.instance.currentDate);
 
             currentDisplayDate = PlayerStatManager.instance.currentDate;
+        }
+
+        void OnDisable() 
+        {
+            PlayerStatManager.instance.onDateChange -= _OnDateChange;        
         }
 
         int GetWeekOfMonth(int year, int month, int day)
@@ -72,8 +85,13 @@ namespace NeedsVsWants.CalendarSystem
 
             return Mathf.CeilToInt(((int)dateTime.DayOfWeek + day) / 7f);
         }
-        
-        void MarkCurrentDay(int year, int month, int day)
+
+        void MarkDay(int year, int month, int day)
+        {
+
+        }
+
+        void MarkEventDay(int year, int month, int day)
         {
             if(_CurrentDisplayMonthYear.Year != year || _CurrentDisplayMonthYear.Month != month)
                 return;
@@ -82,13 +100,30 @@ namespace NeedsVsWants.CalendarSystem
             
             if(calendarDay)
             {
-                if(_MarkedCurrentDay) // Reset Day
-                    _MarkedCurrentDay.color = _InMonthColor;
 
-                _MarkedCurrentDay = calendarDay; // switch to new date
-
-                _MarkedCurrentDay.color = _CurrentDayColor;
             }
+
+        }
+
+        void MarkCurrentDay(CalendarDay calendarDay)
+        {
+            if(_MarkedCurrentDay) // Reset Day
+                _MarkedCurrentDay.color = _InMonthColor;
+
+            _MarkedCurrentDay = calendarDay; // switch to new date
+
+            _MarkedCurrentDay.color = _CurrentDayColor;
+        }
+
+        void MarkCurrentDay(int year, int month, int day)
+        {
+            if(_CurrentDisplayMonthYear.Year != year || _CurrentDisplayMonthYear.Month != month)
+                return;
+
+            CalendarDay calendarDay = _CalendarDays.First(d => d.dateTime.Year == year && d.dateTime.Month == month && d.dateTime.Day == day);
+            
+            if(calendarDay)
+                MarkCurrentDay(calendarDay);
         }
 
         void MarkCurrentDay(DateTime dateTime) => MarkCurrentDay(dateTime.Year, dateTime.Month, dateTime.Day);
@@ -153,5 +188,13 @@ namespace NeedsVsWants.CalendarSystem
         public void DisplayNextMonth() => SetupCalendar(_CurrentDisplayMonthYear.AddMonths(1));
 
         public void DisplayPreviousMonth() => SetupCalendar(_CurrentDisplayMonthYear.AddMonths(-1));
+
+        public void MarkDaysWithEvents()
+        {
+            // IEnumerable<IGrouping<DateTime, CalendarEvent>> calendarEventList = PlayerStatManager.instance.calendarEventList.
+            //     GroupBy(calendarEvent => calendarEvent.deadlineDate);
+
+
+        }
     }
 }

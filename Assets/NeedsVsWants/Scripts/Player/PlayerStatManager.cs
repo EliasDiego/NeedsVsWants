@@ -2,13 +2,9 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 
-using UnityEngine;
-using UnityEngine.Events;
-
 using NeedsVsWants.Patterns;
 using NeedsVsWants.WelfareSystem;
 using NeedsVsWants.CalendarSystem;
-using NeedsVsWants.MoneySystem;
 
 namespace NeedsVsWants.Player
 {
@@ -26,6 +22,8 @@ namespace NeedsVsWants.Player
                 onDateChange?.Invoke(_PlayerStat.currentDateTime);
             }
         }
+
+        public List<CalendarEvent> calendarEventList => _PlayerStat.calendarEventList;
 
         public float currentMoney
         {
@@ -76,128 +74,170 @@ namespace NeedsVsWants.Player
             }
         }
 
-        public float healthValue 
-        { 
-            get => _PlayerStat.healthWelfare.value; 
+        public WelfareValue currentHealthWelfare
+        {
+            get => _PlayerStat.healthWelfare; 
             set
             {
-                WelfareValue welfareValue = _PlayerStat.healthWelfare;
-
-                welfareValue.value = value;
-
-                _PlayerStat.healthWelfare = welfareValue;
+                _PlayerStat.healthWelfare = value;
 
                 onHealthChange?.Invoke(_PlayerStat.healthWelfare);
-
             }
         }
-        public float healthMaxValue
-        { 
-            get => _PlayerStat.healthWelfare.maxValue; 
-            set
-            {
-                WelfareValue welfareValue = _PlayerStat.healthWelfare;
+        // public float healthValue 
+        // { 
+        //     get => _PlayerStat.healthWelfare.value; 
+        //     set
+        //     {
+        //         WelfareValue welfareValue = _PlayerStat.healthWelfare;
 
-                welfareValue.maxValue = value;
+        //         welfareValue.value = value;
 
-                _PlayerStat.healthWelfare = welfareValue;
+        //         _PlayerStat.healthWelfare = welfareValue;
 
-                onHealthChange?.Invoke(_PlayerStat.healthWelfare);
+        //         onHealthChange?.Invoke(_PlayerStat.healthWelfare);
 
-            }
-        }
+        //     }
+        // }
+        // public float healthMaxValue
+        // { 
+        //     get => _PlayerStat.healthWelfare.maxValue; 
+        //     set
+        //     {
+        //         WelfareValue welfareValue = _PlayerStat.healthWelfare;
+
+        //         welfareValue.maxValue = value;
+
+        //         _PlayerStat.healthWelfare = welfareValue;
+
+        //         onHealthChange?.Invoke(_PlayerStat.healthWelfare);
+
+        //     }
+        // }
         
-        public float socialValue
-        { 
-            get => _PlayerStat.socialWelfare.value; 
+        public WelfareValue currentSocialWelfare
+        {
+            get => _PlayerStat.socialWelfare; 
             set
             {
-                WelfareValue welfareValue = _PlayerStat.socialWelfare;
+                _PlayerStat.socialWelfare = value;
 
-                welfareValue.value = value;
-
-                _PlayerStat.socialWelfare = welfareValue;
-
-                onHealthChange?.Invoke(_PlayerStat.socialWelfare);
-
+                onSocialChange?.Invoke(_PlayerStat.socialWelfare);
             }
         }
-        public float socialMaxValue
-        { 
-            get => _PlayerStat.socialWelfare.maxValue; 
-            set
-            {
-                WelfareValue welfareValue = _PlayerStat.socialWelfare;
+        // public float socialValue
+        // { 
+        //     get => _PlayerStat.socialWelfare.value; 
+        //     set
+        //     {
+        //         WelfareValue welfareValue = _PlayerStat.socialWelfare;
 
-                welfareValue.maxValue = value;
+        //         welfareValue.value = value;
 
-                _PlayerStat.socialWelfare = welfareValue;
+        //         _PlayerStat.socialWelfare = welfareValue;
 
-                onHealthChange?.Invoke(_PlayerStat.socialWelfare);
+        //         onHealthChange?.Invoke(_PlayerStat.socialWelfare);
 
-            }
-        }
+        //     }
+        // }
+        // public float socialMaxValue
+        // { 
+        //     get => _PlayerStat.socialWelfare.maxValue; 
+        //     set
+        //     {
+        //         WelfareValue welfareValue = _PlayerStat.socialWelfare;
+
+        //         welfareValue.maxValue = value;
+
+        //         _PlayerStat.socialWelfare = welfareValue;
+
+        //         onHealthChange?.Invoke(_PlayerStat.socialWelfare);
+
+        //     }
+        // }
         
-        public float hungerValue
-        { 
-            get => _PlayerStat.hungerWelfare.value; 
+        public WelfareValue currentHungerWelfare
+        {
+            get => _PlayerStat.hungerWelfare; 
             set
             {
-                WelfareValue welfareValue = _PlayerStat.hungerWelfare;
+                _PlayerStat.hungerWelfare = value;
 
-                welfareValue.value = value;
-
-                _PlayerStat.hungerWelfare = welfareValue;
-
-                onHealthChange?.Invoke(_PlayerStat.hungerWelfare);
-
+                onHungerChange?.Invoke(_PlayerStat.hungerWelfare);
             }
         }
-        public float hungerMaxValue
-        { 
-            get => _PlayerStat.hungerWelfare.maxValue; 
-            set
-            {
-                WelfareValue welfareValue = _PlayerStat.hungerWelfare;
 
-                welfareValue.maxValue = value;
+        // public float hungerValue
+        // { 
+        //     get => _PlayerStat.hungerWelfare.value; 
+        //     set
+        //     {
+        //         WelfareValue welfareValue = _PlayerStat.hungerWelfare;
 
-                _PlayerStat.hungerWelfare = welfareValue;
+        //         welfareValue.value = value;
 
-                onHealthChange?.Invoke(_PlayerStat.hungerWelfare);
+        //         _PlayerStat.hungerWelfare = welfareValue;
 
-            }
-        }
+        //         onHealthChange?.Invoke(_PlayerStat.hungerWelfare);
+
+        //     }
+        // }
+        // public float hungerMaxValue
+        // { 
+        //     get => _PlayerStat.hungerWelfare.maxValue; 
+        //     set
+        //     {
+        //         WelfareValue welfareValue = _PlayerStat.hungerWelfare;
+
+        //         welfareValue.maxValue = value;
+
+        //         _PlayerStat.hungerWelfare = welfareValue;
+
+        //         onHealthChange?.Invoke(_PlayerStat.hungerWelfare);
+
+        //     }
+        // }
         
-        public float happinessValue
-        { 
-            get => _PlayerStat.happinessWelfare.value; 
+        public WelfareValue currentHappinessWelfare
+        {
+            get => _PlayerStat.happinessWelfare; 
             set
             {
-                WelfareValue welfareValue = _PlayerStat.happinessWelfare;
+                _PlayerStat.happinessWelfare = value;
 
-                welfareValue.value = value;
-
-                _PlayerStat.happinessWelfare = welfareValue;
-
-                onHealthChange?.Invoke(_PlayerStat.happinessWelfare);
-
+                onHappinessChange?.Invoke(_PlayerStat.happinessWelfare);
             }
         }
-        public float happinessMaxValue
-        { 
-            get => _PlayerStat.happinessWelfare.maxValue; 
-            set
-            {
-                WelfareValue welfareValue = _PlayerStat.happinessWelfare;
 
-                welfareValue.maxValue = value;
+        // public float happinessValue
+        // { 
+        //     get => _PlayerStat.happinessWelfare.value; 
+        //     set
+        //     {
+        //         WelfareValue welfareValue = _PlayerStat.happinessWelfare;
 
-                _PlayerStat.happinessWelfare = welfareValue;
+        //         welfareValue.value = value;
 
-                onHealthChange?.Invoke(_PlayerStat.happinessWelfare);
-            }
-        }
+        //         _PlayerStat.happinessWelfare = welfareValue;
+
+        //         onHealthChange?.Invoke(_PlayerStat.happinessWelfare);
+
+        //     }
+        // }
+        // public float happinessMaxValue
+        // { 
+        //     get => _PlayerStat.happinessWelfare.maxValue; 
+        //     set
+        //     {
+        //         WelfareValue welfareValue = _PlayerStat.happinessWelfare;
+
+        //         welfareValue.maxValue = value;
+
+        //         _PlayerStat.happinessWelfare = welfareValue;
+
+        //         onHealthChange?.Invoke(_PlayerStat.happinessWelfare);
+        //     }
+        // }
 
         public event Action<float> onMoneyChange;
         public event Action<DateTime> onDateChange;
@@ -219,10 +259,10 @@ namespace NeedsVsWants.Player
 
             onDateChange?.Invoke(currentDate);
 
-            onHealthChange?.Invoke(_PlayerStat.healthWelfare);
-            onHappinessChange?.Invoke(_PlayerStat.happinessWelfare);
-            onHungerChange?.Invoke(_PlayerStat.hungerWelfare);
-            onSocialChange?.Invoke(_PlayerStat.socialWelfare);  
+            onHealthChange?.Invoke(currentHealthWelfare);
+            onHappinessChange?.Invoke(currentHappinessWelfare);
+            onHungerChange?.Invoke(currentHungerWelfare);
+            onSocialChange?.Invoke(currentSocialWelfare);  
         }
     }
 }
