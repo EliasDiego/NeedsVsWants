@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 using NeedsVsWants.Patterns;
+using NeedsVsWants.CalendarSystem;
 
 namespace NeedsVsWants.Player
 {
@@ -55,6 +56,8 @@ namespace NeedsVsWants.Player
             PlayerStat.instance.hungerWelfare = new WelfareSystem.WelfareValue(_HungerValue, _HungerMaxValue);
             PlayerStat.instance.happinessWelfare = new WelfareSystem.WelfareValue(_HappinessValue, _HappinessMaxValue);
             PlayerStat.instance.socialWelfare = new WelfareSystem.WelfareValue(_SocialValue, _SocialMaxValue);
+
+            PlayerStat.instance.calendarEventList.AddRange(Resources.LoadAll<CalendarEvent>("CalendarEvents"));
         }
 
         public void LoadPlayerStat(int slot)

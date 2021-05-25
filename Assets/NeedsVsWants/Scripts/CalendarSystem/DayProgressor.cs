@@ -57,6 +57,11 @@ namespace NeedsVsWants.CalendarSystem
                 OnNextDay();
         }
 
+        void OnMonth()
+        {
+
+        }
+
         void OnSameDay()
         {
             int hour;
@@ -75,7 +80,6 @@ namespace NeedsVsWants.CalendarSystem
                 hour = _CurrentDateTime.Hour;
             
             _TimeText.text = (hour < 10 ? "0" : "") + hour + ":00" + (_CurrentDateTime.Hour > 12 ? " PM" : " AM");
-
         }
 
         void OnNextDay()
@@ -85,12 +89,16 @@ namespace NeedsVsWants.CalendarSystem
             if(_CurrentMonth != _CurrentDateTime.Month) // If current month has passed
             {
                 _CurrentMonth = _CurrentDateTime.Month;
-
-                //Calendar.instance.SetupCalendar(_CurrentDateTime); // Update Calendar
             }
-            
+
+            // Put here Calendar Event stuff
+            foreach(CalendarEvent calendarEvent in PlayerStatManager.instance.calendarEventList)
+            {
+                if(calendarEvent.IsWithinDateRange(_CurrentDateTime))
+                    calendarEvent.Invoke();
+            }
+
             PlayerStatManager.instance.currentDate = _CurrentDateTime;
-            //Calendar.instance.currentDisplayDate = _CurrentDateTime;
         }
 
         public void SetTimeScale(float scale) => _HourTimeScale = scale;
