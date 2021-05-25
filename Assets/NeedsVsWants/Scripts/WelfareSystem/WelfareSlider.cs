@@ -11,8 +11,6 @@ namespace NeedsVsWants.WelfareSystem
     public class WelfareSlider : MonoBehaviour
     {
         [SerializeField]
-        string _Id;
-        [SerializeField]
         float _ValueChangeSpeed = 1;
         
         bool _IsValueChanged = false;
@@ -20,8 +18,6 @@ namespace NeedsVsWants.WelfareSystem
         float _NewValue = 0;
 
         Slider _Slider;
-
-        public string id => _Id;
 
         public float value 
         {

@@ -10,9 +10,10 @@ namespace NeedsVsWants.CalendarSystem
 {
     public abstract class CalendarEvent : ScriptableObject
     {
-        public UDateTime minDateTime { get; set; }
-        public UDateTime maxDateTime { get; set; }
-
+        [HideInInspector]
+        public Date minDate;
+        [HideInInspector]
+        public Date maxDate;
 
         #if UNITY_EDITOR
         [CustomEditor(typeof(CalendarEvent), true)]
@@ -31,11 +32,10 @@ namespace NeedsVsWants.CalendarSystem
 
                 if(!_IsDateRange)
                 {
-                    // Min Date
                     EditorGUILayout.Space();
                     EditorGUILayout.LabelField("Date", EditorStyles.boldLabel);
                     
-                    calendarEvent.maxDateTime = calendarEvent.minDateTime = DrawDateTime(calendarEvent.minDateTime);
+                    calendarEvent.maxDate = calendarEvent.minDate = DrawDate(calendarEvent.minDate);
                 }
 
                 else
@@ -44,14 +44,16 @@ namespace NeedsVsWants.CalendarSystem
                     EditorGUILayout.Space();
                     EditorGUILayout.LabelField("Min Date", EditorStyles.boldLabel);
                     
-                    calendarEvent.minDateTime = DrawDateTime(calendarEvent.minDateTime);
+                    calendarEvent.minDate = DrawDate(calendarEvent.minDate);
                     
                     // Max Date
                     EditorGUILayout.Space();
                     EditorGUILayout.LabelField("Max Date", EditorStyles.boldLabel);
 
-                    calendarEvent.maxDateTime = DrawDateTime(calendarEvent.maxDateTime);
+                    calendarEvent.maxDate = DrawDate(calendarEvent.maxDate);
                 }
+                //AssetDatabase.SaveAssets();
+                EditorUtility.SetDirty(target);
 
                 EditorGUI.BeginChangeCheck();
                 serializedObject.UpdateIfRequiredOrScript();
@@ -64,19 +66,19 @@ namespace NeedsVsWants.CalendarSystem
                 while (property.NextVisible(true))
                     EditorGUILayout.PropertyField(property, true);
 
-                serializedObject.ApplyModifiedProperties();
+                //serializedObject.ApplyModifiedProperties();
                 EditorGUI.EndChangeCheck();
             }
 
-            public DateTime DrawDateTime(DateTime dateTime) 
+            public Date DrawDate(Date date) 
             {
-                int year = dateTime.Year, month = dateTime.Month, day = dateTime.Day;
+                int year = date.year, month = date.month, day = date.day;
                 
                 year = Mathf.Clamp(EditorGUILayout.IntField("Year", year), 1, 9999);
                 month = Mathf.Clamp(EditorGUILayout.IntField("Month", month), 1, 12);
                 day = Mathf.Clamp(EditorGUILayout.IntField("Day", day), 1, DateTime.DaysInMonth(year, month));
 
-                return new DateTime(year, month, day);
+                return new Date(year, month, day);
             }
         }
         #endif
@@ -85,10 +87,10 @@ namespace NeedsVsWants.CalendarSystem
 
         public bool IsWithinDateRange(DateTime dateTime)
         {
-            Debug.Log(minDateTime == null);
-            DateTime max = new DateTime(maxDateTime.dateTime.Year, maxDateTime.dateTime.Month, maxDateTime.dateTime.Day, 23, 59, 59);
+            DateTime min = new DateTime(minDate.year, minDate.month, minDate.day);
+            DateTime max = new DateTime(maxDate.year, maxDate.month, maxDate.day, 23, 59, 59);
 
-            return minDateTime.dateTime <= dateTime && dateTime <= max;
+            return min <= dateTime && dateTime <= max;
         }
     }
 }
