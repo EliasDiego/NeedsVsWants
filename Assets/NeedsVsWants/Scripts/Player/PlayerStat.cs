@@ -42,6 +42,8 @@ namespace NeedsVsWants.Player
                     PlayerStat.instance.hungerWelfare = new WelfareSystem.WelfareValue(100, 100);
                     PlayerStat.instance.happinessWelfare = new WelfareSystem.WelfareValue(100, 100);
                     PlayerStat.instance.socialWelfare = new WelfareSystem.WelfareValue(100, 100);
+
+                    PlayerStat.instance.calendarEventList.AddRange(Resources.LoadAll<CalendarEvent>("CalendarEvents"));
                 }
 
                 return _Instance;

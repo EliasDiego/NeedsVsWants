@@ -85,10 +85,10 @@ namespace NeedsVsWants.CalendarSystem
 
         public bool IsWithinDateRange(DateTime dateTime)
         {
-            DateTime min = new DateTime(minDateTime.dateTime.Year, minDateTime.dateTime.Month, minDateTime.dateTime.Day);
+            Debug.Log(minDateTime == null);
             DateTime max = new DateTime(maxDateTime.dateTime.Year, maxDateTime.dateTime.Month, maxDateTime.dateTime.Day, 23, 59, 59);
 
-            return min <= dateTime && dateTime <= max;
+            return minDateTime.dateTime <= dateTime && dateTime <= max;
         }
     }
 }
