@@ -31,8 +31,6 @@ namespace NeedsVsWants.MenuSystem
 
             transform.SetActiveChildren(true);
 
-            Debug.Log(transform.GetChild(0).gameObject.activeSelf);
-
             _TabButton.image.color = Color.white;
         }
 

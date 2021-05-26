@@ -14,3 +14,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _Name: 
   _Amount: 69
+  _MinDate:
+    year: 2020
+    month: 1
+    day: 2
+  _MaxDate:
+    year: 2020
+    month: 1
+    day: 2

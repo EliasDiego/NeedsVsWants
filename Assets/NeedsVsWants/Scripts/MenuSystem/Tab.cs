@@ -19,6 +19,7 @@ namespace NeedsVsWants.MenuSystem
 
         public static Tab current => _Current;
 
+        #if UNITY_EDITOR
         [CustomEditor(typeof(Tab), true)]
         class TabEditor : Editor
         {
@@ -61,6 +62,7 @@ namespace NeedsVsWants.MenuSystem
                 serializedObject.ApplyModifiedProperties();
             }
         }
+        #endif
 
         protected abstract void OnEnableTab();
         protected abstract void OnDisableTab();
