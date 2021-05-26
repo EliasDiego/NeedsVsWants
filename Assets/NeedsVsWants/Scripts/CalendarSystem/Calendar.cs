@@ -55,7 +55,7 @@ namespace NeedsVsWants.CalendarSystem
 
             _OnDateChange = date => 
             {
-                if(!_CurrentDisplayMonthYear.IsOnSameMonth(date))
+                if(!_CurrentDisplayDate.IsOnSameMonth(date))
                     SetupCalendar(date);
 
                 currentDisplayDate = date;
@@ -91,20 +91,6 @@ namespace NeedsVsWants.CalendarSystem
 
         }
 
-        void MarkEventDay(int year, int month, int day)
-        {
-            if(_CurrentDisplayMonthYear.Year != year || _CurrentDisplayMonthYear.Month != month)
-                return;
-
-            CalendarDay calendarDay = _CalendarDays.First(d => d.dateTime.Year == year && d.dateTime.Month == month && d.dateTime.Day == day);
-            
-            if(calendarDay)
-            {
-
-            }
-
-        }
-
         void MarkCurrentDay(CalendarDay calendarDay)
         {
             if(_MarkedCurrentDay) // Reset Day
@@ -127,6 +113,17 @@ namespace NeedsVsWants.CalendarSystem
         }
 
         void MarkCurrentDay(DateTime dateTime) => MarkCurrentDay(dateTime.Year, dateTime.Month, dateTime.Day);
+
+        bool IsThereEvent(DateTime dateTime)
+        {
+            foreach(CalendarEvent calendarEvent in PlayerStatManager.instance.calendarEventList)
+            {
+                if(calendarEvent.isShowOnCalendar && calendarEvent.IsWithinDate(dateTime))
+                    return true;
+            }
+
+            return false;
+        }
 
         public void SetupCalendar(int year, int month)
         {
@@ -176,7 +173,13 @@ namespace NeedsVsWants.CalendarSystem
                 }
 
                 else
-                    day.color = _InMonthColor;
+                {
+                    if(IsThereEvent(tempDate) && tempDate > _CurrentDisplayDate) // If there is an event and has not yet passed the current displayed date
+                        day.color = _HasEventsColor;
+
+                    else
+                        day.color = _InMonthColor;
+                }
 
                 // Go to next day
                 tempDate = tempDate.AddDays(1);
@@ -188,13 +191,5 @@ namespace NeedsVsWants.CalendarSystem
         public void DisplayNextMonth() => SetupCalendar(_CurrentDisplayMonthYear.AddMonths(1));
 
         public void DisplayPreviousMonth() => SetupCalendar(_CurrentDisplayMonthYear.AddMonths(-1));
-
-        public void MarkDaysWithEvents()
-        {
-            // IEnumerable<IGrouping<DateTime, CalendarEvent>> calendarEventList = PlayerStatManager.instance.calendarEventList.
-            //     GroupBy(calendarEvent => calendarEvent.deadlineDate);
-
-
-        }
     }
 }

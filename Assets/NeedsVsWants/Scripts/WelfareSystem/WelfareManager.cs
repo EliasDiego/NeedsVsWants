@@ -22,6 +22,11 @@ namespace NeedsVsWants.WelfareSystem
 
         void Start() 
         {
+            _HealthWelfare.welfareValue = PlayerStatManager.instance.currentHealthWelfare;
+            _HungerWelfare.welfareValue = PlayerStatManager.instance.currentHungerWelfare;
+            _HappinessWelfare.welfareValue = PlayerStatManager.instance.currentHappinessWelfare;
+            _SocialWelfare.welfareValue = PlayerStatManager.instance.currentSocialWelfare;
+
             PlayerStatManager.instance.onHealthChange += welfare => 
             {
                 if(_HealthWelfare.value != welfare.value)
