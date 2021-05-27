@@ -94,6 +94,7 @@ namespace NeedsVsWants.MenuSystem
         protected abstract void OnEnableMenu();
         protected abstract void OnDisableMenu();
         protected abstract void OnReturn();
+        protected abstract void OnSwitchFrom();
 
         public virtual void EnableMenu()
         {
@@ -119,13 +120,14 @@ namespace NeedsVsWants.MenuSystem
             {
                 _ReturnMenu.EnableMenu();
                 
-                OnReturn();
+                // Uhh originally this is just OnReturn(); 
+                _ReturnMenu.OnReturn();
 
                 DisableMenu();
             }
 
-            else
-                Debug.LogWarning("MenuWarning: ReturnMenu is Null!");
+            // else
+            //     Debug.LogWarning("MenuWarning: ReturnMenu is Null!");
         }
 
         public void SetReturnMenu(Menu menu) => _ReturnMenu = menu;
@@ -225,6 +227,7 @@ namespace NeedsVsWants.MenuSystem
         public void SwitchTo(Menu menu, bool disableMenu)
         {
             SetReturnMenu(null);
+            OnSwitchFrom();
 
             if(disableMenu)
                 DisableMenu();

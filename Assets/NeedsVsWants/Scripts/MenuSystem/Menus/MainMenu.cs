@@ -31,10 +31,16 @@ namespace NeedsVsWants.MenuSystem
         {
             
         }
+        
+        protected override void OnSwitchFrom()
+        {
+            
+        }
 
         public void NextLevel(int levelIndex)
         {
             SceneManager.LoadScene(levelIndex, LoadSceneMode.Single);
         }
+
     }
 }

@@ -20,5 +20,10 @@ namespace NeedsVsWants.MenuSystem
         {
             
         }
+
+        protected override void OnSwitchFrom()
+        {
+            
+        }
     }
 }
