@@ -120,7 +120,7 @@
                     "name": "CameraControls",
                     "type": "Value",
                     "id": "63ab46a0-143f-41fb-9664-32bc1d0494de",
-                    "expectedControlType": "Vector2",
+                    "expectedControlType": "Integer",
                     "processors": "",
                     "interactions": ""
                 }
@@ -162,61 +162,6 @@
                 {
                     "name": "positive",
                     "id": "a939ff91-bdf0-42c2-ac7f-a89e7c4f1024",
-                    "path": "<Keyboard>/d",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "CameraControls",
-                    "isComposite": false,
-                    "isPartOfComposite": true
-                },
-                {
-                    "name": "2D Vector",
-                    "id": "537dd5cb-1337-4c85-9748-9a60fe52f58f",
-                    "path": "2DVector",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "CameraControls",
-                    "isComposite": true,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "up",
-                    "id": "cfd47b4a-6490-4d74-a04e-0e54bb1693f0",
-                    "path": "",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "CameraControls",
-                    "isComposite": false,
-                    "isPartOfComposite": true
-                },
-                {
-                    "name": "down",
-                    "id": "f7b558dc-c9ad-4fcf-899b-f008f94f5538",
-                    "path": "",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "CameraControls",
-                    "isComposite": false,
-                    "isPartOfComposite": true
-                },
-                {
-                    "name": "left",
-                    "id": "d59f94b7-22b5-4ffa-ba42-6cbf6e4c5a0e",
-                    "path": "<Keyboard>/a",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "CameraControls",
-                    "isComposite": false,
-                    "isPartOfComposite": true
-                },
-                {
-                    "name": "right",
-                    "id": "c3c223da-8c02-4d20-a5de-38eededa9532",
                     "path": "<Keyboard>/d",
                     "interactions": "",
                     "processors": "",

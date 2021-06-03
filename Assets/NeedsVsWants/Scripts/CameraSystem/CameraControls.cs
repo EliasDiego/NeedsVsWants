@@ -15,12 +15,13 @@ namespace NeedsVsWants.CameraSystem
 
         void Start()
         {
+            camerabindings.action.actionMap.Enable();
             camerabindings.action.performed += StartCameraMovement; 
         }
 
         void StartCameraMovement (InputAction.CallbackContext context)
         {
-            Debug.Log(context.ReadValue <Vector2>());
+            Debug.Log(context.ReadValue <float>());
 
         }
         // Update is called once per frame
