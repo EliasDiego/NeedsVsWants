@@ -95,7 +95,7 @@ namespace NeedsVsWants.CalendarSystem
             foreach(CalendarEvent calendarEvent in PlayerStatManager.instance.calendarEventList)
             {
                 if(calendarEvent.IsWithinDate(_CurrentDateTime))
-                    calendarEvent.Invoke();
+                    calendarEvent.Invoke(_CurrentDateTime);
             }
 
             PlayerStatManager.instance.currentDate = _CurrentDateTime;

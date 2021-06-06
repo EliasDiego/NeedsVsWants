@@ -24,11 +24,13 @@ namespace NeedsVsWants.MenuSystem
 
         bool _IsActive = false;
 
+        public Menu returnMenu => _ReturnMenu;
+
         public bool isActive => _IsActive;
 
         protected AudioSource audioSource => _AudioSource;
 
-        public static Menu _CurrentMenu;
+        static Menu _CurrentMenu;
 
         public static Menu current => _CurrentMenu;
 
@@ -237,5 +239,10 @@ namespace NeedsVsWants.MenuSystem
         }
 
         public void SwitchTo(Menu menu) => SwitchTo(menu, true);
+
+        public void SwitchTo(MenuGroup menuGroup)
+        {
+            menuGroup.EnableGroup();
+        }
     }
 }

@@ -85,7 +85,7 @@ namespace NeedsVsWants.CalendarSystem
         // }
         // #endif
 
-        public abstract void Invoke();
+        public abstract void Invoke(DateTime dateTime);
 
         public abstract bool IsWithinDate(DateTime dateTime);
 

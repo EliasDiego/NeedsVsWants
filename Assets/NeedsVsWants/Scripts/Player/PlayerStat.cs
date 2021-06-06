@@ -44,22 +44,6 @@ namespace NeedsVsWants.Player
                     PlayerStat.instance.socialWelfare = new WelfareSystem.WelfareValue(100, 100);
 
                     PlayerStat.instance.calendarEventList.AddRange(Resources.LoadAll<CalendarEvent>("CalendarEvents"));
-                    
-                    // For Testing As usual
-                    IncomeEvent baseIncome = IncomeEvent.CreateInstance<IncomeEvent>();
-
-                    baseIncome.name = "Base Income";
-                    baseIncome.incomeRate = 5000;
-                    
-                    PlayerStat.instance.calendarEventList.Add(baseIncome);
-
-                    // For testing as usual x2
-                    WelfareReductionEvent welfareReductionEvent = WelfareReductionEvent.CreateInstance<WelfareReductionEvent>();
-
-                    welfareReductionEvent.name = "Welfare Reduction";
-                    
-                    PlayerStat.instance.calendarEventList.Add(welfareReductionEvent);
-                    
                 }
 
                 return _Instance;

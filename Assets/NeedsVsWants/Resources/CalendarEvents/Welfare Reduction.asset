@@ -9,16 +9,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1fb60ed8dad830443bde24bb1604e635, type: 3}
-  m_Name: New Bill
+  m_Script: {fileID: 11500000, guid: e77a57f693adac742b40c13927f6c160, type: 3}
+  m_Name: Welfare Reduction
   m_EditorClassIdentifier: 
-  _Name: 
-  _Amount: 69
-  _MinDate:
-    year: 2020
-    month: 1
-    day: 2
-  _MaxDate:
-    year: 2020
-    month: 1
-    day: 2
+  _DecrementHealthValue: -1
+  _DecrementHappinessValue: -1
+  _DecrementHungerValue: -1
+  _DecrementSocialValue: -1
