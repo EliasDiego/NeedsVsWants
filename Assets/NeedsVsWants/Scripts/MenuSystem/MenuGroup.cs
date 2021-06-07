@@ -11,6 +11,7 @@ namespace NeedsVsWants.MenuSystem
         Menu[] _Menus;
 
         public Menu currentMenu => _CurrentMenu;
+        public Menu[] menus => _Menus;
 
         void Start() 
         {

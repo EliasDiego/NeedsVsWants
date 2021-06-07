@@ -1,25 +1,33 @@
-using System.Linq;
 using System.Collections;
 using System.Collections.Generic;
 
 using UnityEngine;
 
-using NeedsVsWants;
-using NeedsVsWants.CalendarSystem;
 using NeedsVsWants.MenuSystem;
-using NeedsVsWants.Player;
 
 using TMPro;
 
 namespace NeedsVsWants.BillingSystem
 {
-    public class MonthlyBillApp : Menu
+    public class BillViewerMenu : Menu
     {
         [SerializeField]
-        TMP_Dropdown _Dropdown;
+        TMP_Text _BillNameText;
 
-        CalendarEvent[] _BillEvents;
+        BillEvent _BillEvent;
 
+        public BillEvent billEvent 
+        { 
+            get => _BillEvent; 
+            
+            set
+            {
+                _BillEvent = value;
+                
+                _BillNameText.text = value.name;
+            }
+        }
+        
         protected override void OnDisableMenu()
         {
             transform.SetActiveChildren(false);
@@ -29,9 +37,6 @@ namespace NeedsVsWants.BillingSystem
         {
             transform.SetActiveChildren(true);
 
-            _BillEvents = PlayerStatManager.instance.calendarEventList.Where(calendarEvent => calendarEvent.GetType().IsSubclassOf(typeof(BillEvent))).ToArray();
-
-            _Dropdown.options = _BillEvents.Select(billEvent => new TMP_Dropdown.OptionData(billEvent.name)).ToList();
         }
 
         protected override void OnReturn()

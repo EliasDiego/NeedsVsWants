@@ -1,8 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
+
 using UnityEngine;
 
-namespace NeedsVsWants.MenuSystem
+using NeedsVsWants.MenuSystem;
+
+namespace NeedsVsWants.MessagingSystem
 {
     public class MessageViewerMenu : Menu
     {

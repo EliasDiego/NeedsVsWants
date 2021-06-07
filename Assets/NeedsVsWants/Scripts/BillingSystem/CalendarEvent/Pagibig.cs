@@ -9,8 +9,8 @@ namespace NeedsVsWants.BillingSystem
     public class Pagibig : BillEvent
     {
         public override bool IsWithinDate(DateTime dateTime)
-        {
-            return false;
+        {    
+            return DateTime.DaysInMonth(dateTime.Year, dateTime.Month) == dateTime.Day;
         }
 
         public override float CalculateBill(DateTime dateTime)

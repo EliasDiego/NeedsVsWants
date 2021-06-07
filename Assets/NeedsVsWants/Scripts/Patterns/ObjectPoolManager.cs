@@ -37,7 +37,7 @@ namespace NeedsVsWants.Patterns
             }
         }
 
-        public void Instatiate(string id)
+        public void Instantiate(string id)
         {
             ObjectPool objectPool = _ObjectPools.First(o => o.id == id);
 

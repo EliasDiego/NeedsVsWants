@@ -16,7 +16,7 @@ namespace NeedsVsWants.BillingSystem
         
         public override bool IsWithinDate(DateTime dateTime)
         {
-            return false;
+            return DateTime.DaysInMonth(dateTime.Year, dateTime.Month) == dateTime.Day;
         }
 
         public override float CalculateBill(DateTime dateTime)

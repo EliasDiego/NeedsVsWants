@@ -18,7 +18,7 @@ namespace NeedsVsWants.CalendarSystem
         public override void Invoke(DateTime dateTime)
         {
             if(dateTime.Month == 12)
-                PlayerStatManager.instance.currentMoney += incomeRate + 5000;
+                PlayerStatManager.instance.currentMoney += GetThirteenthMonthPay();
 
             PlayerStatManager.instance.currentMoney += incomeRate;
         }
@@ -28,7 +28,7 @@ namespace NeedsVsWants.CalendarSystem
 
         public float GetThirteenthMonthPay()
         {
-            return 0;
+            return incomeRate + 5000;;
         }
 
         // public override bool IsWithinDateRange(DateTime dateTime) => 
