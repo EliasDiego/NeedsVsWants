@@ -118,7 +118,7 @@ namespace NeedsVsWants.CalendarSystem
         {
             foreach(CalendarEvent calendarEvent in PlayerStatManager.instance.calendarEventList)
             {
-                if(calendarEvent.isShowOnCalendar && calendarEvent.IsWithinDate(dateTime))
+                if(calendarEvent.showOnCalendar && calendarEvent.IsWithinDate(dateTime))
                     return true;
             }
 

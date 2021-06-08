@@ -9,9 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bc8853db54abe0749af099b2d38e253a, type: 3}
-  m_Name: Pagibig
+  m_Script: {fileID: 11500000, guid: 834341174adfbd245a594691cfbe5aa3, type: 3}
+  m_Name: Rent
   m_EditorClassIdentifier: 
   _Icon: {fileID: 0}
-  _ShowAmount: 0
-  _Amount: 100
+  _ShowAmount: 1
+  _Amount: 5000

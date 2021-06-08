@@ -8,7 +8,7 @@ using NeedsVsWants.CalendarSystem;
 
 namespace NeedsVsWants.BillingSystem
 {
-    [CreateAssetMenu(menuName = "NeedsVsWants/Calendar Events/Income Tax")]
+    [CreateAssetMenu(menuName = "NeedsVsWants/Bills/Income Tax")]
     public class IncomeTax : BillEvent
     {
         [SerializeField]

@@ -7,7 +7,7 @@ using NeedsVsWants.MenuSystem;
 
 namespace NeedsVsWants.MessagingSystem
 {
-    public class MessageViewerMenu : Menu
+    public class ChatListMenu : Menu
     {
         protected override void OnDisableMenu()
         {

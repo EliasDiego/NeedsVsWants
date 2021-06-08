@@ -8,7 +8,7 @@ using NeedsVsWants.CalendarSystem;
 
 namespace NeedsVsWants.BillingSystem
 {
-    [CreateAssetMenu(menuName = "NeedsVsWants/Calendar Events/PhilHealth")]
+    [CreateAssetMenu(menuName = "NeedsVsWants/Bills/PhilHealth")]
     public class PhilHealth : BillEvent
     {
         [SerializeField]
@@ -29,7 +29,7 @@ namespace NeedsVsWants.BillingSystem
             else
                 bill = _JobIncome.incomeRate <= 10000 ? 350 : 2450;
                 
-            return bill ;
+            return bill;
         }
     }
 }

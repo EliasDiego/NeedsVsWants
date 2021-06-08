@@ -5,9 +5,12 @@ using UnityEngine;
 
 namespace NeedsVsWants.BillingSystem
 {
-    [CreateAssetMenu(menuName = "NeedsVsWants/Calendar Events/SSS")]
+    [CreateAssetMenu(menuName = "NeedsVsWants/Bills/SSS")]
     public class SSS : BillEvent
     {
+        [SerializeField]
+        float _Amount;
+
         public override bool IsWithinDate(DateTime dateTime)
         {
             return DateTime.DaysInMonth(dateTime.Year, dateTime.Month) == dateTime.Day;
@@ -15,7 +18,7 @@ namespace NeedsVsWants.BillingSystem
 
         public override float CalculateBill(DateTime dateTime)
         {
-            return 1125f;
+            return _Amount;
         }
     }
 }

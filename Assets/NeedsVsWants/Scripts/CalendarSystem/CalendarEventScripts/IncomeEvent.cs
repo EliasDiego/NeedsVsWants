@@ -13,7 +13,7 @@ namespace NeedsVsWants.CalendarSystem
     {
         public float incomeRate;
 
-        public override bool isShowOnCalendar => true;
+        public override bool showOnCalendar => true;
 
         public override void Invoke(DateTime dateTime)
         {

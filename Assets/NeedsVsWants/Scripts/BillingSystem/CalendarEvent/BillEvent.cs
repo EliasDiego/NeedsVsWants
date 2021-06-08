@@ -11,21 +11,35 @@ namespace NeedsVsWants.BillingSystem
 {
     public abstract class BillEvent : CalendarEvent
     {
-        // [Header("Bill")]
-        // [SerializeField]
-        // float _Amount;
-        // [SerializeField]
-        // Date _MinDate;
-        // [SerializeField]
-        // Date _MaxDate;
+        [Header("Bill")]
+        [SerializeField]
+        Sprite _Icon;
+        [SerializeField]
+        bool _ShowAmount = false;
 
         float _CurrentAmount = 0;
 
         bool _HasPayed = false;
 
+        public Sprite icon => _Icon;
+
         public float currentAmount => _CurrentAmount;
 
-        public override bool isShowOnCalendar => true;
+        public override bool showOnCalendar => true;
+
+        public bool showAmount => _ShowAmount;
+
+        // Make sure to have amount at the start of the game (Unless there's change on story)
+        
+        void OnEnable() 
+        {
+            if(Application.isPlaying)
+            {
+                Debug.Log(_CurrentAmount);
+
+                _CurrentAmount = CalculateBill(PlayerStatManager.instance.currentDate);
+            }
+        }
 
         public abstract float CalculateBill(DateTime dateTime);
 
@@ -39,18 +53,5 @@ namespace NeedsVsWants.BillingSystem
         {
             _CurrentAmount -= amount;
         }
-
-        // public override void Invoke()
-        // {
-        //     PlayerStatManager.instance.currentMoney -= _Amount;
-        // }
-
-        // public override bool IsWithinDate(DateTime dateTime)
-        // {
-        //     DateTime min = new DateTime(_MinDate.year, _MinDate.month, _MinDate.day);
-        //     DateTime max = new DateTime(_MaxDate.year, _MaxDate.month, _MaxDate.day, 23, 59, 59);
-
-        //     return min <= dateTime && dateTime <= max;
-        // }
     }
 }

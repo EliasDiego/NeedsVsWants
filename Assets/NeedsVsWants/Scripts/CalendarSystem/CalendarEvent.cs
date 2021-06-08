@@ -15,7 +15,7 @@ namespace NeedsVsWants.CalendarSystem
         // [HideInInspector]
         // public Date maxDate;
 
-        public abstract bool isShowOnCalendar { get; }
+        public abstract bool showOnCalendar { get; }
 
         // #if UNITY_EDITOR
         // [CustomEditor(typeof(CalendarEvent), true)]

@@ -21,7 +21,7 @@ namespace NeedsVsWants.CalendarSystem
         [SerializeField]
         int _DecrementSocialValue = -1;
 
-        public override bool isShowOnCalendar => false;
+        public override bool showOnCalendar => false;
 
         WelfareValue SetValueIncrement(WelfareValue welfareValue, int increment)
         {
