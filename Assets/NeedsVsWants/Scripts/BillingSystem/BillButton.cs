@@ -14,8 +14,6 @@ namespace NeedsVsWants.BillingSystem
 
         Image _BillIconImage;
 
-        public int billEventIndex { get; set; }
-
         protected override void Awake() 
         {
             base.Awake();

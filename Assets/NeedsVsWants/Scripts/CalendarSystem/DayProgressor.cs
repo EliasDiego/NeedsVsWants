@@ -43,6 +43,9 @@ namespace NeedsVsWants.CalendarSystem
             _CurrentMonth = startDateTime.Month;
 
             _CurrentDateTime = startDateTime;
+            
+            // Invoke calendar events and Initialize stuff
+            OnNextDay();
         }
 
         void Update()

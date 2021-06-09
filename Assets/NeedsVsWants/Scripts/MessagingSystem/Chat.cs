@@ -4,14 +4,14 @@ using System.Collections.Generic;
 using UnityEngine;
 
 using NeedsVsWants.CalendarSystem;
+using System;
 
 namespace NeedsVsWants.MessagingSystem
 {
-    [System.Serializable]
-    public struct Chat
+    public class Chat
     {
-        public Character[] characters;
-        public Message[] messages;
-        public Date date;
+        public string title => conversation.title;
+        public bool hasRead = false;
+        public Conversation conversation;
     }
 }

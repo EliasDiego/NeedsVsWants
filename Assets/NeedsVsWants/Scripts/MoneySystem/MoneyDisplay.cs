@@ -22,6 +22,8 @@ namespace NeedsVsWants.MoneySystem
         void Start() 
         {
             PlayerStatManager.instance.onMoneyChange += money => SetText(money);   
+
+            SetText(PlayerStatManager.instance.currentMoney);
         }
 
         string RoundDecimals(float value) => 

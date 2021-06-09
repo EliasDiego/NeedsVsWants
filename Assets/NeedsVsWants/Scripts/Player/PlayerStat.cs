@@ -6,22 +6,23 @@ using UnityEngine;
 
 using NeedsVsWants.WelfareSystem;
 using NeedsVsWants.CalendarSystem;
+using NeedsVsWants.MessagingSystem;
 
 namespace NeedsVsWants.Player
 {
     public class PlayerStat : ScriptableObject
     {
-        List<CalendarEvent> _CalendarEventList = new List<CalendarEvent>();
+        public DateTime currentDateTime; 
+        public List<CalendarEvent> calendarEventList = new List<CalendarEvent>();
 
-        public DateTime currentDateTime { get; set; } 
-        public List<CalendarEvent> calendarEventList => _CalendarEventList;
+        public float currentMoney;
 
-        public float currentMoney { get; set; }
+        public WelfareValue healthWelfare;
+        public WelfareValue hungerWelfare;
+        public WelfareValue socialWelfare;
+        public WelfareValue happinessWelfare;
 
-        public WelfareValue healthWelfare { get; set; }
-        public WelfareValue hungerWelfare  { get; set; }
-        public WelfareValue socialWelfare  { get; set; }
-        public WelfareValue happinessWelfare  { get; set; }
+        public List<Chat> chatList = new List<Chat>();
         
         static PlayerStat _Instance;
 

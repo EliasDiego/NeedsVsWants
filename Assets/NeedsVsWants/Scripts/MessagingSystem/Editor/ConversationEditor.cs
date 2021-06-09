@@ -7,13 +7,13 @@ using UnityEditor;
 
 namespace NeedsVsWants.MessagingSystem
 {
-    [CustomEditor(typeof(ChatEvent))]
-    public class ChatEventEditor : Editor
+    [CustomEditor(typeof(Conversation))]
+    public class ConversationEditor : Editor
     {
         public override void OnInspectorGUI()
         {
             if(GUILayout.Button("Open Editor"))
-                ChatEventWindow.Open(new SerializedObject(target), "Chat Event Editor");
+                ConversationWindow.Open(new SerializedObject(target), "Conversation Editor");
         }
     }
 }

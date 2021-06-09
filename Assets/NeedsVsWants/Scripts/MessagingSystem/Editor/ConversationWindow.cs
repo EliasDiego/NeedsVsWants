@@ -9,7 +9,7 @@ using UnityEditorInternal;
 
 namespace NeedsVsWants.MessagingSystem
 {
-    public class ChatEventWindow : ExtendedEditorWindow<ChatEventWindow>
+    public class ConversationWindow : ExtendedEditorWindow<ConversationWindow>
     {
         int _MessageIndex = 0;
 
@@ -17,23 +17,50 @@ namespace NeedsVsWants.MessagingSystem
 
         SerializedProperty _MessageProperty;
 
+        bool IsCharactersPropertyValid()
+        {
+            SerializedProperty charactersProperty = serializedObject.FindProperty("characters");
+
+            if(charactersProperty.arraySize <= 0)
+                return false;
+            
+            else 
+            {
+                foreach(SerializedProperty property in charactersProperty)
+                {
+                    if(!property.objectReferenceValue)
+                        return false;
+                }
+            }
+
+            return true;
+        }
+
         void SideBar()
         {
             int tempMessageIndex = 0;
 
-            SerializedProperty chatProperty = serializedObject.FindProperty("chat");
-            SerializedProperty messagesProperty = chatProperty.FindPropertyRelative("messages");
-            SerializedProperty charactersProperty = chatProperty.FindPropertyRelative("characters");
-            SerializedProperty tempCharacterProperty;
+            string characterName;
+
+            SerializedProperty messagesProperty = serializedObject.FindProperty("messages");
+            SerializedProperty charactersProperty = serializedObject.FindProperty("characters");
+            SerializedProperty titleProperty = serializedObject.FindProperty("title");
 
             EditorGUILayout.BeginVertical("box", GUILayout.MaxWidth(150), GUILayout.ExpandHeight(true));
 
+            // Title 
+            EditorGUILayout.LabelField("Title", EditorStyles.boldLabel);
+            titleProperty.stringValue = EditorGUILayout.TextField(titleProperty.stringValue);
+            EditorGUILayout.Space();
+
+            // Characters Reorderable List
             EditorGUILayout.PropertyField(charactersProperty);
             
-            EditorGUILayout.LabelField("Messages");
+            // Messages Label
+            EditorGUILayout.LabelField("Messages", EditorStyles.boldLabel);
 
             // Clamp Messages Index to Messages Array Size
-            _MessageIndex = Mathf.Clamp(_MessageIndex, 0, messagesProperty.arraySize - 1);
+            _MessageIndex = messagesProperty.arraySize > 0 ? Mathf.Clamp(_MessageIndex, 0, messagesProperty.arraySize - 1) : 0;
 
             _ScrollPosition = EditorGUILayout.BeginScrollView(_ScrollPosition);
 
@@ -54,11 +81,18 @@ namespace NeedsVsWants.MessagingSystem
                     else
                         GUI.backgroundColor = Color.white;
 
-                    // Get Character Property from currently selected characterIndex
-                    tempCharacterProperty = charactersProperty.GetArrayElementAtIndex(property.FindPropertyRelative("characterIndex").intValue);
+                    // Get Character name from property's characterindex
+                    if(IsCharactersPropertyValid())
+                    {
+                        characterName = (charactersProperty.GetArrayElementAtIndex(
+                            property.FindPropertyRelative("characterIndex").intValue).objectReferenceValue as Character).name;
+                    }
+
+                    else
+                        characterName = "";
 
                     // Message Button
-                    if(GUILayout.Button((tempCharacterProperty.objectReferenceValue as Character).name))
+                    if(GUILayout.Button(characterName))
                     {
                         _MessageIndex = tempMessageIndex;
 
@@ -90,7 +124,8 @@ namespace NeedsVsWants.MessagingSystem
 
             if(GUILayout.Button("Delete", GUILayout.Width(100)))
             {
-                messagesProperty.DeleteArrayElementAtIndex(_MessageIndex);
+                if(messagesProperty.arraySize > 0)
+                    messagesProperty.DeleteArrayElementAtIndex(_MessageIndex);
 
                 if(messagesProperty.arraySize <= 0)
                     _MessageProperty = null;
@@ -126,8 +161,8 @@ namespace NeedsVsWants.MessagingSystem
 
         void ContentPage()
         {
-            SerializedProperty chatProperty;
             SerializedProperty characterIndexProperty;
+            SerializedProperty charactersProperty;
             SerializedProperty textProperty;
 
             List<string> characterNames = new List<string>();
@@ -137,12 +172,12 @@ namespace NeedsVsWants.MessagingSystem
             if(_MessageProperty == null)
                 return;
                 
-            chatProperty = serializedObject.FindProperty("chat");
             characterIndexProperty = _MessageProperty.FindPropertyRelative("characterIndex");
+            charactersProperty = serializedObject.FindProperty("characters");
             textProperty = _MessageProperty.FindPropertyRelative("text");
 
             // Get Character Names
-            foreach(SerializedProperty property in chatProperty.FindPropertyRelative("characters"))
+            foreach(SerializedProperty property in charactersProperty)
             {
                 character = property.objectReferenceValue as Character;
                 
@@ -155,7 +190,7 @@ namespace NeedsVsWants.MessagingSystem
             EditorGUILayout.BeginHorizontal();
 
             EditorGUILayout.LabelField("Character", GUILayout.MaxWidth(150));
-            characterIndexProperty.intValue = EditorGUILayout.Popup(characterIndexProperty.intValue, characterNames.ToArray());
+            characterIndexProperty.intValue = IsCharactersPropertyValid() ? EditorGUILayout.Popup(characterIndexProperty.intValue, characterNames.ToArray()) : 0;
 
             EditorGUILayout.EndHorizontal();
 
@@ -181,7 +216,7 @@ namespace NeedsVsWants.MessagingSystem
 
             EditorGUILayout.EndHorizontal();
             
-            //serializedObject.ApplyModifiedProperties();
+            serializedObject.ApplyModifiedProperties();
         }
     }
 }
