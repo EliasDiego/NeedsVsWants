@@ -13,6 +13,16 @@ MonoBehaviour:
   m_Name: MessageEventSample
   m_EditorClassIdentifier: 
   conversation: {fileID: 11400000, guid: 1f56c94f193c5184a8a2c16517263df6, type: 2}
+  chatChoices:
+  - choiceName: 
+    nextConversation: {fileID: 0}
+    moneyOnChoice: 0
+    welfareOnChoice:
+      _AmountType: 0
+      _HealthValue: 0
+      _HappinessValue: 0
+      _HungerValue: 0
+      _SocialValue: 0
   date:
     year: 0
     month: 1

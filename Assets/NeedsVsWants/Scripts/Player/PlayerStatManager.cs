@@ -123,11 +123,14 @@ namespace NeedsVsWants.Player
         public List<Chat> chatList => _PlayerStat.chatList;
 
         public event Action<float> onMoneyChange;
+
         public event Action<DateTime> onDateChange;
+
         public event Action<WelfareValue> onHealthChange;
         public event Action<WelfareValue> onHungerChange;
         public event Action<WelfareValue> onHappinessChange;
         public event Action<WelfareValue> onSocialChange;
+
         public event Action<Conversation> onNewChat;
 
         protected override void Awake()

@@ -17,41 +17,31 @@ namespace NeedsVsWants.BillingSystem
         [SerializeField]
         bool _ShowAmount = false;
 
-        float _CurrentAmount = 0;
-
-        bool _HasPayed = false;
+        float _CurrentBalance = 0;
 
         public Sprite icon => _Icon;
 
-        public float currentAmount => _CurrentAmount;
+        public float currentBalance => _CurrentBalance;
 
         public override bool showOnCalendar => true;
 
         public bool showAmount => _ShowAmount;
 
-        // Make sure to have amount at the start of the game (Unless there's change on story)
-        
-        void OnEnable() 
+        public override void Initialize()
         {
-            if(Application.isPlaying)
-            {
-                Debug.Log(_CurrentAmount);
-
-                _CurrentAmount = CalculateBill(PlayerStatManager.instance.currentDate);
-            }
+            _CurrentBalance = 0;
         }
 
         public abstract float CalculateBill(DateTime dateTime);
 
         public override void Invoke(DateTime dateTime)
         {
-            if(_HasPayed)
-                _CurrentAmount += CalculateBill(dateTime);
+            _CurrentBalance += CalculateBill(dateTime);
         }
 
         public void PayBill(float amount)
         {
-            _CurrentAmount -= amount;
+            _CurrentBalance -= amount;
         }
     }
 }

@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Text.RegularExpressions;
 
 using UnityEngine;
 
@@ -196,7 +197,7 @@ namespace NeedsVsWants.MessagingSystem
 
             // Text
             EditorGUILayout.LabelField("Text");
-            textProperty.stringValue = EditorGUILayout.TextArea(textProperty.stringValue, GUILayout.Height(250));
+            textProperty.stringValue = EditorGUILayout.TextArea(Regex.Replace(textProperty.stringValue, @"[^a-zA-Z0-9,.]", ""), GUILayout.Height(250));
 
             EditorGUILayout.EndVertical();
         }

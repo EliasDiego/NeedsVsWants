@@ -12,4 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5579b040b0b8f3c49b95f2b641c31d10, type: 3}
   m_Name: PhilHealth
   m_EditorClassIdentifier: 
+  _Icon: {fileID: 0}
+  _ShowAmount: 1
   _JobIncome: {fileID: 11400000, guid: 52114ebef7dcc124ca5600c9247bea4b, type: 2}

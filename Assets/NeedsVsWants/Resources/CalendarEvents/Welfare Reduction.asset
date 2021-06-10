@@ -12,7 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e77a57f693adac742b40c13927f6c160, type: 3}
   m_Name: Welfare Reduction
   m_EditorClassIdentifier: 
-  _DecrementHealthValue: -1
-  _DecrementHappinessValue: -1
-  _DecrementHungerValue: -1
-  _DecrementSocialValue: -1
+  _WelfareOperator:
+    _AmountType: 1
+    _HealthValue: 0
+    _HappinessValue: 0
+    _HungerValue: 0
+    _SocialValue: 0

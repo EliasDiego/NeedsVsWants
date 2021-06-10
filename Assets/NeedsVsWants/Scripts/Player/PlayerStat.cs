@@ -44,7 +44,10 @@ namespace NeedsVsWants.Player
                     PlayerStat.instance.happinessWelfare = new WelfareSystem.WelfareValue(100, 100);
                     PlayerStat.instance.socialWelfare = new WelfareSystem.WelfareValue(100, 100);
 
-                    PlayerStat.instance.calendarEventList.AddRange(Resources.LoadAll<CalendarEvent>("CalendarEvents"));
+                    PlayerStat.instance.calendarEventList.AddRange(Resources.LoadAll<CalendarEvent>("CalendarEvents")); 
+
+                    foreach(CalendarEvent calendarEvent in PlayerStat.instance.calendarEventList)
+                        calendarEvent.Initialize();
                 }
 
                 return _Instance;

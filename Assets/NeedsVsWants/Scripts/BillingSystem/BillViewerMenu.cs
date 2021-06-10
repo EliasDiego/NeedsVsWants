@@ -1,8 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Text.RegularExpressions;
 
 using UnityEngine;
 
+using NeedsVsWants.Player;
 using NeedsVsWants.MenuSystem;
 
 using TMPro;
@@ -14,11 +16,13 @@ namespace NeedsVsWants.BillingSystem
         [SerializeField]
         TMP_Text _BillNameText;
         [SerializeField]
-        TMP_Text _AmountText;
+        TMP_Text _BillBalanceText;
         [SerializeField]
         TMP_InputField _AmountInputField;
 
         BillEvent _BillEvent;
+
+        float _BillAmountDisplay = 0;
 
         public BillEvent billEvent 
         { 
@@ -30,15 +34,31 @@ namespace NeedsVsWants.BillingSystem
                 
                 _BillNameText.text = value.name;
 
-                _AmountText.transform.parent.gameObject.SetActive(value.showAmount);
-                
-                if(value.showAmount)
-                    _AmountText.text = value.currentAmount.ToString();
+                _BillAmountDisplay = value.currentBalance;
+
+                UpdateAmountDisplay();
             }
         }
 
-        // Check if Amount Input Field is being inputted numbers
-        // Make sure to deny pay bill if player doesn't have enough money
+        void Update() 
+        {
+            if(isActive)
+            {
+                if(_BillAmountDisplay != _BillEvent.currentBalance)
+                    UpdateAmountDisplay();
+
+                _AmountInputField.text = Regex.Replace(_AmountInputField.text, @"[^0-9.]", "");
+            }    
+        }
+
+        void UpdateAmountDisplay()
+        {
+            _BillBalanceText.transform.parent.gameObject.SetActive(_BillEvent.showAmount);
+            _BillBalanceText.text = _BillEvent.currentBalance.ToString();
+            
+            if(_BillEvent.showAmount)
+                _BillBalanceText.text = _BillEvent.currentBalance.ToString();
+        }
         
         protected override void OnDisableMenu()
         {
@@ -48,6 +68,8 @@ namespace NeedsVsWants.BillingSystem
         protected override void OnEnableMenu()
         {
             transform.SetActiveChildren(true);
+
+            _AmountInputField.text = "";
         }
 
         protected override void OnReturn()
@@ -60,14 +82,19 @@ namespace NeedsVsWants.BillingSystem
             
         }
 
-        public void CheckInput(string text)
+        public void PayBill()
         {
-            //_AmountInputField
-        }
+            if(string.IsNullOrEmpty(_AmountInputField.text))
+                return;
 
-        public void PayBill(TMP_InputField amountInputField)
-        {
-            _BillEvent.PayBill(float.Parse(amountInputField.text));
+            float inputAmount = float.Parse(_AmountInputField.text);
+
+            if(PlayerStatManager.instance.currentMoney >= inputAmount)
+            {
+                _BillEvent.PayBill(inputAmount);
+
+                PlayerStatManager.instance.currentMoney -= inputAmount;
+            }
         }
     }
 }

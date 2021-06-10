@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: Pagibig
   m_EditorClassIdentifier: 
   _Icon: {fileID: 0}
-  _ShowAmount: 0
+  _ShowAmount: 1
   _Amount: 100

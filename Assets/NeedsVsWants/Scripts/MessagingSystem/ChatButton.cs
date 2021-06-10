@@ -1,6 +1,7 @@
 using System.Linq;
 using System.Collections;
 using System.Collections.Generic;
+using System.Text.RegularExpressions;
 
 using UnityEngine;
 using UnityEngine.UI;
@@ -28,6 +29,8 @@ namespace NeedsVsWants.MessagingSystem
 
         public void AssignChat(Chat chat, MenuSystem.AppMenuGroup appMenuGroup, ChatViewerMenu chatViewerMenu)
         {
+            int stringCount = 0;
+
             Message message;
 
             _ChatTitle.text = chat.title;
@@ -35,9 +38,13 @@ namespace NeedsVsWants.MessagingSystem
 
             if(chat.conversation.messages.Count() > 0)
             {
+                // Temp, show latest message
                 message = chat.conversation.messages[0];
 
-                _PreviewText.text = chat.conversation.characters[message.characterIndex].name + ": " + message.text;
+                // Limit Text
+                _PreviewText.text = chat.conversation.characters[message.characterIndex].name + ": ";// + message.text.Substring;
+
+                stringCount = _PreviewText.text.Length;
             }
 
             else
