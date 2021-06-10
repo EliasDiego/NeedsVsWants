@@ -11,8 +11,9 @@ namespace NeedsVsWants.CameraSystem
     public class CameraZoom : MonoBehaviour
     {
         [SerializeField] InputActionReference camerazoom;
-        public float zoomspeed = 10f;
-        public float cameraDistance = 10f;
+        [SerializeField] float zoomspeed = 10f;
+        [SerializeField] float cameraDistance = 10f;
+
         void Start()
         {
             camerazoom.action.actionMap.Enable();
@@ -28,7 +29,7 @@ namespace NeedsVsWants.CameraSystem
         {
             
             float zoominput = context.ReadValue<float>();
-            cameraDistance += zoominput * zoomspeed;
+            cameraDistance += zoominput * zoomspeed * Time.deltaTime;
             
         }
 

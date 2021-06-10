@@ -12,7 +12,7 @@ namespace NeedsVsWants.CameraSystem
     {
         [SerializeField] InputAction camerarotate;
         [SerializeField] float rotatespeed = 5.0f;
-        public CharacterController controller;
+        private CharacterController controller;
 
         void Start()
         {
