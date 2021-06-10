@@ -631,6 +631,8 @@ GameObject:
   - component: {fileID: 727218088}
   - component: {fileID: 727218087}
   - component: {fileID: 727218091}
+  - component: {fileID: 727218093}
+  - component: {fileID: 727218094}
   - component: {fileID: 727218090}
   m_Layer: 0
   m_Name: Main Camera
@@ -697,13 +699,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 727218086}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1, z: -10}
+  m_LocalRotation: {x: 0.10928809, y: -0.8326701, z: 0.30311695, w: 0.45037416}
+  m_LocalPosition: {x: 53.5, y: 56.9, z: 29.2}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 37.102, y: -120.982, z: 6.554}
 --- !u!114 &727218090
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -713,11 +715,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 727218086}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e69936748216daf4dad96344d4ed7da2, type: 3}
+  m_Script: {fileID: 11500000, guid: f45168a641f830f408ca4d5f8d0738ed, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  camerabindings: {fileID: -7241126942116578865, guid: 4591e5010692a274d985f6ef67912f14, type: 3}
-  panSpeed: 20
+  camerazoom: {fileID: -2796168163865836367, guid: 4591e5010692a274d985f6ef67912f14, type: 3}
+  zoomspeed: 10
+  cameraDistance: 10
 --- !u!114 &727218091
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -750,6 +753,70 @@ MonoBehaviour:
   m_RequiresDepthTexture: 0
   m_RequiresColorTexture: 0
   m_Version: 2
+--- !u!143 &727218093
+CharacterController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 727218086}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Height: 2
+  m_Radius: 0.5
+  m_SlopeLimit: 45
+  m_StepOffset: 0.3
+  m_SkinWidth: 0.08
+  m_MinMoveDistance: 0.001
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &727218094
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 727218086}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 188a3228209fbea4cb2df1cac953943d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  camerarotate:
+    m_Name: Camerarotate
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: 883324c5-7838-4027-b1b1-946802d6c5c7
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings:
+    - m_Name: 2D Vector
+      m_Id: 04b4cdf5-70a6-408f-86da-f63acd18f875
+      m_Path: 2DVector
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Camerarotate
+      m_Flags: 4
+    - m_Name: up
+      m_Id: 1e07035c-3f24-450c-bb78-937553920f0b
+      m_Path: <Keyboard>/a
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Camerarotate
+      m_Flags: 8
+    - m_Name: down
+      m_Id: 0581d01c-4f78-431e-af19-c3a613be6204
+      m_Path: <Keyboard>/d
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Camerarotate
+      m_Flags: 8
+  rotatespeed: 5
+  controller: {fileID: 727218093}
 --- !u!1001 &1046626387
 PrefabInstance:
   m_ObjectHideFlags: 0
