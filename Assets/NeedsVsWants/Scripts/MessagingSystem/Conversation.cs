@@ -13,5 +13,6 @@ namespace NeedsVsWants.MessagingSystem
         public string title;
         public Character[] characters;
         public Message[] messages;
+        public ChatChoice[] choices;
     }
 }

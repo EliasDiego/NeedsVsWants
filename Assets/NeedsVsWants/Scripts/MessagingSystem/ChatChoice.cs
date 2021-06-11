@@ -10,7 +10,7 @@ namespace NeedsVsWants.MessagingSystem
     [System.Serializable]
     public struct ChatChoice
     {
-        public string choiceName;
+        public string name;
         public Conversation nextConversation;
         public int moneyOnChoice;
         public WelfareOperator welfareOnChoice;

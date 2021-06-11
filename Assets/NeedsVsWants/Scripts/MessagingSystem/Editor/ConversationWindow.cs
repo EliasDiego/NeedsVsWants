@@ -13,31 +13,17 @@ namespace NeedsVsWants.MessagingSystem
     public class ConversationWindow : ExtendedEditorWindow<ConversationWindow>
     {
         int _MessageIndex = 0;
+        int _ChoiceIndex = 0;
 
-        Vector2 _ScrollPosition = Vector2.zero;
+        bool _ShowMessages = true;
+
+        Vector2 _MessagesScrollPosition = Vector2.zero;
+        Vector2 _ChoicesScrollPosition = Vector2.zero;
 
         SerializedProperty _MessageProperty;
+        SerializedProperty _ChoiceProperty;
 
-        bool IsCharactersPropertyValid()
-        {
-            SerializedProperty charactersProperty = serializedObject.FindProperty("characters");
-
-            if(charactersProperty.arraySize <= 0)
-                return false;
-            
-            else 
-            {
-                foreach(SerializedProperty property in charactersProperty)
-                {
-                    if(!property.objectReferenceValue)
-                        return false;
-                }
-            }
-
-            return true;
-        }
-
-        void SideBar()
+        void ShowMessages()
         {
             int tempMessageIndex = 0;
 
@@ -47,23 +33,10 @@ namespace NeedsVsWants.MessagingSystem
             SerializedProperty charactersProperty = serializedObject.FindProperty("characters");
             SerializedProperty titleProperty = serializedObject.FindProperty("title");
 
-            EditorGUILayout.BeginVertical("box", GUILayout.MaxWidth(150), GUILayout.ExpandHeight(true));
-
-            // Title 
-            EditorGUILayout.LabelField("Title", EditorStyles.boldLabel);
-            titleProperty.stringValue = EditorGUILayout.TextField(titleProperty.stringValue);
-            EditorGUILayout.Space();
-
-            // Characters Reorderable List
-            EditorGUILayout.PropertyField(charactersProperty);
-            
-            // Messages Label
-            EditorGUILayout.LabelField("Messages", EditorStyles.boldLabel);
-
-            // Clamp Messages Index to Messages Array Size
+             // Clamp Messages Index to Messages Array Size
             _MessageIndex = messagesProperty.arraySize > 0 ? Mathf.Clamp(_MessageIndex, 0, messagesProperty.arraySize - 1) : 0;
 
-            _ScrollPosition = EditorGUILayout.BeginScrollView(_ScrollPosition);
+            _MessagesScrollPosition = EditorGUILayout.BeginScrollView(_MessagesScrollPosition);
 
             if(messagesProperty.arraySize > 0)
             {
@@ -128,8 +101,7 @@ namespace NeedsVsWants.MessagingSystem
                 if(messagesProperty.arraySize > 0)
                     messagesProperty.DeleteArrayElementAtIndex(_MessageIndex);
 
-                if(messagesProperty.arraySize <= 0)
-                    _MessageProperty = null;
+                _MessageProperty = null;
             }
 
             EditorGUILayout.EndHorizontal();
@@ -156,26 +128,22 @@ namespace NeedsVsWants.MessagingSystem
             }
 
             EditorGUILayout.EndHorizontal();
-            
-            EditorGUILayout.EndVertical();
         }
 
-        void ContentPage()
+        void ShowMessageContent()
         {
-            SerializedProperty characterIndexProperty;
-            SerializedProperty charactersProperty;
-            SerializedProperty textProperty;
+            if(_MessageProperty == null)
+                return;
+                
+            SerializedProperty characterIndexProperty = _MessageProperty.FindPropertyRelative("characterIndex");
+            SerializedProperty charactersProperty = serializedObject.FindProperty("characters");
+            SerializedProperty textProperty = _MessageProperty.FindPropertyRelative("text");
+
+            GUIStyle textAreaGUIStyle;
 
             List<string> characterNames = new List<string>();
 
             Character character;
-
-            if(_MessageProperty == null)
-                return;
-                
-            characterIndexProperty = _MessageProperty.FindPropertyRelative("characterIndex");
-            charactersProperty = serializedObject.FindProperty("characters");
-            textProperty = _MessageProperty.FindPropertyRelative("text");
 
             // Get Character Names
             foreach(SerializedProperty property in charactersProperty)
@@ -197,9 +165,191 @@ namespace NeedsVsWants.MessagingSystem
 
             // Text
             EditorGUILayout.LabelField("Text");
-            textProperty.stringValue = EditorGUILayout.TextArea(Regex.Replace(textProperty.stringValue, @"[^a-zA-Z0-9,.]", ""), GUILayout.Height(250));
+
+            textAreaGUIStyle = EditorStyles.textArea;
+            textAreaGUIStyle.wordWrap = true;
+            
+            textProperty.stringValue = EditorGUILayout.TextArea(Regex.Replace(textProperty.stringValue, @"[^a-zA-Z0-9,.]", ""), textAreaGUIStyle, GUILayout.Height(250));
 
             EditorGUILayout.EndVertical();
+        }
+
+        void ShowChoices()
+        {
+            int tempChoiceIndex = 0;
+
+            SerializedProperty choicesProperty = serializedObject.FindProperty("choices");
+
+            _ChoiceIndex = choicesProperty.arraySize > 0 ? Mathf.Clamp(_ChoiceIndex, 0, choicesProperty.arraySize - 1) : 0;
+
+            // Scroll View
+            _ChoicesScrollPosition = EditorGUILayout.BeginScrollView(_ChoicesScrollPosition);
+
+            if(choicesProperty.arraySize > 0)
+            {
+                foreach(SerializedProperty property in choicesProperty)
+                {
+                    // Change Color if the Message is currently selected
+                    if(tempChoiceIndex == _ChoiceIndex)
+                    {
+                        GUI.backgroundColor = Color.grey;
+
+                        // Assign Message Property if not current message
+                        if(property != _ChoiceProperty)
+                            _ChoiceProperty = property;
+                    }
+
+                    else
+                        GUI.backgroundColor = Color.white;
+
+                    if(GUILayout.Button(property.FindPropertyRelative("name").stringValue))
+                    {
+                        _ChoiceIndex = tempChoiceIndex;
+
+                        _ChoiceProperty = property;
+
+                        GUI.FocusControl(null);
+                    }
+
+                    tempChoiceIndex++;
+                }
+            }
+
+            else
+                _ChoiceProperty = null;
+
+            EditorGUILayout.EndScrollView();
+            
+            // Reset Colors
+            GUI.backgroundColor = Color.white;
+
+            // Insert And Delete
+            EditorGUILayout.BeginHorizontal();
+
+            if(GUILayout.Button("Insert", GUILayout.Width(100)))
+                choicesProperty.InsertArrayElementAtIndex(_ChoiceIndex);
+
+            if(GUILayout.Button("Delete", GUILayout.Width(100)))
+            {
+                if(choicesProperty.arraySize > 0)
+                    choicesProperty.DeleteArrayElementAtIndex(_ChoiceIndex);
+
+                _ChoiceProperty = null;
+            }
+
+            EditorGUILayout.EndHorizontal();
+
+            // Move Up And Move Down
+            EditorGUILayout.BeginHorizontal();
+
+            if(GUILayout.Button("Move Up", GUILayout.Width(100)))
+            {
+                tempChoiceIndex = Mathf.Clamp(_ChoiceIndex - 1, 0, choicesProperty.arraySize - 1);
+                
+                choicesProperty.MoveArrayElement(_ChoiceIndex, tempChoiceIndex);
+                
+                _ChoiceIndex = tempChoiceIndex;
+                
+            }
+
+            if(GUILayout.Button("Move Down", GUILayout.Width(100)))
+            {
+                tempChoiceIndex = Mathf.Clamp(_ChoiceIndex + 1, 0, choicesProperty.arraySize - 1);
+                
+                choicesProperty.MoveArrayElement(_ChoiceIndex, tempChoiceIndex);
+                
+                _ChoiceIndex = tempChoiceIndex;
+            }
+
+            EditorGUILayout.EndHorizontal();
+        }
+
+        void ShowChoiceContent()
+        {
+            if(_ChoiceProperty == null)
+                return;
+
+            EditorGUILayout.BeginVertical();
+            
+            EditorGUILayout.PropertyField(_ChoiceProperty.FindPropertyRelative("name"));
+            EditorGUILayout.PropertyField(_ChoiceProperty.FindPropertyRelative("nextConversation"));
+
+            EditorGUILayout.Space();
+            EditorGUILayout.LabelField("Effects On Choice", EditorStyles.boldLabel);
+
+            EditorGUILayout.PropertyField(_ChoiceProperty.FindPropertyRelative("moneyOnChoice"));
+
+            EditorGUILayout.PropertyField(_ChoiceProperty.FindPropertyRelative("welfareOnChoice"));
+            
+            EditorGUILayout.EndVertical();
+        }
+
+        bool IsCharactersPropertyValid()
+        {
+            SerializedProperty charactersProperty = serializedObject.FindProperty("characters");
+
+            if(charactersProperty.arraySize <= 0)
+                return false;
+            
+            else 
+            {
+                foreach(SerializedProperty property in charactersProperty)
+                {
+                    if(!property.objectReferenceValue)
+                        return false;
+                }
+            }
+
+            return true;
+        }
+
+        void SideBar()
+        {
+            SerializedProperty messagesProperty = serializedObject.FindProperty("messages");
+            SerializedProperty charactersProperty = serializedObject.FindProperty("characters");
+            SerializedProperty titleProperty = serializedObject.FindProperty("title");
+
+            EditorGUILayout.BeginVertical("box", GUILayout.MaxWidth(150), GUILayout.ExpandHeight(true));
+
+            // Title 
+            EditorGUILayout.LabelField("Title", EditorStyles.boldLabel);
+            titleProperty.stringValue = EditorGUILayout.TextField(titleProperty.stringValue);
+            EditorGUILayout.Space();
+
+            // Characters Reorderable List
+            EditorGUILayout.PropertyField(charactersProperty);
+            
+            // Messages Label
+            EditorGUILayout.BeginHorizontal();
+         
+            GUI.color = _ShowMessages ? Color.grey : Color.white;
+            if(GUILayout.Button("Messages"))
+                _ShowMessages = true;
+
+            GUI.color = _ShowMessages ? Color.white :  Color.grey;
+            if(GUILayout.Button("Choices"))
+                _ShowMessages = false;
+
+            GUI.color = Color.white;
+         
+            EditorGUILayout.EndHorizontal();
+
+            if(_ShowMessages)
+                ShowMessages();
+
+            else
+                ShowChoices();
+            
+            EditorGUILayout.EndVertical();
+        }
+
+        void ContentPage()
+        {
+            if(_ShowMessages)
+                ShowMessageContent();
+
+            else
+                ShowChoiceContent();
         }
 
         protected override void OnNullSerializeObject()
