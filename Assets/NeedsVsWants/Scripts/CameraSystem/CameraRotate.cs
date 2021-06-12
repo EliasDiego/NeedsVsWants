@@ -11,7 +11,7 @@ namespace NeedsVsWants.CameraSystem
     public class CameraRotate : MonoBehaviour
     {
         [SerializeField] InputAction camerarotate;
-        [SerializeField] float rotatespeed = 5.0f;
+        [SerializeField] float rotatespeed = 15.0f;
         private CharacterController controller;
 
         void Start()
@@ -38,7 +38,7 @@ namespace NeedsVsWants.CameraSystem
            // finalVector.x = inputVector.x;
            // finalVector.z = inputVector.y;
 
-            transform.Rotate(-inputVector * Time.deltaTime * rotatespeed);
+            transform.Rotate(inputVector * Time.deltaTime * rotatespeed);
         }
     }
 }
