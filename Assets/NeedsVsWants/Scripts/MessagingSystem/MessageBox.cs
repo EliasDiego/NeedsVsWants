@@ -28,6 +28,13 @@ namespace NeedsVsWants.MessagingSystem
         void Awake() 
         {
             _LayoutGroup = GetComponent<HorizontalLayoutGroup>();    
+            
+            if(_CharacterCount != _Sender.text.Length || _CharacterCount != _Text.text.Length)
+            {
+                _CharacterCount = _Sender.text.Length > _Text.text.Length ? _Sender.text.Length : _Text.text.Length;
+                
+                _BoxLayout.enabled = _CharacterCount > _CharacterLimit;
+            }
         }
 
         void Update() 
@@ -48,7 +55,7 @@ namespace NeedsVsWants.MessagingSystem
 
             if(isAnne)
             {
-                _LayoutGroup.childAlignment = TextAnchor.MiddleRight;
+                _LayoutGroup.childAlignment = TextAnchor.UpperRight;
 
                 _ProfilePicture.transform.SetSiblingIndex(1);
 
@@ -57,7 +64,7 @@ namespace NeedsVsWants.MessagingSystem
 
             else
             {
-                _LayoutGroup.childAlignment = TextAnchor.MiddleLeft;
+                _LayoutGroup.childAlignment = TextAnchor.UpperLeft;
 
                 _ProfilePicture.transform.SetSiblingIndex(0);
                 

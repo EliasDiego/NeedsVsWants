@@ -16,5 +16,31 @@ MonoBehaviour:
   characters:
   - {fileID: 11400000, guid: 4c03642d09e198548b6f62adf821e0c7, type: 2}
   - {fileID: 11400000, guid: d50b51d4b556f7848b575e15a4b4104b, type: 2}
-  messages: []
+  messages:
+  - characterIndex: 0
+    text: Blah
+  - characterIndex: 1
+    text: Blahblah
+  - characterIndex: 0
+    text: Blah blahBlah blahBlah blahBlah blahBlah blahBlah blahBlah blahBlah blahBlah
+      blahBlah blahBlah blahBlah blahBlah blahBlah blahBlah blahBlah blahBlah blahBlah
+      blahBlah blahBlah blahBlah blahBlah blahBlah blahBlah blahBlah blahBlah blahBlah
+      blahBlah blahBlah blahBlah blahBlah blah
+  - characterIndex: 0
+    text: Blah blahBlah blahBlah blahBlah blahBlah blahBlah blahBlah blahBlah blahBlah
+      blahBlah blahBlah blahBlah blahBlah blahBlah blahBlah blahBlah blahBlah blahBlah
+      blahBlah blahBlah blahBlah blahBlah blahBlah blahBlah blahBlah blahBlah blahBlah
+      blahBlah blahBlah blahBlah blahBlah blah
+  - characterIndex: 0
+    text: Blah blahBlah blahBlah blahBlah blahBlah blahBlah blahBlah blahBlah blahBlah
+      blahBlah blahBlah blahBlah blahBlah blahBlah blahBlah blahBlah blahBlah blahBlah
+      blahBlah blahBlah blahBlah blahBlah blahBlah blahBlah blahBlah blahBlah blahBlah
+      blahBlah blahBlah blahBlah blahBlah blah
+  - characterIndex: 0
+    text: Blah blahBlah blahBlah blahBlah blahBlah blahBlah blahBlah blahBlah blahBlah
+      blahBlah blahBlah blahBlah blahBlah blahBlah blahBlah blahBlah blahBlah blahBlah
+      blahBlah blahBlah blahBlah blahBlah blahBlah blahBlah blahBlah blahBlah blahBlah
+      blahBlah blahBlah blahBlah blahBlah blah
+  - characterIndex: 0
+    text: 
   choices: []

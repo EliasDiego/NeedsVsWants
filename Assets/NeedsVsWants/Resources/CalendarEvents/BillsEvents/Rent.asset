@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 834341174adfbd245a594691cfbe5aa3, type: 3}
   m_Name: Rent
   m_EditorClassIdentifier: 
-  _Icon: {fileID: 0}
+  _Icon: {fileID: 9216381490157431833, guid: 4e2b061b1485d0943bcdc1250a96be2a, type: 3}
   _ShowAmount: 1
   _Amount: 5000

@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9ab664f6e1b1008439c13e2beb723f39, type: 3}
   m_Name: SSS
   m_EditorClassIdentifier: 
-  _Icon: {fileID: 0}
+  _Icon: {fileID: 6623854866510831454, guid: 43e5db650925c024482b1bd409b65100, type: 3}
   _ShowAmount: 1
   _Amount: 1125

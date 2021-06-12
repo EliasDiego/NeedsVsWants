@@ -10,8 +10,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: bc8853db54abe0749af099b2d38e253a, type: 3}
-  m_Name: Pagibig
+  m_Name: Pagibig Fund
   m_EditorClassIdentifier: 
-  _Icon: {fileID: 0}
+  _Icon: {fileID: -1173776428258919297, guid: 43e5db650925c024482b1bd409b65100, type: 3}
   _ShowAmount: 1
   _Amount: 100

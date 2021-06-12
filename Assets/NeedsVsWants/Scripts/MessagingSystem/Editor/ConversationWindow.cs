@@ -169,7 +169,7 @@ namespace NeedsVsWants.MessagingSystem
             textAreaGUIStyle = EditorStyles.textArea;
             textAreaGUIStyle.wordWrap = true;
             
-            textProperty.stringValue = EditorGUILayout.TextArea(Regex.Replace(textProperty.stringValue, @"[^a-zA-Z0-9,.]", ""), textAreaGUIStyle, GUILayout.Height(250));
+            textProperty.stringValue = EditorGUILayout.TextArea(Regex.Replace(textProperty.stringValue, @"[^a-zA-Z0-9,. ]", ""), textAreaGUIStyle, GUILayout.Height(250));
 
             EditorGUILayout.EndVertical();
         }

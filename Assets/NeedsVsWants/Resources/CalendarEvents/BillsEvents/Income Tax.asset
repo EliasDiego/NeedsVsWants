@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6548f141e7794cc47853b03979b92bc7, type: 3}
   m_Name: Income Tax
   m_EditorClassIdentifier: 
-  _Icon: {fileID: 0}
+  _Icon: {fileID: 6966198841771991892, guid: 43e5db650925c024482b1bd409b65100, type: 3}
   _ShowAmount: 1
   _JobIncome: {fileID: 11400000, guid: 52114ebef7dcc124ca5600c9247bea4b, type: 2}
   _SSS: {fileID: 11400000, guid: 9cd6bd09ec17138479ce0797d3c0a247, type: 2}
