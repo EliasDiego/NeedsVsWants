@@ -12,12 +12,15 @@ namespace NeedsVsWants.CameraSystem
     {
         [SerializeField] InputActionReference camerazoom;
         [SerializeField] float zoomspeed = 10f;
-        [SerializeField] float cameraDistance = 10f;
+       [SerializeField] float minFOV = 15f;
+        [SerializeField] float maxFOV = 25f;
+        private Camera cameraFOV;
 
         void Start()
         {
             camerazoom.action.actionMap.Enable();
             camerazoom.action.performed += StartCameraZoom;
+            cameraFOV = GetComponent<Camera>();
       
 
 
@@ -29,7 +32,7 @@ namespace NeedsVsWants.CameraSystem
         {
             
             float zoominput = context.ReadValue<float>();
-            cameraDistance += zoominput * zoomspeed * Time.deltaTime;
+            cameraFOV.fieldOfView -= Mathf.Clamp(zoominput, -minFOV, maxFOV)* zoomspeed* Time.deltaTime;
             
         }
 

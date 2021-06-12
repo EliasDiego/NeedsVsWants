@@ -674,7 +674,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 1000
-  field of view: 60
+  field of view: 60.9
   orthographic: 0
   orthographic size: 5
   m_Depth: -1
@@ -720,7 +720,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   camerazoom: {fileID: -2796168163865836367, guid: 4591e5010692a274d985f6ef67912f14, type: 3}
   zoomspeed: 10
-  cameraDistance: 10
+  minFOV: 15
+  maxFOV: 25
 --- !u!114 &727218091
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -816,7 +817,6 @@ MonoBehaviour:
       m_Action: Camerarotate
       m_Flags: 8
   rotatespeed: 5
-  controller: {fileID: 727218093}
 --- !u!1001 &1046626387
 PrefabInstance:
   m_ObjectHideFlags: 0
