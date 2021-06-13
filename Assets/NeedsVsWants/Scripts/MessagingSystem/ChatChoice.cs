@@ -12,6 +12,7 @@ namespace NeedsVsWants.MessagingSystem
     {
         public string name;
         public Conversation nextConversation;
+        public bool applyEffects;
         public int moneyOnChoice;
         public WelfareOperator welfareOnChoice;
     }

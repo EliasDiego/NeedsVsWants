@@ -269,6 +269,8 @@ namespace NeedsVsWants.MessagingSystem
             if(_ChoiceProperty == null)
                 return;
 
+            SerializedProperty applyEffectsProperty = _ChoiceProperty.FindPropertyRelative("applyEffects");
+
             EditorGUILayout.BeginVertical();
             
             EditorGUILayout.PropertyField(_ChoiceProperty.FindPropertyRelative("name"));
@@ -277,10 +279,15 @@ namespace NeedsVsWants.MessagingSystem
             EditorGUILayout.Space();
             EditorGUILayout.LabelField("Effects On Choice", EditorStyles.boldLabel);
 
-            EditorGUILayout.PropertyField(_ChoiceProperty.FindPropertyRelative("moneyOnChoice"));
+            applyEffectsProperty.boolValue = GUILayout.Toggle(applyEffectsProperty.boolValue, "Apply Effects?");
 
-            EditorGUILayout.PropertyField(_ChoiceProperty.FindPropertyRelative("welfareOnChoice"));
-            
+            if(applyEffectsProperty.boolValue)
+            {
+                EditorGUILayout.PropertyField(_ChoiceProperty.FindPropertyRelative("moneyOnChoice"));
+
+                EditorGUILayout.PropertyField(_ChoiceProperty.FindPropertyRelative("welfareOnChoice"));
+            }
+
             EditorGUILayout.EndVertical();
         }
 

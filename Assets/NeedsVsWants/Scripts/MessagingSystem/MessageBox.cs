@@ -28,25 +28,8 @@ namespace NeedsVsWants.MessagingSystem
         void Awake() 
         {
             _LayoutGroup = GetComponent<HorizontalLayoutGroup>();    
-            
-            if(_CharacterCount != _Sender.text.Length || _CharacterCount != _Text.text.Length)
-            {
-                _CharacterCount = _Sender.text.Length > _Text.text.Length ? _Sender.text.Length : _Text.text.Length;
-                
-                _BoxLayout.enabled = _CharacterCount > _CharacterLimit;
-            }
         }
 
-        void Update() 
-        {
-            if(_CharacterCount != _Sender.text.Length || _CharacterCount != _Text.text.Length)
-            {
-                _CharacterCount = _Sender.text.Length > _Text.text.Length ? _Sender.text.Length : _Text.text.Length;
-                
-                _BoxLayout.enabled = _CharacterCount > _CharacterLimit;
-            }
-        }
-        
         public void AssignMessage(Character sender, string text, bool isAnne)
         {
             _Sender.text = sender.name;
@@ -70,6 +53,8 @@ namespace NeedsVsWants.MessagingSystem
                 
                 _Sender.alignment = TextAlignmentOptions.Left;
             }
+
+            _BoxLayout.enabled = (_Sender.text.Length > _Text.text.Length ? _Sender.text.Length : _Text.text.Length) > _CharacterLimit;
         }
     }
 }

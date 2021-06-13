@@ -11,8 +11,13 @@ namespace NeedsVsWants.MessagingSystem
     public class Chat
     {
         public string title => conversation.title;
+        
         public bool hasRead = false;
+
+        public int currentMessageIndex = 0;
+
         public List<int> choicesMadeList = new List<int>();
+
         public Conversation conversation;
     }
 }

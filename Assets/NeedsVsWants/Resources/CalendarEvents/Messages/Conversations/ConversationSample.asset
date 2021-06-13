@@ -18,29 +18,37 @@ MonoBehaviour:
   - {fileID: 11400000, guid: d50b51d4b556f7848b575e15a4b4104b, type: 2}
   messages:
   - characterIndex: 0
-    text: Blah
+    text: 111111111111111111111111111111111111111111111111111111111111111111111111111111111111v
   - characterIndex: 1
-    text: Blahblah
+    text: 22222222222222222222222222222222222222222222222222222222222222222222222222v
   - characterIndex: 0
-    text: Blah blahBlah blahBlah blahBlah blahBlah blahBlah blahBlah blahBlah blahBlah
-      blahBlah blahBlah blahBlah blahBlah blahBlah blahBlah blahBlah blahBlah blahBlah
-      blahBlah blahBlah blahBlah blahBlah blahBlah blahBlah blahBlah blahBlah blahBlah
-      blahBlah blahBlah blahBlah blahBlah blah
+    text: 3
   - characterIndex: 0
-    text: Blah blahBlah blahBlah blahBlah blahBlah blahBlah blahBlah blahBlah blahBlah
-      blahBlah blahBlah blahBlah blahBlah blahBlah blahBlah blahBlah blahBlah blahBlah
-      blahBlah blahBlah blahBlah blahBlah blahBlah blahBlah blahBlah blahBlah blahBlah
-      blahBlah blahBlah blahBlah blahBlah blah
+    text: 4444444444444444444444444444444444444444444444444444444444444v
   - characterIndex: 0
-    text: Blah blahBlah blahBlah blahBlah blahBlah blahBlah blahBlah blahBlah blahBlah
-      blahBlah blahBlah blahBlah blahBlah blahBlah blahBlah blahBlah blahBlah blahBlah
-      blahBlah blahBlah blahBlah blahBlah blahBlah blahBlah blahBlah blahBlah blahBlah
-      blahBlah blahBlah blahBlah blahBlah blah
+    text: 5
   - characterIndex: 0
-    text: Blah blahBlah blahBlah blahBlah blahBlah blahBlah blahBlah blahBlah blahBlah
-      blahBlah blahBlah blahBlah blahBlah blahBlah blahBlah blahBlah blahBlah blahBlah
-      blahBlah blahBlah blahBlah blahBlah blahBlah blahBlah blahBlah blahBlah blahBlah
-      blahBlah blahBlah blahBlah blahBlah blah
+    text: 6666666666666666666666666666666666666666666666666666666666666666666666666666666666666
   - characterIndex: 0
-    text: 
-  choices: []
+    text: 7
+  choices:
+  - name: Choice 1
+    nextConversation: {fileID: 11400000, guid: bcddae55c7e0fbf428b1c9414ae547ea, type: 2}
+    applyEffects: 1
+    moneyOnChoice: 0
+    welfareOnChoice:
+      _AmountType: 0
+      _HealthValue: 0
+      _HappinessValue: 0
+      _HungerValue: 0
+      _SocialValue: 0
+  - name: Choice 2
+    nextConversation: {fileID: 0}
+    applyEffects: 0
+    moneyOnChoice: 0
+    welfareOnChoice:
+      _AmountType: 0
+      _HealthValue: 0
+      _HappinessValue: 0
+      _HungerValue: 0
+      _SocialValue: 0

@@ -6,6 +6,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.InputSystem.UI;
 
+using NeedsVsWants.Player;
 using NeedsVsWants.Patterns;
 using NeedsVsWants.MenuSystem;
 
@@ -26,11 +27,17 @@ namespace NeedsVsWants.MessagingSystem
         [SerializeField]
         ScrollRect _ScrollRect;
 
+        Conversation _CurrentConversation;
+
+        bool _IsShowingChoice = false;
+
         public Chat chat { get; set; }
 
         void Awake() 
         {
             ObjectPoolManager.instance.Instantiate("Message Box");    
+            ObjectPoolManager.instance.Instantiate("Chat Choice Button");
+            ObjectPoolManager.instance.Instantiate("Chat Choices Holder");
 
             _InputModule.leftClick.action.canceled += context =>
             {
@@ -41,52 +48,214 @@ namespace NeedsVsWants.MessagingSystem
                 
                 Bounds menuBounds = new Bounds((Vector2)rectTransform.position, rectTransform.rect.size);
 
-                if(menuBounds.Contains(_InputModule.point.action.ReadValue<Vector2>()))
-                {
-                    // On Click, Do something
-                }
+                if(_CurrentConversation && menuBounds.Contains(_InputModule.point.action.ReadValue<Vector2>()))
+                    OnClickScreen();
             };
         }
 
-        async void UpdateMessageBoxes()
+        void OnClickChoice(int choiceIndex)
         {
-            MessageBox messageBox;
+            ChatChoice chatChoice = _CurrentConversation.choices[choiceIndex];
 
-            List<MessageBox> messageBoxList = new List<MessageBox>();
+            _IsShowingChoice = false;
+
+            chat.currentMessageIndex = 0;
+            chat.choicesMadeList.Add(choiceIndex);
+
+            _CurrentConversation = chatChoice.nextConversation;
+
+            if(chatChoice.applyEffects)
+            {
+                PlayerStatManager.instance.currentMoney += chatChoice.moneyOnChoice;
+                PlayerStatManager.instance.currentHealthWelfare = chatChoice.welfareOnChoice.GetHealth(PlayerStatManager.instance.currentHealthWelfare);
+                PlayerStatManager.instance.currentHappinessWelfare = chatChoice.welfareOnChoice.GetHealth(PlayerStatManager.instance.currentHappinessWelfare);
+                PlayerStatManager.instance.currentHungerWelfare = chatChoice.welfareOnChoice.GetHealth(PlayerStatManager.instance.currentHungerWelfare);
+                PlayerStatManager.instance.currentSocialWelfare = chatChoice.welfareOnChoice.GetHealth(PlayerStatManager.instance.currentSocialWelfare);
+            }
+
+            if(_CurrentConversation)
+                DisplayToCurrentMessageOrChoice();
+        }
+
+        void OnClickScreen()
+        {
+            Message message;
+
+            // Update Current Message Index
+            chat.currentMessageIndex++;
+
+            // If Message Index goes beyond message length
+            if(chat.currentMessageIndex >= _CurrentConversation.messages.Length)
+            {
+                // Check if there are choices
+                if(!_IsShowingChoice && _CurrentConversation.choices.Length > 0)
+                {
+                    // Show Choices Here
+                    AddChatChoiceHolder(_CurrentConversation.choices, OnClickChoice);
+
+                    // move the Scroll Position to current Chat Choice Holder
+                    ScrollToBottom();
+
+                    _IsShowingChoice = true;
+                }
+
+                else
+                    chat.currentMessageIndex--;
+            }
+
+            else
+            {
+                message = _CurrentConversation.messages[chat.currentMessageIndex];
+
+                // Add Another Message Box
+                AddMessageBox(message, _CurrentConversation.characters[message.characterIndex]);
+                
+                // move the Scroll Position to current Message Box       
+                ScrollToBottom();
+            }
+        }
+
+        async void ScrollToBottom()
+        {
+            await System.Threading.Tasks.Task.Delay(20);
+
+            _ScrollRect.verticalNormalizedPosition = 0;
+        }
+
+        async void AddChatChoiceHolder(string choiceName)
+        {
+            ChatChoicesHolder choicesHolder = ObjectPoolManager.instance.GetObject("Chat Choices Holder").GetComponent<ChatChoicesHolder>();
+
+            choicesHolder.ShowChoice(choiceName);
+            
+            await System.Threading.Tasks.Task.Delay(10);
+            
+            choicesHolder.transform.SetParent(_ContentTransform, false);
+        }
+
+        async void AddChatChoiceHolder(ChatChoice[] choices, System.Action<int> onClickChoice)
+        {
+            ChatChoicesHolder choicesHolder = ObjectPoolManager.instance.GetObject("Chat Choices Holder").GetComponent<ChatChoicesHolder>();
+
+            choicesHolder.AssignChoices(choices, onClickChoice);
+            
+            await System.Threading.Tasks.Task.Delay(10);
+            
+            choicesHolder.transform.SetParent(_ContentTransform, false);
+        }
+
+        async void AddMessageBox(Message message, Character character)
+        {
+            MessageBox messageBox = ObjectPoolManager.instance.GetObject("Message Box").GetComponent<MessageBox>();
+
+            messageBox.AssignMessage(character, message.text, character == _Anne);
+
+            await System.Threading.Tasks.Task.Delay(10);
+            
+            messageBox.transform.SetParent(_ContentTransform, false);
+        }
+
+        void DisplayToCurrentMessageOrChoice()
+        {
+            DisplayMessages(_CurrentConversation, Mathf.Clamp(chat.currentMessageIndex, 0, _CurrentConversation.messages.Length - 1));
+
+            // If player is currently in a choice
+            if(chat.currentMessageIndex >= _CurrentConversation.messages.Length)
+            {
+                _IsShowingChoice = true;
+
+                AddChatChoiceHolder(_CurrentConversation.choices, OnClickChoice);
+            }
+        }
+
+        async void DisplayAllMessages(Conversation conversation)
+        {
+            Message message;
 
             Character character;
 
-            // Temp Solution
-            foreach(Message message in chat.conversation.messages)
+            MessageBox[] messageBoxes = ObjectPoolManager.instance.GetObjects("Message Box", conversation.messages.Length).
+                Select(g => g.GetComponent<MessageBox>()).ToArray();
+
+            for(int i = 0; i < messageBoxes.Length; i++)
             {
-                messageBox = ObjectPoolManager.instance.GetObject("Message Box").GetComponent<MessageBox>();
+                message = conversation.messages[i];
 
-                character = chat.conversation.characters[message.characterIndex];
+                character = conversation.characters[message.characterIndex];
 
-                messageBox.AssignMessage(character, message.text, character == _Anne);
-
-                messageBoxList.Add(messageBox);
+                messageBoxes[i].AssignMessage(character, message.text, character == _Anne);
             }
+                
+            await System.Threading.Tasks.Task.Delay(10);
+            
+            foreach(MessageBox messageBox in messageBoxes)
+                messageBox.transform.SetParent(_ContentTransform, false);
 
-            // Remove Inertia
-            _ScrollRect.inertia = false;
-            _ScrollRect.velocity = Vector2.zero;
+            // foreach(Message message in conversation.messages)
+            //     AddMessageBox(message, conversation.characters[message.characterIndex]);
+        }
 
-            foreach(MessageBox m in messageBoxList)
+        async void DisplayMessages(Conversation conversation, int currentIndex)
+        {
+            Message message;
+
+            Character character;
+
+            MessageBox[] messageBoxes = ObjectPoolManager.instance.GetObjects("Message Box", currentIndex + 1).
+                Select(g => g.GetComponent<MessageBox>()).ToArray();
+            
+            for(int i = 0; i <= currentIndex; i++)
             {
-                m.transform.SetParent(_ContentTransform, false);
+                message = conversation.messages[i];
 
-                _ScrollRect.verticalNormalizedPosition = -1;
+                character = conversation.characters[message.characterIndex];
 
-                await System.Threading.Tasks.Task.Delay(1);
+                messageBoxes[i].AssignMessage(character, message.text, character == _Anne);
             }
+            
+            await System.Threading.Tasks.Task.Delay(10);
+            
+            foreach(MessageBox messageBox in messageBoxes)
+                messageBox.transform.SetParent(_ContentTransform, false);
 
-            _ScrollRect.inertia = true;
+            // Message[] messages = conversation.messages;
+
+            // for(int i = 0; i <= currentIndex; i++)
+            //     AddMessageBox(messages[i], conversation.characters[messages[i].characterIndex]);
+        }
+
+        void FillChat()
+        {
+            _CurrentConversation = chat.conversation;
+
+            // if player went through choices
+            if(chat.choicesMadeList.Count > 0)
+            {
+                foreach(int i in chat.choicesMadeList)
+                {
+                    DisplayAllMessages(_CurrentConversation);
+
+                    AddChatChoiceHolder(_CurrentConversation.choices[i].name);
+
+                    _CurrentConversation = _CurrentConversation.choices[i].nextConversation;
+                }
+
+                if(_CurrentConversation)
+                    DisplayToCurrentMessageOrChoice();
+            }
+            
+            // If player didn't go through choices
+            else
+                DisplayToCurrentMessageOrChoice();
+
+            ScrollToBottom();
         }
 
         protected override void OnDisableMenu()
         {
             transform.SetActiveChildren(false);
+
+            _IsShowingChoice = false;
         }
 
         protected override void OnEnableMenu()
@@ -95,7 +264,7 @@ namespace NeedsVsWants.MessagingSystem
 
             _ChatTitle.text = chat.title;
 
-            UpdateMessageBoxes();
+            FillChat();
         }
 
         protected override void OnReturn()
