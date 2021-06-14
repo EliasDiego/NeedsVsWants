@@ -1,0 +1,43 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 588500f11bfcf094bb32a4e00f946e8a, type: 3}
+  m_Name: test
+  m_EditorClassIdentifier: 
+  title: Bongang Investment
+  characters:
+  - {fileID: 11400000, guid: 61aaffff4a0cb3148aaaecb615619681, type: 2}
+  messages:
+  - characterIndex: 0
+    text: BEEEEHHHH enge 5k kasi kaibigan tayo
+  - characterIndex: 0
+    text: 'pplllllsssss '
+  choices:
+  - name: Yes
+    nextConversation: {fileID: 0}
+    applyEffects: 1
+    moneyOnChoice: -5000
+    welfareOnChoice:
+      _AmountType: 1
+      _HealthValue: 0
+      _HappinessValue: -20
+      _HungerValue: 0
+      _SocialValue: 20
+  - name: No
+    nextConversation: {fileID: 0}
+    applyEffects: 0
+    moneyOnChoice: -5000
+    welfareOnChoice:
+      _AmountType: 1
+      _HealthValue: 0
+      _HappinessValue: -20
+      _HungerValue: 0
+      _SocialValue: 20
