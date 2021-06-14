@@ -4,6 +4,7 @@ using UnityEngine;
 
 namespace NeedsVsWants.WelfareSystem
 {
+    [System.Serializable]
     public struct WelfareValue
     {
         public float value;
