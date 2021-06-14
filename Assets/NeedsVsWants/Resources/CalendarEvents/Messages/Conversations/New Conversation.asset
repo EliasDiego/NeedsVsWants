@@ -18,4 +18,18 @@ MonoBehaviour:
   messages:
   - characterIndex: 0
     text: Anna Anne Ewan ko na
-  choices: []
+  - characterIndex: 0
+    text: Anna Anne Ewan ko na
+  - characterIndex: 0
+    text: 
+  choices:
+  - name: Yes
+    nextConversation: {fileID: 0}
+    applyEffects: 0
+    moneyOnChoice: 0
+    welfareOnChoice:
+      _AmountType: 0
+      _HealthValue: 0
+      _HappinessValue: 0
+      _HungerValue: 0
+      _SocialValue: 0
