@@ -55,7 +55,7 @@ namespace NeedsVsWants.CalendarSystem
 
             _OnDateChange = date => 
             {
-                if(!_CurrentDisplayDate.IsOnSameMonth(date))
+                if(!_CurrentDisplayDate.IsOnSameMonth(date, true))
                     SetupCalendar(date);
 
                 currentDisplayDate = date;
@@ -118,7 +118,7 @@ namespace NeedsVsWants.CalendarSystem
         {
             foreach(CalendarEvent calendarEvent in PlayerStatManager.instance.calendarEventList)
             {
-                if(calendarEvent.isShowOnCalendar && calendarEvent.IsWithinDate(dateTime))
+                if(calendarEvent.showOnCalendar && calendarEvent.IsWithinDate(dateTime))
                     return true;
             }
 
@@ -165,7 +165,7 @@ namespace NeedsVsWants.CalendarSystem
                 if(tempDate.Month != currentMonth)
                     day.color = _NotInMonthColor;
 
-                else if(tempDate.IsOnSameDay(currentDisplayDate))
+                else if(tempDate.IsOnSameDay(currentDisplayDate, true))
                 {
                     day.color = _CurrentDayColor;
 

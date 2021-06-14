@@ -43,6 +43,9 @@ namespace NeedsVsWants.CalendarSystem
             _CurrentMonth = startDateTime.Month;
 
             _CurrentDateTime = startDateTime;
+            
+            // Invoke calendar events and Initialize stuff
+            OnNextDay();
         }
 
         void Update()
@@ -95,7 +98,7 @@ namespace NeedsVsWants.CalendarSystem
             foreach(CalendarEvent calendarEvent in PlayerStatManager.instance.calendarEventList)
             {
                 if(calendarEvent.IsWithinDate(_CurrentDateTime))
-                    calendarEvent.Invoke();
+                    calendarEvent.Invoke(_CurrentDateTime);
             }
 
             PlayerStatManager.instance.currentDate = _CurrentDateTime;

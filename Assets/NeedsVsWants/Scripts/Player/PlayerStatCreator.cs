@@ -58,6 +58,9 @@ namespace NeedsVsWants.Player
             PlayerStat.instance.socialWelfare = new WelfareSystem.WelfareValue(_SocialValue, _SocialMaxValue);
 
             PlayerStat.instance.calendarEventList.AddRange(Resources.LoadAll<CalendarEvent>("CalendarEvents"));
+    
+            foreach(CalendarEvent calendarEvent in PlayerStat.instance.calendarEventList)
+                calendarEvent.Initialize();
         }
 
         public void LoadPlayerStat(int slot)

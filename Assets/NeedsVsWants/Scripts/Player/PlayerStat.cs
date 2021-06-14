@@ -6,22 +6,23 @@ using UnityEngine;
 
 using NeedsVsWants.WelfareSystem;
 using NeedsVsWants.CalendarSystem;
+using NeedsVsWants.MessagingSystem;
 
 namespace NeedsVsWants.Player
 {
     public class PlayerStat : ScriptableObject
     {
-        List<CalendarEvent> _CalendarEventList = new List<CalendarEvent>();
+        public DateTime currentDateTime; 
+        public List<CalendarEvent> calendarEventList = new List<CalendarEvent>();
 
-        public DateTime currentDateTime { get; set; } 
-        public List<CalendarEvent> calendarEventList => _CalendarEventList;
+        public float currentMoney;
 
-        public float currentMoney { get; set; }
+        public WelfareValue healthWelfare;
+        public WelfareValue hungerWelfare;
+        public WelfareValue socialWelfare;
+        public WelfareValue happinessWelfare;
 
-        public WelfareValue healthWelfare { get; set; }
-        public WelfareValue hungerWelfare  { get; set; }
-        public WelfareValue socialWelfare  { get; set; }
-        public WelfareValue happinessWelfare  { get; set; }
+        public List<Chat> chatList = new List<Chat>();
         
         static PlayerStat _Instance;
 
@@ -43,23 +44,10 @@ namespace NeedsVsWants.Player
                     PlayerStat.instance.happinessWelfare = new WelfareSystem.WelfareValue(100, 100);
                     PlayerStat.instance.socialWelfare = new WelfareSystem.WelfareValue(100, 100);
 
-                    PlayerStat.instance.calendarEventList.AddRange(Resources.LoadAll<CalendarEvent>("CalendarEvents"));
-                    
-                    // For Testing As usual
-                    IncomeEvent baseIncome = IncomeEvent.CreateInstance<IncomeEvent>();
+                    PlayerStat.instance.calendarEventList.AddRange(Resources.LoadAll<CalendarEvent>("CalendarEvents")); 
 
-                    baseIncome.name = "Base Income";
-                    baseIncome.incomeRate = 5000;
-                    
-                    PlayerStat.instance.calendarEventList.Add(baseIncome);
-
-                    // For testing as usual x2
-                    WelfareReductionEvent welfareReductionEvent = WelfareReductionEvent.CreateInstance<WelfareReductionEvent>();
-
-                    welfareReductionEvent.name = "Welfare Reduction";
-                    
-                    PlayerStat.instance.calendarEventList.Add(welfareReductionEvent);
-                    
+                    foreach(CalendarEvent calendarEvent in PlayerStat.instance.calendarEventList)
+                        calendarEvent.Initialize();
                 }
 
                 return _Instance;
