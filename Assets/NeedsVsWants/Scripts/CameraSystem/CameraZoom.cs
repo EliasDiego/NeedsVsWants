@@ -32,7 +32,7 @@ namespace NeedsVsWants.CameraSystem
         {
             
             float zoominput = context.ReadValue<float>();
-            cameraFOV.fieldOfView -= Mathf.Clamp(zoominput, -minFOV, maxFOV)* zoomspeed* Time.deltaTime;
+            cameraFOV.orthographicSize -= Mathf.Clamp(zoominput, -minFOV, maxFOV)* zoomspeed* Time.deltaTime;
             
         }
 

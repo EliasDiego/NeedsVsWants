@@ -344,7 +344,7 @@ GameObject:
   - component: {fileID: 111114709}
   - component: {fileID: 111114708}
   m_Layer: 0
-  m_Name: Cube
+  m_Name: RotationFocus
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -816,8 +816,8 @@ Camera:
   near clip plane: 0.3
   far clip plane: 1000
   field of view: 60.9
-  orthographic: 0
-  orthographic size: 5
+  orthographic: 1
+  orthographic size: 35
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -840,13 +840,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 727218086}
-  m_LocalRotation: {x: 0.1714525, y: -0.7788383, z: 0.4258019, w: 0.4274432}
-  m_LocalPosition: {x: 35.6, y: 58.65829, z: 27.7}
+  m_LocalRotation: {x: 0.3105508, y: 0.7011575, z: -0.43843818, w: 0.46873057}
+  m_LocalPosition: {x: -201.3, y: 468.3, z: 84.2}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 111114712}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 54.08, y: -117.619, z: 9.512}
+  m_LocalEulerAnglesHint: {x: 64.953, y: -245.41699, z: -356.686}
 --- !u!114 &727218090
 MonoBehaviour:
   m_ObjectHideFlags: 0
