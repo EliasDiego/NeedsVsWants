@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 
 using NeedsVsWants;
 using NeedsVsWants.Player;
@@ -41,6 +42,11 @@ namespace NeedsVsWants.MenuSystem
             };
         }
 
+        void OnDestroy() 
+        {
+            _PauseKey.action.started -= _OnPauseStarted;    
+        }
+
         protected override void OnDisableMenu()
         {
             transform.SetActiveChildren(false);
@@ -67,6 +73,20 @@ namespace NeedsVsWants.MenuSystem
         protected override void OnSwitchFrom()
         {
             _IsOnFocus = false;
+        }
+
+        public void ReturnToMainMenu(int sceneBuildIndex)
+        {
+            SceneManager.LoadScene(sceneBuildIndex, LoadSceneMode.Single);
+        }
+        
+        public void Quit()
+        {
+            #if UNITY_EDITOR
+                UnityEditor.EditorApplication.isPlaying = false;
+            #else
+                Application.Quit();
+            #endif
         }
     }
 }

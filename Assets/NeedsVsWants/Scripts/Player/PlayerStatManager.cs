@@ -3,6 +3,10 @@ using System.Linq;
 using System.Collections;
 using System.Collections.Generic;
 
+using UnityEngine;
+using UnityEngine.Events;
+using UnityEngine.SceneManagement;
+
 using NeedsVsWants.Patterns;
 using NeedsVsWants.WelfareSystem;
 using NeedsVsWants.CalendarSystem;
@@ -12,6 +16,9 @@ namespace NeedsVsWants.Player
 {
     public class PlayerStatManager : SimpleSingleton<PlayerStatManager>
     {
+        [SerializeField]
+        int _EndMenuBuildSceneIndex;
+
         PlayerStat _PlayerStat;
 
         public DateTime currentDate 
@@ -39,42 +46,42 @@ namespace NeedsVsWants.Player
             }
         }
 
-        public int currentYear 
-        { 
-            get => _PlayerStat.currentDateTime.Year;
-            set
-            {
-                DateTime newDate = _PlayerStat.currentDateTime;
+        // public int currentYear 
+        // { 
+        //     get => _PlayerStat.currentDateTime.Year;
+        //     set
+        //     {
+        //         DateTime newDate = _PlayerStat.currentDateTime;
 
-                _PlayerStat.currentDateTime = new DateTime(value, newDate.Month, newDate.Day);
+        //         _PlayerStat.currentDateTime = new DateTime(value, newDate.Month, newDate.Day);
 
-                onDateChange?.Invoke(_PlayerStat.currentDateTime);
-            }
-        }
-        public int currentMonth 
-        {
-            get => _PlayerStat.currentDateTime.Month;
-            set
-            {
-                DateTime newDate = _PlayerStat.currentDateTime;
+        //         onDateChange?.Invoke(_PlayerStat.currentDateTime);
+        //     }
+        // }
+        // public int currentMonth 
+        // {
+        //     get => _PlayerStat.currentDateTime.Month;
+        //     set
+        //     {
+        //         DateTime newDate = _PlayerStat.currentDateTime;
 
-                _PlayerStat.currentDateTime = new DateTime(newDate.Year, value, newDate.Day);
+        //         _PlayerStat.currentDateTime = new DateTime(newDate.Year, value, newDate.Day);
 
-                onDateChange?.Invoke(_PlayerStat.currentDateTime);
-            }
-        }
-        public int currentDay
-        {
-            get => _PlayerStat.currentDateTime.Day;
-            set
-            {
-                DateTime newDate = _PlayerStat.currentDateTime;
+        //         onDateChange?.Invoke(_PlayerStat.currentDateTime);
+        //     }
+        // }
+        // public int currentDay
+        // {
+        //     get => _PlayerStat.currentDateTime.Day;
+        //     set
+        //     {
+        //         DateTime newDate = _PlayerStat.currentDateTime;
 
-                _PlayerStat.currentDateTime = new DateTime(newDate.Year, newDate.Month, value);
+        //         _PlayerStat.currentDateTime = new DateTime(newDate.Year, newDate.Month, value);
 
-                onDateChange?.Invoke(_PlayerStat.currentDateTime);
-            }
-        }
+        //         onDateChange?.Invoke(_PlayerStat.currentDateTime);
+        //     }
+        // }
 
         public WelfareValue currentHealthWelfare
         {
@@ -142,14 +149,43 @@ namespace NeedsVsWants.Player
 
         void Start() 
         {
-            onMoneyChange?.Invoke(currentMoney);
+            // onMoneyChange?.Invoke(currentMoney);
 
-            onDateChange?.Invoke(currentDate);
+            // onDateChange?.Invoke(currentDate);
 
-            onHealthChange?.Invoke(currentHealthWelfare);
-            onHappinessChange?.Invoke(currentHappinessWelfare);
-            onHungerChange?.Invoke(currentHungerWelfare);
-            onSocialChange?.Invoke(currentSocialWelfare);  
+            // onHealthChange?.Invoke(currentHealthWelfare);
+            // onHappinessChange?.Invoke(currentHappinessWelfare);
+            // onHungerChange?.Invoke(currentHungerWelfare);
+            // onSocialChange?.Invoke(currentSocialWelfare);  
+
+            onHealthChange += welfareValue =>
+            {
+                if(welfareValue.value <= 0)
+                    OnZeroWelfare();
+            };
+            
+            onHungerChange += welfareValue =>
+            {
+                if(welfareValue.value <= 0)
+                    OnZeroWelfare();
+            };
+            
+            onHappinessChange += welfareValue =>
+            {
+                if(welfareValue.value <= 0)
+                    OnZeroWelfare();
+            };
+            
+            onSocialChange += welfareValue =>
+            {
+                if(welfareValue.value <= 0)
+                    OnZeroWelfare();
+            };
+        }
+
+        void OnZeroWelfare()
+        {
+            SceneManager.LoadScene(_EndMenuBuildSceneIndex, LoadSceneMode.Single);
         }
 
         public void AddConversationToChat(Conversation conversation)

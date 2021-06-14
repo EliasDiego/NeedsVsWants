@@ -31,27 +31,47 @@ namespace NeedsVsWants.Player
             get
             {
                 if(!_Instance)
-                {
-                    _Instance = CreateInstance<PlayerStat>();
-
-                    // For Testing, To Be Deleted
-                    PlayerStat.instance.currentDateTime = new DateTime(2020, 1, 1);
-                    
-                    PlayerStat.instance.currentMoney = 10000;
-                    
-                    PlayerStat.instance.healthWelfare = new WelfareSystem.WelfareValue(100, 100);
-                    PlayerStat.instance.hungerWelfare = new WelfareSystem.WelfareValue(100, 100);
-                    PlayerStat.instance.happinessWelfare = new WelfareSystem.WelfareValue(100, 100);
-                    PlayerStat.instance.socialWelfare = new WelfareSystem.WelfareValue(100, 100);
-
-                    PlayerStat.instance.calendarEventList.AddRange(Resources.LoadAll<CalendarEvent>("CalendarEvents")); 
-
-                    foreach(CalendarEvent calendarEvent in PlayerStat.instance.calendarEventList)
-                        calendarEvent.Initialize();
-                }
+                    PlayerStat.CreateNewInstance();
 
                 return _Instance;
-            }
+            } 
+            set => _Instance = value;
+        }
+
+        public static void CreateNewInstance()
+        {
+            PlayerStatStartReference startReference = Resources.Load<PlayerStatStartReference>("Player Stat Start Reference");
+
+            _Instance = CreateInstance<PlayerStat>();
+
+            _Instance.currentDateTime = startReference.startDate;
+        
+            _Instance.currentMoney = startReference.startMoney;
+        
+            _Instance.healthWelfare = startReference.startHealthWelfare;
+            _Instance.hungerWelfare = startReference.startHungerWelfare;
+            _Instance.happinessWelfare = startReference.startHappinessWelfare;
+            _Instance.socialWelfare = startReference.startSocialWelfare;
+
+            _Instance.calendarEventList.AddRange(Resources.LoadAll<CalendarEvent>("CalendarEvents")); 
+            
+            foreach(CalendarEvent calendarEvent in _Instance.calendarEventList)
+                calendarEvent.Initialize();
+
+            // For Testing, To Be Deleted
+            // PlayerStat.instance.currentDateTime = new DateTime(2020, 1, 1);
+            
+            // PlayerStat.instance.currentMoney = 10000;
+            
+            // PlayerStat.instance.healthWelfare = new WelfareSystem.WelfareValue(100, 100);
+            // PlayerStat.instance.hungerWelfare = new WelfareSystem.WelfareValue(100, 100);
+            // PlayerStat.instance.happinessWelfare = new WelfareSystem.WelfareValue(100, 100);
+            // PlayerStat.instance.socialWelfare = new WelfareSystem.WelfareValue(100, 100);
+
+            // PlayerStat.instance.calendarEventList.AddRange(Resources.LoadAll<CalendarEvent>("CalendarEvents")); 
+
+            // foreach(CalendarEvent calendarEvent in PlayerStat.instance.calendarEventList)
+            //     calendarEvent.Initialize();
         }
     }
 }
