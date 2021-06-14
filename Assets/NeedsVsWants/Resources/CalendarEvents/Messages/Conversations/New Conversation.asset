@@ -17,11 +17,11 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 4c03642d09e198548b6f62adf821e0c7, type: 2}
   messages:
   - characterIndex: 0
-    text: Anna Anne Ewan ko na
+    text: 1
   - characterIndex: 0
-    text: Anna Anne Ewan ko na
+    text: 2
   - characterIndex: 0
-    text: 
+    text: 3
   choices:
   - name: Yes
     nextConversation: {fileID: 0}

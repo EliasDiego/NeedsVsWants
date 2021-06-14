@@ -38,7 +38,7 @@ namespace NeedsVsWants.CameraSystem
            // finalVector.x = inputVector.x;
            // finalVector.z = inputVector.y;
 
-            transform.Rotate(inputVector * Time.deltaTime * rotatespeed);
+            transform.eulerAngles += (Vector3)inputVector * Time.deltaTime * rotatespeed;
         }
     }
 }
