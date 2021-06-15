@@ -198,5 +198,13 @@ namespace NeedsVsWants.Player
                 
             onNewChat?.Invoke(conversation);
         }
+
+        public void CalculateWelfare(WelfareOperator welfareOperator)
+        {
+            currentHappinessWelfare = welfareOperator.GetHappiness(currentHappinessWelfare);
+            currentHealthWelfare = welfareOperator.GetHappiness(currentHealthWelfare);
+            currentHungerWelfare = welfareOperator.GetHappiness(currentHungerWelfare);
+            currentSocialWelfare = welfareOperator.GetHappiness(currentSocialWelfare);
+        }
     }
 }

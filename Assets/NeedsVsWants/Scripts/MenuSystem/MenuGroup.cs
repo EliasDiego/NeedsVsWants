@@ -10,6 +10,8 @@ namespace NeedsVsWants.MenuSystem
 
         Menu[] _Menus;
 
+        public bool isActive => _CurrentMenu ? _CurrentMenu.isActive : false;
+
         public Menu currentMenu => _CurrentMenu;
         public Menu[] menus => _Menus;
 
