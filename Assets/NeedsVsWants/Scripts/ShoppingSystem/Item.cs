@@ -12,8 +12,9 @@ namespace NeedsVsWants.ShoppingSystem
     public class Item : ScriptableObject
     {
         public float price;
+        [TextArea]
         public string description;
-        public Sprite[] previewImages;
+        public Sprite previewImage;
         public WelfareOperator onBuyWelfareEffects;
 
         public virtual void OnBuy() 
