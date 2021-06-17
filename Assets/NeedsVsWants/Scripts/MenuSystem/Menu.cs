@@ -228,7 +228,7 @@ namespace NeedsVsWants.MenuSystem
 
         public void SwitchTo(Menu menu, bool disableMenu)
         {
-            SetReturnMenu(null);
+            //SetReturnMenu(null);
             OnSwitchFrom();
 
             if(disableMenu)

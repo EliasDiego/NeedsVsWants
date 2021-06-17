@@ -34,7 +34,7 @@ namespace NeedsVsWants.MenuSystem
             _CurrentMenu = menu;
         }
 
-        public Menu Return()
+        public void Return()
         {
             Menu returnMenu = _CurrentMenu.returnMenu;
             
@@ -44,9 +44,21 @@ namespace NeedsVsWants.MenuSystem
 
                 _CurrentMenu = returnMenu;
             }
-
-            return returnMenu;
         }
+
+        // public Menu Return()
+        // {
+        //     Menu returnMenu = _CurrentMenu.returnMenu;
+            
+        //     if(returnMenu)
+        //     {
+        //         _CurrentMenu.Return();
+
+        //         _CurrentMenu = returnMenu;
+        //     }
+
+        //     return returnMenu;
+        // }
 
         public void DisableAllMenus()
         {

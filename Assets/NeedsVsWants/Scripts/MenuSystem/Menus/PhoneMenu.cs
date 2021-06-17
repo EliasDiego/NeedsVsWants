@@ -61,9 +61,7 @@ namespace NeedsVsWants.MenuSystem
         {
             if(_CurrentMenuGroup)
             {
-                Menu returnMenu = _CurrentMenuGroup.Return();
-
-                if(!returnMenu) // If current group return doesn't have a return menu, thus go to home screen
+                if(!_CurrentMenuGroup.currentMenu.returnMenu)
                 {
                     _CurrentMenuGroup.DisableGroup();
 
@@ -71,7 +69,23 @@ namespace NeedsVsWants.MenuSystem
 
                     _HomeScreenMenu.EnableMenu();
                 }
+
+                else
+                    _CurrentMenuGroup.Return();
             }
+            // if(_CurrentMenuGroup)
+            // {
+            //     Menu returnMenu = _CurrentMenuGroup.Return();
+
+            //     if(!returnMenu) // If current group return doesn't have a return menu, thus go to home screen
+            //     {
+            //         _CurrentMenuGroup.DisableGroup();
+
+            //         _CurrentMenuGroup = null;
+
+            //         _HomeScreenMenu.EnableMenu();
+            //     }
+            // }
         }
 
         public void ReturnHomeScreen()
