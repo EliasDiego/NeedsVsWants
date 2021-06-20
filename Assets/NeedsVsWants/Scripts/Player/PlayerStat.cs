@@ -15,7 +15,7 @@ namespace NeedsVsWants.Player
         public DateTime currentDateTime; 
         public List<CalendarEvent> calendarEventList = new List<CalendarEvent>();
 
-        public float currentMoney;
+        public double currentMoney;
 
         public WelfareValue healthWelfare;
         public WelfareValue hungerWelfare;

@@ -34,7 +34,7 @@ namespace NeedsVsWants.Player
 
         public List<CalendarEvent> calendarEventList => _PlayerStat.calendarEventList;
 
-        public float currentMoney
+        public double currentMoney
         {
             get => _PlayerStat.currentMoney;
 
@@ -129,7 +129,7 @@ namespace NeedsVsWants.Player
 
         public List<Chat> chatList => _PlayerStat.chatList;
 
-        public event Action<float> onMoneyChange;
+        public event Action<double> onMoneyChange;
 
         public event Action<DateTime> onDateChange;
 

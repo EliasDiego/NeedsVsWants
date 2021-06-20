@@ -19,7 +19,11 @@ namespace NeedsVsWants.ShoppingSystem
         [SerializeField]
         TMP_Text _Name;
         [SerializeField]
+        TMP_Text _Price;
+        [SerializeField]
         TMP_Text _Description;
+        [SerializeField]
+        ItemCartMenu _ItemCartMenu;
 
         public Item item { get; set; }
         
@@ -28,8 +32,8 @@ namespace NeedsVsWants.ShoppingSystem
             transform.SetActiveChildren(true);
 
             _PreviewImage.sprite = item.previewImage;
+            _Price.text = StringFormat.ToPriceFormat(item.price);
             _Name.text = item.name;
-
             _Description.text = item.description;
             
             await System.Threading.Tasks.Task.Delay(20);
@@ -46,5 +50,10 @@ namespace NeedsVsWants.ShoppingSystem
         protected override void OnReturn() { }
 
         protected override void OnSwitchFrom() { }
+
+        public void AddToCart()
+        {
+            _ItemCartMenu.AddToCart(item);
+        }
     }
 }

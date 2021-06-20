@@ -30,7 +30,7 @@ namespace NeedsVsWants.ShoppingSystem
             _Image.sprite = item.previewImage;
 
             _Name.text = item.name;
-            _Price.text = item.price.ToString();
+            _Price.text = StringFormat.ToPriceFormat(item.price);
             
             onClick.RemoveAllListeners();
 

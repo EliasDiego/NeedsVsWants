@@ -19,9 +19,9 @@ namespace NeedsVsWants.BillingSystem
             return DateTime.DaysInMonth(dateTime.Year, dateTime.Month) == dateTime.Day;
         }
 
-        public override float CalculateBill(DateTime dateTime)
+        public override double CalculateBill(DateTime dateTime)
         {
-            float bill = 0;
+            double bill = 0;
 
             if(10000.01 <= _JobIncome.incomeRate && _JobIncome.incomeRate <= 69999.99f)
                 bill = _JobIncome.incomeRate * 0.035f;

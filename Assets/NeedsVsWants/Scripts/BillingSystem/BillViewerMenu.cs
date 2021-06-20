@@ -22,7 +22,7 @@ namespace NeedsVsWants.BillingSystem
 
         BillEvent _BillEvent;
 
-        float _BillAmountDisplay = 0;
+        double _BillAmountDisplay = 0;
 
         public BillEvent billEvent 
         { 
@@ -54,10 +54,9 @@ namespace NeedsVsWants.BillingSystem
         void UpdateAmountDisplay()
         {
             _BillBalanceText.transform.parent.gameObject.SetActive(_BillEvent.showAmount);
-            _BillBalanceText.text = _BillEvent.currentBalance.ToString();
             
             if(_BillEvent.showAmount)
-                _BillBalanceText.text = _BillEvent.currentBalance.ToString();
+                _BillBalanceText.text = StringFormat.ToPriceFormat(_BillEvent.currentBalance);
         }
         
         protected override void OnDisableMenu()
@@ -87,7 +86,7 @@ namespace NeedsVsWants.BillingSystem
             if(string.IsNullOrEmpty(_AmountInputField.text))
                 return;
 
-            float inputAmount = float.Parse(_AmountInputField.text);
+            double inputAmount = double.Parse(_AmountInputField.text);
 
             if(PlayerStatManager.instance.currentMoney >= inputAmount)
             {

@@ -17,11 +17,11 @@ namespace NeedsVsWants.BillingSystem
         [SerializeField]
         bool _ShowAmount = false;
 
-        float _CurrentBalance = 0;
+        double _CurrentBalance = 0;
 
         public Sprite icon => _Icon;
 
-        public float currentBalance => _CurrentBalance;
+        public double currentBalance => _CurrentBalance;
 
         public override bool showOnCalendar => true;
 
@@ -32,14 +32,14 @@ namespace NeedsVsWants.BillingSystem
             _CurrentBalance = 0;
         }
 
-        public abstract float CalculateBill(DateTime dateTime);
+        public abstract double CalculateBill(DateTime dateTime);
 
         public override void Invoke(DateTime dateTime)
         {
             _CurrentBalance += CalculateBill(dateTime);
         }
 
-        public void PayBill(float amount)
+        public void PayBill(double amount)
         {
             _CurrentBalance -= amount;
         }

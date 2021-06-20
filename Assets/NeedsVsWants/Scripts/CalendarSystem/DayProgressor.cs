@@ -16,9 +16,9 @@ namespace NeedsVsWants.CalendarSystem
     {
         [Header("Day Speed")]
         [SerializeField]
-        float _HourTimeDelta = 1;
+        double _HourTimeDelta = 1;
         [SerializeField]
-        float _HourTimeScale = 1;
+        double _HourTimeScale = 1;
         
         int _CurrentMonth;
         int _CurrentDay;
