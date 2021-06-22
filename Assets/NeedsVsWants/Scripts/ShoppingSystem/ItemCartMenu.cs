@@ -20,14 +20,27 @@ namespace NeedsVsWants.ShoppingSystem
         Toggle _SelectAllToggle;
         [SerializeField]
         TMP_Text _TotalPriceText;
+        [SerializeField]
+        CheckoutPopUp _CheckoutPopUp;
 
         Dictionary<Item, int> _ItemCartSlots = new Dictionary<Item, int>();
 
         List<ItemSlot> _ItemSlotList = new List<ItemSlot>();
 
+        bool _BlockOnSelectAll = false;
+
         void Awake() 
         {
             ObjectPoolManager.instance.Instantiate("Item Slot");
+        }
+
+        void OnAfterCheckoutProcessing(double newMoney)
+        {
+            Player.PlayerStatManager.instance.currentMoney = newMoney;
+            
+            DeleteItems();
+            
+            GetComponentInParent<AppMenuGroup>().Return();
         }
 
         void OnQuantityChange()
@@ -43,6 +56,7 @@ namespace NeedsVsWants.ShoppingSystem
             {
                 if(!itemSlot.isToggled)
                 {
+                    _BlockOnSelectAll = true;
                     _SelectAllToggle.isOn = false;
 
                     return;
@@ -50,6 +64,19 @@ namespace NeedsVsWants.ShoppingSystem
             }
 
             _SelectAllToggle.isOn = true;
+        }
+
+        double GetTotalPrice()
+        {
+            double totalPrice = 0;
+
+            foreach(ItemSlot itemSlot in _ItemSlotList)
+            {
+                if(itemSlot.isToggled)
+                    totalPrice += itemSlot.item.price * itemSlot.quantity;
+            }
+
+            return totalPrice;
         }
 
         async void SpawnItemsSlots()
@@ -86,6 +113,9 @@ namespace NeedsVsWants.ShoppingSystem
             SpawnItemsSlots();
 
             UpdateTotalPrice();
+
+            //_BlockOnSelectAll = true;
+            _SelectAllToggle.isOn = false;
         }
 
         protected override void OnDisableMenu() 
@@ -97,16 +127,9 @@ namespace NeedsVsWants.ShoppingSystem
             _ItemSlotList.Clear();
         }
 
-        protected override void OnReturn()
-        {
-            
-        }
+        protected override void OnReturn() { }
 
-        protected override void OnSwitchFrom()
-        {
-            
-        }
-
+        protected override void OnSwitchFrom() { }
         public void DeleteItems()
         {
             List<ItemSlot> removedItemSlot = new List<ItemSlot>();
@@ -143,37 +166,50 @@ namespace NeedsVsWants.ShoppingSystem
 
         public void SelectAll()
         {
-            foreach(ItemSlot itemSlot in _ItemSlotList)
+            if(!_BlockOnSelectAll)
             {
-                if(_SelectAllToggle.isOn)
+                foreach(ItemSlot itemSlot in _ItemSlotList)
                 {
-                    if(!itemSlot.isToggled)
-                    {
-                        itemSlot.blockOnToggleEvent = true;
-
-                        itemSlot.isToggled = true;
-                    }
+                    itemSlot.blockOnToggleEvent = true;
+                    itemSlot.isToggled = _SelectAllToggle.isOn;
                 }
-
-                else
-                    itemSlot.isToggled = false;
+                    
+                UpdateTotalPrice();
             }
 
-            if(_SelectAllToggle.isOn)
-                UpdateTotalPrice();
+            else
+                _BlockOnSelectAll = false;
         }
 
         public void UpdateTotalPrice()
         {
-            double totalPrice = 0;
+            _TotalPriceText.text = StringFormat.ToPriceFormat(GetTotalPrice());
+        }
+
+        public void Checkout()
+        {
+            bool hasSelected = false;
+            double newMoney;
 
             foreach(ItemSlot itemSlot in _ItemSlotList)
             {
                 if(itemSlot.isToggled)
-                    totalPrice += itemSlot.item.price * itemSlot.quantity;
+                {
+                    hasSelected = true;
+                    break;
+                }
             }
 
-            _TotalPriceText.text = StringFormat.ToPriceFormat(totalPrice);
+            if(hasSelected)
+            {
+                newMoney = Player.PlayerStatManager.instance.currentMoney - GetTotalPrice();
+
+                _CheckoutPopUp.hasSufficientFunds = newMoney >= 0;
+
+                _CheckoutPopUp.onAfterProcessing = () => OnAfterCheckoutProcessing(newMoney);
+
+                _CheckoutPopUp.EnablePopUp();
+            }
         }
     }
 }
