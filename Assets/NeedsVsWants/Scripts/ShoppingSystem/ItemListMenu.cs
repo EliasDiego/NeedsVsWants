@@ -5,9 +5,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-using NeedsVsWants;
 using NeedsVsWants.Patterns;
 using NeedsVsWants.MenuSystem;
+using NeedsVsWants.PhoneSystem;
 
 namespace NeedsVsWants.ShoppingSystem
 {
@@ -33,7 +33,7 @@ namespace NeedsVsWants.ShoppingSystem
         {
             AppMenuGroup appMenuGroup = GetComponentInParent<AppMenuGroup>();
 
-            Item[] items = Resources.LoadAll<Item>("Shopping/AlwaysInStoreItems");
+            Item[] items = Player.PlayerStatManager.instance.currentShopItemList;
 
             ItemButton[] itemButtons = ObjectPoolManager.instance.GetObjects("Item Button", items.Length).
                 Select(g => g.GetComponent<ItemButton>()).ToArray();

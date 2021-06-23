@@ -55,5 +55,10 @@ namespace NeedsVsWants.ShoppingSystem
         {
             _ItemCartMenu.AddToCart(item);
         }
+
+        public void BuyNow()
+        {
+            _ItemCartMenu.AddAndSelectItemToCart(item);
+        }
     }
 }

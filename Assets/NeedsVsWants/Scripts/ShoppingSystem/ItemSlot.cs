@@ -33,7 +33,6 @@ namespace NeedsVsWants.ShoppingSystem
         public Item item => _Item;
 
         public bool isToggled { get => _Toggle.isOn; set => _Toggle.isOn = value; }
-        public bool blockOnToggleEvent { get; set; } = false;
 
         public void AssignItem(Item item, int quantity, System.Action onQuantityChange, System.Action onToggleChange)
         {
@@ -89,12 +88,7 @@ namespace NeedsVsWants.ShoppingSystem
 
         public void OnToggle()
         {
-            if(blockOnToggleEvent)
-                blockOnToggleEvent = false;
-
-            else            
-                _OnToggleChange?.Invoke();
-
+            _OnToggleChange?.Invoke();
         }
     }
 }

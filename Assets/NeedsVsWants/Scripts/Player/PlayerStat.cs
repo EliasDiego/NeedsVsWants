@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 using NeedsVsWants.WelfareSystem;
+using NeedsVsWants.ShoppingSystem;
 using NeedsVsWants.CalendarSystem;
 using NeedsVsWants.MessagingSystem;
 
@@ -13,7 +14,8 @@ namespace NeedsVsWants.Player
     public class PlayerStat : ScriptableObject
     {
         public DateTime currentDateTime; 
-        public List<CalendarEvent> calendarEventList = new List<CalendarEvent>();
+
+        public List<Item> currentShopItemList = new List<Item>();
 
         public double currentMoney;
 
@@ -23,6 +25,8 @@ namespace NeedsVsWants.Player
         public WelfareValue happinessWelfare;
 
         public List<Chat> chatList = new List<Chat>();
+
+        public List<CalendarEvent> calendarEventList = new List<CalendarEvent>();
         
         static PlayerStat _Instance;
 
@@ -54,24 +58,11 @@ namespace NeedsVsWants.Player
             _Instance.socialWelfare = startReference.startSocialWelfare;
 
             _Instance.calendarEventList.AddRange(Resources.LoadAll<CalendarEvent>("CalendarEvents")); 
+
+            _Instance.currentShopItemList.AddRange(Resources.LoadAll<Item>("CalendarEvents/SaleEvents/StartingShopItems"));
             
             foreach(CalendarEvent calendarEvent in _Instance.calendarEventList)
                 calendarEvent.Initialize();
-
-            // For Testing, To Be Deleted
-            // PlayerStat.instance.currentDateTime = new DateTime(2020, 1, 1);
-            
-            // PlayerStat.instance.currentMoney = 10000;
-            
-            // PlayerStat.instance.healthWelfare = new WelfareSystem.WelfareValue(100, 100);
-            // PlayerStat.instance.hungerWelfare = new WelfareSystem.WelfareValue(100, 100);
-            // PlayerStat.instance.happinessWelfare = new WelfareSystem.WelfareValue(100, 100);
-            // PlayerStat.instance.socialWelfare = new WelfareSystem.WelfareValue(100, 100);
-
-            // PlayerStat.instance.calendarEventList.AddRange(Resources.LoadAll<CalendarEvent>("CalendarEvents")); 
-
-            // foreach(CalendarEvent calendarEvent in PlayerStat.instance.calendarEventList)
-            //     calendarEvent.Initialize();
         }
     }
 }

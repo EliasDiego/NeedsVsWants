@@ -2,7 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace NeedsVsWants.MenuSystem
+using NeedsVsWants.MenuSystem;
+
+namespace NeedsVsWants.PhoneSystem
 {
     public class HomeScreenMenu : Menu
     {

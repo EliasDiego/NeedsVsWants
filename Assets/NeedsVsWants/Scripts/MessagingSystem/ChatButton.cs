@@ -3,8 +3,9 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
 
-using UnityEngine;
 using UnityEngine.UI;
+
+using NeedsVsWants.PhoneSystem;
 
 using TMPro;
 
@@ -27,7 +28,7 @@ namespace NeedsVsWants.MessagingSystem
             _PreviewText = texts[1];
         }
 
-        public void AssignChat(Chat chat, MenuSystem.AppMenuGroup appMenuGroup, ChatViewerMenu chatViewerMenu)
+        public void AssignChat(Chat chat, AppMenuGroup appMenuGroup, ChatViewerMenu chatViewerMenu)
         {
             int stringCount = 0;
 

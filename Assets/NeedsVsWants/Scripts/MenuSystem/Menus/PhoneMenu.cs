@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-using NeedsVsWants;
+using NeedsVsWants.PhoneSystem;
 
 namespace NeedsVsWants.MenuSystem
 {

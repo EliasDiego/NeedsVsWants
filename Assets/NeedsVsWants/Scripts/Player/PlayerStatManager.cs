@@ -10,6 +10,7 @@ using UnityEngine.SceneManagement;
 using NeedsVsWants.Patterns;
 using NeedsVsWants.WelfareSystem;
 using NeedsVsWants.CalendarSystem;
+using NeedsVsWants.ShoppingSystem;
 using NeedsVsWants.MessagingSystem;
 
 namespace NeedsVsWants.Player
@@ -32,7 +33,7 @@ namespace NeedsVsWants.Player
             }
         }
 
-        public List<CalendarEvent> calendarEventList => _PlayerStat.calendarEventList;
+        public CalendarEvent[] calendarEventList => _PlayerStat.calendarEventList.ToArray();
 
         public double currentMoney
         {
@@ -127,7 +128,9 @@ namespace NeedsVsWants.Player
             }
         }
 
-        public List<Chat> chatList => _PlayerStat.chatList;
+        public Chat[] chatList => _PlayerStat.chatList.ToArray();
+
+        public Item[] currentShopItemList => _PlayerStat.currentShopItemList.ToArray();
 
         public event Action<double> onMoneyChange;
 
@@ -139,6 +142,8 @@ namespace NeedsVsWants.Player
         public event Action<WelfareValue> onSocialChange;
 
         public event Action<Conversation> onNewChat;
+
+        public event Action<Item[]> onShopItemListChange;
 
         protected override void Awake()
         {
@@ -194,7 +199,7 @@ namespace NeedsVsWants.Player
 
             chat.conversation = conversation;
 
-            chatList.Add(chat);
+            _PlayerStat.chatList.Add(chat);
                 
             onNewChat?.Invoke(conversation);
         }
@@ -205,6 +210,37 @@ namespace NeedsVsWants.Player
             currentHealthWelfare = welfareOperator.GetHappiness(currentHealthWelfare);
             currentHungerWelfare = welfareOperator.GetHappiness(currentHungerWelfare);
             currentSocialWelfare = welfareOperator.GetHappiness(currentSocialWelfare);
+        }
+
+        public void AddShopItemTolist(Item item)
+        {
+            if(!_PlayerStat.currentShopItemList.Contains(item))
+            {
+                _PlayerStat.currentShopItemList.Add(item);
+
+                onShopItemListChange?.Invoke(new Item[]{ item });
+            }
+        }
+        
+        public void AddShopItemTolist(Item[] items)
+        {
+            foreach(Item item in items)
+            {
+                if(!_PlayerStat.currentShopItemList.Contains(item))
+                    _PlayerStat.currentShopItemList.Add(item);
+            }
+            
+            onShopItemListChange?.Invoke(items);
+        }
+
+        public void RemoveShopItemTolist(Item item)
+        {
+            if(_PlayerStat.currentShopItemList.Contains(item))
+            {
+                _PlayerStat.currentShopItemList.Remove(item);
+
+                onShopItemListChange?.Invoke(new Item[]{ item });
+            }
         }
     }
 }

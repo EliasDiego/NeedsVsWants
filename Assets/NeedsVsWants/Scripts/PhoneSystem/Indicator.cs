@@ -8,13 +8,13 @@ using TMPro;
 
 namespace NeedsVsWants.PhoneSystem
 {
-    public class NotificationIndicator : MonoBehaviour
+    public class Indicator : MonoBehaviour
     {
         [SerializeField]
         Image _Graphic;
         [SerializeField]
         TMP_Text _Text;
         
-        public string text { get => _Text.text; set => _Text.text = value.Substring(0, 3); }
+        public string text { get => _Text.text; set => _Text.text = value.Length > 3 ? value.Substring(0, 3) : value; }
     }
 }

@@ -6,7 +6,9 @@ using UnityEngine.UI;
 
 using TMPro;
 
-namespace NeedsVsWants.MenuSystem
+using NeedsVsWants.MenuSystem;
+
+namespace NeedsVsWants.PhoneSystem
 {
     public class CheckoutPopUp : PopUp
     {

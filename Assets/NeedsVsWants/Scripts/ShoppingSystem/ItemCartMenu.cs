@@ -7,6 +7,7 @@ using UnityEngine.UI;
 
 using NeedsVsWants.Patterns;
 using NeedsVsWants.MenuSystem;
+using NeedsVsWants.PhoneSystem;
 
 using TMPro;
 
@@ -22,25 +23,46 @@ namespace NeedsVsWants.ShoppingSystem
         TMP_Text _TotalPriceText;
         [SerializeField]
         CheckoutPopUp _CheckoutPopUp;
+        [SerializeField]
+        Indicator[] _Indicators;
 
         Dictionary<Item, int> _ItemCartSlots = new Dictionary<Item, int>();
 
         List<ItemSlot> _ItemSlotList = new List<ItemSlot>();
 
-        bool _BlockOnSelectAll = false;
+        Item _BuyItem;
 
         void Awake() 
         {
             ObjectPoolManager.instance.Instantiate("Item Slot");
         }
 
+        void OnChangeToCart()
+        {
+            int itemsInCart = 0;
+
+            foreach(Item item in _ItemCartSlots.Keys)
+                itemsInCart += _ItemCartSlots[item];
+
+            foreach(Indicator n in _Indicators)
+                n.text = itemsInCart.ToString();
+        }
+
         void OnAfterCheckoutProcessing(double newMoney)
         {
             Player.PlayerStatManager.instance.currentMoney = newMoney;
+
+            foreach(ItemSlot itemSlot in _ItemSlotList)
+            {
+                if(itemSlot.isToggled)
+                    itemSlot.item.OnBuy();
+            }
             
             DeleteItems();
             
-            GetComponentInParent<AppMenuGroup>().Return();
+            // Return To Item List Menu
+            while(menuGroup.currentMenu.GetType() != typeof(ItemListMenu))
+                menuGroup.Return();
         }
 
         void OnQuantityChange()
@@ -51,19 +73,6 @@ namespace NeedsVsWants.ShoppingSystem
         void onToggleChange()
         {
             UpdateTotalPrice();
-
-            foreach(ItemSlot itemSlot in _ItemSlotList)
-            {
-                if(!itemSlot.isToggled)
-                {
-                    _BlockOnSelectAll = true;
-                    _SelectAllToggle.isOn = false;
-
-                    return;
-                }
-            }
-
-            _SelectAllToggle.isOn = true;
         }
 
         double GetTotalPrice()
@@ -90,6 +99,14 @@ namespace NeedsVsWants.ShoppingSystem
                 itemSlot = ObjectPoolManager.instance.GetObject("Item Slot").GetComponent<ItemSlot>();
 
                 itemSlot.AssignItem(item, _ItemCartSlots[item], OnQuantityChange, onToggleChange);
+
+                // When On Buy Now
+                if(item == _BuyItem)
+                {
+                    itemSlot.isToggled = true;
+
+                    _BuyItem = null;
+                }
                 
                 _ItemSlotList.Add(itemSlot);
             }
@@ -130,6 +147,7 @@ namespace NeedsVsWants.ShoppingSystem
         protected override void OnReturn() { }
 
         protected override void OnSwitchFrom() { }
+
         public void DeleteItems()
         {
             List<ItemSlot> removedItemSlot = new List<ItemSlot>();
@@ -150,6 +168,8 @@ namespace NeedsVsWants.ShoppingSystem
 
             foreach(ItemSlot itemSlot in removedItemSlot)
                 _ItemSlotList.Remove(itemSlot);
+
+            OnChangeToCart();
         }
 
         public void AddToCart(Item item)
@@ -162,23 +182,23 @@ namespace NeedsVsWants.ShoppingSystem
 
             else
                 _ItemCartSlots.Add(item, 1);
+
+            OnChangeToCart();
         }   
+
+        public void AddAndSelectItemToCart(Item item)
+        {
+            AddToCart(item);
+
+            _BuyItem = item;
+        }
 
         public void SelectAll()
         {
-            if(!_BlockOnSelectAll)
-            {
-                foreach(ItemSlot itemSlot in _ItemSlotList)
-                {
-                    itemSlot.blockOnToggleEvent = true;
-                    itemSlot.isToggled = _SelectAllToggle.isOn;
-                }
-                    
-                UpdateTotalPrice();
-            }
-
-            else
-                _BlockOnSelectAll = false;
+            foreach(ItemSlot itemSlot in _ItemSlotList)
+                itemSlot.isToggled = _SelectAllToggle.isOn;
+                
+            UpdateTotalPrice();
         }
 
         public void UpdateTotalPrice()
