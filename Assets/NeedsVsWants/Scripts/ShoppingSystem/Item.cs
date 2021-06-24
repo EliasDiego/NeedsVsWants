@@ -17,6 +17,11 @@ namespace NeedsVsWants.ShoppingSystem
         public Sprite previewImage;
         public WelfareOperator onBuyWelfareEffects;
 
+        [HideInInspector]
+        public bool isDiscounted;
+        [HideInInspector]
+        public double discountPrice;
+
         public virtual void OnBuy() 
         { 
             PlayerStatManager.instance.CalculateWelfare(onBuyWelfareEffects);

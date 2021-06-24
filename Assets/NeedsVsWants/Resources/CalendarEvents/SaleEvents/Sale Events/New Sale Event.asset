@@ -14,9 +14,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _SaleDate:
     year: 0
-    month: 2
-    day: 10
+    month: 1
+    day: 5
   _SaleDays: 5
   _IsYearSpecific: 0
-  _Discount: 100
-  _SaleItems: []
+  _DiscountItems:
+  - item: {fileID: 11400000, guid: ab20ba57a544b024796779492711f2fb, type: 2}
+    discount:
+      _AmountType: 2
+      _Value: 69
+  - item: {fileID: 11400000, guid: 7c4039876362834418c908ce2b5b9421, type: 2}
+    discount:
+      _AmountType: 1
+      _Value: -10

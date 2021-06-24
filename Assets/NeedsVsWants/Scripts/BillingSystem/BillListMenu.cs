@@ -57,7 +57,7 @@ namespace NeedsVsWants.BillingSystem
             AppMenuGroup appMenuGroup = transform.GetComponentInParent<AppMenuGroup>();
 
             // Get All Bills
-            billEvents = PlayerStatManager.instance.calendarEventList.Where(calendarEvent => calendarEvent.GetType().
+            billEvents = PlayerStatManager.instance.calendarEvents.Where(calendarEvent => calendarEvent.GetType().
                 IsSubclassOf(typeof(BillEvent))).Cast<BillEvent>().ToArray();
 
             foreach(BillEvent billEvent in billEvents)

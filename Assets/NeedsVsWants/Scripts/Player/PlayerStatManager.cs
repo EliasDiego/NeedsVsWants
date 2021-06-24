@@ -33,7 +33,7 @@ namespace NeedsVsWants.Player
             }
         }
 
-        public CalendarEvent[] calendarEventList => _PlayerStat.calendarEventList.ToArray();
+        public CalendarEvent[] calendarEvents => _PlayerStat.calendarEventList.ToArray();
 
         public double currentMoney
         {
@@ -128,9 +128,9 @@ namespace NeedsVsWants.Player
             }
         }
 
-        public Chat[] chatList => _PlayerStat.chatList.ToArray();
+        public Chat[] chats => _PlayerStat.chatList.ToArray();
 
-        public Item[] currentShopItemList => _PlayerStat.currentShopItemList.ToArray();
+        public Item[] ShopItems => _PlayerStat.ShopItemList.ToArray();
 
         public event Action<double> onMoneyChange;
 
@@ -141,9 +141,11 @@ namespace NeedsVsWants.Player
         public event Action<WelfareValue> onHappinessChange;
         public event Action<WelfareValue> onSocialChange;
 
-        public event Action<Conversation> onNewChat;
+        public event Action<Chat> onAddChat;
 
-        public event Action<Item[]> onShopItemListChange;
+        public event Action<Item[]> onAddItems;
+        public event Action<Item[]> onEditItems;
+        public event Action<Item[]> onRemoveItems;
 
         protected override void Awake()
         {
@@ -201,7 +203,7 @@ namespace NeedsVsWants.Player
 
             _PlayerStat.chatList.Add(chat);
                 
-            onNewChat?.Invoke(conversation);
+            onAddChat?.Invoke(chat);
         }
 
         public void CalculateWelfare(WelfareOperator welfareOperator)
@@ -212,35 +214,26 @@ namespace NeedsVsWants.Player
             currentSocialWelfare = welfareOperator.GetHappiness(currentSocialWelfare);
         }
 
-        public void AddShopItemTolist(Item item)
+        #region Shop Item
+        public void AddShopItem(params Item[] items)
         {
-            if(!_PlayerStat.currentShopItemList.Contains(item))
-            {
-                _PlayerStat.currentShopItemList.Add(item);
-
-                onShopItemListChange?.Invoke(new Item[]{ item });
-            }
-        }
-        
-        public void AddShopItemTolist(Item[] items)
-        {
-            foreach(Item item in items)
-            {
-                if(!_PlayerStat.currentShopItemList.Contains(item))
-                    _PlayerStat.currentShopItemList.Add(item);
-            }
+            _PlayerStat.ShopItemList.AddRange(items);
             
-            onShopItemListChange?.Invoke(items);
+            onAddItems?.Invoke(items);
         }
 
-        public void RemoveShopItemTolist(Item item)
+        public void RemoveShopItem(params Item[] items)
         {
-            if(_PlayerStat.currentShopItemList.Contains(item))
-            {
-                _PlayerStat.currentShopItemList.Remove(item);
+            _PlayerStat.ShopItemList.RemoveAll(item => items.Contains(item));
 
-                onShopItemListChange?.Invoke(new Item[]{ item });
-            }
+            onRemoveItems?.Invoke(items);
         }
+
+        public void EditItem(Func<Item, bool> predicate)
+        {
+            if(predicate != null)
+                onEditItems?.Invoke(_PlayerStat.ShopItemList.Where(item => predicate.Invoke(item)).ToArray());
+        }
+        #endregion
     }
 }

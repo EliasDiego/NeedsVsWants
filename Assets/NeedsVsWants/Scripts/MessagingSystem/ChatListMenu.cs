@@ -21,7 +21,7 @@ namespace NeedsVsWants.MessagingSystem
         {
             ObjectPoolManager.instance.Instantiate("Chat Button");    
             
-            PlayerStatManager.instance.onNewChat += conversation =>
+            PlayerStatManager.instance.onAddChat += chat =>
             {
                 if(isActive)
                     UpdateChatList();
@@ -34,7 +34,7 @@ namespace NeedsVsWants.MessagingSystem
 
             AppMenuGroup appMenuGroup = GetComponentInParent<AppMenuGroup>();
 
-            Chat[] chatList = PlayerStatManager.instance.chatList;
+            Chat[] chatList = PlayerStatManager.instance.chats;
 
             // Return current Chat Buttons to Pool
             for(int i = 0; i < _ContentTransform.childCount; i++)

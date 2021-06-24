@@ -95,7 +95,7 @@ namespace NeedsVsWants.CalendarSystem
             }
 
             // Put here Calendar Event stuff
-            foreach(CalendarEvent calendarEvent in PlayerStatManager.instance.calendarEventList)
+            foreach(CalendarEvent calendarEvent in PlayerStatManager.instance.calendarEvents)
             {
                 if(calendarEvent.IsWithinDate(_CurrentDateTime))
                     calendarEvent.Invoke(_CurrentDateTime);

@@ -12,7 +12,11 @@ namespace NeedsVsWants.MenuSystem
         [SerializeField]
         Image _Panel;
         [SerializeField]
+        Color _StartColor;
+        [SerializeField]
         Color _EnabledColor;
+        [SerializeField]
+        Color _DisabledColor;
         [SerializeField]
         float _TransitionSpeed;
 
@@ -26,12 +30,10 @@ namespace NeedsVsWants.MenuSystem
 
         protected virtual void Awake() 
         {
-            _Panel.color = Color.clear;    
-
             transform.SetActiveChildren(false);
         }
 
-        IEnumerator AnimateTransparency(Image image, Color color, float delta)
+        IEnumerator AnimateColor(Image image, Color color, float delta, System.Action onAfterColor)
         {
             while(image.color != color)
             {
@@ -39,6 +41,8 @@ namespace NeedsVsWants.MenuSystem
 
                 yield return new WaitForEndOfFrame();
             }
+
+            onAfterColor?.Invoke();
         }
 
         protected virtual void onEnablePopUp() { }
@@ -46,10 +50,13 @@ namespace NeedsVsWants.MenuSystem
 
         public void EnablePopUp()
         {
-            _PanelColorTransition = StartCoroutine(AnimateTransparency(_Panel, _EnabledColor, _TransitionSpeed));
+            _Panel.color = _StartColor;
+            _PanelColorTransition = StartCoroutine(AnimateColor(_Panel, _EnabledColor, _TransitionSpeed, null));
 
             if(!controlSetActive)
                 transform.SetActiveChildren(true);
+
+            _Panel.raycastTarget = true;
 
             onEnablePopUp();
         }
@@ -59,11 +66,14 @@ namespace NeedsVsWants.MenuSystem
             if(_PanelColorTransition != null)
                 StopCoroutine(_PanelColorTransition);
             
-            _PanelColorTransition = StartCoroutine(AnimateTransparency(_Panel, Color.clear, _TransitionSpeed));
-            
-            if(!controlSetActive)
-                transform.SetActiveChildren(false);
+            _PanelColorTransition = StartCoroutine(AnimateColor(_Panel, _DisabledColor, _TransitionSpeed, () => 
+            {
+                if(!controlSetActive)
+                    transform.SetActiveChildren(false);
+            }));
 
+            _Panel.raycastTarget = false;
+            
             onDisablePopUp();
         }
     }

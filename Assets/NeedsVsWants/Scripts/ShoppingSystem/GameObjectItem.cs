@@ -14,6 +14,8 @@ namespace NeedsVsWants.ShoppingSystem
     {
         GameObject _GameObject;
 
+        public bool isAlreadyActive => _GameObject ? _GameObject.activeSelf : false;
+
         [CustomEditor(typeof(GameObjectItem))]
         class GameObjectItemEditor : Editor
         {
@@ -38,9 +40,7 @@ namespace NeedsVsWants.ShoppingSystem
 
             _GameObject?.SetActive(true);
 
-            PlayerStatManager.instance.RemoveShopItemTolist(this);
-
-            // Tell To Player Stat about this
+            PlayerStatManager.instance.RemoveShopItem(this);
         }
     }
 }
