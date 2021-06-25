@@ -16,6 +16,7 @@ namespace NeedsVsWants.ShoppingSystem
 
         TMP_Text _Name;
         TMP_Text _Price;
+        TMP_Text _FromPrice;
 
         protected override void Awake() 
         {
@@ -23,6 +24,7 @@ namespace NeedsVsWants.ShoppingSystem
             
             _Name = transform.GetChild(1).GetComponent<TMP_Text>();
             _Price = transform.GetChild(2).GetComponent<TMP_Text>();
+            _FromPrice = transform.GetChild(3).GetComponent<TMP_Text>();
         }
 
         public void AssignItem(Item item, AppMenuGroup appMenuGroup, ItemViewerMenu itemViewerMenu)
@@ -30,7 +32,9 @@ namespace NeedsVsWants.ShoppingSystem
             _Image.sprite = item.previewImage;
 
             _Name.text = item.name;
-            _Price.text = StringFormat.ToPriceFormat(item.price);
+            _Price.text = StringFormat.ToPriceFormat(item.isDiscounted ? item.discountPrice : item.price);
+            _FromPrice.gameObject.SetActive(item.isDiscounted);
+            _FromPrice.text = "From <color=red>" + StringFormat.ToPriceFormat(item.price) + "</color>";
             
             onClick.RemoveAllListeners();
 

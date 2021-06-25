@@ -12,33 +12,26 @@ namespace NeedsVsWants.ShoppingSystem
     [CreateAssetMenu(menuName = "NeedsVsWants/Shopping/Game Object Item")]
     public class GameObjectItem : Item
     {
+        [SerializeField]
+        string _GameObjectName;
+
         GameObject _GameObject;
 
-        public bool isAlreadyActive => _GameObject ? _GameObject.activeSelf : false;
+        public bool isAlreadyActive => FindGameObject() ? _GameObject.activeSelf : false;
 
-        [CustomEditor(typeof(GameObjectItem))]
-        class GameObjectItemEditor : Editor
+        GameObject FindGameObject()
         {
-            public override void OnInspectorGUI()
-            {
-                base.OnInspectorGUI();
+            if(!_GameObject)
+                _GameObject = GameObjectItemManager.instance.GetGameObject(_GameObjectName);
 
-                GameObjectItem gameObjectItem = target as GameObjectItem;
-
-                if(!gameObjectItem)
-                    return;
-
-                gameObjectItem._GameObject = EditorGUILayout.ObjectField("Game Object", gameObjectItem._GameObject, typeof(GameObject), true) as GameObject;
-
-                serializedObject.ApplyModifiedProperties();
-            }
+            return _GameObject;
         }
 
         public override void OnBuy()
         {
             base.OnBuy();
 
-            _GameObject?.SetActive(true);
+            FindGameObject()?.SetActive(true);
 
             PlayerStatManager.instance.RemoveShopItem(this);
         }

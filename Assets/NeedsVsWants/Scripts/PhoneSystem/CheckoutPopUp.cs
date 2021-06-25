@@ -10,7 +10,7 @@ using NeedsVsWants.MenuSystem;
 
 namespace NeedsVsWants.PhoneSystem
 {
-    public class CheckoutPopUp : PopUp
+    public class CheckoutPopUp : AppPopUp
     {
         [Header("Box")]
         [SerializeField]
@@ -29,19 +29,14 @@ namespace NeedsVsWants.PhoneSystem
         string _SufficientFundsText;
         [SerializeField][Multiline]
         string _InsufficientFundsText;
-        
-        [Header("Navigation Buttons")]
-        [SerializeField]
-        Button _BackgroundAppsButton;
-        [SerializeField]
-        Button _HomeButton;
-        [SerializeField]
-        Button _ReturnButton;
 
         Coroutine _BoxScaleAnimation;
         Coroutine _ProcessingRotationAnimation;
 
+        bool hasColorTransition = true;
+
         protected override bool controlSetActive => true;
+        protected override bool hasDisabledColorTransition => hasColorTransition;
 
         public bool hasSufficientFunds { get; set; } = false;
 
@@ -84,6 +79,8 @@ namespace NeedsVsWants.PhoneSystem
             _CloseButton.gameObject.SetActive(false);
             _Text.gameObject.SetActive(false);
 
+            hasColorTransition = false;
+
             StartCoroutine(AnimateRotation(_ProcessingImage.rectTransform, Quaternion.Euler(0, 0, 1), 2.5f, () =>
             {
                 _ProcessingImage.gameObject.SetActive(false);
@@ -99,10 +96,14 @@ namespace NeedsVsWants.PhoneSystem
             _ProcessingImage.gameObject.SetActive(false);
 
             _Text.text = _InsufficientFundsText;
+
+            hasColorTransition = true;
         }
 
         protected override void onEnablePopUp()
         {
+            base.onEnablePopUp();
+
             _BoxScaleAnimation = StartCoroutine(AnimateScale(_BoxImage.rectTransform, Vector3.one, _ScaleSpeed, null));
             
             transform.SetActiveChildren(true);
@@ -112,14 +113,12 @@ namespace NeedsVsWants.PhoneSystem
 
             else
                 OnInsufficientFunds();
-
-            _BackgroundAppsButton.interactable = false;
-            _HomeButton.interactable = false;
-            _ReturnButton.interactable = false;
         }
 
         protected override void onDisablePopUp()
         {
+            base.onDisablePopUp();
+
             if(hasSufficientFunds)
             {
                 onAfterProcessing?.Invoke();
@@ -134,10 +133,6 @@ namespace NeedsVsWants.PhoneSystem
                     
                 _BoxScaleAnimation = StartCoroutine(AnimateScale(_BoxImage.rectTransform, Vector3.zero, _ScaleSpeed, () => transform.SetActiveChildren(false)));
             }
-
-            _BackgroundAppsButton.interactable = true;
-            _HomeButton.interactable = true;
-            _ReturnButton.interactable = true;
         }
     }
 }

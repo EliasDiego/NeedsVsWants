@@ -25,6 +25,8 @@ namespace NeedsVsWants.MenuSystem
         Coroutine _PanelColorTransition;
 
         protected virtual bool controlSetActive => false;
+        protected virtual bool hasEnabledColorTransition => true;
+        protected virtual bool hasDisabledColorTransition => true;
     
         public bool isActive => _IsActive;
 
@@ -51,7 +53,9 @@ namespace NeedsVsWants.MenuSystem
         public void EnablePopUp()
         {
             _Panel.color = _StartColor;
-            _PanelColorTransition = StartCoroutine(AnimateColor(_Panel, _EnabledColor, _TransitionSpeed, null));
+
+            if(hasEnabledColorTransition)
+                _PanelColorTransition = StartCoroutine(AnimateColor(_Panel, _EnabledColor, _TransitionSpeed, null));
 
             if(!controlSetActive)
                 transform.SetActiveChildren(true);
@@ -66,11 +70,17 @@ namespace NeedsVsWants.MenuSystem
             if(_PanelColorTransition != null)
                 StopCoroutine(_PanelColorTransition);
             
-            _PanelColorTransition = StartCoroutine(AnimateColor(_Panel, _DisabledColor, _TransitionSpeed, () => 
+            if(hasDisabledColorTransition)
             {
-                if(!controlSetActive)
-                    transform.SetActiveChildren(false);
-            }));
+                _PanelColorTransition = StartCoroutine(AnimateColor(_Panel, _DisabledColor, _TransitionSpeed, () => 
+                {
+                    if(!controlSetActive)
+                        transform.SetActiveChildren(false);
+                }));
+            }
+
+            else if(!controlSetActive)
+                transform.SetActiveChildren(false);
 
             _Panel.raycastTarget = false;
             

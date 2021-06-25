@@ -4,9 +4,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+using NeedsVsWants.MenuSystem;
+
 namespace NeedsVsWants.PhoneSystem
 {
-    public class LoadingPopUp : AppPopUp
+    public class LoadingPopUp : PopUp
     {
         [SerializeField]
         Image _LoadingScreen;
@@ -29,8 +31,6 @@ namespace NeedsVsWants.PhoneSystem
 
         protected override void onEnablePopUp()
         {
-            base.onEnablePopUp();
-
             if(_AnimateRotationCoroutine != null)
                 StopCoroutine(_AnimateRotationCoroutine);
 
@@ -39,8 +39,6 @@ namespace NeedsVsWants.PhoneSystem
 
         protected override void onDisablePopUp()
         {
-            base.onDisablePopUp();
-
             if(_AnimateRotationCoroutine != null)
                 StopCoroutine(_AnimateRotationCoroutine);
                 

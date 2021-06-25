@@ -80,8 +80,11 @@ namespace NeedsVsWants.ShoppingSystem
                     _CloseButton.onClick.AddListener(async() => 
                     {
                         _ItemNotifPopUp.DisablePopUp();
+                        _ItemNotifPopUp.transform.SetActiveChildren(false);
+                        
                         _LoadingPopUp.EnablePopUp();
 
+                        _Price.text = StringFormat.ToPriceFormat(item.isDiscounted ? item.discountPrice : item.price);
                         _FromPrice.gameObject.SetActive(item.isDiscounted);
                         _FromPrice.text = "From <color=red>" + StringFormat.ToPriceFormat(item.price) + "</color>";
 
