@@ -6,6 +6,7 @@ namespace NeedsVsWants.ShoppingSystem
 {
     public struct SaleContext
     {
+        [HideInInspector]
         public string name;
         public Sprite salePicture;
     }

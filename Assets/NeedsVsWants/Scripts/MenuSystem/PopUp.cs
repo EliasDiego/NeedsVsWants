@@ -53,9 +53,16 @@ namespace NeedsVsWants.MenuSystem
         public void EnablePopUp()
         {
             _Panel.color = _StartColor;
+            
+            if(_PanelColorTransition != null)
+                StopCoroutine(_PanelColorTransition);
 
             if(hasEnabledColorTransition)
+            {
+                _Panel.color = _StartColor;
+
                 _PanelColorTransition = StartCoroutine(AnimateColor(_Panel, _EnabledColor, _TransitionSpeed, null));
+            }
 
             if(!controlSetActive)
                 transform.SetActiveChildren(true);
@@ -72,6 +79,8 @@ namespace NeedsVsWants.MenuSystem
             
             if(hasDisabledColorTransition)
             {
+                _Panel.color = _EnabledColor;
+
                 _PanelColorTransition = StartCoroutine(AnimateColor(_Panel, _DisabledColor, _TransitionSpeed, () => 
                 {
                     if(!controlSetActive)

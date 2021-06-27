@@ -19,6 +19,8 @@ namespace NeedsVsWants.ShoppingSystem
         [SerializeField]
         TMP_Text _PriceText;
         [SerializeField]
+        TMP_Text _FromPriceText;
+        [SerializeField]
         TMP_Text _QuantityText;
 
         int _Quantity;
@@ -36,17 +38,13 @@ namespace NeedsVsWants.ShoppingSystem
 
         public void AssignItem(Item item, int quantity, System.Action onQuantityChange, System.Action onToggleChange)
         {
-            // Assign Item Properties
-            _PreviewImage.sprite = item.previewImage;
-            _NameText.text = item.name;
-            _PriceText.text = StringFormat.ToPriceFormat(item.price);
-            _Toggle.isOn = false;
-
             // Assign to public Properties
             _Item = item;
             _Quantity = quantity;
             _OnQuantityChange = onQuantityChange as System.Action;
             _OnToggleChange = onToggleChange as System.Action;
+
+            UpdateItemDetails();
 
             // When Item is not a Game Object Item
             if(item.GetType() != typeof(GameObjectItem))
@@ -58,6 +56,15 @@ namespace NeedsVsWants.ShoppingSystem
 
             else
                 _QuantityText.transform.parent.gameObject.SetActive(false);
+        }
+        
+        public void UpdateItemDetails()
+        {
+            _PreviewImage.sprite = item.previewImage;
+            _NameText.text = item.name;
+            _PriceText.text = StringFormat.ToPriceFormat(item.isDiscounted ? item.discountPrice : item.price);
+            _FromPriceText.gameObject.SetActive(item.isDiscounted);
+            _FromPriceText.text = "From <color=red>" + StringFormat.ToPriceFormat(item.price) + "</color>";
         }
         
         public void Increment()

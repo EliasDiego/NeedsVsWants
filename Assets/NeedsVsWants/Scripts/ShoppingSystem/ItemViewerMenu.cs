@@ -117,9 +117,11 @@ namespace NeedsVsWants.ShoppingSystem
             
             _ContentLayoutGroup.enabled = false;
 
-            await System.Threading.Tasks.Task.Delay(100);
+            await System.Threading.Tasks.Task.Delay(200);
 
             _ContentLayoutGroup.enabled = true;
+            
+            await System.Threading.Tasks.Task.Delay(200);
             
             _LoadingPopUp.DisablePopUp();
         }

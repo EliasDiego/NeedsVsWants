@@ -40,6 +40,8 @@ namespace NeedsVsWants.ShoppingSystem
 
         Item[] _Item;
 
+        Coroutine _UpdateListCoroutine;
+
         void Awake() 
         {
             System.Action<Item[]> onItemListChange = items =>
@@ -100,12 +102,15 @@ namespace NeedsVsWants.ShoppingSystem
         { 
             transform.SetActiveChildren(true);
 
-            StartCoroutine(UpdateItemList());
+            _UpdateListCoroutine = StartCoroutine(UpdateItemList());
         }
 
         protected override void OnDisableMenu() 
         { 
             transform.SetActiveChildren(false);
+
+            if(_UpdateListCoroutine != null)
+                StopCoroutine(_UpdateListCoroutine);
         }
 
         protected override void OnReturn() { }

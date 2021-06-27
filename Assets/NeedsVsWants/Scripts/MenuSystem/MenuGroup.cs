@@ -46,19 +46,31 @@ namespace NeedsVsWants.MenuSystem
             }
         }
 
-        // public Menu Return()
-        // {
-        //     Menu returnMenu = _CurrentMenu.returnMenu;
-            
-        //     if(returnMenu)
-        //     {
-        //         _CurrentMenu.Return();
+        public void ReturnToPreviousMenu<T>() where T : Menu
+        {
+            Menu newCurrentMenu = _CurrentMenu;
 
-        //         _CurrentMenu = returnMenu;
-        //     }
+            do
+            {
+                if(newCurrentMenu.returnMenu)
+                    newCurrentMenu = newCurrentMenu.returnMenu;
 
-        //     return returnMenu;
-        // }
+                else
+                {
+                    Debug.LogWarning("MenuWarning: ReturnToPreviousMenu<T>() stopped at " + newCurrentMenu.ToString() + "!");
+
+                    break;
+                }
+            }
+            while(typeof(T) != newCurrentMenu.GetType());
+
+            newCurrentMenu.EnableMenu();
+
+            _CurrentMenu.DisableMenu();
+            _CurrentMenu.SetReturnMenu(null);
+
+            _CurrentMenu = newCurrentMenu;
+        }
 
         public void DisableAllMenus()
         {

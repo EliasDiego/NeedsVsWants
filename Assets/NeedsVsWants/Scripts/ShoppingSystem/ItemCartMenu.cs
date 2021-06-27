@@ -1,3 +1,4 @@
+using System.Linq;
 using System.Collections;
 using System.Threading.Tasks;
 using System.Collections.Generic;
@@ -5,6 +6,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+using NeedsVsWants.Player;
 using NeedsVsWants.Patterns;
 using NeedsVsWants.MenuSystem;
 using NeedsVsWants.PhoneSystem;
@@ -15,16 +17,33 @@ namespace NeedsVsWants.ShoppingSystem
 {
     public class ItemCartMenu : Menu
     {
+        [Header("UI")]
         [SerializeField]
-        Transform _ContentTransform;
+        VerticalLayoutGroup _ContentLayoutGroup;
         [SerializeField]
         Toggle _SelectAllToggle;
         [SerializeField]
         TMP_Text _TotalPriceText;
+        
+        [Header("Cart Indication")]
+        [SerializeField]
+        Indicator[] _Indicators;
+        
+        [Header("Pop Up")]
         [SerializeField]
         CheckoutPopUp _CheckoutPopUp;
         [SerializeField]
-        Indicator[] _Indicators;
+        LoadingPopUp _LoadingPopUp;
+        [SerializeField]
+        AppPopUp _ItemNotifPopUp;
+        [SerializeField]
+        TMP_Text _PopUpText;
+        [SerializeField]
+        Button _CloseButton;
+        [SerializeField, Multiline]
+        string _OnEdit;
+        [SerializeField, Multiline]
+        string _OnRemove;
 
         Dictionary<Item, int> _ItemCartSlots = new Dictionary<Item, int>();
 
@@ -35,6 +54,108 @@ namespace NeedsVsWants.ShoppingSystem
         void Awake() 
         {
             ObjectPoolManager.instance.Instantiate("Item Slot");
+
+            PlayerStatManager.instance.onEditItems += items => 
+            {
+                IEnumerable<ItemSlot> editedCartItems;
+
+                if(isActive) 
+                {
+                    editedCartItems = _ItemSlotList.Where(itemSlot => items.Contains(itemSlot.item));
+
+                    if(editedCartItems.Count() > 0)
+                    {
+                        _PopUpText.text = _OnEdit;
+
+                        _CloseButton.onClick.RemoveAllListeners();
+                        _CloseButton.onClick.AddListener(async() => 
+                        {
+                            _ItemNotifPopUp.DisablePopUp();
+
+                            _ItemNotifPopUp.DisablePopUp();
+                            _ItemNotifPopUp.transform.SetActiveChildren(false);
+                            
+                            _LoadingPopUp.EnablePopUp();
+
+                            foreach(ItemSlot itemSlot in editedCartItems)
+                                itemSlot.UpdateItemDetails();
+
+                            UpdateTotalPrice();
+
+                            _ContentLayoutGroup.enabled = false;
+
+                            await System.Threading.Tasks.Task.Delay(100);
+                            
+                            _ContentLayoutGroup.enabled = true;
+                            
+                            _LoadingPopUp.DisablePopUp();
+                        });
+                        
+                        _ItemNotifPopUp.EnablePopUp();
+                    }
+                }
+            };
+
+            PlayerStatManager.instance.onRemoveItems += items =>
+            {   
+                IEnumerable<ItemSlot> removedItemSlotItems;
+
+                if(isActive) 
+                {
+                    removedItemSlotItems = _ItemSlotList.Where(itemSlot => items.Contains(itemSlot.item));
+
+                    if(removedItemSlotItems.Count() > 0)
+                    {
+                        _PopUpText.text = _OnRemove;
+
+                        _CloseButton.onClick.RemoveAllListeners();
+                        _CloseButton.onClick.AddListener(async() => 
+                        {
+                            List<ItemSlot> safeMarkedItemSlot = new List<ItemSlot>();
+
+                            _ItemNotifPopUp.DisablePopUp();
+                            _ItemNotifPopUp.transform.SetActiveChildren(false);
+                            
+                            _LoadingPopUp.EnablePopUp();
+
+                            // Mark Item Slots for Removal
+                            foreach(ItemSlot itemSlot in _ItemSlotList)
+                            {
+                                if(removedItemSlotItems.Contains(itemSlot))
+                                    itemSlot.isToggled = true;
+
+                                // If ItemSlot is toggled but not part of items to be removed, keep track but untoggle
+                                else if(itemSlot.isToggled)
+                                {
+                                    itemSlot.isToggled = false;
+
+                                    safeMarkedItemSlot.Add(itemSlot);
+                                }
+
+                                itemSlot.UpdateItemDetails();
+                            }
+
+                            DeleteItems();
+
+                            // Re toggle Item Slots
+                            foreach(ItemSlot itemSlot in safeMarkedItemSlot)
+                                itemSlot.isToggled = true;
+
+                            UpdateTotalPrice();
+
+                            _ContentLayoutGroup.enabled = false;
+
+                            await System.Threading.Tasks.Task.Delay(100);
+                            
+                            _ContentLayoutGroup.enabled = true;
+                            
+                            _LoadingPopUp.DisablePopUp();
+                        });
+                        
+                        _ItemNotifPopUp.EnablePopUp();
+                    }
+                }
+            };
         }
 
         void OnChangeToCart()
@@ -60,9 +181,7 @@ namespace NeedsVsWants.ShoppingSystem
             
             DeleteItems();
             
-            // Return To Item List Menu
-            while(menuGroup.currentMenu.GetType() != typeof(ItemListMenu))
-                menuGroup.Return();
+            menuGroup.ReturnToPreviousMenu<ItemListMenu>();
         }
 
         void OnQuantityChange()
@@ -82,7 +201,7 @@ namespace NeedsVsWants.ShoppingSystem
             foreach(ItemSlot itemSlot in _ItemSlotList)
             {
                 if(itemSlot.isToggled)
-                    totalPrice += itemSlot.item.price * itemSlot.quantity;
+                    totalPrice += (itemSlot.item.isDiscounted ? itemSlot.item.discountPrice : itemSlot.item.price) * itemSlot.quantity;
             }
 
             return totalPrice;
@@ -114,7 +233,7 @@ namespace NeedsVsWants.ShoppingSystem
             await Task.Delay(10);
 
             foreach(ItemSlot i in _ItemSlotList)
-                i.transform.SetParent(_ContentTransform, false);
+                i.transform.SetParent(_ContentLayoutGroup.transform, false);
         }
 
         void UpdateDictionary()
@@ -222,7 +341,7 @@ namespace NeedsVsWants.ShoppingSystem
 
             if(hasSelected)
             {
-                newMoney = Player.PlayerStatManager.instance.currentMoney - GetTotalPrice();
+                newMoney = PlayerStatManager.instance.currentMoney - GetTotalPrice();
 
                 _CheckoutPopUp.hasSufficientFunds = newMoney >= 0;
 

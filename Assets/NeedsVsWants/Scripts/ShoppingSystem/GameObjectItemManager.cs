@@ -14,7 +14,7 @@ namespace NeedsVsWants.ShoppingSystem
 
         void Start() 
         {
-            _GameObjects = GetComponentsInChildren<Transform>(true).Select(tarnsform => transform.gameObject).ToArray();
+            _GameObjects = GetComponentsInChildren<Transform>(true).Select(transform => transform.gameObject).Except(new GameObject[] { gameObject }).ToArray();
         }
 
         public GameObject GetGameObject(string name) =>

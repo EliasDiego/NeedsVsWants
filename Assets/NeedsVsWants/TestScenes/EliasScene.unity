@@ -2362,13 +2362,13 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 927508281}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1440842811}
   - {fileID: 1945883380}
-  m_Father: {fileID: 765027058031152705}
+  m_Father: {fileID: 765027057629649971}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -3891,13 +3891,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _ActiveOnStart: 0
-  _ContentTransform: {fileID: 1049797451}
+  _ContentLayoutGroup: {fileID: 1049797453}
   _SelectAllToggle: {fileID: 987896762}
   _TotalPriceText: {fileID: 427926190}
-  _CheckoutPopUp: {fileID: 59620968}
   _Indicators:
   - {fileID: 1221262774}
   - {fileID: 1166108714}
+  _CheckoutPopUp: {fileID: 59620968}
+  _LoadingPopUp: {fileID: 673750961}
+  _ItemNotifPopUp: {fileID: 927508283}
+  _PopUpText: {fileID: 1240665365}
+  _CloseButton: {fileID: 1123053623}
+  _OnEdit: Item(s) has been Updated or Removed because of a Sale!
+  _OnRemove: Item(s) has been Updated or Removed because of a Sale!
 --- !u!82 &1246972862
 AudioSource:
   m_ObjectHideFlags: 0
@@ -11651,6 +11657,7 @@ RectTransform:
   - {fileID: 765027058031152705}
   - {fileID: 1246972860}
   - {fileID: 673750960}
+  - {fileID: 927508282}
   m_Father: {fileID: 7368427440852396541}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -13202,7 +13209,6 @@ RectTransform:
   - {fileID: 1324327760}
   - {fileID: 765027057072142279}
   - {fileID: 245432432}
-  - {fileID: 927508282}
   m_Father: {fileID: 765027057629649971}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
