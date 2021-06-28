@@ -9,9 +9,9 @@ namespace NeedsVsWants.BillingSystem
     public class Rent : BillEvent
     {
         [SerializeField]
-        float _Amount;
+        double _Amount;
 
-        public override float CalculateBill(DateTime dateTime)
+        public override double CalculateBill(DateTime dateTime)
         {
             return _Amount;
         }

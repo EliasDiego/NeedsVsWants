@@ -6,6 +6,7 @@ using UnityEngine;
 
 using NeedsVsWants.Player;
 using NeedsVsWants.MenuSystem;
+using NeedsVsWants.PhoneSystem;
 
 using TMPro;
 
@@ -19,10 +20,12 @@ namespace NeedsVsWants.BillingSystem
         TMP_Text _BillBalanceText;
         [SerializeField]
         TMP_InputField _AmountInputField;
+        [SerializeField]
+        CheckoutPopUp _CheckoutPopUp;
 
         BillEvent _BillEvent;
 
-        float _BillAmountDisplay = 0;
+        double _BillBalanceDisplay = 0;
 
         public BillEvent billEvent 
         { 
@@ -34,30 +37,30 @@ namespace NeedsVsWants.BillingSystem
                 
                 _BillNameText.text = value.name;
 
-                _BillAmountDisplay = value.currentBalance;
+                _BillBalanceDisplay = value.currentBalance;
 
                 UpdateAmountDisplay();
             }
         }
 
-        void Update() 
+        void OnAfterProcessing(double inputAmount)
         {
-            if(isActive)
-            {
-                if(_BillAmountDisplay != _BillEvent.currentBalance)
-                    UpdateAmountDisplay();
+            _BillEvent.PayBill(inputAmount);
+            
+            if(_BillBalanceDisplay != _BillEvent.currentBalance)
+                UpdateAmountDisplay();
 
-                _AmountInputField.text = Regex.Replace(_AmountInputField.text, @"[^0-9.]", "");
-            }    
+            PlayerStatManager.instance.currentMoney -= inputAmount;
+            
+            GetComponentInParent<AppMenuGroup>().Return();
         }
 
         void UpdateAmountDisplay()
         {
             _BillBalanceText.transform.parent.gameObject.SetActive(_BillEvent.showAmount);
-            _BillBalanceText.text = _BillEvent.currentBalance.ToString();
             
             if(_BillEvent.showAmount)
-                _BillBalanceText.text = _BillEvent.currentBalance.ToString();
+                _BillBalanceText.text = StringFormat.ToPriceFormat(_BillEvent.currentBalance);
         }
         
         protected override void OnDisableMenu()
@@ -82,19 +85,24 @@ namespace NeedsVsWants.BillingSystem
             
         }
 
+        public void OnAmountValueChange()
+        {
+            if(_BillBalanceDisplay != _BillEvent.currentBalance)
+                UpdateAmountDisplay();
+
+            _AmountInputField.text = Regex.Replace(_AmountInputField.text, @"[^0-9.]", "");
+        }
+
         public void PayBill()
         {
             if(string.IsNullOrEmpty(_AmountInputField.text))
                 return;
 
-            float inputAmount = float.Parse(_AmountInputField.text);
+            double inputAmount = double.Parse(_AmountInputField.text);
 
-            if(PlayerStatManager.instance.currentMoney >= inputAmount)
-            {
-                _BillEvent.PayBill(inputAmount);
-
-                PlayerStatManager.instance.currentMoney -= inputAmount;
-            }
+            _CheckoutPopUp.hasSufficientFunds = PlayerStatManager.instance.currentMoney >= inputAmount;
+            _CheckoutPopUp.onAfterProcessing = () => OnAfterProcessing(inputAmount);
+            _CheckoutPopUp.EnablePopUp();
         }
     }
 }

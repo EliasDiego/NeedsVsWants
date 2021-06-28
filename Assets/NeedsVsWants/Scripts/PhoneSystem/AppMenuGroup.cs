@@ -4,7 +4,9 @@ using System.Threading.Tasks;
 
 using UnityEngine;
 
-namespace NeedsVsWants.MenuSystem
+using NeedsVsWants.MenuSystem;
+
+namespace NeedsVsWants.PhoneSystem
 {
     public class AppMenuGroup : MenuGroup
     {

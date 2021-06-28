@@ -1,13 +1,16 @@
 using System;
 
+using NeedsVsWants.CalendarSystem;
+
 namespace NeedsVsWants
 {
-    public struct DateTimeRange
+    [Serializable]
+    public struct DateRange
     {
-        public UDateTime min;          
-        public UDateTime max;
+        public Date min;          
+        public Date max;
 
-        public DateTimeRange(DateTime minDate, DateTime maxDate)
+        public DateRange(Date minDate, Date maxDate)
         {
             min = minDate;
             max = maxDate;

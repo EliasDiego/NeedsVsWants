@@ -10,6 +10,8 @@ namespace NeedsVsWants.MenuSystem
 
         Menu[] _Menus;
 
+        public bool isActive => _CurrentMenu ? _CurrentMenu.isActive : false;
+
         public Menu currentMenu => _CurrentMenu;
         public Menu[] menus => _Menus;
 
@@ -32,7 +34,7 @@ namespace NeedsVsWants.MenuSystem
             _CurrentMenu = menu;
         }
 
-        public Menu Return()
+        public void Return()
         {
             Menu returnMenu = _CurrentMenu.returnMenu;
             
@@ -42,8 +44,32 @@ namespace NeedsVsWants.MenuSystem
 
                 _CurrentMenu = returnMenu;
             }
+        }
 
-            return returnMenu;
+        public void ReturnToPreviousMenu<T>() where T : Menu
+        {
+            Menu newCurrentMenu = _CurrentMenu;
+
+            do
+            {
+                if(newCurrentMenu.returnMenu)
+                    newCurrentMenu = newCurrentMenu.returnMenu;
+
+                else
+                {
+                    Debug.LogWarning("MenuWarning: ReturnToPreviousMenu<T>() stopped at " + newCurrentMenu.ToString() + "!");
+
+                    break;
+                }
+            }
+            while(typeof(T) != newCurrentMenu.GetType());
+
+            newCurrentMenu.EnableMenu();
+
+            _CurrentMenu.DisableMenu();
+            _CurrentMenu.SetReturnMenu(null);
+
+            _CurrentMenu = newCurrentMenu;
         }
 
         public void DisableAllMenus()
