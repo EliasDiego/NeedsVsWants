@@ -46,6 +46,8 @@ namespace NeedsVsWants.ShoppingSystem
 
             UpdateItemDetails();
 
+            _Toggle.isOn = false;
+
             // When Item is not a Game Object Item
             if(item.GetType() != typeof(GameObjectItem))
             {

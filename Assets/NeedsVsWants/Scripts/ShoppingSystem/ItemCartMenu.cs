@@ -71,8 +71,6 @@ namespace NeedsVsWants.ShoppingSystem
                         _CloseButton.onClick.AddListener(async() => 
                         {
                             _ItemNotifPopUp.DisablePopUp();
-
-                            _ItemNotifPopUp.DisablePopUp();
                             _ItemNotifPopUp.transform.SetActiveChildren(false);
                             
                             _LoadingPopUp.EnablePopUp();
@@ -155,6 +153,16 @@ namespace NeedsVsWants.ShoppingSystem
                         _ItemNotifPopUp.EnablePopUp();
                     }
                 }
+                
+                else
+                {
+                    List<Item> itemsRemoved = _ItemCartSlots.Keys.Intersect(items).ToList();
+
+                    foreach(Item item in itemsRemoved)
+                        _ItemCartSlots.Remove(item);
+                    
+                    OnChangeToCart();
+                }
             };
         }
 
@@ -180,6 +188,9 @@ namespace NeedsVsWants.ShoppingSystem
             }
             
             DeleteItems();
+            
+            _ItemNotifPopUp.DisablePopUp();
+            _ItemNotifPopUp.transform.SetActiveChildren(false);
             
             menuGroup.ReturnToPreviousMenu<ItemListMenu>();
         }

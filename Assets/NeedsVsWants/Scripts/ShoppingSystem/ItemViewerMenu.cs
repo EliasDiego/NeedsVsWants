@@ -55,19 +55,7 @@ namespace NeedsVsWants.ShoppingSystem
             PlayerStatManager.instance.onRemoveItems += items => 
             {
                 if(isActive && items.Contains(item))
-                {
-                    _PopUpText.text = _OnRemove;
-
-                    _CloseButton.onClick.RemoveAllListeners();
-                    _CloseButton.onClick.AddListener(() => 
-                    {
-                        _ItemNotifPopUp.DisablePopUp();
-
-                        menuGroup.Return();
-                    });
-                    
-                    _ItemNotifPopUp.EnablePopUp();
-                }
+                    EnablePopUpForRemovedItem();
             };
 
             PlayerStatManager.instance.onEditItems += items =>
@@ -101,6 +89,22 @@ namespace NeedsVsWants.ShoppingSystem
                 }
             };
         }
+
+        void EnablePopUpForRemovedItem()
+        {
+            _PopUpText.text = _OnRemove;
+
+            _CloseButton.onClick.RemoveAllListeners();
+            _CloseButton.onClick.AddListener(() => 
+            {
+                _ItemNotifPopUp.DisablePopUp();
+                _ItemNotifPopUp.transform.SetActiveChildren(false);
+
+                menuGroup.Return();
+            });
+            
+            _ItemNotifPopUp.EnablePopUp();
+        }
         
         async protected override void OnEnableMenu() 
         { 
@@ -124,6 +128,9 @@ namespace NeedsVsWants.ShoppingSystem
             await System.Threading.Tasks.Task.Delay(200);
             
             _LoadingPopUp.DisablePopUp();
+
+            if(!PlayerStatManager.instance.ShopItems.Contains(item))
+                EnablePopUpForRemovedItem();
         }
 
         protected override void OnDisableMenu() 
