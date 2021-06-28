@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 588500f11bfcf094bb32a4e00f946e8a, type: 3}
+  m_Name: KBBQ_Yes
+  m_EditorClassIdentifier: 
+  title: 
+  characters:
+  - {fileID: 11400000, guid: 445c7d9518b60cc4c9f3972ac588f7a4, type: 2}
+  - {fileID: 11400000, guid: 4c03642d09e198548b6f62adf821e0c7, type: 2}
+  messages:
+  - characterIndex: 1
+    text: Sure! I can come.
+  - characterIndex: 0
+    text: Great! See you later then.
+  choices: []

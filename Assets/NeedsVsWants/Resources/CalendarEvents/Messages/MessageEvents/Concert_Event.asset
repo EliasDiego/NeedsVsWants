@@ -10,21 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a50e43e0ba2ec874aa69c9700afe2854, type: 3}
-  m_Name: MessageEventSample
+  m_Name: Concert_Event
   m_EditorClassIdentifier: 
-  conversation: {fileID: 11400000, guid: 1f56c94f193c5184a8a2c16517263df6, type: 2}
-  chatChoices:
-  - choiceName: 
-    nextConversation: {fileID: 0}
-    moneyOnChoice: 0
-    welfareOnChoice:
-      _AmountType: 0
-      _HealthValue: 0
-      _HappinessValue: 0
-      _HungerValue: 0
-      _SocialValue: 0
+  conversation: {fileID: 11400000, guid: d468fbf243cb6aa46ba90598e1de9e11, type: 2}
+  chatChoices: []
   date:
     year: 0
-    month: 1
-    day: 2
+    month: 3
+    day: 1
   isYearSpecific: 0

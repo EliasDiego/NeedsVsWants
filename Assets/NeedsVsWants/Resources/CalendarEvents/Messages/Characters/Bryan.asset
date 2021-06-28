@@ -9,10 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 588500f11bfcf094bb32a4e00f946e8a, type: 3}
-  m_Name: cherry yes
+  m_Script: {fileID: 11500000, guid: 615fa48d00b5b0842b050b05b9403fde, type: 3}
+  m_Name: Bryan
   m_EditorClassIdentifier: 
-  title: 
-  characters: []
-  messages: []
-  choices: []
+  _ProfilePicture: {fileID: 0}

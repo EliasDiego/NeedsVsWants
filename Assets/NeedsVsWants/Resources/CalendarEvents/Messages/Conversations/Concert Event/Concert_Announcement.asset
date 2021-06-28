@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 588500f11bfcf094bb32a4e00f946e8a, type: 3}
+  m_Name: Concert_Announcement
+  m_EditorClassIdentifier: 
+  title: Concert
+  characters:
+  - {fileID: 11400000, guid: 61aaffff4a0cb3148aaaecb615619681, type: 2}
+  - {fileID: 11400000, guid: 4c03642d09e198548b6f62adf821e0c7, type: 2}
+  messages:
+  - characterIndex: 0
+    text: Girl! PinkBlack is going to have a concert at March 1st!
+  - characterIndex: 1
+    text: AAAAAAAAAA!
+  - characterIndex: 0
+    text: AAAAAAAAAA!
+  - characterIndex: 0
+    text: I'm going to save up for the concert! It says it will cost around P10,000
+  - characterIndex: 1
+    text: I'll try to save up too!
+  choices: []
