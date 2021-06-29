@@ -39,6 +39,10 @@ namespace NeedsVsWants.PhoneSystem
         protected override bool hasDisabledColorTransition => hasColorTransition;
 
         public bool hasSufficientFunds { get; set; } = false;
+        public bool useDefaultText { get; set; } = true;
+
+        public string customSufficientFundsText { get; set; }
+        public string customInsufficientFundsText { get; set; }
 
         public System.Action onAfterProcessing { get; set; }
 
@@ -87,7 +91,7 @@ namespace NeedsVsWants.PhoneSystem
                 _CloseButton.gameObject.SetActive(true);
                 _Text.gameObject.SetActive(true);
 
-                _Text.text = _SufficientFundsText;
+                _Text.text = useDefaultText ? _SufficientFundsText : customSufficientFundsText;
             }));
         }
 
@@ -95,7 +99,7 @@ namespace NeedsVsWants.PhoneSystem
         {
             _ProcessingImage.gameObject.SetActive(false);
 
-            _Text.text = _InsufficientFundsText;
+            _Text.text = useDefaultText ? _InsufficientFundsText : customInsufficientFundsText;
 
             hasColorTransition = true;
         }
