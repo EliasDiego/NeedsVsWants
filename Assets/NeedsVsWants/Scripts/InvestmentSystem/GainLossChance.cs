@@ -10,7 +10,7 @@ namespace NeedsVsWants.InvestmentSystem
     [System.Serializable]
     public struct GainLossChance
     {
-        public MoneyOperator _Effect;
+        public int effect;
         public int chanceOfHappening;
     }
 }

@@ -18,18 +18,6 @@ namespace NeedsVsWants.InvestmentSystem
         [SerializeField]
         int _Effect;
 
-        protected override void OnEnableMenu()
-        {
-            transform.SetActiveChildren(true);
-
-            capitalText.text = StringFormat.ToPriceFormat(capital + capitalGainLoss);
-        }
-
-        protected override void OnDisableMenu()
-        {
-            transform.SetActiveChildren(false);
-        }
-
         protected override void OnReturn()
         {
             
@@ -42,18 +30,23 @@ namespace NeedsVsWants.InvestmentSystem
 
         protected override bool IsWithinRange(DateTime dateTime)
         {
+            int daysInMonth;
+
             bool isNewYear = false;
 
             if(dateTime.Month == dateInvested.month)
-                isNewYear = dateTime.Day == DateTime.DaysInMonth(dateTime.Year, dateTime.Month) || dateTime.Day == dateInvested.day;
+            {
+                daysInMonth = DateTime.DaysInMonth(dateTime.Year, dateTime.Month);
+
+                isNewYear = dateTime.Day == dateInvested.day || (daysInMonth < dateInvested.day && dateTime.Day == daysInMonth);
+            }
 
             return isNewYear;
         }
 
-        protected override double CalculateGainLoss(DateTime dateTime, double money)
+        protected override double CalculateGainLoss(DateTime dateTime)
         {
-            Debug.Log(dateTime);
-            return 0;
+            return capital * ((float)_Effect / (float)100);
         }
     }
 }

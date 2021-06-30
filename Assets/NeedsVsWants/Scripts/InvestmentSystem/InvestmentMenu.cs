@@ -4,6 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 
 using UnityEngine;
+using UnityEngine.UI;
 
 using NeedsVsWants.Player;
 using NeedsVsWants.MenuSystem;
@@ -21,7 +22,13 @@ namespace NeedsVsWants.InvestmentSystem
         [SerializeField]
         TMP_InputField _AmountInputField;
         [SerializeField]
+        Image _BoxCapital;
+        [SerializeField]
         TMP_Text _CapitalText;
+        [SerializeField]
+        TMP_Text _ErrorText;
+        [SerializeField]
+        Double _MinReqAmount;
 
         protected double capital { get; private set; }
 
@@ -42,15 +49,47 @@ namespace NeedsVsWants.InvestmentSystem
                     if(!isActive)
                         _Indicator.gameObject.SetActive(true);
 
-                    if(capital > 0)
-                        capitalGainLoss += CalculateGainLoss(dateTime, capital);
+                    if(HasReachedMinReq())
+                    {
+                        capitalGainLoss += CalculateGainLoss(dateTime);
+
+                        capitalText.text = StringFormat.ToPriceFormat(capital + capitalGainLoss);
+                    }
                 }
             };
         }
 
+        void SetErrorText(string errorText)
+        {
+            _ErrorText.gameObject.SetActive(true);
+            _ErrorText.text = errorText;
+        }
+        
+        protected override void OnEnableMenu()
+        {
+            transform.SetActiveChildren(true);
+
+            capitalText.text = StringFormat.ToPriceFormat(capital + capitalGainLoss);
+
+            _ErrorText.gameObject.SetActive(false);
+
+            _BoxCapital.color = HasReachedMinReq() ? Color.white : Color.grey;
+        }
+
+        protected override void OnDisableMenu()
+        {
+            transform.SetActiveChildren(false);
+        }
+
+        protected virtual bool HasReachedMinReq()
+        {
+            return capital + capitalGainLoss >= _MinReqAmount;
+        }
+        
         protected abstract bool IsWithinRange(DateTime dateTime);
 
-        protected abstract Double CalculateGainLoss(DateTime dateTime, double money);
+        protected abstract Double CalculateGainLoss(DateTime dateTime);
+
 
         public void OnAmountValueChange()
         {
@@ -60,7 +99,11 @@ namespace NeedsVsWants.InvestmentSystem
         public void CashIn(CheckoutPopUp checkoutPopUp)
         {
             if(string.IsNullOrEmpty(_AmountInputField.text))
+            {
+                SetErrorText("Please enter an amount!");
+
                 return;
+            }
 
             double parsedAmount = Double.Parse(_AmountInputField.text);
             double newMoney = PlayerStatManager.instance.currentMoney - parsedAmount;
@@ -69,7 +112,7 @@ namespace NeedsVsWants.InvestmentSystem
                 return;
 
             checkoutPopUp.useDefaultText = true;
-            checkoutPopUp.hasSufficientFunds = newMoney > 0;
+            checkoutPopUp.hasSufficientFunds = newMoney >= 0;
             checkoutPopUp.onAfterProcessing = () => 
             {
                 PlayerStatManager.instance.currentMoney = newMoney;
@@ -80,17 +123,25 @@ namespace NeedsVsWants.InvestmentSystem
                 capitalText.text = StringFormat.ToPriceFormat(capital + capitalGainLoss);
                 
                 dateInvested = (Date)PlayerStatManager.instance.currentDate;
+                
+                _BoxCapital.color = HasReachedMinReq() ? Color.white : Color.grey;
             };
             
             checkoutPopUp.EnablePopUp();
 
-            _AmountInputField.text = "0";
+            _AmountInputField.text = "";
+                
+            _ErrorText.gameObject.SetActive(false);
         }
         
         public void CashOut(CheckoutPopUp checkoutPopUp)
         {
             if(string.IsNullOrEmpty(_AmountInputField.text))
+            {
+                SetErrorText("Please enter an amount!");
+
                 return;
+            }
 
             double parsedAmount = Double.Parse(_AmountInputField.text);
             double overallCapital = capital + capitalGainLoss;
@@ -109,11 +160,15 @@ namespace NeedsVsWants.InvestmentSystem
                 capitalGainLoss = 0;
                 
                 capitalText.text = StringFormat.ToPriceFormat(capital + capitalGainLoss);
+                
+                _BoxCapital.color = HasReachedMinReq() ? Color.white : Color.grey;
             };
             
             checkoutPopUp.EnablePopUp();
 
-            _AmountInputField.text = "0";
+            _AmountInputField.text = "";
+            
+            _ErrorText.gameObject.SetActive(false);
         }
     }
 }
