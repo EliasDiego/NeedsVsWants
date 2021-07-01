@@ -4,12 +4,10 @@ using System.Collections;
 using System.Collections.Generic;
 
 using UnityEngine;
-using UnityEngine.UI;
 
 using NeedsVsWants.Player;
 using NeedsVsWants.MenuSystem;
 using NeedsVsWants.PhoneSystem;
-using NeedsVsWants.CalendarSystem;
 
 using TMPro;
 
@@ -22,21 +20,16 @@ namespace NeedsVsWants.InvestmentSystem
         [SerializeField]
         TMP_InputField _AmountInputField;
         [SerializeField]
-        Image _BoxCapital;
-        [SerializeField]
         TMP_Text _CapitalText;
         [SerializeField]
         TMP_Text _ErrorText;
-        [SerializeField]
-        Double _MinReqAmount;
 
-        protected double capital { get; private set; }
+        protected double capital { get; set; }
 
-        protected Date dateInvested { get; private set; }
-
-        protected double capitalGainLoss { get; private set; }
+        protected double capitalGainLoss { get; set; }
 
         protected TMP_Text capitalText => _CapitalText;
+        protected TMP_InputField amountInputField => _AmountInputField;
         
         protected override void Start() 
         {
@@ -46,12 +39,15 @@ namespace NeedsVsWants.InvestmentSystem
             {
                 if(IsWithinRange(dateTime))
                 {
-                    if(!isActive)
-                        _Indicator.gameObject.SetActive(true);
-
                     if(HasReachedMinReq())
                     {
+                        if(!isActive)
+                            _Indicator.gameObject.SetActive(true);
+
                         capitalGainLoss += CalculateGainLoss(dateTime);
+
+                        if(capital + capitalGainLoss < 0)
+                            capitalGainLoss = -(capital + capitalGainLoss);
 
                         capitalText.text = StringFormat.ToPriceFormat(capital + capitalGainLoss);
                     }
@@ -72,8 +68,6 @@ namespace NeedsVsWants.InvestmentSystem
             capitalText.text = StringFormat.ToPriceFormat(capital + capitalGainLoss);
 
             _ErrorText.gameObject.SetActive(false);
-
-            _BoxCapital.color = HasReachedMinReq() ? Color.white : Color.grey;
         }
 
         protected override void OnDisableMenu()
@@ -83,7 +77,20 @@ namespace NeedsVsWants.InvestmentSystem
 
         protected virtual bool HasReachedMinReq()
         {
-            return capital + capitalGainLoss >= _MinReqAmount;
+            return true;
+        }
+
+        protected virtual void OnCashIn(bool hasSufficientFunds) { }
+        
+        protected virtual void OnCashOut(bool hasSufficientFunds) { }
+
+        protected virtual void OnCashOutAll(bool hasSufficientFunds) { }
+
+        protected virtual bool AllowCashInputted(bool isCashIn, ref double parsedAmount, out string errorText) 
+        {
+            errorText = "";
+
+            return true;
         }
         
         protected abstract bool IsWithinRange(DateTime dateTime);
@@ -111,6 +118,13 @@ namespace NeedsVsWants.InvestmentSystem
             if(parsedAmount <= 0)
                 return;
 
+            if(!AllowCashInputted(true, ref parsedAmount, out string errorText))
+            {
+                SetErrorText(errorText);
+
+                return;
+            }
+
             checkoutPopUp.useDefaultText = true;
             checkoutPopUp.hasSufficientFunds = newMoney >= 0;
             checkoutPopUp.onAfterProcessing = () => 
@@ -122,9 +136,7 @@ namespace NeedsVsWants.InvestmentSystem
                 
                 capitalText.text = StringFormat.ToPriceFormat(capital + capitalGainLoss);
                 
-                dateInvested = (Date)PlayerStatManager.instance.currentDate;
-                
-                _BoxCapital.color = HasReachedMinReq() ? Color.white : Color.grey;
+                OnCashIn(true);
             };
             
             checkoutPopUp.EnablePopUp();
@@ -132,6 +144,9 @@ namespace NeedsVsWants.InvestmentSystem
             _AmountInputField.text = "";
                 
             _ErrorText.gameObject.SetActive(false);
+
+            if(!checkoutPopUp.hasSufficientFunds)
+                OnCashIn(false);
         }
         
         public void CashOut(CheckoutPopUp checkoutPopUp)
@@ -149,6 +164,13 @@ namespace NeedsVsWants.InvestmentSystem
             if(parsedAmount <= 0)
                 return;
                 
+            if(!AllowCashInputted(false, ref parsedAmount, out string errorText))
+            {
+                SetErrorText(errorText);
+
+                return;
+            }
+                
             checkoutPopUp.hasSufficientFunds = parsedAmount <= overallCapital;
             checkoutPopUp.onAfterProcessing = () => 
             {
@@ -161,7 +183,7 @@ namespace NeedsVsWants.InvestmentSystem
                 
                 capitalText.text = StringFormat.ToPriceFormat(capital + capitalGainLoss);
                 
-                _BoxCapital.color = HasReachedMinReq() ? Color.white : Color.grey;
+                OnCashOut(true);
             };
             
             checkoutPopUp.EnablePopUp();
@@ -169,6 +191,36 @@ namespace NeedsVsWants.InvestmentSystem
             _AmountInputField.text = "";
             
             _ErrorText.gameObject.SetActive(false);
+            
+            if(!checkoutPopUp.hasSufficientFunds)
+                OnCashOut(false);
+        }
+
+        public void CashOutAll(CheckoutPopUp checkoutPopUp)
+        {
+            double overallCapital = capital + capitalGainLoss;
+                
+            checkoutPopUp.hasSufficientFunds = overallCapital > 0;
+            checkoutPopUp.onAfterProcessing = () => 
+            {
+                PlayerStatManager.instance.currentMoney += overallCapital;
+
+                capital = 0;
+                capitalGainLoss = 0;
+                
+                capitalText.text = StringFormat.ToPriceFormat(capital + capitalGainLoss);
+                
+                OnCashOutAll(true);
+            };
+            
+            checkoutPopUp.EnablePopUp();
+
+            _AmountInputField.text = "";
+            
+            _ErrorText.gameObject.SetActive(false);
+            
+            if(!checkoutPopUp.hasSufficientFunds)
+                OnCashOutAll(false);
         }
     }
 }
