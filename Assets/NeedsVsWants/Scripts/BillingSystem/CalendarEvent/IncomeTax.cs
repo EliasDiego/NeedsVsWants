@@ -20,9 +20,9 @@ namespace NeedsVsWants.BillingSystem
         [SerializeField]
         Pagibig _Pagibig;
 
-        float TrainTaxRate(float income)
+        double TrainTaxRate(double income)
         {
-            float newIncome = 0;
+            double newIncome = 0;
 
             if(250000 >= income)
                 newIncome = income;
@@ -50,10 +50,10 @@ namespace NeedsVsWants.BillingSystem
             return DateTime.DaysInMonth(dateTime.Year, dateTime.Month) == dateTime.Day;
         }
 
-        public override float CalculateBill(DateTime dateTime)
+        public override double CalculateBill(DateTime dateTime)
         {
-            float deductions = _SSS.CalculateBill(dateTime) + _PhilHealth.CalculateBill(dateTime) + _Pagibig.CalculateBill(dateTime);
-            float annualTaxableIncome = (_JobIncome.incomeRate * 12) + _JobIncome.GetThirteenthMonthPay() - ((deductions * 12) + _JobIncome.GetThirteenthMonthPay());
+            double deductions = _SSS.CalculateBill(dateTime) + _PhilHealth.CalculateBill(dateTime) + _Pagibig.CalculateBill(dateTime);
+            double annualTaxableIncome = (_JobIncome.incomeRate * 12) + _JobIncome.GetThirteenthMonthPay() - ((deductions * 12) + _JobIncome.GetThirteenthMonthPay());
 
             return TrainTaxRate(annualTaxableIncome) / 12;
         }

@@ -15,7 +15,7 @@ namespace NeedsVsWants.Player
         public Date startDate;
 
         [Header("Starting Money")]
-        public float startMoney;
+        public double startMoney;
 
         [Header("Starting Welfare")]
         public WelfareValue startHealthWelfare;

@@ -116,7 +116,7 @@ namespace NeedsVsWants.CalendarSystem
 
         bool IsThereEvent(DateTime dateTime)
         {
-            foreach(CalendarEvent calendarEvent in PlayerStatManager.instance.calendarEventList)
+            foreach(CalendarEvent calendarEvent in PlayerStatManager.instance.calendarEvents)
             {
                 if(calendarEvent.showOnCalendar && calendarEvent.IsWithinDate(dateTime))
                     return true;

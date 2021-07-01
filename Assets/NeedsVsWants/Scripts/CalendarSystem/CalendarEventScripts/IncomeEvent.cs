@@ -11,7 +11,7 @@ namespace NeedsVsWants.CalendarSystem
     [CreateAssetMenu(menuName = "NeedsVsWants/Calendar Events/Income Event")]
     public class IncomeEvent : CalendarEvent
     {
-        public float incomeRate;
+        public double incomeRate;
 
         public override bool showOnCalendar => true;
 
@@ -26,9 +26,9 @@ namespace NeedsVsWants.CalendarSystem
         public override bool IsWithinDate(DateTime dateTime) => 
             dateTime.Day == DateTime.DaysInMonth(dateTime.Year, dateTime.Month);
 
-        public float GetThirteenthMonthPay()
+        public double GetThirteenthMonthPay()
         {
-            return incomeRate + 5000;;
+            return incomeRate + 5000;
         }
 
         // public override bool IsWithinDateRange(DateTime dateTime) => 

@@ -10,6 +10,7 @@ using UnityEngine.SceneManagement;
 using NeedsVsWants.Patterns;
 using NeedsVsWants.WelfareSystem;
 using NeedsVsWants.CalendarSystem;
+using NeedsVsWants.ShoppingSystem;
 using NeedsVsWants.MessagingSystem;
 
 namespace NeedsVsWants.Player
@@ -32,9 +33,9 @@ namespace NeedsVsWants.Player
             }
         }
 
-        public List<CalendarEvent> calendarEventList => _PlayerStat.calendarEventList;
+        public CalendarEvent[] calendarEvents => _PlayerStat.calendarEventList.ToArray();
 
-        public float currentMoney
+        public double currentMoney
         {
             get => _PlayerStat.currentMoney;
 
@@ -127,9 +128,11 @@ namespace NeedsVsWants.Player
             }
         }
 
-        public List<Chat> chatList => _PlayerStat.chatList;
+        public Chat[] chats => _PlayerStat.chatList.ToArray();
 
-        public event Action<float> onMoneyChange;
+        public Item[] ShopItems => _PlayerStat.ShopItemList.ToArray();
+
+        public event Action<double> onMoneyChange;
 
         public event Action<DateTime> onDateChange;
 
@@ -138,7 +141,11 @@ namespace NeedsVsWants.Player
         public event Action<WelfareValue> onHappinessChange;
         public event Action<WelfareValue> onSocialChange;
 
-        public event Action<Conversation> onNewChat;
+        public event Action<Chat> onAddChat;
+
+        public event Action<Item[]> onAddItems;
+        public event Action<Item[]> onEditItems;
+        public event Action<Item[]> onRemoveItems;
 
         protected override void Awake()
         {
@@ -194,9 +201,39 @@ namespace NeedsVsWants.Player
 
             chat.conversation = conversation;
 
-            chatList.Add(chat);
+            _PlayerStat.chatList.Add(chat);
                 
-            onNewChat?.Invoke(conversation);
+            onAddChat?.Invoke(chat);
         }
+
+        public void CalculateWelfare(WelfareOperator welfareOperator)
+        {
+            currentHappinessWelfare = welfareOperator.GetHappiness(currentHappinessWelfare);
+            currentHealthWelfare = welfareOperator.GetHappiness(currentHealthWelfare);
+            currentHungerWelfare = welfareOperator.GetHappiness(currentHungerWelfare);
+            currentSocialWelfare = welfareOperator.GetHappiness(currentSocialWelfare);
+        }
+
+        #region Shop Item
+        public void AddShopItem(params Item[] items)
+        {
+            _PlayerStat.ShopItemList.AddRange(items);
+            
+            onAddItems?.Invoke(items);
+        }
+
+        public void RemoveShopItem(params Item[] items)
+        {
+            _PlayerStat.ShopItemList.RemoveAll(item => items.Contains(item));
+
+            onRemoveItems?.Invoke(items);
+        }
+
+        public void EditItem(Func<Item, bool> predicate)
+        {
+            if(predicate != null)
+                onEditItems?.Invoke(_PlayerStat.ShopItemList.Where(item => predicate.Invoke(item)).ToArray());
+        }
+        #endregion
     }
 }

@@ -6,6 +6,7 @@ using UnityEngine;
 using NeedsVsWants.Player;
 using NeedsVsWants.Patterns;
 using NeedsVsWants.MenuSystem;
+using NeedsVsWants.PhoneSystem;
 
 namespace NeedsVsWants.MessagingSystem
 {
@@ -20,7 +21,7 @@ namespace NeedsVsWants.MessagingSystem
         {
             ObjectPoolManager.instance.Instantiate("Chat Button");    
             
-            PlayerStatManager.instance.onNewChat += conversation =>
+            PlayerStatManager.instance.onAddChat += chat =>
             {
                 if(isActive)
                     UpdateChatList();
@@ -33,13 +34,13 @@ namespace NeedsVsWants.MessagingSystem
 
             AppMenuGroup appMenuGroup = GetComponentInParent<AppMenuGroup>();
 
-            List<Chat> chatList = PlayerStatManager.instance.chatList;
+            Chat[] chatList = PlayerStatManager.instance.chats;
 
             // Return current Chat Buttons to Pool
             for(int i = 0; i < _ContentTransform.childCount; i++)
                 _ContentTransform.GetChild(i).gameObject.SetActive(false);
 
-            for(int i = chatList.Count - 1; i >= 0; i--)
+            for(int i = chatList.Length - 1; i >= 0; i--)
             {
                 chatButton = ObjectPoolManager.instance.GetObject("Chat Button").GetComponent<ChatButton>();
 

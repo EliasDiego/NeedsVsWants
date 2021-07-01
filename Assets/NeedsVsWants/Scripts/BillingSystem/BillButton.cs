@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+using NeedsVsWants.PhoneSystem;
+
 using TMPro;
 
 namespace NeedsVsWants.BillingSystem
@@ -22,7 +24,7 @@ namespace NeedsVsWants.BillingSystem
             _BillIconImage = GetComponent<Image>();
         }
 
-        public void AssignBill(BillEvent billEvent, MenuSystem.AppMenuGroup appMenuGroup, BillViewerMenu billViewerMenu)
+        public void AssignBill(BillEvent billEvent, AppMenuGroup appMenuGroup, BillViewerMenu billViewerMenu)
         {
             _BillNameText.text = billEvent.name;
             _BillIconImage.sprite = billEvent.icon;

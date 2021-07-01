@@ -16,9 +16,9 @@ namespace NeedsVsWants.CalendarSystem
     {
         [Header("Day Speed")]
         [SerializeField]
-        float _HourTimeDelta = 1;
+        double _HourTimeDelta = 1;
         [SerializeField]
-        float _HourTimeScale = 1;
+        double _HourTimeScale = 1;
         
         int _CurrentMonth;
         int _CurrentDay;
@@ -95,7 +95,7 @@ namespace NeedsVsWants.CalendarSystem
             }
 
             // Put here Calendar Event stuff
-            foreach(CalendarEvent calendarEvent in PlayerStatManager.instance.calendarEventList)
+            foreach(CalendarEvent calendarEvent in PlayerStatManager.instance.calendarEvents)
             {
                 if(calendarEvent.IsWithinDate(_CurrentDateTime))
                     calendarEvent.Invoke(_CurrentDateTime);

@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 using NeedsVsWants.WelfareSystem;
+using NeedsVsWants.ShoppingSystem;
 using NeedsVsWants.CalendarSystem;
 using NeedsVsWants.MessagingSystem;
 
@@ -13,9 +14,9 @@ namespace NeedsVsWants.Player
     public class PlayerStat : ScriptableObject
     {
         public DateTime currentDateTime; 
-        public List<CalendarEvent> calendarEventList = new List<CalendarEvent>();
 
-        public float currentMoney;
+
+        public double currentMoney;
 
         public WelfareValue healthWelfare;
         public WelfareValue hungerWelfare;
@@ -23,7 +24,11 @@ namespace NeedsVsWants.Player
         public WelfareValue happinessWelfare;
 
         public List<Chat> chatList = new List<Chat>();
+
+        public List<CalendarEvent> calendarEventList = new List<CalendarEvent>();
         
+        public List<Item> ShopItemList = new List<Item>();
+
         static PlayerStat _Instance;
 
         public static PlayerStat instance 
@@ -52,26 +57,20 @@ namespace NeedsVsWants.Player
             _Instance.hungerWelfare = startReference.startHungerWelfare;
             _Instance.happinessWelfare = startReference.startHappinessWelfare;
             _Instance.socialWelfare = startReference.startSocialWelfare;
-
-            _Instance.calendarEventList.AddRange(Resources.LoadAll<CalendarEvent>("CalendarEvents")); 
             
-            foreach(CalendarEvent calendarEvent in _Instance.calendarEventList)
+            foreach(CalendarEvent calendarEvent in Resources.LoadAll<CalendarEvent>("CalendarEvents"))
+            {
                 calendarEvent.Initialize();
 
-            // For Testing, To Be Deleted
-            // PlayerStat.instance.currentDateTime = new DateTime(2020, 1, 1);
-            
-            // PlayerStat.instance.currentMoney = 10000;
-            
-            // PlayerStat.instance.healthWelfare = new WelfareSystem.WelfareValue(100, 100);
-            // PlayerStat.instance.hungerWelfare = new WelfareSystem.WelfareValue(100, 100);
-            // PlayerStat.instance.happinessWelfare = new WelfareSystem.WelfareValue(100, 100);
-            // PlayerStat.instance.socialWelfare = new WelfareSystem.WelfareValue(100, 100);
+                _Instance.calendarEventList.Add(calendarEvent);
+            }
 
-            // PlayerStat.instance.calendarEventList.AddRange(Resources.LoadAll<CalendarEvent>("CalendarEvents")); 
+            foreach(Item item in Resources.LoadAll<Item>("CalendarEvents/SaleEvents/StartingShopItems"))
+            {
+                item.isDiscounted = false;
 
-            // foreach(CalendarEvent calendarEvent in PlayerStat.instance.calendarEventList)
-            //     calendarEvent.Initialize();
+                _Instance.ShopItemList.Add(item);
+            }
         }
     }
 }

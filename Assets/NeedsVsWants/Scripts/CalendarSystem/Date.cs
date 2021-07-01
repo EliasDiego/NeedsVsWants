@@ -19,13 +19,22 @@ namespace NeedsVsWants.CalendarSystem
             this.day = Mathf.Clamp(day, 1, DateTime.DaysInMonth(this.year, this.month));
         }
 
-        public static implicit operator DateTime (Date date) 
+        public static implicit operator DateTime(Date date) 
         {
             int year = Mathf.Clamp(date.year, 1, 9999);
             int month = Mathf.Clamp(date.month, 1, 12);
             int day = Mathf.Clamp(date.day, 1, DateTime.DaysInMonth(year, month));
 
             return new DateTime(year, month, day);
+        }
+
+        public static explicit operator Date(DateTime dateTime)
+        {
+            int year = Mathf.Clamp(dateTime.Year, 1, 9999);
+            int month = Mathf.Clamp(dateTime.Month, 1, 12);
+            int day = Mathf.Clamp(dateTime.Day, 1, DateTime.DaysInMonth(year, month));
+
+            return new Date(year, month, day);
         }
         
         // public static implicit operator Date (DateTime dateTime)
