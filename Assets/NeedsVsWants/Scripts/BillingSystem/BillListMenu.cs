@@ -50,7 +50,7 @@ namespace NeedsVsWants.BillingSystem
 
         public void UpdateBillList()
         {
-            BillButton billButton;
+            BillHolder billHolder;
             
             BillEvent[] billEvents;
             
@@ -62,11 +62,11 @@ namespace NeedsVsWants.BillingSystem
 
             foreach(BillEvent billEvent in billEvents)
             {
-                billButton = ObjectPoolManager.instance.GetObject("Bill Button").GetComponent<BillButton>();
+                billHolder = ObjectPoolManager.instance.GetObject("Bill Button").GetComponent<BillHolder>();
 
-                billButton.transform.SetParent(_BillListTransform, false);
+                billHolder.transform.SetParent(_BillListTransform, false);
 
-                billButton.AssignBill(billEvent, appMenuGroup, _BillViewerMenu);
+                billHolder.AssignBill(billEvent, appMenuGroup, _BillViewerMenu);
             }
 
             // billButtons = ObjectPoolManager.instance.GetObjects("Bill Button", billEvents.Length).ToArray();
