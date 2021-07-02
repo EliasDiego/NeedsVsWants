@@ -10,12 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a50e43e0ba2ec874aa69c9700afe2854, type: 3}
-  m_Name: KBBQ_Event
+  m_Name: JUL
   m_EditorClassIdentifier: 
-  conversation: {fileID: 11400000, guid: 4b364eca56286a44a8c0de83b4d7dc17, type: 2}
+  conversation: {fileID: 11400000, guid: 0b18a6cd7c807c442a0f3a2466aa019e, type: 2}
   chatChoices: []
   date:
     year: 0
-    month: 1
+    month: 7
     day: 7
   isYearSpecific: 0

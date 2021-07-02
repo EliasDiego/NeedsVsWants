@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 2138677392}
-  m_IndirectSpecularColor: {r: 0.28462094, g: 0.37121028, b: 0.4988079, a: 1}
+  m_IndirectSpecularColor: {r: 0.284621, g: 0.3712107, b: 0.4988094, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -11326,7 +11326,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &4642524650808575362
 GameObject:
   m_ObjectHideFlags: 0
@@ -11470,7 +11470,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &4642524651351599722
 GameObject:
   m_ObjectHideFlags: 0
@@ -11542,7 +11542,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &4642524651843031747
 GameObject:
   m_ObjectHideFlags: 0
@@ -13852,7 +13852,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0.000011735168}
+  m_AnchoredPosition: {x: 0, y: 0.000019833513}
   m_SizeDelta: {x: 0, y: 500}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &7529515404612885857
@@ -18622,6 +18622,7 @@ MonoBehaviour:
   _BillNameText: {fileID: 7529515405880098119}
   _BillBalanceText: {fileID: 7529515406198000010}
   _AmountInputField: {fileID: 7529515405244221315}
+  _CheckoutPopUp: {fileID: 0}
 --- !u!82 &7529515405638046698
 AudioSource:
   m_ObjectHideFlags: 0
@@ -18979,7 +18980,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 7529515405166717439}
   m_Direction: 2
   m_Value: 0
-  m_Size: 0.99980223
+  m_Size: 0.99971014
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -19200,8 +19201,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _ActiveOnStart: 1
-  _LeftList: {fileID: 2274650075422289464}
-  _RightList: {fileID: 4338933289991513260}
+  _ContentLayoutGroup: {fileID: 0}
+  _ItemViewerMenu: {fileID: 0}
+  _LoadingPopUp: {fileID: 0}
+  _Text: {fileID: 0}
+  _SaleLeftList: {fileID: 0}
+  _SaleRightList: {fileID: 0}
+  _ShopLeftList: {fileID: 0}
+  _ShopRightList: {fileID: 0}
 --- !u!82 &7529515405744211505
 AudioSource:
   m_ObjectHideFlags: 0
@@ -37552,7 +37559,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4642524651351599722}
-  m_Mesh: {fileID: -4786596286103453739, guid: 6fc2d0e998cbf5249a64c7c528a0fd1b, type: 3}
+  m_Mesh: {fileID: -4714697462674152764, guid: e808f4a06bc907d4590e71230cb83d4b, type: 3}
 --- !u!33 &8973849603161855304
 MeshFilter:
   m_ObjectHideFlags: 0
