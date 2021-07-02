@@ -21,8 +21,6 @@ namespace NeedsVsWants.MenuSystem
 
         System.Action<InputAction.CallbackContext> _OnPauseStarted;
 
-        bool _IsPaused = false;
-
         bool _IsOnFocus = true;
 
         void Awake() 
