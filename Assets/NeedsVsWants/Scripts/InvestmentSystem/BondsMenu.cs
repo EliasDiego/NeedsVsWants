@@ -18,6 +18,8 @@ namespace NeedsVsWants.InvestmentSystem
         [SerializeField]
         GainLossChance[] _GainLossChances;
 
+        protected override string investmentEventName => "Bonds";
+
         protected override void OnReturn()
         {
             
@@ -38,7 +40,12 @@ namespace NeedsVsWants.InvestmentSystem
         protected override void OnCashIn(bool hasSufficientFunds)
         {
             if(hasSufficientFunds)
+            {
                 _BoxCapitalImage.color = HasReachedMinReq() ? Color.white : Color.grey;
+
+                
+                investmentEventShownInCalendar = true;   
+            }
         }
 
         protected override void OnCashOut(bool hasSufficientFunds)
@@ -54,6 +61,9 @@ namespace NeedsVsWants.InvestmentSystem
 
                     _GainLossText.text = "- %";
                 }
+                
+                if(capital <= 0)
+                    investmentEventShownInCalendar = false;   
             }
         }
         

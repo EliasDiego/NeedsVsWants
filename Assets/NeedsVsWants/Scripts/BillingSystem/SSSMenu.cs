@@ -15,12 +15,6 @@ namespace NeedsVsWants.BillingSystem
         double _Amount;
 
         protected override string billEventName => "SSS";
-        
-        protected override void Start() 
-        {
-            foreach(CalendarEvent c in PlayerStatManager.instance.calendarEvents)    
-                Debug.Log(c);
-        }
 
         public override bool IsWithinDate(DateTime dateTime)
         {

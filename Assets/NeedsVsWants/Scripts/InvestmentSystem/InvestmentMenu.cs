@@ -24,6 +24,8 @@ namespace NeedsVsWants.InvestmentSystem
         [SerializeField]
         TMP_Text _ErrorText;
 
+        InvestmentEvent _InvestmentEvent;
+
         protected double capital { get; set; }
 
         protected double capitalGainLoss { get; set; }
@@ -31,10 +33,11 @@ namespace NeedsVsWants.InvestmentSystem
         protected TMP_Text capitalText => _CapitalText;
         protected TMP_InputField amountInputField => _AmountInputField;
         
-        protected override void Start() 
-        {
-            base.Start();
+        protected abstract string investmentEventName { get; }
+        protected bool investmentEventShownInCalendar { get => _InvestmentEvent.isShownOnCalendar; set => _InvestmentEvent.isShownOnCalendar = value; }
 
+        void Awake() 
+        {
             PlayerStatManager.instance.onDateChange += dateTime => 
             {
                 if(IsWithinRange(dateTime))
@@ -53,6 +56,13 @@ namespace NeedsVsWants.InvestmentSystem
                     }
                 }
             };
+            
+            _InvestmentEvent = InvestmentEvent.CreateInstance<InvestmentEvent>();
+
+            _InvestmentEvent.name = investmentEventName;
+            _InvestmentEvent.onIsWithinDate += IsWithinRange;
+
+            PlayerStatManager.instance.AddCalendarEvent(_InvestmentEvent);
         }
 
         void SetErrorText(string errorText)

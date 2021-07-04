@@ -42,6 +42,9 @@ namespace NeedsVsWants.BillingSystem
 
                     else
                         _Indicator.gameObject.SetActive(true);
+
+                    if(CalculateBill(dateTime) * 6 <= _CurrentBalance)
+                        PlayerStatManager.instance.LoadEndMenuScene();
                 }
             };
 

@@ -32,6 +32,15 @@ namespace NeedsVsWants.InvestmentSystem
 
         Date _DateInvested;
 
+        protected override string investmentEventName => "Time Deposit";
+
+        protected override void Start() 
+        {
+            base.Start();
+
+            investmentEventShownInCalendar = false;    
+        }
+
         void SetUI()
         {
             _CashInButton.gameObject.SetActive(!_HasInvested);
@@ -80,6 +89,8 @@ namespace NeedsVsWants.InvestmentSystem
                 _IsInLockInPeriod = true;
                 
                 SetUI();
+                
+                investmentEventShownInCalendar = true;
             }
         }
 
@@ -90,6 +101,8 @@ namespace NeedsVsWants.InvestmentSystem
                 _HasInvested = false;
                 
                 SetUI();
+
+                investmentEventShownInCalendar = false;
             }
         }
 
