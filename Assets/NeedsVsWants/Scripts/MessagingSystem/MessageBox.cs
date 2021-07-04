@@ -23,8 +23,6 @@ namespace NeedsVsWants.MessagingSystem
 
         HorizontalLayoutGroup _LayoutGroup;
 
-        int _CharacterCount = 0;
-
         void Awake() 
         {
             _LayoutGroup = GetComponent<HorizontalLayoutGroup>();    

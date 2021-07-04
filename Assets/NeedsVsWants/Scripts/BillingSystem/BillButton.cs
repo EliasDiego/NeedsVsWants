@@ -21,7 +21,7 @@ namespace NeedsVsWants.BillingSystem
             base.Awake();
 
             _BillNameText = GetComponentInChildren<TMP_Text>();
-            _BillIconImage = GetComponent<Image>();
+            _BillIconImage = GetComponentInChildren<Image>();
         }
 
         public void AssignBill(BillEvent billEvent, AppMenuGroup appMenuGroup, BillViewerMenu billViewerMenu)

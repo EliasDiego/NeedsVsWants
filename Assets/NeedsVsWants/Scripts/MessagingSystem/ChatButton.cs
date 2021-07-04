@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
 
+using UnityEngine;
 using UnityEngine.UI;
 
 using NeedsVsWants.PhoneSystem;
@@ -22,7 +23,7 @@ namespace NeedsVsWants.MessagingSystem
         {
             TMP_Text[] texts = GetComponentsInChildren<TMP_Text>();
 
-            _Icon = transform.GetChild(1).GetComponentInChildren<Image>();
+            _Icon = transform.GetChild(0).GetComponentInChildren<Image>();
 
             _ChatTitle = texts[0];
             _PreviewText = texts[1];
@@ -30,28 +31,47 @@ namespace NeedsVsWants.MessagingSystem
 
         public void AssignChat(Chat chat, AppMenuGroup appMenuGroup, ChatViewerMenu chatViewerMenu)
         {
-            int stringCount = 0;
-
+            Conversation currentConversation;
             Message message;
 
             _ChatTitle.text = chat.title;
-            _ChatTitle.fontStyle = chat.hasRead ? FontStyles.Normal : FontStyles.Bold;
 
             if(chat.conversation.messages.Count() > 0)
             {
-                // Temp, show latest message
-                message = chat.conversation.messages[0];
+                if(chat.hasRead)
+                {
+                    currentConversation = chat.conversation;
 
-                // Limit Text
-                _PreviewText.text = chat.conversation.characters[message.characterIndex].name + ": ";// + message.text.Substring;
+                    foreach(int choiceIndex in chat.choicesMadeList)
+                    {
+                        if(currentConversation.choices[choiceIndex].nextConversation)
+                            currentConversation = currentConversation.choices[choiceIndex].nextConversation;
+                    }
+                        
+                    message = currentConversation.messages[currentConversation.messages.Length - 1];
 
-                stringCount = _PreviewText.text.Length;
+                    // Limit Text
+                    _PreviewText.text = currentConversation.characters[message.characterIndex].name + ": ";
+                    _PreviewText.text += message.text.Substring(0, Mathf.Clamp(message.text.Length, 0, 15));
+                    
+                    _Icon.sprite =  currentConversation.characters[message.characterIndex].profilePicture;
+                }
+
+                else
+                {
+                    message = chat.conversation.messages[0];
+
+                    // Limit Text
+                    _PreviewText.text = chat.conversation.characters[message.characterIndex].name + ": ";
+                    _PreviewText.text += message.text.Substring(0, Mathf.Clamp(message.text.Length, 0, 15));
+                    
+                    _Icon.sprite =  chat.conversation.characters[message.characterIndex].profilePicture;
+                }
             }
 
             else
                 _PreviewText.text  = "";
 
-            //_Icon.sprite = billEvent.icon;
 
             onClick.RemoveAllListeners();
 

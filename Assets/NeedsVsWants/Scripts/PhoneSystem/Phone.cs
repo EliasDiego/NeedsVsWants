@@ -2,13 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.InputSystem;
 
+using NeedsVsWants.Patterns;
 using NeedsVsWants.PhoneSystem;
+using NeedsVsWants.CalendarSystem;
 
 namespace NeedsVsWants.MenuSystem
 {
-    public class PhoneMenu : Menu
+    public class Phone : SimpleSingleton<Phone>
     {
         [SerializeField]
         InputActionReference _Point;
@@ -16,13 +19,20 @@ namespace NeedsVsWants.MenuSystem
         InputActionReference _CameraZoom;
         [SerializeField]
         HomeScreenMenu _HomeScreenMenu;
+        [Header("Disable")]
+        [SerializeField]
+        Button[] _DisableButtons;
+        [SerializeField]
+        DayProgressor _DayProgressor;
 
         MenuGroup _CurrentMenuGroup;
 
         RectTransform _RectTransform;
 
-        void Awake() 
+        protected override void Awake() 
         {
+            base.Awake();
+
             _RectTransform = transform as RectTransform;
         }
 
@@ -35,26 +45,6 @@ namespace NeedsVsWants.MenuSystem
 
             else
                 _CameraZoom.action.actionMap.Enable();
-        }
-
-        protected override void OnDisableMenu()
-        {
-
-        }
-
-        protected override void OnEnableMenu()
-        {
-            
-        }
-
-        protected override void OnReturn()
-        {
-            
-        }
-
-        protected override void OnSwitchFrom()
-        {
-            
         }
 
         public void ReturnCurrentApp()
@@ -73,19 +63,6 @@ namespace NeedsVsWants.MenuSystem
                 else
                     _CurrentMenuGroup.Return();
             }
-            // if(_CurrentMenuGroup)
-            // {
-            //     Menu returnMenu = _CurrentMenuGroup.Return();
-
-            //     if(!returnMenu) // If current group return doesn't have a return menu, thus go to home screen
-            //     {
-            //         _CurrentMenuGroup.DisableGroup();
-
-            //         _CurrentMenuGroup = null;
-
-            //         _HomeScreenMenu.EnableMenu();
-            //     }
-            // }
         }
 
         public void ReturnHomeScreen()
@@ -106,5 +83,21 @@ namespace NeedsVsWants.MenuSystem
         }
 
         public void SetCurrentMenuGroup(MenuGroup menuGroup) => _CurrentMenuGroup = menuGroup;
+
+        public void EnablePlayerControl()
+        {
+            foreach(Button button in _DisableButtons)
+                button.interactable = true;
+
+            _DayProgressor.Unpause();
+        }
+        
+        public void DisablePlayerControl()
+        {
+            foreach(Button button in _DisableButtons)
+                button.interactable = false;
+                
+            _DayProgressor.Pause();
+        }
     }
 }
