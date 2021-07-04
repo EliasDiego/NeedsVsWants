@@ -3,6 +3,7 @@ using System.Collections.Generic;
 
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Events;
 
 using NeedsVsWants.MenuSystem;
 using NeedsVsWants.CalendarSystem;
@@ -15,6 +16,10 @@ namespace NeedsVsWants.TutorialSystem
         Image _BoxImage;
         [SerializeField]
         float _ScaleSpeed;
+        [SerializeField]
+        UnityEvent _OnEnable;
+        [SerializeField]
+        UnityEvent _OnDisable;
 
         Coroutine _BoxScaleAnimation;
 
@@ -49,6 +54,8 @@ namespace NeedsVsWants.TutorialSystem
             _BoxScaleAnimation = StartCoroutine(AnimateScale(_BoxImage.rectTransform, Vector3.one, _ScaleSpeed, null));
 
             transform.SetActiveChildren(true);
+
+            _OnEnable?.Invoke();
         }
 
         protected override void onDisablePopUp()
@@ -57,6 +64,8 @@ namespace NeedsVsWants.TutorialSystem
                 StopCoroutine(_BoxScaleAnimation);
                 
             _BoxScaleAnimation = StartCoroutine(AnimateScale(_BoxImage.rectTransform, Vector3.zero, _ScaleSpeed, () => transform.SetActiveChildren(false)));
+            
+            _OnDisable?.Invoke();
         }
     }
 }

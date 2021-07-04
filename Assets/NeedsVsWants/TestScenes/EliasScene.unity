@@ -270,6 +270,72 @@ MonoBehaviour:
   _TransitionSpeed: 10
   _BoxImage: {fileID: 2099427304}
   _ScaleSpeed: 20
+  _OnEnable:
+    m_PersistentCalls:
+      m_Calls: []
+  _OnDisable:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1324136772}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
+      - m_Target: {fileID: 765027058620501399}
+        m_TargetAssemblyTypeName: NeedsVsWants.MenuSystem.MenuGroup, Assembly-CSharp
+        m_MethodName: Return
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
+      - m_Target: {fileID: 7368427440011159141}
+        m_TargetAssemblyTypeName: NeedsVsWants.MenuSystem.Phone, Assembly-CSharp
+        m_MethodName: ReturnHomeScreen
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
+      - m_Target: {fileID: 7368427440011159141}
+        m_TargetAssemblyTypeName: NeedsVsWants.MenuSystem.Phone, Assembly-CSharp
+        m_MethodName: SetCurrentMenuGroup
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 765027056769567286}
+          m_ObjectArgumentAssemblyTypeName: NeedsVsWants.MenuSystem.MenuGroup, Assembly-CSharp
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
+      - m_Target: {fileID: 765027056769567286}
+        m_TargetAssemblyTypeName: NeedsVsWants.MenuSystem.MenuGroup, Assembly-CSharp
+        m_MethodName: EnableGroup
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
 --- !u!1 &21975209
 GameObject:
   m_ObjectHideFlags: 0
@@ -1761,6 +1827,24 @@ MonoBehaviour:
   _TransitionSpeed: 10
   _BoxImage: {fileID: 881512685}
   _ScaleSpeed: 20
+  _OnEnable:
+    m_PersistentCalls:
+      m_Calls: []
+  _OnDisable:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1756309177}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
 --- !u!1 &66432040
 GameObject:
   m_ObjectHideFlags: 0
@@ -1855,18 +1939,6 @@ MonoBehaviour:
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 701866310}
-        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: SetActive
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 1
         m_CallState: 2
 --- !u!114 &66432043
 MonoBehaviour:
@@ -2580,18 +2652,6 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 765027057629649970}
-        m_TargetAssemblyTypeName: NeedsVsWants.MenuSystem.MenuGroup, Assembly-CSharp
-        m_MethodName: Return
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
       - m_Target: {fileID: 1387531324}
         m_TargetAssemblyTypeName: NeedsVsWants.MenuSystem.PopUp, Assembly-CSharp
         m_MethodName: DisablePopUp
@@ -2603,54 +2663,6 @@ MonoBehaviour:
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 7368427440011159141}
-        m_TargetAssemblyTypeName: NeedsVsWants.MenuSystem.Phone, Assembly-CSharp
-        m_MethodName: ReturnHomeScreen
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 7368427440011159141}
-        m_TargetAssemblyTypeName: NeedsVsWants.MenuSystem.Phone, Assembly-CSharp
-        m_MethodName: SetCurrentMenuGroup
-        m_Mode: 2
-        m_Arguments:
-          m_ObjectArgument: {fileID: 765027058620501399}
-          m_ObjectArgumentAssemblyTypeName: NeedsVsWants.MenuSystem.MenuGroup, Assembly-CSharp
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 765027058620501399}
-        m_TargetAssemblyTypeName: NeedsVsWants.MenuSystem.MenuGroup, Assembly-CSharp
-        m_MethodName: EnableGroup
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 501277962}
-        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: SetActive
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 1
         m_CallState: 2
 --- !u!114 &86705177
 MonoBehaviour:
@@ -3658,54 +3670,6 @@ MonoBehaviour:
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 1091354768}
-        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: SetActive
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 1
-        m_CallState: 2
-      - m_Target: {fileID: 7368427440011159141}
-        m_TargetAssemblyTypeName: NeedsVsWants.MenuSystem.Phone, Assembly-CSharp
-        m_MethodName: ReturnHomeScreen
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 1
-        m_CallState: 2
-      - m_Target: {fileID: 7368427440011159141}
-        m_TargetAssemblyTypeName: NeedsVsWants.MenuSystem.Phone, Assembly-CSharp
-        m_MethodName: SetCurrentMenuGroup
-        m_Mode: 2
-        m_Arguments:
-          m_ObjectArgument: {fileID: 765027057091581200}
-          m_ObjectArgumentAssemblyTypeName: NeedsVsWants.MenuSystem.MenuGroup, Assembly-CSharp
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 1
-        m_CallState: 2
-      - m_Target: {fileID: 765027057091581200}
-        m_TargetAssemblyTypeName: NeedsVsWants.MenuSystem.MenuGroup, Assembly-CSharp
-        m_MethodName: EnableGroup
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 1
         m_CallState: 2
 --- !u!114 &135471531
 MonoBehaviour:
@@ -11831,6 +11795,106 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 455982792}
   m_CullTransparentMesh: 1
+--- !u!1 &460766799
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 460766803}
+  - component: {fileID: 460766802}
+  - component: {fileID: 460766801}
+  - component: {fileID: 460766800}
+  m_Layer: 0
+  m_Name: Manager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &460766800
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 460766799}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bc450e1265b091448993c5944ffb71bf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &460766801
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 460766799}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0542eb0a6a45eef478c24b373d790d09, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _ObjectPools:
+  - _Id: Bill Button
+    _Prefab: {fileID: 3813399525369671632, guid: f89b03f682c20564e870f8ad59bc0972, type: 3}
+    _Count: 5
+    _IsExpandable: 1
+  - _Id: Chat Button
+    _Prefab: {fileID: 4578923840160094314, guid: 935e7c4ba591c6d4fbb89a5308fe0dee, type: 3}
+    _Count: 5
+    _IsExpandable: 1
+  - _Id: Message Box
+    _Prefab: {fileID: 4197200547950468408, guid: 87a1237f98e494242842d856fa093f97, type: 3}
+    _Count: 10
+    _IsExpandable: 1
+  - _Id: Chat Choice Button
+    _Prefab: {fileID: 4639630346244581890, guid: 175ebb40ca0dc52488a9a08dce125fbf, type: 3}
+    _Count: 5
+    _IsExpandable: 1
+  - _Id: Chat Choices Holder
+    _Prefab: {fileID: 2128830600734119547, guid: cab6a3418c93f1444a48510a18bd9bed, type: 3}
+    _Count: 5
+    _IsExpandable: 1
+  - _Id: Item Button
+    _Prefab: {fileID: 5970592576559565452, guid: a68aaedc2d3603f48aed13683a63110d, type: 3}
+    _Count: 10
+    _IsExpandable: 1
+  - _Id: Item Slot
+    _Prefab: {fileID: 7492460808822351514, guid: 2542d2d6697f87a4da67fa71ca500fc3, type: 3}
+    _Count: 5
+    _IsExpandable: 1
+--- !u!114 &460766802
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 460766799}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 71b7e1d0019f8cc4097409a3d374550e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _EndMenuBuildSceneIndex: 2
+--- !u!4 &460766803
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 460766799}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1709.4877, y: 752.4479, z: -37.24003}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 1158537156}
+  m_Father: {fileID: 0}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &469971239
 GameObject:
   m_ObjectHideFlags: 0
@@ -12647,6 +12711,36 @@ MonoBehaviour:
   _TransitionSpeed: 10
   _BoxImage: {fileID: 365715204}
   _ScaleSpeed: 20
+  _OnEnable:
+    m_PersistentCalls:
+      m_Calls: []
+  _OnDisable:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 3916058}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
+      - m_Target: {fileID: 765027058620501399}
+        m_TargetAssemblyTypeName: NeedsVsWants.MenuSystem.MenuGroup, Assembly-CSharp
+        m_MethodName: SwitchTo
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 109445772}
+          m_ObjectArgumentAssemblyTypeName: NeedsVsWants.MenuSystem.Menu, Assembly-CSharp
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
 --- !u!1 &512407768
 GameObject:
   m_ObjectHideFlags: 0
@@ -13012,30 +13106,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 3916058}
-        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: SetActive
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 1
-        m_CallState: 2
-      - m_Target: {fileID: 765027058620501399}
-        m_TargetAssemblyTypeName: NeedsVsWants.MenuSystem.MenuGroup, Assembly-CSharp
-        m_MethodName: SwitchTo
-        m_Mode: 2
-        m_Arguments:
-          m_ObjectArgument: {fileID: 109445772}
-          m_ObjectArgumentAssemblyTypeName: NeedsVsWants.MenuSystem.Menu, Assembly-CSharp
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 1
-        m_CallState: 2
 --- !u!114 &523298909
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13354,18 +13424,6 @@ MonoBehaviour:
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 1756309177}
-        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: SetActive
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 1
         m_CallState: 2
 --- !u!114 &537714166
 MonoBehaviour:
@@ -13711,18 +13769,6 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 765027057629649970}
-        m_TargetAssemblyTypeName: NeedsVsWants.MenuSystem.MenuGroup, Assembly-CSharp
-        m_MethodName: SwitchTo
-        m_Mode: 2
-        m_Arguments:
-          m_ObjectArgument: {fileID: 1246972861}
-          m_ObjectArgumentAssemblyTypeName: NeedsVsWants.MenuSystem.Menu, Assembly-CSharp
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
       - m_Target: {fileID: 624497929}
         m_TargetAssemblyTypeName: NeedsVsWants.MenuSystem.PopUp, Assembly-CSharp
         m_MethodName: DisablePopUp
@@ -13734,18 +13780,6 @@ MonoBehaviour:
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 1387531322}
-        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: SetActive
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 1
         m_CallState: 2
 --- !u!114 &549048934
 MonoBehaviour:
@@ -13879,18 +13913,6 @@ MonoBehaviour:
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 60585876}
-        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: SetActive
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 1
         m_CallState: 2
 --- !u!114 &559940879
 MonoBehaviour:
@@ -14804,6 +14826,36 @@ MonoBehaviour:
   _TransitionSpeed: 10
   _BoxImage: {fileID: 702912510}
   _ScaleSpeed: 20
+  _OnEnable:
+    m_PersistentCalls:
+      m_Calls: []
+  _OnDisable:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 765027057629649970}
+        m_TargetAssemblyTypeName: NeedsVsWants.MenuSystem.MenuGroup, Assembly-CSharp
+        m_MethodName: SwitchTo
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 1246972861}
+          m_ObjectArgumentAssemblyTypeName: NeedsVsWants.MenuSystem.Menu, Assembly-CSharp
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1387531322}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
 --- !u!1 &634046027
 GameObject:
   m_ObjectHideFlags: 0
@@ -15242,42 +15294,6 @@ MonoBehaviour:
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 1374237605}
-        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: SetActive
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 1
-        m_CallState: 2
-      - m_Target: {fileID: 765027057091581200}
-        m_TargetAssemblyTypeName: NeedsVsWants.MenuSystem.MenuGroup, Assembly-CSharp
-        m_MethodName: Return
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 1
-        m_CallState: 2
-      - m_Target: {fileID: 7368427440011159141}
-        m_TargetAssemblyTypeName: NeedsVsWants.MenuSystem.Phone, Assembly-CSharp
-        m_MethodName: ReturnHomeScreen
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 1
         m_CallState: 2
 --- !u!114 &648833139
 MonoBehaviour:
@@ -15913,6 +15929,24 @@ MonoBehaviour:
   _TransitionSpeed: 10
   _BoxImage: {fileID: 2010819004}
   _ScaleSpeed: 20
+  _OnEnable:
+    m_PersistentCalls:
+      m_Calls: []
+  _OnDisable:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1700942898}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
 --- !u!1 &672055637
 GameObject:
   m_ObjectHideFlags: 0
@@ -16800,6 +16834,48 @@ MonoBehaviour:
   _TransitionSpeed: 10
   _BoxImage: {fileID: 713430765}
   _ScaleSpeed: 20
+  _OnEnable:
+    m_PersistentCalls:
+      m_Calls: []
+  _OnDisable:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 7368427440011159141}
+        m_TargetAssemblyTypeName: NeedsVsWants.MenuSystem.PhoneMenu, Assembly-CSharp
+        m_MethodName: SetCurrentMenuGroup
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 765027057629649970}
+          m_ObjectArgumentAssemblyTypeName: NeedsVsWants.MenuSystem.MenuGroup, Assembly-CSharp
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 765027057629649970}
+        m_TargetAssemblyTypeName: NeedsVsWants.MenuSystem.MenuGroup, Assembly-CSharp
+        m_MethodName: EnableGroup
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 624497927}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
 --- !u!1 &702912508
 GameObject:
   m_ObjectHideFlags: 0
@@ -22204,30 +22280,6 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 7368427440011159141}
-        m_TargetAssemblyTypeName: NeedsVsWants.MenuSystem.PhoneMenu, Assembly-CSharp
-        m_MethodName: SetCurrentMenuGroup
-        m_Mode: 2
-        m_Arguments:
-          m_ObjectArgument: {fileID: 765027057629649970}
-          m_ObjectArgumentAssemblyTypeName: NeedsVsWants.MenuSystem.MenuGroup, Assembly-CSharp
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 765027057629649970}
-        m_TargetAssemblyTypeName: NeedsVsWants.MenuSystem.MenuGroup, Assembly-CSharp
-        m_MethodName: EnableGroup
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
       - m_Target: {fileID: 701866312}
         m_TargetAssemblyTypeName: NeedsVsWants.MenuSystem.PopUp, Assembly-CSharp
         m_MethodName: DisablePopUp
@@ -22239,18 +22291,6 @@ MonoBehaviour:
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 624497927}
-        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: SetActive
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 1
         m_CallState: 2
 --- !u!114 &953168816
 MonoBehaviour:
@@ -22290,101 +22330,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 953168813}
   m_CullTransparentMesh: 1
---- !u!1 &954644052
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 954644053}
-  - component: {fileID: 954644056}
-  - component: {fileID: 954644055}
-  - component: {fileID: 954644054}
-  m_Layer: 0
-  m_Name: Cube
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 0
---- !u!4 &954644053
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 954644052}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -1709.4877, y: -752.4479, z: 37.24003}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 1433609467}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!65 &954644054
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 954644052}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
---- !u!23 &954644055
-MeshRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 954644052}
-  m_Enabled: 1
-  m_CastShadows: 1
-  m_ReceiveShadows: 1
-  m_DynamicOccludee: 1
-  m_MotionVectors: 1
-  m_LightProbeUsage: 1
-  m_ReflectionProbeUsage: 1
-  m_RayTracingMode: 2
-  m_RayTraceProcedural: 0
-  m_RenderingLayerMask: 1
-  m_RendererPriority: 0
-  m_Materials:
-  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
-  m_StaticBatchInfo:
-    firstSubMesh: 0
-    subMeshCount: 0
-  m_StaticBatchRoot: {fileID: 0}
-  m_ProbeAnchor: {fileID: 0}
-  m_LightProbeVolumeOverride: {fileID: 0}
-  m_ScaleInLightmap: 1
-  m_ReceiveGI: 1
-  m_PreserveUVs: 0
-  m_IgnoreNormalsForChartDetection: 0
-  m_ImportantGI: 0
-  m_StitchLightmapSeams: 1
-  m_SelectedEditorRenderState: 3
-  m_MinimumChartSize: 4
-  m_AutoUVMaxDistance: 0.5
-  m_AutoUVMaxAngle: 89
-  m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
-  m_AdditionalVertexStreams: {fileID: 0}
---- !u!33 &954644056
-MeshFilter:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 954644052}
-  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!1 &960456452
 GameObject:
   m_ObjectHideFlags: 0
@@ -23481,18 +23426,6 @@ MonoBehaviour:
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 2065057475}
-        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: SetActive
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 1
         m_CallState: 2
 --- !u!114 &996354350
 MonoBehaviour:
@@ -25266,6 +25199,24 @@ MonoBehaviour:
   _TransitionSpeed: 10
   _BoxImage: {fileID: 1657271583}
   _ScaleSpeed: 20
+  _OnEnable:
+    m_PersistentCalls:
+      m_Calls: []
+  _OnDisable:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 668988486}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
 --- !u!1 &1068514325
 GameObject:
   m_ObjectHideFlags: 0
@@ -25360,18 +25311,6 @@ MonoBehaviour:
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 1067424726}
-        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: SetActive
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 1
         m_CallState: 2
 --- !u!114 &1068514328
 MonoBehaviour:
@@ -25677,6 +25616,36 @@ MonoBehaviour:
   _TransitionSpeed: 10
   _BoxImage: {fileID: 863664914}
   _ScaleSpeed: 20
+  _OnEnable:
+    m_PersistentCalls:
+      m_Calls: []
+  _OnDisable:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1442236380}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
+      - m_Target: {fileID: 765027057091581200}
+        m_TargetAssemblyTypeName: NeedsVsWants.MenuSystem.MenuGroup, Assembly-CSharp
+        m_MethodName: SwitchTo
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 1940303265}
+          m_ObjectArgumentAssemblyTypeName: NeedsVsWants.MenuSystem.Menu, Assembly-CSharp
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
 --- !u!1 &1094215011
 GameObject:
   m_ObjectHideFlags: 0
@@ -26832,6 +26801,101 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1142884810}
   m_CullTransparentMesh: 1
+--- !u!1 &1158537155
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1158537156}
+  - component: {fileID: 1158537159}
+  - component: {fileID: 1158537158}
+  - component: {fileID: 1158537157}
+  m_Layer: 0
+  m_Name: Cube
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &1158537156
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1158537155}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -1709.4877, y: -752.4479, z: 37.24003}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 460766803}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &1158537157
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1158537155}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!23 &1158537158
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1158537155}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
+--- !u!33 &1158537159
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1158537155}
+  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!1 &1159523261
 GameObject:
   m_ObjectHideFlags: 0
@@ -31225,6 +31289,60 @@ MonoBehaviour:
   _TransitionSpeed: 10
   _BoxImage: {fileID: 634046029}
   _ScaleSpeed: 20
+  _OnEnable:
+    m_PersistentCalls:
+      m_Calls: []
+  _OnDisable:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1091354768}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
+      - m_Target: {fileID: 7368427440011159141}
+        m_TargetAssemblyTypeName: NeedsVsWants.MenuSystem.Phone, Assembly-CSharp
+        m_MethodName: ReturnHomeScreen
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
+      - m_Target: {fileID: 7368427440011159141}
+        m_TargetAssemblyTypeName: NeedsVsWants.MenuSystem.Phone, Assembly-CSharp
+        m_MethodName: SetCurrentMenuGroup
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 765027057091581200}
+          m_ObjectArgumentAssemblyTypeName: NeedsVsWants.MenuSystem.MenuGroup, Assembly-CSharp
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
+      - m_Target: {fileID: 765027057091581200}
+        m_TargetAssemblyTypeName: NeedsVsWants.MenuSystem.MenuGroup, Assembly-CSharp
+        m_MethodName: EnableGroup
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
 --- !u!1 &1324327759
 GameObject:
   m_ObjectHideFlags: 0
@@ -32543,6 +32661,24 @@ MonoBehaviour:
   _TransitionSpeed: 10
   _BoxImage: {fileID: 580049411}
   _ScaleSpeed: 20
+  _OnEnable:
+    m_PersistentCalls:
+      m_Calls: []
+  _OnDisable:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1812318713690754353}
+        m_TargetAssemblyTypeName: NeedsVsWants.CalendarSystem.DayProgressor, Assembly-CSharp
+        m_MethodName: Unpause
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &1382926392
 GameObject:
   m_ObjectHideFlags: 0
@@ -32867,6 +33003,72 @@ MonoBehaviour:
   _TransitionSpeed: 10
   _BoxImage: {fileID: 1735140901}
   _ScaleSpeed: 20
+  _OnEnable:
+    m_PersistentCalls:
+      m_Calls: []
+  _OnDisable:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 765027057629649970}
+        m_TargetAssemblyTypeName: NeedsVsWants.MenuSystem.MenuGroup, Assembly-CSharp
+        m_MethodName: Return
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 7368427440011159141}
+        m_TargetAssemblyTypeName: NeedsVsWants.MenuSystem.Phone, Assembly-CSharp
+        m_MethodName: ReturnHomeScreen
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 7368427440011159141}
+        m_TargetAssemblyTypeName: NeedsVsWants.MenuSystem.Phone, Assembly-CSharp
+        m_MethodName: SetCurrentMenuGroup
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 765027058620501399}
+          m_ObjectArgumentAssemblyTypeName: NeedsVsWants.MenuSystem.MenuGroup, Assembly-CSharp
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 765027058620501399}
+        m_TargetAssemblyTypeName: NeedsVsWants.MenuSystem.MenuGroup, Assembly-CSharp
+        m_MethodName: EnableGroup
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 501277962}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
 --- !u!1 &1387961701
 GameObject:
   m_ObjectHideFlags: 0
@@ -33869,106 +34071,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1428989713}
   m_CullTransparentMesh: 1
---- !u!1 &1433609463
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1433609467}
-  - component: {fileID: 1433609466}
-  - component: {fileID: 1433609465}
-  - component: {fileID: 1433609464}
-  m_Layer: 0
-  m_Name: Manager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &1433609464
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1433609463}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bc450e1265b091448993c5944ffb71bf, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &1433609465
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1433609463}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0542eb0a6a45eef478c24b373d790d09, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _ObjectPools:
-  - _Id: Bill Button
-    _Prefab: {fileID: 3813399525369671632, guid: f89b03f682c20564e870f8ad59bc0972, type: 3}
-    _Count: 5
-    _IsExpandable: 1
-  - _Id: Chat Button
-    _Prefab: {fileID: 4578923840160094314, guid: 935e7c4ba591c6d4fbb89a5308fe0dee, type: 3}
-    _Count: 5
-    _IsExpandable: 1
-  - _Id: Message Box
-    _Prefab: {fileID: 4197200547950468408, guid: 87a1237f98e494242842d856fa093f97, type: 3}
-    _Count: 10
-    _IsExpandable: 1
-  - _Id: Chat Choice Button
-    _Prefab: {fileID: 4639630346244581890, guid: 175ebb40ca0dc52488a9a08dce125fbf, type: 3}
-    _Count: 5
-    _IsExpandable: 1
-  - _Id: Chat Choices Holder
-    _Prefab: {fileID: 2128830600734119547, guid: cab6a3418c93f1444a48510a18bd9bed, type: 3}
-    _Count: 5
-    _IsExpandable: 1
-  - _Id: Item Button
-    _Prefab: {fileID: 5970592576559565452, guid: a68aaedc2d3603f48aed13683a63110d, type: 3}
-    _Count: 10
-    _IsExpandable: 1
-  - _Id: Item Slot
-    _Prefab: {fileID: 7492460808822351514, guid: 2542d2d6697f87a4da67fa71ca500fc3, type: 3}
-    _Count: 5
-    _IsExpandable: 1
---- !u!114 &1433609466
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1433609463}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 71b7e1d0019f8cc4097409a3d374550e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _EndMenuBuildSceneIndex: 2
---- !u!4 &1433609467
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1433609463}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1709.4877, y: 752.4479, z: -37.24003}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children:
-  - {fileID: 954644053}
-  m_Father: {fileID: 0}
-  m_RootOrder: 4
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1435254987
 GameObject:
   m_ObjectHideFlags: 0
@@ -34371,6 +34473,48 @@ MonoBehaviour:
   _TransitionSpeed: 10
   _BoxImage: {fileID: 74959926}
   _ScaleSpeed: 20
+  _OnEnable:
+    m_PersistentCalls:
+      m_Calls: []
+  _OnDisable:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1374237605}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
+      - m_Target: {fileID: 765027057091581200}
+        m_TargetAssemblyTypeName: NeedsVsWants.MenuSystem.MenuGroup, Assembly-CSharp
+        m_MethodName: Return
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
+      - m_Target: {fileID: 7368427440011159141}
+        m_TargetAssemblyTypeName: NeedsVsWants.MenuSystem.Phone, Assembly-CSharp
+        m_MethodName: ReturnHomeScreen
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
 --- !u!1 &1445192869
 GameObject:
   m_ObjectHideFlags: 0
@@ -34704,18 +34848,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 1812318713690754353}
-        m_TargetAssemblyTypeName: NeedsVsWants.CalendarSystem.DayProgressor, Assembly-CSharp
-        m_MethodName: Unpause
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
 --- !u!114 &1455854150
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -34923,18 +35055,6 @@ MonoBehaviour:
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 668988486}
-        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: SetActive
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 1
         m_CallState: 2
 --- !u!114 &1474204499
 MonoBehaviour:
@@ -35277,66 +35397,6 @@ MonoBehaviour:
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 1324136772}
-        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: SetActive
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 1
-        m_CallState: 2
-      - m_Target: {fileID: 765027058620501399}
-        m_TargetAssemblyTypeName: NeedsVsWants.MenuSystem.MenuGroup, Assembly-CSharp
-        m_MethodName: Return
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 1
-        m_CallState: 2
-      - m_Target: {fileID: 7368427440011159141}
-        m_TargetAssemblyTypeName: NeedsVsWants.MenuSystem.Phone, Assembly-CSharp
-        m_MethodName: ReturnHomeScreen
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 1
-        m_CallState: 2
-      - m_Target: {fileID: 7368427440011159141}
-        m_TargetAssemblyTypeName: NeedsVsWants.MenuSystem.Phone, Assembly-CSharp
-        m_MethodName: SetCurrentMenuGroup
-        m_Mode: 2
-        m_Arguments:
-          m_ObjectArgument: {fileID: 765027056769567286}
-          m_ObjectArgumentAssemblyTypeName: NeedsVsWants.MenuSystem.MenuGroup, Assembly-CSharp
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 1
-        m_CallState: 2
-      - m_Target: {fileID: 765027056769567286}
-        m_TargetAssemblyTypeName: NeedsVsWants.MenuSystem.MenuGroup, Assembly-CSharp
-        m_MethodName: EnableGroup
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 1
         m_CallState: 2
 --- !u!114 &1476593999
 MonoBehaviour:
@@ -39362,18 +39422,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 1700942898}
-        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: SetActive
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 1
-        m_CallState: 2
 --- !u!114 &1643601114
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -41179,30 +41227,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 1442236380}
-        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: SetActive
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 1
-        m_CallState: 2
-      - m_Target: {fileID: 765027057091581200}
-        m_TargetAssemblyTypeName: NeedsVsWants.MenuSystem.MenuGroup, Assembly-CSharp
-        m_MethodName: SwitchTo
-        m_Mode: 2
-        m_Arguments:
-          m_ObjectArgument: {fileID: 1940303265}
-          m_ObjectArgumentAssemblyTypeName: NeedsVsWants.MenuSystem.Menu, Assembly-CSharp
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 1
-        m_CallState: 2
 --- !u!114 &1693763061
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -41298,6 +41322,24 @@ MonoBehaviour:
   _TransitionSpeed: 10
   _BoxImage: {fileID: 1170366989}
   _ScaleSpeed: 20
+  _OnEnable:
+    m_PersistentCalls:
+      m_Calls: []
+  _OnDisable:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 701866310}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
 --- !u!1 &1701777984
 GameObject:
   m_ObjectHideFlags: 0
@@ -42513,6 +42555,24 @@ MonoBehaviour:
   _TransitionSpeed: 10
   _BoxImage: {fileID: 1533821429}
   _ScaleSpeed: 20
+  _OnEnable:
+    m_PersistentCalls:
+      m_Calls: []
+  _OnDisable:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 2065057475}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
 --- !u!1 &1759377007
 GameObject:
   m_ObjectHideFlags: 0
@@ -43625,6 +43685,24 @@ MonoBehaviour:
   _TransitionSpeed: 10
   _BoxImage: {fileID: 1745010805}
   _ScaleSpeed: 20
+  _OnEnable:
+    m_PersistentCalls:
+      m_Calls: []
+  _OnDisable:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 60585876}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
 --- !u!1 &1827151534
 GameObject:
   m_ObjectHideFlags: 0
@@ -50367,6 +50445,24 @@ MonoBehaviour:
   _TransitionSpeed: 10
   _BoxImage: {fileID: 960456454}
   _ScaleSpeed: 20
+  _OnEnable:
+    m_PersistentCalls:
+      m_Calls: []
+  _OnDisable:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1067424726}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
 --- !u!1 &2068417108
 GameObject:
   m_ObjectHideFlags: 0
@@ -65079,8 +65175,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "On your upper left, you can see your current savings account. \nYou\u2019ll
-    be able to see the status of your earnings here."
+  m_text: g app, or eating healthy food.
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 784d295283c1238408c0d266ef3940a4, type: 2}
   m_sharedMaterial: {fileID: 8833138599292801196, guid: 784d295283c1238408c0d266ef3940a4, type: 2}
@@ -65184,7 +65279,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 422.355, y: 0}
+  m_AnchoredPosition: {x: 210.13, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &2573461483325967360
@@ -65244,6 +65339,36 @@ MonoBehaviour:
   _TransitionSpeed: 10
   _BoxImage: {fileID: 2573461483555827857}
   _ScaleSpeed: 20
+  _OnEnable:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1812318713690754353}
+        m_TargetAssemblyTypeName: NeedsVsWants.CalendarSystem.DayProgressor, Assembly-CSharp
+        m_MethodName: Pause
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  _OnDisable:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1825871768}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
 --- !u!224 &2573461483555827856
 RectTransform:
   m_ObjectHideFlags: 0
@@ -65591,30 +65716,6 @@ MonoBehaviour:
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 1825871768}
-        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: SetActive
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 1
-        m_CallState: 2
-      - m_Target: {fileID: 1812318713690754353}
-        m_TargetAssemblyTypeName: NeedsVsWants.CalendarSystem.DayProgressor, Assembly-CSharp
-        m_MethodName: Pause
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 1
         m_CallState: 2
 --- !u!114 &2573461484659627267
 MonoBehaviour:
