@@ -8,7 +8,7 @@ ModelImporter:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: ROOM
-    second: {fileID: 2100000, guid: e8b542769d5cb884a86d6731e07b71ed, type: 2}
+    second: {fileID: 2100000, guid: d657471f5d6a7864fa4628f31d5ebf72, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0

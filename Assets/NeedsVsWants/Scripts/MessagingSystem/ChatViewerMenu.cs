@@ -75,6 +75,13 @@ namespace NeedsVsWants.MessagingSystem
 
             if(_CurrentConversation)
                 DisplayToCurrentMessageOrChoice();
+                
+            else
+            {
+                chat.hasRead = true;
+
+                Phone.instance.EnablePlayerControl();
+            }
         }
 
         void OnClickScreen()
@@ -99,8 +106,17 @@ namespace NeedsVsWants.MessagingSystem
                     _IsShowingChoice = true;
                 }
 
-                else
+                else // If At the end of the conversation
+                {
+                    if(!_CurrentConversation)
+                    {
+                        chat.hasRead = true;
+
+                        Phone.instance.EnablePlayerControl();
+                    }
+
                     chat.currentMessageIndex--;
+                }
             }
 
             else
@@ -190,9 +206,6 @@ namespace NeedsVsWants.MessagingSystem
             
             foreach(MessageBox messageBox in messageBoxes)
                 messageBox.transform.SetParent(_ContentTransform, false);
-
-            // foreach(Message message in conversation.messages)
-            //     AddMessageBox(message, conversation.characters[message.characterIndex]);
         }
 
         async void DisplayMessages(Conversation conversation, int currentIndex)
@@ -217,11 +230,6 @@ namespace NeedsVsWants.MessagingSystem
             
             foreach(MessageBox messageBox in messageBoxes)
                 messageBox.transform.SetParent(_ContentTransform, false);
-
-            // Message[] messages = conversation.messages;
-
-            // for(int i = 0; i <= currentIndex; i++)
-            //     AddMessageBox(messages[i], conversation.characters[messages[i].characterIndex]);
         }
 
         void FillChat()
@@ -265,6 +273,9 @@ namespace NeedsVsWants.MessagingSystem
             _ChatTitle.text = chat.title;
 
             FillChat();
+
+            if(!chat.hasRead)
+                Phone.instance.DisablePlayerControl();
         }
 
         protected override void OnReturn()

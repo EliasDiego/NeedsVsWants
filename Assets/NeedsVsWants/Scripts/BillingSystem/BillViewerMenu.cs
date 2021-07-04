@@ -43,6 +43,18 @@ namespace NeedsVsWants.BillingSystem
             }
         }
 
+        void Awake() 
+        {
+            PlayerStatManager.instance.onDateChange += dateTime => 
+            {
+                if(isActive)
+                {
+                    if(billEvent.IsWithinDate(dateTime))
+                        UpdateAmountDisplay();
+                }
+            };
+        }
+
         void OnAfterProcessing(double inputAmount)
         {
             _BillEvent.PayBill(inputAmount);
@@ -102,6 +114,13 @@ namespace NeedsVsWants.BillingSystem
 
             _CheckoutPopUp.hasSufficientFunds = PlayerStatManager.instance.currentMoney >= inputAmount;
             _CheckoutPopUp.onAfterProcessing = () => OnAfterProcessing(inputAmount);
+            _CheckoutPopUp.EnablePopUp();
+        }
+
+        public void PayAllBill()
+        {
+            _CheckoutPopUp.hasSufficientFunds = PlayerStatManager.instance.currentMoney >= billEvent.currentBalance;
+            _CheckoutPopUp.onAfterProcessing = () => OnAfterProcessing(billEvent.currentBalance);
             _CheckoutPopUp.EnablePopUp();
         }
     }

@@ -13,7 +13,6 @@ namespace NeedsVsWants.MessagingSystem
     public class MessageEvent : CalendarEvent
     {
         public Conversation conversation;
-        public ChatChoice[] chatChoices;
 
         public Date date;
         
