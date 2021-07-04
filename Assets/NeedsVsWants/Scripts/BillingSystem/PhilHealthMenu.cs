@@ -4,16 +4,17 @@ using System.Collections.Generic;
 
 using UnityEngine;
 
-using NeedsVsWants.CalendarSystem;
+using NeedsVsWants.MoneySystem;
 
 namespace NeedsVsWants.BillingSystem
 {
-    [CreateAssetMenu(menuName = "NeedsVsWants/Bills/PhilHealth")]
-    public class PhilHealth : BillEvent
+    public class PhilHealthMenu : BillMenu
     {
         [SerializeField]
         IncomeEvent _JobIncome;
         
+        protected override string billEventName => "PhilHealth";
+
         public override bool IsWithinDate(DateTime dateTime)
         {
             return DateTime.DaysInMonth(dateTime.Year, dateTime.Month) == dateTime.Day;
@@ -30,6 +31,16 @@ namespace NeedsVsWants.BillingSystem
                 bill = _JobIncome.incomeRate <= 10000 ? 350 : 2450;
                 
             return bill;
+        }
+
+        protected override void OnReturn()
+        {
+            
+        }
+
+        protected override void OnSwitchFrom()
+        {
+            
         }
     }
 }

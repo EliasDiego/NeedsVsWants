@@ -1,12 +1,13 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 
 using UnityEngine;
 
 using NeedsVsWants.Player;
-using System;
+using NeedsVsWants.CalendarSystem;
 
-namespace NeedsVsWants.CalendarSystem
+namespace NeedsVsWants.MoneySystem
 {
     [CreateAssetMenu(menuName = "NeedsVsWants/Calendar Events/Income Event")]
     public class IncomeEvent : CalendarEvent

@@ -5,11 +5,12 @@ using UnityEngine;
 
 namespace NeedsVsWants.BillingSystem
 {
-    [CreateAssetMenu(menuName = "NeedsVsWants/Bills/Rent")]
-    public class Rent : BillEvent
+    public class RentMenu : BillMenu
     {
         [SerializeField]
         double _Amount;
+        
+        protected override string billEventName => "Rent";
 
         public override double CalculateBill(DateTime dateTime)
         {
@@ -19,6 +20,16 @@ namespace NeedsVsWants.BillingSystem
         public override bool IsWithinDate(DateTime dateTime)
         {
             return DateTime.DaysInMonth(dateTime.Year, dateTime.Month) == dateTime.Day;
+        }
+
+        protected override void OnReturn()
+        {
+            
+        }
+
+        protected override void OnSwitchFrom()
+        {
+            
         }
     }
 }

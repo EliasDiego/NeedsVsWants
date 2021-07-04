@@ -4,21 +4,22 @@ using System.Collections.Generic;
 
 using UnityEngine;
 
-using NeedsVsWants.CalendarSystem;
+using NeedsVsWants.MoneySystem;
 
 namespace NeedsVsWants.BillingSystem
 {
-    [CreateAssetMenu(menuName = "NeedsVsWants/Bills/Income Tax")]
-    public class IncomeTax : BillEvent
+    public class IncomeTaxMenu : BillMenu
     {
         [SerializeField]
         IncomeEvent _JobIncome;
         [SerializeField]
-        SSS _SSS;
+        SSSMenu _SSSMenu;
         [SerializeField]
-        PhilHealth _PhilHealth;
+        PhilHealthMenu _PhilHealthMenu;
         [SerializeField]
-        Pagibig _Pagibig;
+        PagibigFundMenu _PagibigFundMenu;
+
+        protected override string billEventName => "Income Tax";
 
         double TrainTaxRate(double income)
         {
@@ -52,10 +53,20 @@ namespace NeedsVsWants.BillingSystem
 
         public override double CalculateBill(DateTime dateTime)
         {
-            double deductions = _SSS.CalculateBill(dateTime) + _PhilHealth.CalculateBill(dateTime) + _Pagibig.CalculateBill(dateTime);
+            double deductions = _SSSMenu.CalculateBill(dateTime) + _PhilHealthMenu.CalculateBill(dateTime) + _PagibigFundMenu.CalculateBill(dateTime);
             double annualTaxableIncome = (_JobIncome.incomeRate * 12) + _JobIncome.GetThirteenthMonthPay() - ((deductions * 12) + _JobIncome.GetThirteenthMonthPay());
 
             return TrainTaxRate(annualTaxableIncome) / 12;
+        }
+
+        protected override void OnReturn()
+        {
+            
+        }
+
+        protected override void OnSwitchFrom()
+        {
+            
         }
     }
 }
