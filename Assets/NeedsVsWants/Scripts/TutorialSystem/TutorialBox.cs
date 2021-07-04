@@ -49,8 +49,6 @@ namespace NeedsVsWants.TutorialSystem
             _BoxScaleAnimation = StartCoroutine(AnimateScale(_BoxImage.rectTransform, Vector3.one, _ScaleSpeed, null));
 
             transform.SetActiveChildren(true);
-
-            TutorialManager.instance.dayProgressor.Pause();
         }
 
         protected override void onDisablePopUp()
@@ -59,8 +57,6 @@ namespace NeedsVsWants.TutorialSystem
                 StopCoroutine(_BoxScaleAnimation);
                 
             _BoxScaleAnimation = StartCoroutine(AnimateScale(_BoxImage.rectTransform, Vector3.zero, _ScaleSpeed, () => transform.SetActiveChildren(false)));
-
-            TutorialManager.instance.dayProgressor.Unpause();
         }
     }
 }
