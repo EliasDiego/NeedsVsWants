@@ -71,6 +71,8 @@ namespace NeedsVsWants.MessagingSystem
                 PlayerStatManager.instance.currentHappinessWelfare = chatChoice.welfareOnChoice.GetHealth(PlayerStatManager.instance.currentHappinessWelfare);
                 PlayerStatManager.instance.currentHungerWelfare = chatChoice.welfareOnChoice.GetHealth(PlayerStatManager.instance.currentHungerWelfare);
                 PlayerStatManager.instance.currentSocialWelfare = chatChoice.welfareOnChoice.GetHealth(PlayerStatManager.instance.currentSocialWelfare);
+
+                chatChoice.onChoiceEvent?.Invoke();
             }
 
             if(_CurrentConversation)
