@@ -589,14 +589,6 @@ MonoBehaviour:
   _EnabledColor: {r: 0, g: 0, b: 0, a: 0.48235294}
   _DisabledColor: {r: 0, g: 0, b: 0, a: 0}
   _TransitionSpeed: 20
-  _DisableButtons:
-  - {fileID: 1812318714963156238}
-  - {fileID: 1812318713636746114}
-  - {fileID: 1812318714427435592}
-  - {fileID: 765027056800187496}
-  - {fileID: 765027056961198437}
-  - {fileID: 765027058201045948}
-  _DayProgressor: {fileID: 1812318713690754353}
   _BoxImage: {fileID: 622715369}
   _ScaleSpeed: 50
   _Text: {fileID: 1565515941}
@@ -9432,14 +9424,6 @@ MonoBehaviour:
   _EnabledColor: {r: 0, g: 0, b: 0, a: 0.5019608}
   _DisabledColor: {r: 0, g: 0, b: 0, a: 0}
   _TransitionSpeed: 20
-  _DisableButtons:
-  - {fileID: 765027056800187496}
-  - {fileID: 765027056961198437}
-  - {fileID: 765027058201045948}
-  - {fileID: 1812318714963156238}
-  - {fileID: 1812318713636746114}
-  - {fileID: 1812318714427435592}
-  _DayProgressor: {fileID: 1812318713690754353}
 --- !u!1 &935468328
 GameObject:
   m_ObjectHideFlags: 0
@@ -43495,14 +43479,6 @@ MonoBehaviour:
   _EnabledColor: {r: 0, g: 0, b: 0, a: 0.48235294}
   _DisabledColor: {r: 0, g: 0, b: 0, a: 0}
   _TransitionSpeed: 20
-  _DisableButtons:
-  - {fileID: 1812318714963156238}
-  - {fileID: 1812318713636746114}
-  - {fileID: 1812318714427435592}
-  - {fileID: 765027056800187496}
-  - {fileID: 765027056961198437}
-  - {fileID: 765027058201045948}
-  _DayProgressor: {fileID: 1812318713690754353}
   _BoxImage: {fileID: 2836502307321063852}
   _ScaleSpeed: 50
   _Text: {fileID: 2836502305570859232}
@@ -43527,14 +43503,6 @@ MonoBehaviour:
   _EnabledColor: {r: 0, g: 0, b: 0, a: 0.48235294}
   _DisabledColor: {r: 0, g: 0, b: 0, a: 0}
   _TransitionSpeed: 20
-  _DisableButtons:
-  - {fileID: 1812318714963156238}
-  - {fileID: 1812318713636746114}
-  - {fileID: 1812318714427435592}
-  - {fileID: 765027056800187496}
-  - {fileID: 765027056961198437}
-  - {fileID: 765027058201045948}
-  _DayProgressor: {fileID: 1812318713690754353}
   _BoxImage: {fileID: 2836502307568743841}
   _ScaleSpeed: 50
   _Text: {fileID: 2836502305558754541}
@@ -51923,10 +51891,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 78cc827f40bc9204280139ee1377e4b9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _ActiveOnStart: 0
   _Point: {fileID: 3392949735992209306, guid: 4591e5010692a274d985f6ef67912f14, type: 3}
   _CameraZoom: {fileID: -2796168163865836367, guid: 4591e5010692a274d985f6ef67912f14, type: 3}
   _HomeScreenMenu: {fileID: 765027058270328126}
+  _DisableButtons:
+  - {fileID: 765027056800187496}
+  - {fileID: 765027056961198437}
+  - {fileID: 765027058201045948}
+  - {fileID: 1812318714963156238}
+  - {fileID: 1812318713636746114}
+  - {fileID: 1812318714427435592}
+  _DayProgressor: {fileID: 1812318713690754353}
 --- !u!114 &7368427440011159193
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -51984,7 +51959,7 @@ GameObject:
   - component: {fileID: 7368427440011159141}
   - component: {fileID: 7368427440011159140}
   m_Layer: 5
-  m_Name: PhoneMenu
+  m_Name: PhoneUI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
