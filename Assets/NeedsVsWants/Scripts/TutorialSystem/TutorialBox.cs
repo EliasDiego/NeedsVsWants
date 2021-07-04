@@ -58,12 +58,9 @@ namespace NeedsVsWants.TutorialSystem
             if(_BoxScaleAnimation != null)
                 StopCoroutine(_BoxScaleAnimation);
                 
-            _BoxScaleAnimation = StartCoroutine(AnimateScale(_BoxImage.rectTransform, Vector3.zero, _ScaleSpeed, () => 
-            {
-                transform.SetActiveChildren(false);
-                
-                TutorialManager.instance.dayProgressor.Unpause();
-            }));
+            _BoxScaleAnimation = StartCoroutine(AnimateScale(_BoxImage.rectTransform, Vector3.zero, _ScaleSpeed, () => transform.SetActiveChildren(false)));
+
+            TutorialManager.instance.dayProgressor.Unpause();
         }
     }
 }
