@@ -15,7 +15,7 @@ MonoBehaviour:
   _SaleDate:
     year: 0
     month: 7
-    day: 0
+    day: 7
   _SaleDays: 3
   _IsYearSpecific: 0
   _DiscountItems:
