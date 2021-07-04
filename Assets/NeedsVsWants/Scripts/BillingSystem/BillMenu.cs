@@ -1,4 +1,4 @@
-using System.Collections;
+using System;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
 
@@ -12,67 +12,64 @@ using TMPro;
 
 namespace NeedsVsWants.BillingSystem
 {
-    public class BillViewerMenu : Menu
+    public abstract class BillMenu : Menu
     {
-        [SerializeField]
-        TMP_Text _BillNameText;
         [SerializeField]
         TMP_Text _BillBalanceText;
         [SerializeField]
         TMP_InputField _AmountInputField;
         [SerializeField]
         CheckoutPopUp _CheckoutPopUp;
-
-        BillEvent _BillEvent;
+        [SerializeField]
+        Indicator _Indicator;
 
         double _BillBalanceDisplay = 0;
 
-        public BillEvent billEvent 
-        { 
-            get => _BillEvent; 
-            
-            set
-            {
-                _BillEvent = value;
-                
-                _BillNameText.text = value.name;
+        double _CurrentBalance = 0;
 
-                _BillBalanceDisplay = value.currentBalance;
-
-                UpdateAmountDisplay();
-            }
-        }
+        protected abstract string billEventName { get; }
 
         void Awake() 
         {
             PlayerStatManager.instance.onDateChange += dateTime => 
             {
-                if(isActive)
+                if(IsWithinDate(dateTime))
                 {
-                    if(billEvent.IsWithinDate(dateTime))
+                    _CurrentBalance += CalculateBill(dateTime);
+
+                    if(isActive)
                         UpdateAmountDisplay();
+
+                    else
+                        _Indicator.gameObject.SetActive(true);
                 }
             };
+
+            BillEvent billEvent = BillEvent.CreateInstance<BillEvent>();
+
+            billEvent.name = billEventName;
+            billEvent.onIsWithinDate += IsWithinDate;
+
+            PlayerStatManager.instance.AddCalendarEvent(billEvent);
         }
 
         void OnAfterProcessing(double inputAmount)
         {
-            _BillEvent.PayBill(inputAmount);
+            UpdateAmountDisplay();
             
-            if(_BillBalanceDisplay != _BillEvent.currentBalance)
-                UpdateAmountDisplay();
-
             PlayerStatManager.instance.currentMoney -= inputAmount;
+
+            _CurrentBalance -= inputAmount;
             
-            GetComponentInParent<AppMenuGroup>().Return();
+            if(_CurrentBalance <= 0)
+                _Indicator.gameObject.SetActive(false);
+                
+            _AmountInputField.text = "";
         }
 
         void UpdateAmountDisplay()
         {
-            _BillBalanceText.transform.parent.gameObject.SetActive(_BillEvent.showAmount);
-            
-            if(_BillEvent.showAmount)
-                _BillBalanceText.text = StringFormat.ToPriceFormat(_BillEvent.currentBalance);
+            _BillBalanceText.text = StringFormat.ToPriceFormat(_CurrentBalance);
         }
         
         protected override void OnDisableMenu()
@@ -85,21 +82,13 @@ namespace NeedsVsWants.BillingSystem
             transform.SetActiveChildren(true);
 
             _AmountInputField.text = "";
-        }
 
-        protected override void OnReturn()
-        {
-            
-        }
-
-        protected override void OnSwitchFrom()
-        {
-            
+            UpdateAmountDisplay();
         }
 
         public void OnAmountValueChange()
         {
-            if(_BillBalanceDisplay != _BillEvent.currentBalance)
+            if(_BillBalanceDisplay != _CurrentBalance)
                 UpdateAmountDisplay();
 
             _AmountInputField.text = Regex.Replace(_AmountInputField.text, @"[^0-9.]", "");
@@ -112,6 +101,9 @@ namespace NeedsVsWants.BillingSystem
 
             double inputAmount = double.Parse(_AmountInputField.text);
 
+            if(_CurrentBalance <= 0 || inputAmount <= 0)
+                return;
+
             _CheckoutPopUp.hasSufficientFunds = PlayerStatManager.instance.currentMoney >= inputAmount;
             _CheckoutPopUp.onAfterProcessing = () => OnAfterProcessing(inputAmount);
             _CheckoutPopUp.EnablePopUp();
@@ -119,9 +111,16 @@ namespace NeedsVsWants.BillingSystem
 
         public void PayAllBill()
         {
-            _CheckoutPopUp.hasSufficientFunds = PlayerStatManager.instance.currentMoney >= billEvent.currentBalance;
-            _CheckoutPopUp.onAfterProcessing = () => OnAfterProcessing(billEvent.currentBalance);
+            if(_CurrentBalance <= 0)
+                return;
+
+            _CheckoutPopUp.hasSufficientFunds = PlayerStatManager.instance.currentMoney >= _CurrentBalance;
+            _CheckoutPopUp.onAfterProcessing = () => OnAfterProcessing(_CurrentBalance);
             _CheckoutPopUp.EnablePopUp();
         }
+        
+        public abstract bool IsWithinDate(DateTime dateTime);
+    
+        public abstract double CalculateBill(DateTime dateTime);
     }
 }

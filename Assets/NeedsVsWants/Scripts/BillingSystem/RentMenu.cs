@@ -5,20 +5,31 @@ using UnityEngine;
 
 namespace NeedsVsWants.BillingSystem
 {
-    [CreateAssetMenu(menuName = "NeedsVsWants/Bills/Pagibig")]
-    public class Pagibig : BillEvent
+    public class RentMenu : BillMenu
     {
         [SerializeField]
         double _Amount;
-
-        public override bool IsWithinDate(DateTime dateTime)
-        {    
-            return DateTime.DaysInMonth(dateTime.Year, dateTime.Month) == dateTime.Day;
-        }
+        
+        protected override string billEventName => "Rent";
 
         public override double CalculateBill(DateTime dateTime)
         {
             return _Amount;
+        }
+
+        public override bool IsWithinDate(DateTime dateTime)
+        {
+            return DateTime.DaysInMonth(dateTime.Year, dateTime.Month) == dateTime.Day;
+        }
+
+        protected override void OnReturn()
+        {
+            
+        }
+
+        protected override void OnSwitchFrom()
+        {
+            
         }
     }
 }
