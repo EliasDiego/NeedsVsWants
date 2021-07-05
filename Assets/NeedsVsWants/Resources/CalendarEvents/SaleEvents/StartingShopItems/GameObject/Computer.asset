@@ -13,14 +13,16 @@ MonoBehaviour:
   m_Name: Computer
   m_EditorClassIdentifier: 
   price: 49999
-  description: 
-  previewImage: {fileID: 0}
+  description: A state of the art gaming computer made by the Empire of Gamers, using
+    the finest and affordable computer parts fit for its customers. A true gaming
+    computer for true gamers.
+  previewImage: {fileID: -870290617569865803, guid: 7d0633392042e344baf0ea4bea21de7f, type: 3}
   onBuyWelfareEffects:
     _AmountType: 0
     _HealthValue: 0
-    _HappinessValue: 0
+    _HappinessValue: 100
     _HungerValue: 0
     _SocialValue: 0
   isDiscounted: 0
-  discountPrice: 0
+  discountPrice: 39999.2
   _GameObjectName: Computer

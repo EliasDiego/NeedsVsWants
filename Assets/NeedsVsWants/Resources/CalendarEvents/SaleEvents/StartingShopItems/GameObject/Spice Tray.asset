@@ -10,17 +10,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f5103c891e84aa7479b06f7aed931d67, type: 3}
-  m_Name: Cube
+  m_Name: Spice Tray
   m_EditorClassIdentifier: 
-  price: 10
-  description: asdfasdfasdf
-  previewImage: {fileID: 0}
+  price: 499
+  description: A spice tray endorsed by the famous chef, Rordon Gamsey.
+  previewImage: {fileID: 2126624827228127261, guid: 7d0633392042e344baf0ea4bea21de7f, type: 3}
   onBuyWelfareEffects:
     _AmountType: 0
     _HealthValue: 0
-    _HappinessValue: 0
+    _HappinessValue: 20
     _HungerValue: 0
     _SocialValue: 0
   isDiscounted: 0
-  discountPrice: 9
-  _GameObjectName: Cube
+  discountPrice: 349.3
+  _GameObjectName: Spice_Tray

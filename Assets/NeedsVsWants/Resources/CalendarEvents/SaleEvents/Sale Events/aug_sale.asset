@@ -59,3 +59,7 @@ MonoBehaviour:
     discount:
       _AmountType: 1
       _Value: -30
+  - item: {fileID: 11400000, guid: bde2d0800abaf2c4ba5397905235560d, type: 2}
+    discount:
+      _AmountType: 1
+      _Value: -30

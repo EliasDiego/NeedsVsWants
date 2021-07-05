@@ -10,16 +10,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 648d88b892b50fb43a071d8f92cb39d4, type: 3}
-  m_Name: 4
+  m_Name: Medicine
   m_EditorClassIdentifier: 
   price: 100
-  description: Blah
-  previewImage: {fileID: 0}
+  description: Always take this when you're not feeling well.
+  previewImage: {fileID: 21300000, guid: 292ee70a867912d469e8b5e15602b175, type: 3}
   onBuyWelfareEffects:
-    _AmountType: 0
-    _HealthValue: 0
+    _AmountType: 1
+    _HealthValue: 10
     _HappinessValue: 0
     _HungerValue: 0
     _SocialValue: 0
-  isDiscounted: 1
-  discountPrice: 69
+  isDiscounted: 0
+  discountPrice: 0

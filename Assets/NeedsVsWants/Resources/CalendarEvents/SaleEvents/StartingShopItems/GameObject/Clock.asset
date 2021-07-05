@@ -13,14 +13,14 @@ MonoBehaviour:
   m_Name: Clock
   m_EditorClassIdentifier: 
   price: 199
-  description: 
-  previewImage: {fileID: 0}
+  description: A clock for the modern age.
+  previewImage: {fileID: -2362825246133592709, guid: 7d0633392042e344baf0ea4bea21de7f, type: 3}
   onBuyWelfareEffects:
     _AmountType: 0
     _HealthValue: 0
-    _HappinessValue: 0
+    _HappinessValue: 20
     _HungerValue: 0
     _SocialValue: 0
   isDiscounted: 0
-  discountPrice: 0
+  discountPrice: 139.3
   _GameObjectName: Clock

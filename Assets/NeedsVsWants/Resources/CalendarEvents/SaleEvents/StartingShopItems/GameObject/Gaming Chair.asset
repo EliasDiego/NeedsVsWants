@@ -13,14 +13,15 @@ MonoBehaviour:
   m_Name: Gaming Chair
   m_EditorClassIdentifier: 
   price: 19999
-  description: 
-  previewImage: {fileID: 0}
+  description: A classic gaming chair made by the Empire of Gamers, using the best
+    quality of materials for its customers. A true gaming chair for true gamers.
+  previewImage: {fileID: 1121870158278628584, guid: 7d0633392042e344baf0ea4bea21de7f, type: 3}
   onBuyWelfareEffects:
     _AmountType: 0
     _HealthValue: 0
-    _HappinessValue: 0
+    _HappinessValue: 100
     _HungerValue: 0
     _SocialValue: 0
   isDiscounted: 0
-  discountPrice: 0
+  discountPrice: 14999.25
   _GameObjectName: Gaming Chair
