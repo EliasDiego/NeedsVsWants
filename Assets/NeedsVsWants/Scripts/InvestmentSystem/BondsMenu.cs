@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 
 using UnityEngine;
+using UnityEngine.UI;
 
 using TMPro;
 
@@ -13,7 +14,11 @@ namespace NeedsVsWants.InvestmentSystem
         [SerializeField]
         TMP_Text _GainLossText;
         [SerializeField]
+        Image _BoxCapitalImage;
+        [SerializeField]
         GainLossChance[] _GainLossChances;
+
+        protected override string investmentEventName => "Bonds";
 
         protected override void OnReturn()
         {
@@ -25,6 +30,48 @@ namespace NeedsVsWants.InvestmentSystem
             
         }
         
+        protected override void OnEnableMenu()
+        {
+            base.OnEnableMenu();
+
+            _BoxCapitalImage.color = HasReachedMinReq() ? Color.white : Color.grey;
+        }
+
+        protected override void OnCashIn(bool hasSufficientFunds)
+        {
+            if(hasSufficientFunds)
+            {
+                _BoxCapitalImage.color = HasReachedMinReq() ? Color.white : Color.grey;
+
+                
+                investmentEventShownInCalendar = true;   
+            }
+        }
+
+        protected override void OnCashOut(bool hasSufficientFunds)
+        {
+            if(hasSufficientFunds)
+            {
+                if(HasReachedMinReq())
+                    _BoxCapitalImage.color = Color.white;
+                
+                else
+                {
+                    _BoxCapitalImage.color = Color.grey;
+
+                    _GainLossText.text = "- %";
+                }
+                
+                if(capital <= 0)
+                    investmentEventShownInCalendar = false;   
+            }
+        }
+        
+        protected override bool HasReachedMinReq()
+        {
+            return capital > 0;
+        }
+
         protected override bool IsWithinRange(DateTime dateTime)
         {
             bool isNextMonth = false;

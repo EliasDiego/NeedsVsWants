@@ -156,43 +156,39 @@ namespace NeedsVsWants.Player
 
         void Start() 
         {
-            // onMoneyChange?.Invoke(currentMoney);
-
-            // onDateChange?.Invoke(currentDate);
-
-            // onHealthChange?.Invoke(currentHealthWelfare);
-            // onHappinessChange?.Invoke(currentHappinessWelfare);
-            // onHungerChange?.Invoke(currentHungerWelfare);
-            // onSocialChange?.Invoke(currentSocialWelfare);  
-
             onHealthChange += welfareValue =>
             {
                 if(welfareValue.value <= 0)
-                    OnZeroWelfare();
+                    LoadEndMenuScene();
             };
             
             onHungerChange += welfareValue =>
             {
                 if(welfareValue.value <= 0)
-                    OnZeroWelfare();
+                    LoadEndMenuScene();
             };
             
             onHappinessChange += welfareValue =>
             {
                 if(welfareValue.value <= 0)
-                    OnZeroWelfare();
+                    LoadEndMenuScene();
             };
             
             onSocialChange += welfareValue =>
             {
                 if(welfareValue.value <= 0)
-                    OnZeroWelfare();
+                    LoadEndMenuScene();
             };
         }
 
-        void OnZeroWelfare()
+        public void LoadEndMenuScene()
         {
             SceneManager.LoadScene(_EndMenuBuildSceneIndex, LoadSceneMode.Single);
+        }
+
+        public void AddCalendarEvent(CalendarEvent calendarEvent)
+        {
+            _PlayerStat.calendarEventList.Add(calendarEvent);
         }
 
         public void AddConversationToChat(Conversation conversation)

@@ -71,17 +71,11 @@ namespace NeedsVsWants.CalendarSystem
 
             _CurrentDateTime = _CurrentDateTime.AddHours(_HourTimeDelta * _HourTimeScale * Time.deltaTime);
 
-            if(_CurrentDateTime.Hour > 12)
-            {
-                hour = _CurrentDateTime.Hour - 12;
+            hour = _CurrentDateTime.Hour + 1;
 
-                if(hour <= 0)
-                    hour = 1; 
-            }
-
-            else
-                hour = _CurrentDateTime.Hour;
-            
+            if(hour > 12 )
+                hour = hour - 12;
+                
             _TimeText.text = (hour < 10 ? "0" : "") + hour + ":00" + (_CurrentDateTime.Hour > 12 ? " PM" : " AM");
         }
 

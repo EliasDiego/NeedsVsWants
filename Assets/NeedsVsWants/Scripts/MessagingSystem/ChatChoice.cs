@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 
 using UnityEngine;
+using UnityEngine.Events;
 
 using NeedsVsWants.WelfareSystem;
 
@@ -15,5 +16,6 @@ namespace NeedsVsWants.MessagingSystem
         public bool applyEffects;
         public double moneyOnChoice;
         public WelfareOperator welfareOnChoice;
+        public UnityEvent onChoiceEvent;
     }
 }

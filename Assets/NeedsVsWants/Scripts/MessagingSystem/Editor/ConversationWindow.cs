@@ -278,6 +278,8 @@ namespace NeedsVsWants.MessagingSystem
 
             EditorGUILayout.Space();
             EditorGUILayout.LabelField("Effects On Choice", EditorStyles.boldLabel);
+                
+            EditorGUILayout.PropertyField(_ChoiceProperty.FindPropertyRelative("onChoiceEvent"));
 
             applyEffectsProperty.boolValue = GUILayout.Toggle(applyEffectsProperty.boolValue, "Apply Effects?");
 
