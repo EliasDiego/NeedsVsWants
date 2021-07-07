@@ -6,6 +6,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.InputSystem.UI;
 
+using NeedsVsWants.Audio;
 using NeedsVsWants.Player;
 using NeedsVsWants.Patterns;
 using NeedsVsWants.MenuSystem;
@@ -26,6 +27,10 @@ namespace NeedsVsWants.MessagingSystem
         InputSystemUIInputModule _InputModule;
         [SerializeField]
         ScrollRect _ScrollRect;
+        [SerializeField]
+        AudioAsset _MessageSFXAsset;
+        [SerializeField]
+        AudioAsset _ButtonClickAsset;
 
         Conversation _CurrentConversation;
 
@@ -56,6 +61,8 @@ namespace NeedsVsWants.MessagingSystem
         void OnClickChoice(int choiceIndex)
         {
             ChatChoice chatChoice = _CurrentConversation.choices[choiceIndex];
+
+            _ButtonClickAsset.PlayOneShot(audioSource);
 
             _IsShowingChoice = false;
 
@@ -130,12 +137,14 @@ namespace NeedsVsWants.MessagingSystem
                 
                 // move the Scroll Position to current Message Box       
                 ScrollToBottom();
+
+                _MessageSFXAsset.PlayOneShot(audioSource);
             }
         }
 
         async void ScrollToBottom()
         {
-            await System.Threading.Tasks.Task.Delay(20);
+            await System.Threading.Tasks.Task.Delay(50);
 
             _ScrollRect.verticalNormalizedPosition = 0;
         }
@@ -277,7 +286,11 @@ namespace NeedsVsWants.MessagingSystem
             FillChat();
 
             if(!chat.hasRead)
+            {
                 Phone.instance.DisablePlayerControl();
+
+                _MessageSFXAsset.PlayOneShot(audioSource);
+            }
         }
 
         protected override void OnReturn()

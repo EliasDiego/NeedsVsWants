@@ -27,7 +27,7 @@ namespace NeedsVsWants.ShoppingSystem
             _FromPrice = transform.GetChild(3).GetComponent<TMP_Text>();
         }
 
-        public void AssignItem(Item item, AppMenuGroup appMenuGroup, ItemViewerMenu itemViewerMenu)
+        public void AssignItem(Item item, AppMenuGroup appMenuGroup, ItemViewerMenu itemViewerMenu, System.Action onClickEvent)
         {
             _Image.sprite = item.previewImage;
 
@@ -43,6 +43,8 @@ namespace NeedsVsWants.ShoppingSystem
                 itemViewerMenu.item = item;
 
                 appMenuGroup.SwitchTo(itemViewerMenu);
+
+                onClickEvent?.Invoke();
             });
         }
     }

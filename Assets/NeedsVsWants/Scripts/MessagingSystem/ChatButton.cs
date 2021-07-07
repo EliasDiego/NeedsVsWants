@@ -29,7 +29,7 @@ namespace NeedsVsWants.MessagingSystem
             _PreviewText = texts[1];
         }
 
-        public void AssignChat(Chat chat, AppMenuGroup appMenuGroup, ChatViewerMenu chatViewerMenu)
+        public void AssignChat(Chat chat, AppMenuGroup appMenuGroup, ChatViewerMenu chatViewerMenu, System.Action onClickEvent)
         {
             Conversation currentConversation;
             Message message;
@@ -80,6 +80,8 @@ namespace NeedsVsWants.MessagingSystem
                 chatViewerMenu.chat = chat;
 
                 appMenuGroup.SwitchTo(chatViewerMenu);
+
+                onClickEvent?.Invoke();
             });
         }
     }
