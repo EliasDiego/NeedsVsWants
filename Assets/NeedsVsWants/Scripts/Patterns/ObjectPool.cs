@@ -141,9 +141,7 @@ namespace NeedsVsWants.Patterns
 
                 _InactivePool.Push(instance);
 
-                Debug.Log(instance != null);
-
-                instance.transform.parent = parent;
+                instance.transform.SetParent(parent, false);
             }
         }
     }

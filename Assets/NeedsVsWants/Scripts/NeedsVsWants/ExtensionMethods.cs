@@ -13,10 +13,10 @@ namespace NeedsVsWants
                 transform.GetChild(i).gameObject.SetActive(isActive);
         }
 
-        public static bool IsOnSameMonth(this DateTime dateTime, DateTime otherDateTime) =>
-            dateTime.Year == otherDateTime.Year && dateTime.Month == otherDateTime.Month;
+        public static bool IsOnSameMonth(this DateTime dateTime, DateTime otherDateTime, bool isYearSpecific) =>
+            (isYearSpecific ? dateTime.Year == otherDateTime.Year : true) && dateTime.Month == otherDateTime.Month;
 
-        public static bool IsOnSameDay(this DateTime dateTime, DateTime otherDateTime) =>
-            IsOnSameMonth(dateTime, otherDateTime) && dateTime.Day == otherDateTime.Day;
+        public static bool IsOnSameDay(this DateTime dateTime, DateTime otherDateTime, bool isYearSpecific) =>
+            IsOnSameMonth(dateTime, otherDateTime, isYearSpecific) && dateTime.Day == otherDateTime.Day;
     }
 }

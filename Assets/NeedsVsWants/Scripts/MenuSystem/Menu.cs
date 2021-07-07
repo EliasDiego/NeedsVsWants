@@ -22,13 +22,19 @@ namespace NeedsVsWants.MenuSystem
 
         Menu _ReturnMenu;
 
-        bool _IsActive = false;
+        MenuGroup _MenuGroup;
 
-        public bool isActive => _IsActive;
+        bool _IsActive = false;
 
         protected AudioSource audioSource => _AudioSource;
 
-        public static Menu _CurrentMenu;
+        public Menu returnMenu => _ReturnMenu;
+
+        public bool isActive => _IsActive;
+
+        public MenuGroup menuGroup => _MenuGroup;
+
+        static Menu _CurrentMenu;
 
         public static Menu current => _CurrentMenu;
 
@@ -80,6 +86,8 @@ namespace NeedsVsWants.MenuSystem
         protected virtual void Start()
         {
             _AudioSource = GetComponent<AudioSource>();
+
+            _MenuGroup = GetComponentInParent<MenuGroup>();
 
             if(_ActiveOnStart)
             {
@@ -226,7 +234,7 @@ namespace NeedsVsWants.MenuSystem
 
         public void SwitchTo(Menu menu, bool disableMenu)
         {
-            SetReturnMenu(null);
+            //SetReturnMenu(null);
             OnSwitchFrom();
 
             if(disableMenu)
@@ -237,5 +245,10 @@ namespace NeedsVsWants.MenuSystem
         }
 
         public void SwitchTo(Menu menu) => SwitchTo(menu, true);
+
+        public void SwitchTo(MenuGroup menuGroup)
+        {
+            menuGroup.EnableGroup();
+        }
     }
 }

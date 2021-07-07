@@ -25,7 +25,7 @@ namespace NeedsVsWants.Patterns
             if(gameObject.activeSelf)
                 gameObject.SetActive(false);
 
-            transform.parent = _ObjectPool.parent;
+            transform.SetParent(_ObjectPool.parent, false);
             
             _ObjectPool.Return(this);
         }   

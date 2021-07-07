@@ -37,10 +37,21 @@ namespace NeedsVsWants.MenuSystem
             
         }
 
-        public void NextLevel(int levelIndex)
+        public void NewGame(int levelIndex)
         {
             SceneManager.LoadScene(levelIndex, LoadSceneMode.Single);
+
+            // Create New File
+            PlayerStat.CreateNewInstance();
         }
 
+        public void Quit()
+        {
+            #if UNITY_EDITOR
+                UnityEditor.EditorApplication.isPlaying = false;
+            #else
+                Application.Quit();
+            #endif
+        }
     }
 }

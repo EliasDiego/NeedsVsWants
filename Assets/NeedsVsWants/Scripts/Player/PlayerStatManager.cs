@@ -1,15 +1,25 @@
 using System;
+using System.Linq;
 using System.Collections;
 using System.Collections.Generic;
+
+using UnityEngine;
+using UnityEngine.Events;
+using UnityEngine.SceneManagement;
 
 using NeedsVsWants.Patterns;
 using NeedsVsWants.WelfareSystem;
 using NeedsVsWants.CalendarSystem;
+using NeedsVsWants.ShoppingSystem;
+using NeedsVsWants.MessagingSystem;
 
 namespace NeedsVsWants.Player
 {
     public class PlayerStatManager : SimpleSingleton<PlayerStatManager>
     {
+        [SerializeField]
+        int _EndMenuBuildSceneIndex;
+
         PlayerStat _PlayerStat;
 
         public DateTime currentDate 
@@ -23,9 +33,9 @@ namespace NeedsVsWants.Player
             }
         }
 
-        public List<CalendarEvent> calendarEventList => _PlayerStat.calendarEventList;
+        public CalendarEvent[] calendarEvents => _PlayerStat.calendarEventList.ToArray();
 
-        public float currentMoney
+        public double currentMoney
         {
             get => _PlayerStat.currentMoney;
 
@@ -37,42 +47,42 @@ namespace NeedsVsWants.Player
             }
         }
 
-        public int currentYear 
-        { 
-            get => _PlayerStat.currentDateTime.Year;
-            set
-            {
-                DateTime newDate = _PlayerStat.currentDateTime;
+        // public int currentYear 
+        // { 
+        //     get => _PlayerStat.currentDateTime.Year;
+        //     set
+        //     {
+        //         DateTime newDate = _PlayerStat.currentDateTime;
 
-                _PlayerStat.currentDateTime = new DateTime(value, newDate.Month, newDate.Day);
+        //         _PlayerStat.currentDateTime = new DateTime(value, newDate.Month, newDate.Day);
 
-                onDateChange?.Invoke(_PlayerStat.currentDateTime);
-            }
-        }
-        public int currentMonth 
-        {
-            get => _PlayerStat.currentDateTime.Month;
-            set
-            {
-                DateTime newDate = _PlayerStat.currentDateTime;
+        //         onDateChange?.Invoke(_PlayerStat.currentDateTime);
+        //     }
+        // }
+        // public int currentMonth 
+        // {
+        //     get => _PlayerStat.currentDateTime.Month;
+        //     set
+        //     {
+        //         DateTime newDate = _PlayerStat.currentDateTime;
 
-                _PlayerStat.currentDateTime = new DateTime(newDate.Year, value, newDate.Day);
+        //         _PlayerStat.currentDateTime = new DateTime(newDate.Year, value, newDate.Day);
 
-                onDateChange?.Invoke(_PlayerStat.currentDateTime);
-            }
-        }
-        public int currentDay
-        {
-            get => _PlayerStat.currentDateTime.Day;
-            set
-            {
-                DateTime newDate = _PlayerStat.currentDateTime;
+        //         onDateChange?.Invoke(_PlayerStat.currentDateTime);
+        //     }
+        // }
+        // public int currentDay
+        // {
+        //     get => _PlayerStat.currentDateTime.Day;
+        //     set
+        //     {
+        //         DateTime newDate = _PlayerStat.currentDateTime;
 
-                _PlayerStat.currentDateTime = new DateTime(newDate.Year, newDate.Month, value);
+        //         _PlayerStat.currentDateTime = new DateTime(newDate.Year, newDate.Month, value);
 
-                onDateChange?.Invoke(_PlayerStat.currentDateTime);
-            }
-        }
+        //         onDateChange?.Invoke(_PlayerStat.currentDateTime);
+        //     }
+        // }
 
         public WelfareValue currentHealthWelfare
         {
@@ -84,36 +94,6 @@ namespace NeedsVsWants.Player
                 onHealthChange?.Invoke(_PlayerStat.healthWelfare);
             }
         }
-        // public float healthValue 
-        // { 
-        //     get => _PlayerStat.healthWelfare.value; 
-        //     set
-        //     {
-        //         WelfareValue welfareValue = _PlayerStat.healthWelfare;
-
-        //         welfareValue.value = value;
-
-        //         _PlayerStat.healthWelfare = welfareValue;
-
-        //         onHealthChange?.Invoke(_PlayerStat.healthWelfare);
-
-        //     }
-        // }
-        // public float healthMaxValue
-        // { 
-        //     get => _PlayerStat.healthWelfare.maxValue; 
-        //     set
-        //     {
-        //         WelfareValue welfareValue = _PlayerStat.healthWelfare;
-
-        //         welfareValue.maxValue = value;
-
-        //         _PlayerStat.healthWelfare = welfareValue;
-
-        //         onHealthChange?.Invoke(_PlayerStat.healthWelfare);
-
-        //     }
-        // }
         
         public WelfareValue currentSocialWelfare
         {
@@ -125,37 +105,7 @@ namespace NeedsVsWants.Player
                 onSocialChange?.Invoke(_PlayerStat.socialWelfare);
             }
         }
-        // public float socialValue
-        // { 
-        //     get => _PlayerStat.socialWelfare.value; 
-        //     set
-        //     {
-        //         WelfareValue welfareValue = _PlayerStat.socialWelfare;
-
-        //         welfareValue.value = value;
-
-        //         _PlayerStat.socialWelfare = welfareValue;
-
-        //         onHealthChange?.Invoke(_PlayerStat.socialWelfare);
-
-        //     }
-        // }
-        // public float socialMaxValue
-        // { 
-        //     get => _PlayerStat.socialWelfare.maxValue; 
-        //     set
-        //     {
-        //         WelfareValue welfareValue = _PlayerStat.socialWelfare;
-
-        //         welfareValue.maxValue = value;
-
-        //         _PlayerStat.socialWelfare = welfareValue;
-
-        //         onHealthChange?.Invoke(_PlayerStat.socialWelfare);
-
-        //     }
-        // }
-        
+       
         public WelfareValue currentHungerWelfare
         {
             get => _PlayerStat.hungerWelfare; 
@@ -166,37 +116,6 @@ namespace NeedsVsWants.Player
                 onHungerChange?.Invoke(_PlayerStat.hungerWelfare);
             }
         }
-
-        // public float hungerValue
-        // { 
-        //     get => _PlayerStat.hungerWelfare.value; 
-        //     set
-        //     {
-        //         WelfareValue welfareValue = _PlayerStat.hungerWelfare;
-
-        //         welfareValue.value = value;
-
-        //         _PlayerStat.hungerWelfare = welfareValue;
-
-        //         onHealthChange?.Invoke(_PlayerStat.hungerWelfare);
-
-        //     }
-        // }
-        // public float hungerMaxValue
-        // { 
-        //     get => _PlayerStat.hungerWelfare.maxValue; 
-        //     set
-        //     {
-        //         WelfareValue welfareValue = _PlayerStat.hungerWelfare;
-
-        //         welfareValue.maxValue = value;
-
-        //         _PlayerStat.hungerWelfare = welfareValue;
-
-        //         onHealthChange?.Invoke(_PlayerStat.hungerWelfare);
-
-        //     }
-        // }
         
         public WelfareValue currentHappinessWelfare
         {
@@ -209,42 +128,24 @@ namespace NeedsVsWants.Player
             }
         }
 
-        // public float happinessValue
-        // { 
-        //     get => _PlayerStat.happinessWelfare.value; 
-        //     set
-        //     {
-        //         WelfareValue welfareValue = _PlayerStat.happinessWelfare;
+        public Chat[] chats => _PlayerStat.chatList.ToArray();
 
-        //         welfareValue.value = value;
+        public Item[] ShopItems => _PlayerStat.ShopItemList.ToArray();
 
-        //         _PlayerStat.happinessWelfare = welfareValue;
+        public event Action<double> onMoneyChange;
 
-        //         onHealthChange?.Invoke(_PlayerStat.happinessWelfare);
-
-        //     }
-        // }
-        // public float happinessMaxValue
-        // { 
-        //     get => _PlayerStat.happinessWelfare.maxValue; 
-        //     set
-        //     {
-        //         WelfareValue welfareValue = _PlayerStat.happinessWelfare;
-
-        //         welfareValue.maxValue = value;
-
-        //         _PlayerStat.happinessWelfare = welfareValue;
-
-        //         onHealthChange?.Invoke(_PlayerStat.happinessWelfare);
-        //     }
-        // }
-
-        public event Action<float> onMoneyChange;
         public event Action<DateTime> onDateChange;
+
         public event Action<WelfareValue> onHealthChange;
         public event Action<WelfareValue> onHungerChange;
         public event Action<WelfareValue> onHappinessChange;
         public event Action<WelfareValue> onSocialChange;
+
+        public event Action<Chat> onAddChat;
+
+        public event Action<Item[]> onAddItems;
+        public event Action<Item[]> onEditItems;
+        public event Action<Item[]> onRemoveItems;
 
         protected override void Awake()
         {
@@ -255,14 +156,80 @@ namespace NeedsVsWants.Player
 
         void Start() 
         {
-            onMoneyChange?.Invoke(currentMoney);
-
-            onDateChange?.Invoke(currentDate);
-
-            onHealthChange?.Invoke(currentHealthWelfare);
-            onHappinessChange?.Invoke(currentHappinessWelfare);
-            onHungerChange?.Invoke(currentHungerWelfare);
-            onSocialChange?.Invoke(currentSocialWelfare);  
+            onHealthChange += welfareValue =>
+            {
+                if(welfareValue.value <= 0)
+                    LoadEndMenuScene();
+            };
+            
+            onHungerChange += welfareValue =>
+            {
+                if(welfareValue.value <= 0)
+                    LoadEndMenuScene();
+            };
+            
+            onHappinessChange += welfareValue =>
+            {
+                if(welfareValue.value <= 0)
+                    LoadEndMenuScene();
+            };
+            
+            onSocialChange += welfareValue =>
+            {
+                if(welfareValue.value <= 0)
+                    LoadEndMenuScene();
+            };
         }
+
+        public void LoadEndMenuScene()
+        {
+            SceneManager.LoadScene(_EndMenuBuildSceneIndex, LoadSceneMode.Single);
+        }
+
+        public void AddCalendarEvent(CalendarEvent calendarEvent)
+        {
+            _PlayerStat.calendarEventList.Add(calendarEvent);
+        }
+
+        public void AddConversationToChat(Conversation conversation)
+        {
+            Chat chat = new Chat();
+
+            chat.conversation = conversation;
+
+            _PlayerStat.chatList.Add(chat);
+                
+            onAddChat?.Invoke(chat);
+        }
+
+        public void CalculateWelfare(WelfareOperator welfareOperator)
+        {
+            currentHappinessWelfare = welfareOperator.GetHappiness(currentHappinessWelfare);
+            currentHealthWelfare = welfareOperator.GetHappiness(currentHealthWelfare);
+            currentHungerWelfare = welfareOperator.GetHappiness(currentHungerWelfare);
+            currentSocialWelfare = welfareOperator.GetHappiness(currentSocialWelfare);
+        }
+
+        #region Shop Item
+        public void AddShopItem(params Item[] items)
+        {
+            _PlayerStat.ShopItemList.AddRange(items);
+            
+            onAddItems?.Invoke(items);
+        }
+
+        public void RemoveShopItem(params Item[] items)
+        {
+            _PlayerStat.ShopItemList.RemoveAll(item => items.Contains(item));
+
+            onRemoveItems?.Invoke(items);
+        }
+
+        public void EditItem(Func<Item, bool> predicate)
+        {
+            if(predicate != null)
+                onEditItems?.Invoke(_PlayerStat.ShopItemList.Where(item => predicate.Invoke(item)).ToArray());
+        }
+        #endregion
     }
 }

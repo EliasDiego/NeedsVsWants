@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 
 using NeedsVsWants;
 using NeedsVsWants.Player;
@@ -19,8 +20,6 @@ namespace NeedsVsWants.MenuSystem
         DayProgressor _DayProgressor;
 
         System.Action<InputAction.CallbackContext> _OnPauseStarted;
-
-        bool _IsPaused = false;
 
         bool _IsOnFocus = true;
 
@@ -39,6 +38,11 @@ namespace NeedsVsWants.MenuSystem
                 else
                     EnableMenu();
             };
+        }
+
+        void OnDestroy() 
+        {
+            _PauseKey.action.started -= _OnPauseStarted;    
         }
 
         protected override void OnDisableMenu()
@@ -67,6 +71,20 @@ namespace NeedsVsWants.MenuSystem
         protected override void OnSwitchFrom()
         {
             _IsOnFocus = false;
+        }
+
+        public void ReturnToMainMenu(int sceneBuildIndex)
+        {
+            SceneManager.LoadScene(sceneBuildIndex, LoadSceneMode.Single);
+        }
+        
+        public void Quit()
+        {
+            #if UNITY_EDITOR
+                UnityEditor.EditorApplication.isPlaying = false;
+            #else
+                Application.Quit();
+            #endif
         }
     }
 }

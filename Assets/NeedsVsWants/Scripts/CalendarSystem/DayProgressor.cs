@@ -16,9 +16,9 @@ namespace NeedsVsWants.CalendarSystem
     {
         [Header("Day Speed")]
         [SerializeField]
-        float _HourTimeDelta = 1;
+        double _HourTimeDelta = 1;
         [SerializeField]
-        float _HourTimeScale = 1;
+        double _HourTimeScale = 1;
         
         int _CurrentMonth;
         int _CurrentDay;
@@ -43,6 +43,9 @@ namespace NeedsVsWants.CalendarSystem
             _CurrentMonth = startDateTime.Month;
 
             _CurrentDateTime = startDateTime;
+            
+            // Invoke calendar events and Initialize stuff
+            OnNextDay();
         }
 
         void Update()
@@ -68,17 +71,11 @@ namespace NeedsVsWants.CalendarSystem
 
             _CurrentDateTime = _CurrentDateTime.AddHours(_HourTimeDelta * _HourTimeScale * Time.deltaTime);
 
-            if(_CurrentDateTime.Hour > 12)
-            {
-                hour = _CurrentDateTime.Hour - 12;
+            hour = _CurrentDateTime.Hour + 1;
 
-                if(hour <= 0)
-                    hour = 1; 
-            }
-
-            else
-                hour = _CurrentDateTime.Hour;
-            
+            if(hour > 12 )
+                hour = hour - 12;
+                
             _TimeText.text = (hour < 10 ? "0" : "") + hour + ":00" + (_CurrentDateTime.Hour > 12 ? " PM" : " AM");
         }
 
@@ -92,10 +89,10 @@ namespace NeedsVsWants.CalendarSystem
             }
 
             // Put here Calendar Event stuff
-            foreach(CalendarEvent calendarEvent in PlayerStatManager.instance.calendarEventList)
+            foreach(CalendarEvent calendarEvent in PlayerStatManager.instance.calendarEvents)
             {
                 if(calendarEvent.IsWithinDate(_CurrentDateTime))
-                    calendarEvent.Invoke();
+                    calendarEvent.Invoke(_CurrentDateTime);
             }
 
             PlayerStatManager.instance.currentDate = _CurrentDateTime;
