@@ -6,6 +6,8 @@ TagManager:
   tags:
   - waypoint
   - busypoint
+  - shoppoint
+  - msgpoint
   layers:
   - Default
   - TransparentFX
