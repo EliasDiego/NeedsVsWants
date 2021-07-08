@@ -12,3 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 304c816f97d589949945ba91c60b6b47, type: 3}
   m_Name: ButtonClick
   m_EditorClassIdentifier: 
+  _AudioClip: {fileID: 8300000, guid: ba420924ae2f9f2439def44fc26f0c62, type: 3}
+  _OutputAudioMixerGroup: {fileID: -6926243139782011487, guid: 6a4b6ff46fe2a7e4ab5caf7c15ab5371, type: 2}
+  _Priority: 128
+  _Volume: 1
+  _Pitch: 1
+  _RandomPitch:
+    min: 0
+    max: 0
+  _IsPitchRandom: 0
