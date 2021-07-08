@@ -120,12 +120,12 @@ namespace NeedsVsWants.MessagingSystem
 
                 else // If At the end of the conversation
                 {
-                    if(!_CurrentConversation)
-                    {
+                    // if(!_CurrentConversation)
+                    // {
                         chat.hasRead = true;
 
                         Phone.instance.EnablePlayerControl();
-                    }
+                    //}
 
                     chat.currentMessageIndex--;
                 }
