@@ -33,8 +33,6 @@ namespace NeedsVsWants.MessagingSystem
                 if(isActive)
                     UpdateChatList();
 
-                Debug.Log(messagesUnread);
-
                 if(messagesUnread > 0)
                 {
                     _Indicator.gameObject.SetActive(true);
