@@ -18,9 +18,9 @@ MonoBehaviour:
   onBuyWelfareEffects:
     _AmountType: 0
     _HealthValue: 0
-    _HappinessValue: 15
+    _HappinessValue: 80
     _HungerValue: 0
     _SocialValue: 0
-  isDiscounted: 0
+  isDiscounted: 1
   discountPrice: 139.3
   _GameObjectName: Vase

@@ -27,9 +27,9 @@ MonoBehaviour:
     welfareOnChoice:
       _AmountType: 0
       _HealthValue: -5
-      _HappinessValue: 20
-      _HungerValue: 10
-      _SocialValue: 20
+      _HappinessValue: 40
+      _HungerValue: 20
+      _SocialValue: 40
     onChoiceEvent:
       m_PersistentCalls:
         m_Calls: []

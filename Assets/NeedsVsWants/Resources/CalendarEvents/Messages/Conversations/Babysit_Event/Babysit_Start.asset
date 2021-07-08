@@ -33,7 +33,7 @@ MonoBehaviour:
     welfareOnChoice:
       _AmountType: 0
       _HealthValue: 0
-      _HappinessValue: -5
+      _HappinessValue: -15
       _HungerValue: 0
       _SocialValue: 0
     onChoiceEvent:

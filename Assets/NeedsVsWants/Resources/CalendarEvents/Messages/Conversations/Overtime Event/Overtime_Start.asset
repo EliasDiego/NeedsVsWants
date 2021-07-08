@@ -31,10 +31,10 @@ MonoBehaviour:
     moneyOnChoice: 2000
     welfareOnChoice:
       _AmountType: 0
-      _HealthValue: -5
-      _HappinessValue: -10
+      _HealthValue: -10
+      _HappinessValue: -20
       _HungerValue: 0
-      _SocialValue: -5
+      _SocialValue: -15
     onChoiceEvent:
       m_PersistentCalls:
         m_Calls: []

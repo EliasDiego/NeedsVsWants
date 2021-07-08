@@ -9,12 +9,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e77a57f693adac742b40c13927f6c160, type: 3}
-  m_Name: WelfareDailyReductionEvent
+  m_Script: {fileID: 11500000, guid: a50e43e0ba2ec874aa69c9700afe2854, type: 3}
+  m_Name: End of 2 years
   m_EditorClassIdentifier: 
-  _WelfareOperator:
-    _AmountType: 0
-    _HealthValue: -2
-    _HappinessValue: -1
-    _HungerValue: -3
-    _SocialValue: -1
+  conversation: {fileID: 11400000, guid: 06b4c0d78c4cb154a8a366b0ed3574d5, type: 2}
+  date:
+    year: 2022
+    month: 1
+    day: 1
+  isYearSpecific: 1

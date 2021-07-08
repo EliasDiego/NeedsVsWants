@@ -12,14 +12,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 648d88b892b50fb43a071d8f92cb39d4, type: 3}
   m_Name: Luxury Food
   m_EditorClassIdentifier: 
-  price: 2000
+  price: 500
   description: Food to be enjoyed once in a while as a treat for one's self.
   previewImage: {fileID: 7481911063837868265, guid: 91e727c78cb565145a8c7e9d22b1e011, type: 3}
   onBuyWelfareEffects:
     _AmountType: 0
     _HealthValue: 0
-    _HappinessValue: 5
-    _HungerValue: 20
+    _HappinessValue: 40
+    _HungerValue: 40
     _SocialValue: 0
   isDiscounted: 1
-  discountPrice: 1000
+  discountPrice: 500

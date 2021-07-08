@@ -17,7 +17,7 @@ MonoBehaviour:
   previewImage: {fileID: 21300000, guid: 292ee70a867912d469e8b5e15602b175, type: 3}
   onBuyWelfareEffects:
     _AmountType: 0
-    _HealthValue: 10
+    _HealthValue: 40
     _HappinessValue: 0
     _HungerValue: 0
     _SocialValue: 0

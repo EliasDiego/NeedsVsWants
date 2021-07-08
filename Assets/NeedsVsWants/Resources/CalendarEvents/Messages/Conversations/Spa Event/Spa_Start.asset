@@ -30,10 +30,10 @@ MonoBehaviour:
     moneyOnChoice: -500
     welfareOnChoice:
       _AmountType: 0
-      _HealthValue: 5
-      _HappinessValue: 15
+      _HealthValue: 10
+      _HappinessValue: 30
       _HungerValue: 0
-      _SocialValue: 10
+      _SocialValue: 20
     onChoiceEvent:
       m_PersistentCalls:
         m_Calls: []
