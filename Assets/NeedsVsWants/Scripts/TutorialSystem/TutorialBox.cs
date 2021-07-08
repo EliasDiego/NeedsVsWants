@@ -16,12 +16,18 @@ namespace NeedsVsWants.TutorialSystem
         Image _BoxImage;
         [SerializeField]
         float _ScaleSpeed;
+
+        [Header("Tutorial Box")]
+        [SerializeField]
+        TutorialBox _NextTutorialBox;
         [SerializeField]
         UnityEvent _OnEnable;
         [SerializeField]
         UnityEvent _OnDisable;
 
         Coroutine _BoxScaleAnimation;
+
+        bool _IsSkip = false;
 
         protected override bool controlSetActive => true;
 
@@ -64,8 +70,20 @@ namespace NeedsVsWants.TutorialSystem
                 StopCoroutine(_BoxScaleAnimation);
                 
             _BoxScaleAnimation = StartCoroutine(AnimateScale(_BoxImage.rectTransform, Vector3.zero, _ScaleSpeed, () => transform.SetActiveChildren(false)));
-            
-            _OnDisable?.Invoke();
+
+            if(!_IsSkip)
+            {
+                _NextTutorialBox?.gameObject.SetActive(true);
+                
+                _OnDisable?.Invoke();
+            }
+        }
+
+        public void Skip()
+        {
+            _IsSkip = true;
+
+            DisablePopUp();
         }
     }
 }

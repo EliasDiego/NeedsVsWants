@@ -1,3 +1,4 @@
+using System.Linq;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -16,6 +17,10 @@ namespace NeedsVsWants.MessagingSystem
         ChatViewerMenu _ChatViewerMenu;
         [SerializeField]
         Transform _ContentTransform;
+        [SerializeField]
+        Audio.AudioAsset _ButtonClickAsset;
+        [SerializeField]
+        Indicator _Indicator;
 
         void Awake() 
         {
@@ -23,8 +28,21 @@ namespace NeedsVsWants.MessagingSystem
             
             PlayerStatManager.instance.onAddChat += chat =>
             {
+                int messagesUnread = PlayerStatManager.instance.chats.Where(chat => !chat.hasRead).Count();
+
                 if(isActive)
                     UpdateChatList();
+
+                Debug.Log(messagesUnread);
+
+                if(messagesUnread > 0)
+                {
+                    _Indicator.gameObject.SetActive(true);
+                    _Indicator.text = messagesUnread.ToString();
+                }
+
+                else
+                    _Indicator.gameObject.SetActive(false);
             };
         }
 
@@ -46,7 +64,7 @@ namespace NeedsVsWants.MessagingSystem
 
                 chatButton.transform.SetParent(_ContentTransform, false);
 
-                chatButton.AssignChat(chatList[i], appMenuGroup, _ChatViewerMenu);
+                chatButton.AssignChat(chatList[i], appMenuGroup, _ChatViewerMenu, () => _ButtonClickAsset.PlayOneShot(audioSource));
             }
         }
 
