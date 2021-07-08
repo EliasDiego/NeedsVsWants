@@ -10,12 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a50e43e0ba2ec874aa69c9700afe2854, type: 3}
-  m_Name: CV_Event
+  m_Name: Movie_Event 2
   m_EditorClassIdentifier: 
-  conversation: {fileID: 11400000, guid: 35e8fa089d9d86a41ab96fd30d9a9824, type: 2}
-  chatChoices: []
+  conversation: {fileID: 11400000, guid: b4243bf9a27e3124bb0617c69eac9199, type: 2}
   date:
     year: 0
-    month: 2
-    day: 15
+    month: 9
+    day: 4
   isYearSpecific: 0

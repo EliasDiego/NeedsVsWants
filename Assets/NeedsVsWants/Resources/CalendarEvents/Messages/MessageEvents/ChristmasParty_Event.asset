@@ -13,9 +13,8 @@ MonoBehaviour:
   m_Name: ChristmasParty_Event
   m_EditorClassIdentifier: 
   conversation: {fileID: 11400000, guid: 0381e43e1f0f05d4590c2e9468372634, type: 2}
-  chatChoices: []
   date:
     year: 0
     month: 12
-    day: 21
+    day: 24
   isYearSpecific: 0

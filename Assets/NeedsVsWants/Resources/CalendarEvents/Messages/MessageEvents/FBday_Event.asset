@@ -13,9 +13,8 @@ MonoBehaviour:
   m_Name: FBday_Event
   m_EditorClassIdentifier: 
   conversation: {fileID: 11400000, guid: a6bc61032fcda3e459568c299d16d7d5, type: 2}
-  chatChoices: []
   date:
     year: 0
-    month: 2
-    day: 3
+    month: 3
+    day: 10
   isYearSpecific: 0

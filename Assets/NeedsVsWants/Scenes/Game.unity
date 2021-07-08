@@ -333,7 +333,7 @@ PrefabInstance:
     - target: {fileID: -7511558181221131132, guid: fc5d506cc4a2c0842ae8084541b205af, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 2cba5694758ebd8438f116ab5b4d3d3c, type: 2}
+      objectReference: {fileID: 2100000, guid: 4b4cdf87c42a08e4b87f96f75c1fa22f, type: 2}
     - target: {fileID: 919132149155446097, guid: fc5d506cc4a2c0842ae8084541b205af, type: 3}
       propertyPath: m_Name
       value: Toilet_sink
@@ -1527,6 +1527,7 @@ MonoBehaviour:
   _TransitionSpeed: 10
   _BoxImage: {fileID: 50832655415639465}
   _ScaleSpeed: 20
+  _NextTutorialBox: {fileID: 0}
   _OnEnable:
     m_PersistentCalls:
       m_Calls:
@@ -7528,6 +7529,7 @@ MonoBehaviour:
   _TransitionSpeed: 10
   _BoxImage: {fileID: 2522681624807421482}
   _ScaleSpeed: 20
+  _NextTutorialBox: {fileID: 0}
   _OnEnable:
     m_PersistentCalls:
       m_Calls: []
@@ -12100,6 +12102,7 @@ MonoBehaviour:
   _TransitionSpeed: 10
   _BoxImage: {fileID: 2522681624651205493}
   _ScaleSpeed: 20
+  _NextTutorialBox: {fileID: 0}
   _OnEnable:
     m_PersistentCalls:
       m_Calls: []
@@ -13664,6 +13667,7 @@ MonoBehaviour:
   _TransitionSpeed: 10
   _BoxImage: {fileID: 2522681623533284125}
   _ScaleSpeed: 20
+  _NextTutorialBox: {fileID: 0}
   _OnEnable:
     m_PersistentCalls:
       m_Calls: []
@@ -14264,6 +14268,7 @@ MonoBehaviour:
   _TransitionSpeed: 10
   _BoxImage: {fileID: 2522681624569943867}
   _ScaleSpeed: 20
+  _NextTutorialBox: {fileID: 0}
   _OnEnable:
     m_PersistentCalls:
       m_Calls: []
@@ -15663,6 +15668,7 @@ MonoBehaviour:
   _TransitionSpeed: 10
   _BoxImage: {fileID: 2522681624118722830}
   _ScaleSpeed: 20
+  _NextTutorialBox: {fileID: 0}
   _OnEnable:
     m_PersistentCalls:
       m_Calls: []
@@ -22471,6 +22477,7 @@ MonoBehaviour:
   _TransitionSpeed: 10
   _BoxImage: {fileID: 2522681623040044853}
   _ScaleSpeed: 20
+  _NextTutorialBox: {fileID: 0}
   _OnEnable:
     m_PersistentCalls:
       m_Calls: []
@@ -24311,6 +24318,7 @@ MonoBehaviour:
   _TransitionSpeed: 10
   _BoxImage: {fileID: 2522681623331933389}
   _ScaleSpeed: 20
+  _NextTutorialBox: {fileID: 0}
   _OnEnable:
     m_PersistentCalls:
       m_Calls: []
@@ -25676,6 +25684,7 @@ MonoBehaviour:
   _TransitionSpeed: 10
   _BoxImage: {fileID: 2522681623656631629}
   _ScaleSpeed: 20
+  _NextTutorialBox: {fileID: 0}
   _OnEnable:
     m_PersistentCalls:
       m_Calls: []
@@ -30059,6 +30068,7 @@ MonoBehaviour:
   _TransitionSpeed: 10
   _BoxImage: {fileID: 2522681624979057214}
   _ScaleSpeed: 20
+  _NextTutorialBox: {fileID: 0}
   _OnEnable:
     m_PersistentCalls:
       m_Calls: []
@@ -33523,6 +33533,7 @@ MonoBehaviour:
   _TransitionSpeed: 10
   _BoxImage: {fileID: 2522681624940617173}
   _ScaleSpeed: 20
+  _NextTutorialBox: {fileID: 0}
   _OnEnable:
     m_PersistentCalls:
       m_Calls: []
@@ -34833,6 +34844,7 @@ MonoBehaviour:
   _TransitionSpeed: 10
   _BoxImage: {fileID: 2522681623973329616}
   _ScaleSpeed: 20
+  _NextTutorialBox: {fileID: 0}
   _OnEnable:
     m_PersistentCalls:
       m_Calls: []
@@ -45723,6 +45735,7 @@ MonoBehaviour:
   _TransitionSpeed: 10
   _BoxImage: {fileID: 2522681624382607932}
   _ScaleSpeed: 20
+  _NextTutorialBox: {fileID: 0}
   _OnEnable:
     m_PersistentCalls:
       m_Calls: []
@@ -47623,6 +47636,7 @@ MonoBehaviour:
   _TransitionSpeed: 10
   _BoxImage: {fileID: 2522681623811318916}
   _ScaleSpeed: 20
+  _NextTutorialBox: {fileID: 0}
   _OnEnable:
     m_PersistentCalls:
       m_Calls: []
@@ -48480,6 +48494,7 @@ MonoBehaviour:
   _TransitionSpeed: 10
   _BoxImage: {fileID: 2522681624715516614}
   _ScaleSpeed: 20
+  _NextTutorialBox: {fileID: 0}
   _OnEnable:
     m_PersistentCalls:
       m_Calls: []
@@ -49646,6 +49661,7 @@ MonoBehaviour:
   _TransitionSpeed: 10
   _BoxImage: {fileID: 2522681624704932821}
   _ScaleSpeed: 20
+  _NextTutorialBox: {fileID: 0}
   _OnEnable:
     m_PersistentCalls:
       m_Calls: []
@@ -57466,6 +57482,7 @@ MonoBehaviour:
   _TransitionSpeed: 10
   _BoxImage: {fileID: 2522681623492737063}
   _ScaleSpeed: 20
+  _NextTutorialBox: {fileID: 0}
   _OnEnable:
     m_PersistentCalls:
       m_Calls: []
@@ -58593,6 +58610,8 @@ MonoBehaviour:
   _Anne: {fileID: 11400000, guid: 4c03642d09e198548b6f62adf821e0c7, type: 2}
   _InputModule: {fileID: 300054500}
   _ScrollRect: {fileID: 2999311161580583369}
+  _MessageSFXAsset: {fileID: 0}
+  _ButtonClickAsset: {fileID: 0}
 --- !u!224 &2999311160520447215
 RectTransform:
   m_ObjectHideFlags: 0
@@ -60021,6 +60040,7 @@ MonoBehaviour:
   _ActiveOnStart: 0
   _ChatViewerMenu: {fileID: 2999311160520447214}
   _ContentTransform: {fileID: 2999311162287753662}
+  _ButtonClickAsset: {fileID: 0}
 --- !u!224 &2999311160837975815
 RectTransform:
   m_ObjectHideFlags: 0
@@ -63796,6 +63816,7 @@ MonoBehaviour:
   _ContentLayoutGroup: {fileID: 2999311160620267332}
   _ItemViewerMenu: {fileID: 2999311160810210175}
   _LoadingPopUp: {fileID: 2522681624728949385}
+  _ButtonClickAsset: {fileID: 0}
   _Text: {fileID: 2522681623483990912}
   _SaleLeftList: {fileID: 2522681623032506305}
   _SaleRightList: {fileID: 2522681624995861273}
