@@ -13,17 +13,24 @@ namespace NeedsVsWants.Audio
     [CreateAssetMenu(menuName = "NeedsVsWants/Audio/Audio Asset")]
     public class AudioAsset : ScriptableObject
     {
+        [SerializeField]
         AudioClip _AudioClip;
 
+        [SerializeField]
         AudioMixerGroup _OutputAudioMixerGroup;
 
+        [SerializeField]
         int _Priority = 128;
 
+        [SerializeField]
         float _Volume = 1;
+        [SerializeField]
         float _Pitch = 1;
         
+        [SerializeField]
         FloatMinMax _RandomPitch;
 
+        [SerializeField]
         bool _IsPitchRandom = false;
 
         #if UNITY_EDITOR
@@ -46,37 +53,32 @@ namespace NeedsVsWants.Audio
 
             public override void OnInspectorGUI()
             {
-                AudioAsset audioAsset = target as AudioAsset;
+                SerializedProperty priorityProperty = serializedObject.FindProperty("_Priority");
+                SerializedProperty volumeProperty = serializedObject.FindProperty("_Volume");
+                SerializedProperty isPitchRandomProperty = serializedObject.FindProperty("_IsPitchRandom");
+                SerializedProperty pitchProperty = serializedObject.FindProperty("_Pitch");
+                SerializedProperty randomPitchMinProperty = serializedObject.FindProperty("_RandomPitch").FindPropertyRelative("min");
+                SerializedProperty randomPitchMaxProperty = serializedObject.FindProperty("_RandomPitch").FindPropertyRelative("max");
 
-                float randomPitchMin, randomPitchMax;
+                float randomPitchMin = randomPitchMinProperty.floatValue;
+                float randomPitchMax = randomPitchMaxProperty.floatValue;
 
-                if(!audioAsset)
-                    return;
+                EditorGUILayout.ObjectField(serializedObject.FindProperty("_AudioClip"));
 
-                randomPitchMin = audioAsset._RandomPitch.min;
-                randomPitchMax = audioAsset._RandomPitch.max;
-                    
-                // Audio Clip
-                audioAsset._AudioClip = Functions.DrawObjectField<AudioClip>("Audio Clip", audioAsset._AudioClip, false);
-                
-                // Output
-                audioAsset._OutputAudioMixerGroup = Functions.DrawObjectField<AudioMixerGroup>("Output", audioAsset._OutputAudioMixerGroup, false);
-                
-                // Priority
-                audioAsset._Priority = EditorGUILayout.IntSlider("Priority", audioAsset._Priority, 0, 256);          
+                EditorGUILayout.ObjectField(serializedObject.FindProperty("_OutputAudioMixerGroup"));
 
-                // Volume
-                audioAsset._Volume = EditorGUILayout.Slider("Volume", audioAsset._Volume, 0, 1);     
-                
-                // Pitch
+                priorityProperty.intValue = EditorGUILayout.IntSlider("Priority", priorityProperty.intValue, 0, 256); 
+
+                volumeProperty.floatValue = EditorGUILayout.Slider("Volume", volumeProperty.floatValue, 0, 1);           
+
                 _IsPitchFoldout = EditorGUILayout.Foldout(_IsPitchFoldout, "Pitch");
 
                 if(_IsPitchFoldout)
                 {
-                    audioAsset._IsPitchRandom = EditorGUILayout.Toggle("Is Random", audioAsset._IsPitchRandom);
+                    isPitchRandomProperty.boolValue = EditorGUILayout.Toggle("Is Random", isPitchRandomProperty.boolValue);
 
-                    if(!audioAsset._IsPitchRandom)
-                        audioAsset._Pitch = EditorGUILayout.Slider(audioAsset._Pitch, -3, 3);
+                    if(!isPitchRandomProperty.boolValue)
+                        pitchProperty.floatValue = EditorGUILayout.Slider(pitchProperty.floatValue, -3, 3);
 
                     else
                     {
@@ -86,13 +88,15 @@ namespace NeedsVsWants.Audio
                         randomPitchMax = Mathf.Clamp(EditorGUILayout.FloatField(randomPitchMax), randomPitchMin, 3);
                         EditorGUILayout.EndHorizontal();
 
-                        audioAsset._RandomPitch.min = randomPitchMin;
-                        audioAsset._RandomPitch.max = randomPitchMax;
+                        randomPitchMinProperty.floatValue = randomPitchMin;
+                        randomPitchMaxProperty.floatValue = randomPitchMax;
                     }
                 }
 
                 if(GUILayout.Button("Preview"))
-                    audioAsset.Play(_PreviewAudioSource);
+                    (target as AudioAsset).Play(_PreviewAudioSource);
+
+                serializedObject.ApplyModifiedProperties();
             }
         }
         #endif

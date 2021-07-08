@@ -10,6 +10,7 @@ using NeedsVsWants.Audio;
 using NeedsVsWants.Player;
 using NeedsVsWants.Patterns;
 using NeedsVsWants.MenuSystem;
+using NeedsVsWants.PhoneSystem;
 
 using TMPro;
 
@@ -31,6 +32,8 @@ namespace NeedsVsWants.MessagingSystem
         AudioAsset _MessageSFXAsset;
         [SerializeField]
         AudioAsset _ButtonClickAsset;
+        [SerializeField]
+        Indicator _Indicator;
 
         Conversation _CurrentConversation;
 
@@ -272,9 +275,20 @@ namespace NeedsVsWants.MessagingSystem
 
         protected override void OnDisableMenu()
         {
+            int messagesUnread = PlayerStatManager.instance.chats.Where(chat => !chat.hasRead).Count();
+            
             transform.SetActiveChildren(false);
 
             _IsShowingChoice = false;
+
+            if(messagesUnread > 0)
+            {
+                _Indicator.gameObject.SetActive(true);
+                _Indicator.text = messagesUnread.ToString();
+            }
+
+            else
+                _Indicator.gameObject.SetActive(false);
         }
 
         protected override void OnEnableMenu()
