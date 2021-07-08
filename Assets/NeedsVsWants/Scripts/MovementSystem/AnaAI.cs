@@ -10,15 +10,15 @@ namespace NeedsVsWants.MovementSystem
     public class AnaAI : MonoBehaviour
     {
         Animator anim;
-        public GameObject menu;
+       // public GameObject menu;
         [SerializeField] MenuGroup Activity;
         [SerializeField] MenuGroup Activity01;
         [SerializeField] MenuGroup Activity02;
         [SerializeField] MenuGroup Activity03;
-        public GameObject GetMenu()
+        /*public GameObject GetMenu()
         {
             return menu;
-        }
+        }*/
         
         void Start()
         {
