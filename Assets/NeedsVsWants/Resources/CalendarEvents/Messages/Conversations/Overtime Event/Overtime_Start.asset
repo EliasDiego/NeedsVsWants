@@ -30,11 +30,14 @@ MonoBehaviour:
     applyEffects: 1
     moneyOnChoice: 2000
     welfareOnChoice:
-      _AmountType: 1
+      _AmountType: 0
       _HealthValue: -5
       _HappinessValue: -10
       _HungerValue: 0
       _SocialValue: -5
+    onChoiceEvent:
+      m_PersistentCalls:
+        m_Calls: []
   - name: No
     nextConversation: {fileID: 11400000, guid: c6eac79afedf62e4096039231cda6416, type: 2}
     applyEffects: 0
@@ -45,3 +48,6 @@ MonoBehaviour:
       _HappinessValue: -10
       _HungerValue: 0
       _SocialValue: -5
+    onChoiceEvent:
+      m_PersistentCalls:
+        m_Calls: []

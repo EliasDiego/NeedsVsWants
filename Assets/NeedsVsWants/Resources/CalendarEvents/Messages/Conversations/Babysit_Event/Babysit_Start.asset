@@ -10,43 +10,45 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 588500f11bfcf094bb32a4e00f946e8a, type: 3}
-  m_Name: Concert_Start
+  m_Name: Babysit_Start
   m_EditorClassIdentifier: 
-  title: Concert
+  title: Babysitting
   characters:
-  - {fileID: 11400000, guid: 61aaffff4a0cb3148aaaecb615619681, type: 2}
+  - {fileID: 11400000, guid: ab4256fda8870ff4dae1d78abf4e1b97, type: 2}
   - {fileID: 11400000, guid: 4c03642d09e198548b6f62adf821e0c7, type: 2}
   messages:
   - characterIndex: 0
-    text: Girl! Do you have the money right now?
+    text: Anne? Are you free today?
   - characterIndex: 0
-    text: I can buy us both the tickets now!
+    text: 'My husband and I have to attend to a business event later, '
   - characterIndex: 0
-    text: It's P10,000.
+    text: but I can't find someone to look after our daughter.
+  - characterIndex: 0
+    text: Can you look after her while we're gone, we'll pay you P500.
   choices:
   - name: Yes
-    nextConversation: {fileID: 11400000, guid: 710112c4468003d46807b45262316fbf, type: 2}
+    nextConversation: {fileID: 11400000, guid: 2e02d8041ba3bc54dacfff5a39e1841e, type: 2}
     applyEffects: 1
-    moneyOnChoice: -10000
+    moneyOnChoice: 500
     welfareOnChoice:
       _AmountType: 0
-      _HealthValue: -10
-      _HappinessValue: 100
+      _HealthValue: 0
+      _HappinessValue: -5
       _HungerValue: 0
-      _SocialValue: 50
+      _SocialValue: 0
     onChoiceEvent:
       m_PersistentCalls:
         m_Calls: []
   - name: No
-    nextConversation: {fileID: 11400000, guid: d7770f7c9250e684186add03a328943b, type: 2}
+    nextConversation: {fileID: 11400000, guid: fb591a3480f81334bbd97b52b3ba8dea, type: 2}
     applyEffects: 0
-    moneyOnChoice: -10000
+    moneyOnChoice: 500
     welfareOnChoice:
-      _AmountType: 1
-      _HealthValue: -10
-      _HappinessValue: 100
+      _AmountType: 0
+      _HealthValue: 0
+      _HappinessValue: -5
       _HungerValue: 0
-      _SocialValue: 50
+      _SocialValue: 0
     onChoiceEvent:
       m_PersistentCalls:
         m_Calls: []

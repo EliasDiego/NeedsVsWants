@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _WelfareOperator:
     _AmountType: 0
-    _HealthValue: -1
-    _HappinessValue: -1
-    _HungerValue: -1
+    _HealthValue: -2
+    _HappinessValue: -2
+    _HungerValue: -5
     _SocialValue: -1
