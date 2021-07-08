@@ -16,6 +16,8 @@ namespace NeedsVsWants.MessagingSystem
         ChatViewerMenu _ChatViewerMenu;
         [SerializeField]
         Transform _ContentTransform;
+        [SerializeField]
+        Audio.AudioAsset _ButtonClickAsset;
 
         void Awake() 
         {
@@ -46,7 +48,7 @@ namespace NeedsVsWants.MessagingSystem
 
                 chatButton.transform.SetParent(_ContentTransform, false);
 
-                chatButton.AssignChat(chatList[i], appMenuGroup, _ChatViewerMenu);
+                chatButton.AssignChat(chatList[i], appMenuGroup, _ChatViewerMenu, () => _ButtonClickAsset.PlayOneShot(audioSource));
             }
         }
 
