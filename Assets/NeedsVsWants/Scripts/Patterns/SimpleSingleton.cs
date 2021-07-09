@@ -12,8 +12,7 @@ namespace NeedsVsWants.Patterns
 
         protected virtual void Awake()
         {
-            if(!_Instance)
-                _Instance = this as T;
+            _Instance = this as T;
         }
     }
 }
