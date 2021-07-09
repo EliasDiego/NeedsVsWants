@@ -92,14 +92,11 @@ namespace NeedsVsWants.ShoppingSystem
                 saleItemButtons[i].transform.SetParent(i % 2 == 0 ? _SaleLeftList.transform : _SaleRightList.transform, false);
             }
 
-            _ContentLayoutGroup.CalculateLayoutInputVertical();
-            _ContentLayoutGroup.CalculateLayoutInputHorizontal();
-            
-            //_ContentLayoutGroup.enabled = false;
+            _ContentLayoutGroup.enabled = false;
 
             yield return new WaitForSecondsRealtime(.5f);
 
-            //_ContentLayoutGroup.enabled = true;
+            _ContentLayoutGroup.enabled = true;
 
             yield return new WaitForEndOfFrame();
 
