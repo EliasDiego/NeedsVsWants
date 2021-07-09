@@ -22,8 +22,10 @@ namespace NeedsVsWants.MessagingSystem
         [SerializeField]
         Indicator _Indicator;
 
-        void Awake() 
+        protected override void Start()
         {
+            base.Start();
+            
             ObjectPoolManager.instance.Instantiate("Chat Button");    
             
             PlayerStatManager.instance.onAddChat += chat =>

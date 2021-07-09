@@ -36,8 +36,6 @@ namespace NeedsVsWants.CalendarSystem
 
         DateTime _CurrentDisplayDate;
 
-        Action<DateTime> _OnDateChange;
-
         public DateTime currentDisplayDate 
         { 
             get => _CurrentDisplayDate;
@@ -49,34 +47,21 @@ namespace NeedsVsWants.CalendarSystem
             } 
         }
 
-        void Awake() 
+        void Start()
         {
             _CalendarDays = GetComponentsInChildren<CalendarDay>();
 
-            _OnDateChange = date => 
+            PlayerStatManager.instance.onDateChange += date => 
             {
                 if(!_CurrentDisplayDate.IsOnSameMonth(date, true))
                     SetupCalendar(date);
 
                 currentDisplayDate = date;
             };
-        }
 
-        void OnEnable() 
-        {
-            PlayerStatManager.instance.onDateChange += _OnDateChange;    
-        }
-
-        void Start() 
-        {
             SetupCalendar(PlayerStatManager.instance.currentDate);
 
             currentDisplayDate = PlayerStatManager.instance.currentDate;
-        }
-
-        void OnDisable() 
-        {
-            PlayerStatManager.instance.onDateChange -= _OnDateChange;        
         }
 
         int GetWeekOfMonth(int year, int month, int day)

@@ -41,8 +41,10 @@ namespace NeedsVsWants.MessagingSystem
 
         public Chat chat { get; set; }
 
-        void Awake() 
+        protected override void Start()
         {
+            base.Start();
+            
             ObjectPoolManager.instance.Instantiate("Message Box");    
             ObjectPoolManager.instance.Instantiate("Chat Choice Button");
             ObjectPoolManager.instance.Instantiate("Chat Choices Holder");
