@@ -11,9 +11,9 @@ namespace NeedsVsWants.CameraSystem
     public class CameraZoom : MonoBehaviour
     {
         [SerializeField] InputActionReference camerazoom;
-        [SerializeField] float zoomspeed = 10f;
-       [SerializeField] float minFOV = 15f;
-        [SerializeField] float maxFOV = 25f;
+        [SerializeField] float zoomspeed = 3f;
+       [SerializeField] float minFOV = 5f;
+        [SerializeField] float maxFOV = 50f;
         private Camera cameraFOV;
 
         void Start()

@@ -20,7 +20,11 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
+<<<<<<< HEAD:Assets/NeedsVsWants/Models/3D Assets/Toilet_bowl/Bowlmats.mat
+  m_Name: Bowlmats
+=======
   m_Name: Toiletflush_metal
+>>>>>>> c3dbfc4f143e3c4a4b96c5f995b5bacb037d12ac:Assets/NeedsVsWants/Models/3D Assets/Toilet_bowl/Toiletflush_metal.mat
   m_Shader: {fileID: 4800000, guid: 933532a4fcc9baf4fa0491de14d08ed7, type: 3}
   m_ShaderKeywords: _NORMALMAP
   m_LightmapFlags: 4
