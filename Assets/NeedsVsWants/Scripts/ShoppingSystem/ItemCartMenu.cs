@@ -51,8 +51,10 @@ namespace NeedsVsWants.ShoppingSystem
 
         Item _BuyItem;
 
-        void Awake() 
+        protected override void Start()
         {
+            base.Start();
+            
             ObjectPoolManager.instance.Instantiate("Item Slot");
 
             PlayerStatManager.instance.onEditItems += items => 

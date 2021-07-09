@@ -8,12 +8,11 @@ namespace NeedsVsWants.MenuSystem
 {
     public abstract class OptionsTab : Tab
     {
+        [SerializeField]
         Button _TabButton;
 
-        void GetTabButton()
+        void Start()
         {
-            _TabButton = GetComponentInChildren<Button>(true);
-
             _TabButton.onClick.AddListener(() => 
             {
                 if(current)
@@ -21,14 +20,13 @@ namespace NeedsVsWants.MenuSystem
 
                 else
                     EnableTab();
+
+                Debug.Log("Blah");
             });
         }
 
         protected override void OnEnableTab()
         {
-            if(!_TabButton)
-                GetTabButton();
-
             transform.SetActiveChildren(true);
 
             _TabButton.image.color = Color.white;
@@ -36,9 +34,6 @@ namespace NeedsVsWants.MenuSystem
 
         protected override void OnDisableTab()
         {
-            if(!_TabButton)
-                GetTabButton();
-
             transform.SetActiveChildren(false);
             
             _TabButton.gameObject.SetActive(true);

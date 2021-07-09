@@ -50,8 +50,10 @@ namespace NeedsVsWants.ShoppingSystem
 
         public Item item { get; set; }
 
-        void Awake() 
+        protected override void Start()
         {
+            base.Start();
+            
             PlayerStatManager.instance.onRemoveItems += items => 
             {
                 if(isActive && items.Contains(item))

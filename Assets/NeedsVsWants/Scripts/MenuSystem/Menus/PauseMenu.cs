@@ -50,7 +50,7 @@ namespace NeedsVsWants.MenuSystem
             transform.SetActiveChildren(false);
 
             if(_IsOnFocus)
-                _DayProgressor.Unpause();
+                Time.timeScale = 1; //_DayProgressor.Unpause();
         }
 
         protected override void OnEnableMenu()
@@ -58,7 +58,7 @@ namespace NeedsVsWants.MenuSystem
             transform.SetActiveChildren(true);
 
             if(_IsOnFocus)
-                _DayProgressor.Pause();
+                Time.timeScale = 0; //_DayProgressor.Pause();
         }
 
         async protected override void OnReturn()

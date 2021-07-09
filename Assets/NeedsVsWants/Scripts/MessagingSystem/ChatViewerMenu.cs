@@ -6,9 +6,11 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.InputSystem.UI;
 
+using NeedsVsWants.Audio;
 using NeedsVsWants.Player;
 using NeedsVsWants.Patterns;
 using NeedsVsWants.MenuSystem;
+using NeedsVsWants.PhoneSystem;
 
 using TMPro;
 
@@ -26,6 +28,12 @@ namespace NeedsVsWants.MessagingSystem
         InputSystemUIInputModule _InputModule;
         [SerializeField]
         ScrollRect _ScrollRect;
+        [SerializeField]
+        AudioAsset _MessageSFXAsset;
+        [SerializeField]
+        AudioAsset _ButtonClickAsset;
+        [SerializeField]
+        Indicator _Indicator;
 
         Conversation _CurrentConversation;
 
@@ -33,8 +41,10 @@ namespace NeedsVsWants.MessagingSystem
 
         public Chat chat { get; set; }
 
-        void Awake() 
+        protected override void Start()
         {
+            base.Start();
+            
             ObjectPoolManager.instance.Instantiate("Message Box");    
             ObjectPoolManager.instance.Instantiate("Chat Choice Button");
             ObjectPoolManager.instance.Instantiate("Chat Choices Holder");
@@ -56,6 +66,8 @@ namespace NeedsVsWants.MessagingSystem
         void OnClickChoice(int choiceIndex)
         {
             ChatChoice chatChoice = _CurrentConversation.choices[choiceIndex];
+
+            _ButtonClickAsset.PlayOneShot(audioSource);
 
             _IsShowingChoice = false;
 
@@ -110,12 +122,12 @@ namespace NeedsVsWants.MessagingSystem
 
                 else // If At the end of the conversation
                 {
-                    if(!_CurrentConversation)
-                    {
+                    // if(!_CurrentConversation)
+                    // {
                         chat.hasRead = true;
 
                         Phone.instance.EnablePlayerControl();
-                    }
+                    //}
 
                     chat.currentMessageIndex--;
                 }
@@ -130,12 +142,14 @@ namespace NeedsVsWants.MessagingSystem
                 
                 // move the Scroll Position to current Message Box       
                 ScrollToBottom();
+
+                _MessageSFXAsset.PlayOneShot(audioSource);
             }
         }
 
         async void ScrollToBottom()
         {
-            await System.Threading.Tasks.Task.Delay(20);
+            await System.Threading.Tasks.Task.Delay(50);
 
             _ScrollRect.verticalNormalizedPosition = 0;
         }
@@ -263,9 +277,20 @@ namespace NeedsVsWants.MessagingSystem
 
         protected override void OnDisableMenu()
         {
+            int messagesUnread = PlayerStatManager.instance.chats.Where(chat => !chat.hasRead).Count();
+            
             transform.SetActiveChildren(false);
 
             _IsShowingChoice = false;
+
+            if(messagesUnread > 0)
+            {
+                _Indicator.gameObject.SetActive(true);
+                _Indicator.text = messagesUnread.ToString();
+            }
+
+            else
+                _Indicator.gameObject.SetActive(false);
         }
 
         protected override void OnEnableMenu()
@@ -277,7 +302,11 @@ namespace NeedsVsWants.MessagingSystem
             FillChat();
 
             if(!chat.hasRead)
+            {
                 Phone.instance.DisablePlayerControl();
+
+                _MessageSFXAsset.PlayOneShot(audioSource);
+            }
         }
 
         protected override void OnReturn()

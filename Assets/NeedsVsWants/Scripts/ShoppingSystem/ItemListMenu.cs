@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+using NeedsVsWants.Audio;
 using NeedsVsWants.Player;
 using NeedsVsWants.Patterns;
 using NeedsVsWants.MenuSystem;
@@ -23,6 +24,8 @@ namespace NeedsVsWants.ShoppingSystem
         ItemViewerMenu _ItemViewerMenu;
         [SerializeField]
         LoadingPopUp _LoadingPopUp;
+        [SerializeField]
+        AudioAsset _ButtonClickAsset;
 
         [Header("Sale")]
         [SerializeField]
@@ -42,8 +45,10 @@ namespace NeedsVsWants.ShoppingSystem
 
         Coroutine _UpdateListCoroutine;
 
-        void Awake() 
+        protected override void Start()
         {
+            base.Start();
+            
             System.Action<Item[]> onItemListChange = items =>
             {
                 if(isActive)
@@ -77,13 +82,13 @@ namespace NeedsVsWants.ShoppingSystem
 
             for(int i = 0; i < shopItemButtons.Length; i++)
             {
-                shopItemButtons[i].AssignItem(shopItems[i], menuGroup as AppMenuGroup, _ItemViewerMenu);
+                shopItemButtons[i].AssignItem(shopItems[i], menuGroup as AppMenuGroup, _ItemViewerMenu, () => _ButtonClickAsset.PlayOneShot(audioSource));
                 shopItemButtons[i].transform.SetParent(i % 2 == 0 ? _ShopLeftList.transform : _ShopRightList.transform, false);
             }
             
             for(int i = 0; i < saleItemButtons.Length; i++)
             {
-                saleItemButtons[i].AssignItem(saleItems[i], menuGroup as AppMenuGroup, _ItemViewerMenu);
+                saleItemButtons[i].AssignItem(saleItems[i], menuGroup as AppMenuGroup, _ItemViewerMenu, () => _ButtonClickAsset.PlayOneShot(audioSource));
                 saleItemButtons[i].transform.SetParent(i % 2 == 0 ? _SaleLeftList.transform : _SaleRightList.transform, false);
             }
             

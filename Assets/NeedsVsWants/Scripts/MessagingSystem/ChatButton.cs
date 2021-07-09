@@ -18,10 +18,13 @@ namespace NeedsVsWants.MessagingSystem
         TMP_Text _PreviewText;
 
         Image _Icon;
+        Image _BackgroundImage;
 
         protected override void Awake() 
         {
             TMP_Text[] texts = GetComponentsInChildren<TMP_Text>();
+
+            _BackgroundImage = GetComponent<Image>();
 
             _Icon = transform.GetChild(0).GetComponentInChildren<Image>();
 
@@ -29,7 +32,7 @@ namespace NeedsVsWants.MessagingSystem
             _PreviewText = texts[1];
         }
 
-        public void AssignChat(Chat chat, AppMenuGroup appMenuGroup, ChatViewerMenu chatViewerMenu)
+        public void AssignChat(Chat chat, AppMenuGroup appMenuGroup, ChatViewerMenu chatViewerMenu, System.Action onClickEvent)
         {
             Conversation currentConversation;
             Message message;
@@ -52,7 +55,10 @@ namespace NeedsVsWants.MessagingSystem
 
                     // Limit Text
                     _PreviewText.text = currentConversation.characters[message.characterIndex].name + ": ";
-                    _PreviewText.text += message.text.Substring(0, Mathf.Clamp(message.text.Length, 0, 15));
+                    _PreviewText.text += message.text;
+
+                    if(_PreviewText.text.Length > 16)
+                        _PreviewText.text = _PreviewText.text.Substring(0, Mathf.Clamp(16, 0, _PreviewText.text.Length)) + "...";
                     
                     _Icon.sprite =  currentConversation.characters[message.characterIndex].profilePicture;
                 }
@@ -63,8 +69,11 @@ namespace NeedsVsWants.MessagingSystem
 
                     // Limit Text
                     _PreviewText.text = chat.conversation.characters[message.characterIndex].name + ": ";
-                    _PreviewText.text += message.text.Substring(0, Mathf.Clamp(message.text.Length, 0, 15));
+                    _PreviewText.text += message.text;
                     
+                    if(_PreviewText.text.Length > 16)
+                        _PreviewText.text = _PreviewText.text.Substring(0, Mathf.Clamp(16, 0, _PreviewText.text.Length)) + "...";
+
                     _Icon.sprite =  chat.conversation.characters[message.characterIndex].profilePicture;
                 }
             }
@@ -72,6 +81,11 @@ namespace NeedsVsWants.MessagingSystem
             else
                 _PreviewText.text  = "";
 
+            Color color = _BackgroundImage.color;
+
+            color.a = chat.hasRead ? .5f : 1;
+
+            _BackgroundImage.color = color; 
 
             onClick.RemoveAllListeners();
 
@@ -80,6 +94,8 @@ namespace NeedsVsWants.MessagingSystem
                 chatViewerMenu.chat = chat;
 
                 appMenuGroup.SwitchTo(chatViewerMenu);
+
+                onClickEvent?.Invoke();
             });
         }
     }
