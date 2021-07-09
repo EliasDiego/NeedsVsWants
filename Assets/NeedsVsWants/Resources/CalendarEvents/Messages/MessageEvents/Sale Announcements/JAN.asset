@@ -13,9 +13,8 @@ MonoBehaviour:
   m_Name: JAN
   m_EditorClassIdentifier: 
   conversation: {fileID: 11400000, guid: 0b18a6cd7c807c442a0f3a2466aa019e, type: 2}
-  chatChoices: []
   date:
     year: 0
     month: 1
-    day: 1
+    day: 2
   isYearSpecific: 0

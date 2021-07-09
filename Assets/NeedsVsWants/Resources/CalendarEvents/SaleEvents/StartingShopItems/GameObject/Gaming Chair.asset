@@ -22,6 +22,6 @@ MonoBehaviour:
     _HappinessValue: 100
     _HungerValue: 0
     _SocialValue: 0
-  isDiscounted: 0
+  isDiscounted: 1
   discountPrice: 14999.25
-  _GameObjectName: Gaming Chair
+  _GameObjectName: 'Gaming_Chair '
