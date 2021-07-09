@@ -40,9 +40,6 @@ namespace NeedsVsWants.MenuSystem
         public void NewGame(int levelIndex)
         {
             SceneManager.LoadScene(levelIndex, LoadSceneMode.Single);
-
-            // Create New File
-            PlayerStat.CreateNewInstance();
         }
 
         public void Quit()
