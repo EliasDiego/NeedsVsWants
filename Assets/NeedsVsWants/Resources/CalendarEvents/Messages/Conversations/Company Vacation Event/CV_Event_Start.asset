@@ -29,7 +29,7 @@ MonoBehaviour:
       _HealthValue: -5
       _HappinessValue: 40
       _HungerValue: 20
-      _SocialValue: 40
+      _SocialValue: 70
     onChoiceEvent:
       m_PersistentCalls:
         m_Calls: []

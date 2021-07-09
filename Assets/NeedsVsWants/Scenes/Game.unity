@@ -686,6 +686,15 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2213281672985921806, guid: 94ec9da883dd7d04999075eafc968485, type: 3}
+      propertyPath: m_text
+      value: 'To move around the room, press A or D.
+
+        To zoom in and out,
+        use the scroll bar.
+
+        To access the pause menu, press the Esc key.'
+      objectReference: {fileID: 0}
     - target: {fileID: 2302525292989773474, guid: 94ec9da883dd7d04999075eafc968485, type: 3}
       propertyPath: m_RootOrder
       value: 2

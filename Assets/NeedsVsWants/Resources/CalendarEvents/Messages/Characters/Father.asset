@@ -12,4 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 615fa48d00b5b0842b050b05b9403fde, type: 3}
   m_Name: Father
   m_EditorClassIdentifier: 
-  _ProfilePicture: {fileID: 0}
+  _ProfilePicture: {fileID: 4239396667467378739, guid: 219f0c5c7e1b29e4c9fcb70565fedeb3, type: 3}
