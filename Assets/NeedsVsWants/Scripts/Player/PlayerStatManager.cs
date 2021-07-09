@@ -151,6 +151,9 @@ namespace NeedsVsWants.Player
         {
             base.Awake();
 
+            // Create New File
+            PlayerStat.CreateNewInstance();
+
             _PlayerStat = PlayerStat.instance;
         }
 
