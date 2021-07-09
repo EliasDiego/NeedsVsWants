@@ -36,8 +36,10 @@ namespace NeedsVsWants.InvestmentSystem
         protected abstract string investmentEventName { get; }
         protected bool investmentEventShownInCalendar { get => _InvestmentEvent.isShownOnCalendar; set => _InvestmentEvent.isShownOnCalendar = value; }
 
-        void Awake() 
+        protected override void Start()
         {
+            base.Start();
+            
             PlayerStatManager.instance.onDateChange += dateTime => 
             {
                 if(IsWithinRange(dateTime))

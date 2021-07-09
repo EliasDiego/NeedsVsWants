@@ -29,8 +29,9 @@ namespace NeedsVsWants.BillingSystem
 
         protected abstract string billEventName { get; }
 
-        void Awake() 
+        protected override void Start()
         {
+            base.Start();
             PlayerStatManager.instance.onDateChange += dateTime => 
             {
                 if(IsWithinDate(dateTime))

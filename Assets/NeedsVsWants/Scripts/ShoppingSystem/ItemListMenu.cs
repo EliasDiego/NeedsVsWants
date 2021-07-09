@@ -45,8 +45,10 @@ namespace NeedsVsWants.ShoppingSystem
 
         Coroutine _UpdateListCoroutine;
 
-        void Awake() 
+        protected override void Start()
         {
+            base.Start();
+            
             System.Action<Item[]> onItemListChange = items =>
             {
                 if(isActive)
