@@ -12,4 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 10e47a410c0ff354d9d40679c5669675, type: 3}
   m_Name: Job Income
   m_EditorClassIdentifier: 
-  incomeRate: 25000
+  _StartIncomeRate: 25000

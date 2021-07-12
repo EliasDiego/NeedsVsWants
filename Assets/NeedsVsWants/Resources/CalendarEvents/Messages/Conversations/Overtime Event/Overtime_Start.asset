@@ -1,0 +1,53 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 588500f11bfcf094bb32a4e00f946e8a, type: 3}
+  m_Name: Overtime_Start
+  m_EditorClassIdentifier: 
+  title: Overtime
+  characters:
+  - {fileID: 11400000, guid: 8c47e9dcd8476ee40a2fe6deaa7520e4, type: 2}
+  messages:
+  - characterIndex: 0
+    text: Hi Anne. I need your help.
+  - characterIndex: 0
+    text: One of the developers had an emergency and cannot come today.
+  - characterIndex: 0
+    text: I was hoping you can come over and do his work.
+  - characterIndex: 0
+    text: I will pay you P2000 for this. Can you do it?
+  choices:
+  - name: Yes
+    nextConversation: {fileID: 11400000, guid: 70ca5abf42e839b40a8e8f04cbc9f193, type: 2}
+    applyEffects: 1
+    moneyOnChoice: 2000
+    welfareOnChoice:
+      _AmountType: 0
+      _HealthValue: -10
+      _HappinessValue: -20
+      _HungerValue: 0
+      _SocialValue: -15
+    onChoiceEvent:
+      m_PersistentCalls:
+        m_Calls: []
+  - name: No
+    nextConversation: {fileID: 11400000, guid: c6eac79afedf62e4096039231cda6416, type: 2}
+    applyEffects: 0
+    moneyOnChoice: 2000
+    welfareOnChoice:
+      _AmountType: 1
+      _HealthValue: -5
+      _HappinessValue: -10
+      _HungerValue: 0
+      _SocialValue: -5
+    onChoiceEvent:
+      m_PersistentCalls:
+        m_Calls: []

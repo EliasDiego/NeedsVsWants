@@ -91,7 +91,7 @@ namespace NeedsVsWants.ShoppingSystem
                 saleItemButtons[i].AssignItem(saleItems[i], menuGroup as AppMenuGroup, _ItemViewerMenu, () => _ButtonClickAsset.PlayOneShot(audioSource));
                 saleItemButtons[i].transform.SetParent(i % 2 == 0 ? _SaleLeftList.transform : _SaleRightList.transform, false);
             }
-            
+
             _ContentLayoutGroup.enabled = false;
 
             yield return new WaitForSecondsRealtime(.5f);

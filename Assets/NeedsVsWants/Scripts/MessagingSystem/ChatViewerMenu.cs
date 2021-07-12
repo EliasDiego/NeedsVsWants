@@ -109,27 +109,27 @@ namespace NeedsVsWants.MessagingSystem
             if(chat.currentMessageIndex >= _CurrentConversation.messages.Length)
             {
                 // Check if there are choices
-                if(!_IsShowingChoice && _CurrentConversation.choices.Length > 0)
+                if(!_IsShowingChoice)
                 {
-                    // Show Choices Here
-                    AddChatChoiceHolder(_CurrentConversation.choices, OnClickChoice);
+                    if(_CurrentConversation.choices.Length > 0)
+                    {
+                        // Show Choices Here
+                        AddChatChoiceHolder(_CurrentConversation.choices, OnClickChoice);
 
-                    // move the Scroll Position to current Chat Choice Holder
-                    ScrollToBottom();
+                        // move the Scroll Position to current Chat Choice Holder
+                        ScrollToBottom();
 
-                    _IsShowingChoice = true;
-                }
+                        _IsShowingChoice = true;
+                    }
 
-                else // If At the end of the conversation
-                {
-                    // if(!_CurrentConversation)
-                    // {
+                    else // If At the end of the conversation
+                    {
                         chat.hasRead = true;
 
                         Phone.instance.EnablePlayerControl();
-                    //}
 
-                    chat.currentMessageIndex--;
+                        chat.currentMessageIndex--;
+                    }
                 }
             }
 

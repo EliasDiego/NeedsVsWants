@@ -15,8 +15,8 @@ MonoBehaviour:
   _AudioClip: {fileID: 8300000, guid: ba420924ae2f9f2439def44fc26f0c62, type: 3}
   _OutputAudioMixerGroup: {fileID: -6926243139782011487, guid: 6a4b6ff46fe2a7e4ab5caf7c15ab5371, type: 2}
   _Priority: 128
-  _Volume: 1
-  _Pitch: 1
+  _Volume: 0.544
+  _Pitch: 1.41
   _RandomPitch:
     min: 0
     max: 0
