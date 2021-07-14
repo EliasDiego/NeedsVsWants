@@ -16,7 +16,7 @@ MonoBehaviour:
     year: 2020
     month: 1
     day: 1
-  startMoney: 10000
+  startMoney: 25000
   startHealthWelfare:
     value: 100
     maxValue: 100

@@ -1,0 +1,52 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 588500f11bfcf094bb32a4e00f946e8a, type: 3}
+  m_Name: Movie_Start
+  m_EditorClassIdentifier: 
+  title: Movie Night
+  characters:
+  - {fileID: 11400000, guid: 445c7d9518b60cc4c9f3972ac588f7a4, type: 2}
+  - {fileID: 11400000, guid: 4c03642d09e198548b6f62adf821e0c7, type: 2}
+  messages:
+  - characterIndex: 0
+    text: Hi Anne! Are you free later?
+  - characterIndex: 0
+    text: There's this new movie that came out and looks really cool.
+  - characterIndex: 0
+    text: The tickets cost P500, wanna go see it?
+  choices:
+  - name: Yes
+    nextConversation: {fileID: 11400000, guid: 9c41394aebf537a4fae5511b02a2156b, type: 2}
+    applyEffects: 1
+    moneyOnChoice: -500
+    welfareOnChoice:
+      _AmountType: 0
+      _HealthValue: 0
+      _HappinessValue: 30
+      _HungerValue: 0
+      _SocialValue: 50
+    onChoiceEvent:
+      m_PersistentCalls:
+        m_Calls: []
+  - name: No
+    nextConversation: {fileID: 11400000, guid: 05e4c7b067ee6cb4799a6d24041906e2, type: 2}
+    applyEffects: 0
+    moneyOnChoice: 0
+    welfareOnChoice:
+      _AmountType: 0
+      _HealthValue: 0
+      _HappinessValue: 0
+      _HungerValue: 0
+      _SocialValue: 0
+    onChoiceEvent:
+      m_PersistentCalls:
+        m_Calls: []

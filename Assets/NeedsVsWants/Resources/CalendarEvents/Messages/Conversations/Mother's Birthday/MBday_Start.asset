@@ -1,0 +1,53 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 588500f11bfcf094bb32a4e00f946e8a, type: 3}
+  m_Name: MBday_Start
+  m_EditorClassIdentifier: 
+  title: Mother's Birthday
+  characters:
+  - {fileID: 11400000, guid: 9a6da2aaea4d7fd4880001c6bd30b5c4, type: 2}
+  - {fileID: 11400000, guid: 4c03642d09e198548b6f62adf821e0c7, type: 2}
+  messages:
+  - characterIndex: 0
+    text: Hi hon! Your mother's birthday is today.
+  - characterIndex: 0
+    text: I'm planning to buy her some clothes with the logo of the kpop group you
+      both watch.
+  - characterIndex: 0
+    text: Want to come with me? We can split the cost P500 each.
+  choices:
+  - name: Yes
+    nextConversation: {fileID: 11400000, guid: 71f055ef47fd68249a02d17a02d187ee, type: 2}
+    applyEffects: 1
+    moneyOnChoice: -500
+    welfareOnChoice:
+      _AmountType: 0
+      _HealthValue: 0
+      _HappinessValue: 30
+      _HungerValue: 0
+      _SocialValue: 50
+    onChoiceEvent:
+      m_PersistentCalls:
+        m_Calls: []
+  - name: No
+    nextConversation: {fileID: 11400000, guid: a28be879df794dc468ab2114165eb760, type: 2}
+    applyEffects: 0
+    moneyOnChoice: -500
+    welfareOnChoice:
+      _AmountType: 0
+      _HealthValue: 0
+      _HappinessValue: 10
+      _HungerValue: 0
+      _SocialValue: 15
+    onChoiceEvent:
+      m_PersistentCalls:
+        m_Calls: []

@@ -1,0 +1,53 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 588500f11bfcf094bb32a4e00f946e8a, type: 3}
+  m_Name: Christmas_party_start
+  m_EditorClassIdentifier: 
+  title: Christmas Party
+  characters:
+  - {fileID: 11400000, guid: 445c7d9518b60cc4c9f3972ac588f7a4, type: 2}
+  - {fileID: 11400000, guid: 4c03642d09e198548b6f62adf821e0c7, type: 2}
+  messages:
+  - characterIndex: 0
+    text: Hi Anne! Are you coming to the Christmas Party later? Almost all of the
+      guys are going to be there!
+  - characterIndex: 0
+    text: You also have to get an exchange gift P500. Last time some people got upset
+      that the price of the gifts were too different, so we decided to just stick
+      to P500.
+  choices:
+  - name: Yes
+    nextConversation: {fileID: 11400000, guid: b0335e4a202542b44a40389b36e1a9b9, type: 2}
+    applyEffects: 1
+    moneyOnChoice: -500
+    welfareOnChoice:
+      _AmountType: 0
+      _HealthValue: 0
+      _HappinessValue: 50
+      _HungerValue: 30
+      _SocialValue: 70
+    onChoiceEvent:
+      m_PersistentCalls:
+        m_Calls: []
+  - name: No
+    nextConversation: {fileID: 11400000, guid: 247f39c46603d86499b320285bcc16a8, type: 2}
+    applyEffects: 0
+    moneyOnChoice: -500
+    welfareOnChoice:
+      _AmountType: 0
+      _HealthValue: 0
+      _HappinessValue: 30
+      _HungerValue: 15
+      _SocialValue: 30
+    onChoiceEvent:
+      m_PersistentCalls:
+        m_Calls: []

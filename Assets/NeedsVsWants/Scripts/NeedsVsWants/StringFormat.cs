@@ -29,7 +29,7 @@ namespace NeedsVsWants
 
         public static string ToPriceFormat(double price)
         {
-            return price.ToString("C").Replace('₱', 'P');
+            return price.ToString("C").Replace('₱', 'P').Replace('$', 'P');
         }
     }
 }

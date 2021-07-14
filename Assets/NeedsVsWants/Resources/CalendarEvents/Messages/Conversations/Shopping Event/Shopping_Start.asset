@@ -1,0 +1,54 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 588500f11bfcf094bb32a4e00f946e8a, type: 3}
+  m_Name: Shopping_Start
+  m_EditorClassIdentifier: 
+  title: Shopping
+  characters:
+  - {fileID: 11400000, guid: 61aaffff4a0cb3148aaaecb615619681, type: 2}
+  - {fileID: 11400000, guid: 4c03642d09e198548b6f62adf821e0c7, type: 2}
+  messages:
+  - characterIndex: 0
+    text: Hey girl! Whatcha doin?
+  - characterIndex: 0
+    text: Want to go shopping today? There's a sale at Breezy's.
+  - characterIndex: 0
+    text: The boots you've been eyeing on is around P1500 now!
+  - characterIndex: 0
+    text: You in?
+  choices:
+  - name: Yes
+    nextConversation: {fileID: 11400000, guid: 02225572764885547b75cb7ba63366a3, type: 2}
+    applyEffects: 1
+    moneyOnChoice: -1500
+    welfareOnChoice:
+      _AmountType: 0
+      _HealthValue: 0
+      _HappinessValue: 30
+      _HungerValue: 0
+      _SocialValue: 50
+    onChoiceEvent:
+      m_PersistentCalls:
+        m_Calls: []
+  - name: No
+    nextConversation: {fileID: 11400000, guid: f69c0722ce2003040abffee14b813066, type: 2}
+    applyEffects: 0
+    moneyOnChoice: -1500
+    welfareOnChoice:
+      _AmountType: 1
+      _HealthValue: 0
+      _HappinessValue: 15
+      _HungerValue: 0
+      _SocialValue: 20
+    onChoiceEvent:
+      m_PersistentCalls:
+        m_Calls: []

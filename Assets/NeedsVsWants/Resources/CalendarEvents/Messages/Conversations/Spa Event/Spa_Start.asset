@@ -1,0 +1,52 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 588500f11bfcf094bb32a4e00f946e8a, type: 3}
+  m_Name: Spa_Start
+  m_EditorClassIdentifier: 
+  title: Spa
+  characters:
+  - {fileID: 11400000, guid: ab4256fda8870ff4dae1d78abf4e1b97, type: 2}
+  messages:
+  - characterIndex: 0
+    text: Hi Anne! Are you free today?
+  - characterIndex: 0
+    text: I was gonna ask if you want to go to a spa today. Just to relieve stress
+      and worries you know?
+  - characterIndex: 0
+    text: There is this place that offers a spa treatment for P500. Wanna go?
+  choices:
+  - name: Yes
+    nextConversation: {fileID: 11400000, guid: 24ef59ad546b101498187a471f916474, type: 2}
+    applyEffects: 1
+    moneyOnChoice: -500
+    welfareOnChoice:
+      _AmountType: 0
+      _HealthValue: 10
+      _HappinessValue: 30
+      _HungerValue: 0
+      _SocialValue: 50
+    onChoiceEvent:
+      m_PersistentCalls:
+        m_Calls: []
+  - name: No
+    nextConversation: {fileID: 11400000, guid: 1d84b6760da07f345bcb2ee205699ebc, type: 2}
+    applyEffects: 0
+    moneyOnChoice: 0
+    welfareOnChoice:
+      _AmountType: 0
+      _HealthValue: 0
+      _HappinessValue: 0
+      _HungerValue: 0
+      _SocialValue: 0
+    onChoiceEvent:
+      m_PersistentCalls:
+        m_Calls: []

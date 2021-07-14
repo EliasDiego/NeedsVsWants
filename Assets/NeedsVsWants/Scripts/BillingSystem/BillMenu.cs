@@ -59,8 +59,6 @@ namespace NeedsVsWants.BillingSystem
 
         void OnAfterProcessing(double inputAmount)
         {
-            UpdateAmountDisplay();
-            
             PlayerStatManager.instance.currentMoney -= inputAmount;
 
             _CurrentBalance -= inputAmount;
@@ -69,6 +67,8 @@ namespace NeedsVsWants.BillingSystem
                 _Indicator.gameObject.SetActive(false);
                 
             _AmountInputField.text = "";
+
+            UpdateAmountDisplay();
         }
 
         void UpdateAmountDisplay()
