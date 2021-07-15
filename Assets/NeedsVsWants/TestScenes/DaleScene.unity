@@ -280,7 +280,7 @@ MonoBehaviour:
       m_Groups: 
       m_Action: Camerarotate
       m_Flags: 8
-  rotatespeed: 5
+  rotatespeed: 50
 --- !u!65 &111114709
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -4825,6 +4825,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cab3fc44246e9bc4198222c7c8a83765, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _TabButton: {fileID: 0}
   _AudioMixer: {fileID: 24100000, guid: 6a4b6ff46fe2a7e4ab5caf7c15ab5371, type: 2}
   _MasterVolume: {fileID: 1719687576123356905}
   _MusicVolume: {fileID: 1719687576715602347}
@@ -8672,6 +8673,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 950ee28d4b0b57948bcde9a5cb2ca759, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _TabButton: {fileID: 0}
   _ResolutionDropdown: {fileID: 1719687575127929434}
   _DisplayModeDropdown: {fileID: 1719687576722553718}
 --- !u!224 &1719687577027686387
