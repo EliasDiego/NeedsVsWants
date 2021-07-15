@@ -3,8 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 
 using UnityEngine;
-
-using NeedsVsWants.Patterns;
+using UnityEngine.UI;
 
 using TMPro;
 
@@ -27,11 +26,15 @@ namespace NeedsVsWants.CalendarSystem
         
         DateTime _CurrentDateTime;
 
+        Action _CurrentEvent;
+
         TMP_Text _TimeText;
 
         void Awake()
         {
             _TimeText = GetComponentInChildren<TMP_Text>();
+
+            Unpause();
         }
 
         void Start() 
@@ -98,11 +101,20 @@ namespace NeedsVsWants.CalendarSystem
             PlayerStatManager.instance.currentDate = _CurrentDateTime;
         }
 
-        public void SetTimeScale(float scale) => _HourTimeScale = scale;
+        public void Skip()
+        {
+            _IsPaused = false;
+
+            _HourTimeScale = 2;
+
+            _CurrentEvent = Skip;
+        }
 
         public void Pause()
         {
             _IsPaused = true;
+
+            _CurrentEvent = Pause;
         }
 
         public void Unpause()
@@ -110,6 +122,18 @@ namespace NeedsVsWants.CalendarSystem
             _IsPaused = false;
 
             _HourTimeScale = 1;
+            
+            _CurrentEvent = Unpause;
+        }
+
+        public void Stop()
+        {
+            _IsPaused = true;
+        }
+        
+        public void Resume()
+        {
+            _CurrentEvent?.Invoke();
         }
     }
 }

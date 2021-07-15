@@ -89,7 +89,7 @@ namespace NeedsVsWants.MenuSystem
             foreach(Button button in _DisableButtons)
                 button.interactable = true;
 
-            _DayProgressor.Unpause();
+            _DayProgressor.Resume();
         }
         
         public void DisablePlayerControl()
@@ -97,7 +97,7 @@ namespace NeedsVsWants.MenuSystem
             foreach(Button button in _DisableButtons)
                 button.interactable = false;
                 
-            _DayProgressor.Pause();
+            _DayProgressor.Stop();
         }
     }
 }

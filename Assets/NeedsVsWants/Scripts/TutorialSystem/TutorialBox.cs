@@ -77,6 +77,16 @@ namespace NeedsVsWants.TutorialSystem
                 
                 _OnDisable?.Invoke();
             }
+
+            else
+            {
+                TutorialBox currentTutorialBox = this;
+
+                while(currentTutorialBox._NextTutorialBox)
+                    currentTutorialBox = currentTutorialBox._NextTutorialBox;
+
+                currentTutorialBox._OnDisable?.Invoke();
+            }
         }
 
         public void Skip()
