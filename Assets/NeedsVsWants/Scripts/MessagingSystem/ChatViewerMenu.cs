@@ -34,6 +34,10 @@ namespace NeedsVsWants.MessagingSystem
         AudioAsset _ButtonClickAsset;
         [SerializeField]
         Indicator _Indicator;
+        [SerializeField]
+        TMP_Text _LeftClickText;
+        [SerializeField]
+        PopUp _PopUpPanel;
 
         Conversation _CurrentConversation;
 
@@ -95,6 +99,8 @@ namespace NeedsVsWants.MessagingSystem
                 chat.hasRead = true;
 
                 Phone.instance.EnablePlayerControl();
+                
+                _PopUpPanel.DisablePopUp();
             }
         }
 
@@ -128,6 +134,8 @@ namespace NeedsVsWants.MessagingSystem
 
                         Phone.instance.EnablePlayerControl();
 
+                        _PopUpPanel.DisablePopUp();
+
                         chat.currentMessageIndex--;
                     }
                 }
@@ -145,6 +153,9 @@ namespace NeedsVsWants.MessagingSystem
 
                 _MessageSFXAsset.PlayOneShot(audioSource);
             }
+            
+            if(_LeftClickText.gameObject.activeSelf)
+                _LeftClickText.gameObject.SetActive(false);
         }
 
         async void ScrollToBottom()
@@ -306,6 +317,10 @@ namespace NeedsVsWants.MessagingSystem
                 Phone.instance.DisablePlayerControl();
 
                 _MessageSFXAsset.PlayOneShot(audioSource);
+
+                _PopUpPanel.EnablePopUp();
+
+                _LeftClickText.gameObject.SetActive(true);
             }
         }
 
