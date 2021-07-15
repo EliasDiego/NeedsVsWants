@@ -12,13 +12,13 @@ namespace NeedsVsWants.WelfareSystem
     public class WelfareManager : MonoBehaviour
     {
         [SerializeField]
-        WelfareSlider _HealthWelfare;
+        WelfareHandler _HealthWelfare;
         [SerializeField]
-        WelfareSlider _HungerWelfare;
+        WelfareHandler _HungerWelfare;
         [SerializeField]
-        WelfareSlider _HappinessWelfare;
+        WelfareHandler _HappinessWelfare;
         [SerializeField]
-        WelfareSlider _SocialWelfare;
+        WelfareHandler _SocialWelfare;
 
         void Start() 
         {

@@ -15,9 +15,9 @@ namespace NeedsVsWants.CalendarSystem
     {
         [Header("Day Speed")]
         [SerializeField]
-        double _HourTimeDelta = 1;
+        float _HourTimeDelta = 1;
         [SerializeField]
-        double _HourTimeScale = 1;
+        float _HourTimeScale = 1;
         
         int _CurrentMonth;
         int _CurrentDay;
@@ -29,6 +29,8 @@ namespace NeedsVsWants.CalendarSystem
         Action _CurrentEvent;
 
         TMP_Text _TimeText;
+
+        public static float hourTimeScale { get; set; }
 
         void Awake()
         {
@@ -105,7 +107,7 @@ namespace NeedsVsWants.CalendarSystem
         {
             _IsPaused = false;
 
-            _HourTimeScale = 2;
+            hourTimeScale = _HourTimeScale = 2;
 
             _CurrentEvent = Skip;
         }
@@ -121,7 +123,7 @@ namespace NeedsVsWants.CalendarSystem
         {
             _IsPaused = false;
 
-            _HourTimeScale = 1;
+            hourTimeScale = _HourTimeScale = 1;
             
             _CurrentEvent = Unpause;
         }

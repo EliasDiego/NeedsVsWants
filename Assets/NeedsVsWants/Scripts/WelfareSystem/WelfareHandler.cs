@@ -4,20 +4,20 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-using NeedsVsWants;
-
 namespace NeedsVsWants.WelfareSystem
 {
-    public class WelfareSlider : MonoBehaviour
+    public class WelfareHandler : MonoBehaviour
     {
         [SerializeField]
+        Slider _Slider;
+        [SerializeField]
         float _ValueChangeSpeed = 1;
+        [SerializeField]
+        WelfareEmote _Emote;
         
         bool _IsValueChanged = false;
 
         float _NewValue = 0;
-
-        Slider _Slider;
 
         public float value 
         {
@@ -27,6 +27,12 @@ namespace NeedsVsWants.WelfareSystem
                 _NewValue = value;
 
                 _IsValueChanged = true;
+                
+                if(_Emote)
+                {
+                    _Emote.isPositive = _Slider.value < value;
+                    _Emote?.DisablePopUp();
+                }
             }
         }
 
@@ -42,16 +48,11 @@ namespace NeedsVsWants.WelfareSystem
             }
         }
 
-        void Awake() 
-        {
-            _Slider = GetComponentInChildren<Slider>();
-        }
-
         void Update()
         {
             if(_IsValueChanged)
             {
-                _Slider.value = Mathf.MoveTowards(_Slider.value, _NewValue, _ValueChangeSpeed * Time.deltaTime);
+                _Slider.value = Mathf.MoveTowards(_Slider.value, _NewValue, _ValueChangeSpeed * Time.deltaTime * CalendarSystem.DayProgressor.hourTimeScale);
 
                 if(Mathf.Approximately(_Slider.value, _NewValue))
                     _IsValueChanged = false;
