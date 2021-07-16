@@ -85,7 +85,7 @@ namespace NeedsVsWants.WelfareSystem
             _Rigidbody.useGravity = true;
             _Rigidbody.position = spawnPoint;
 
-            randomSpherePoint.y = -Mathf.Abs(randomSpherePoint.y);
+            randomSpherePoint.y = Mathf.Abs(randomSpherePoint.y);
 
             _Rigidbody.AddForce(randomSpherePoint * 10, ForceMode.Impulse);
         }
