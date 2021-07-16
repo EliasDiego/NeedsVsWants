@@ -83,10 +83,8 @@ namespace NeedsVsWants.MessagingSystem
             if(chatChoice.applyEffects)
             {
                 PlayerStatManager.instance.currentMoney += chatChoice.moneyOnChoice;
-                PlayerStatManager.instance.currentHealthWelfare = chatChoice.welfareOnChoice.GetHealth(PlayerStatManager.instance.currentHealthWelfare);
-                PlayerStatManager.instance.currentHappinessWelfare = chatChoice.welfareOnChoice.GetHealth(PlayerStatManager.instance.currentHappinessWelfare);
-                PlayerStatManager.instance.currentHungerWelfare = chatChoice.welfareOnChoice.GetHealth(PlayerStatManager.instance.currentHungerWelfare);
-                PlayerStatManager.instance.currentSocialWelfare = chatChoice.welfareOnChoice.GetHealth(PlayerStatManager.instance.currentSocialWelfare);
+
+                WelfareSystem.WelfareDropManager.instance.SpawnWelfareDropsOnAnne(chatChoice.welfareOnChoice, 5);
 
                 chatChoice.onChoiceEvent?.Invoke();
             }

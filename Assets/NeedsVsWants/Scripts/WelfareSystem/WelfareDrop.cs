@@ -24,7 +24,6 @@ namespace NeedsVsWants.WelfareSystem
 
         WelfareDropManager.WelfareType _WelfareType;
             
-
         float _Value;
 
         bool _IsClicked = false;
@@ -72,9 +71,12 @@ namespace NeedsVsWants.WelfareSystem
 
         public void SetDrop(WelfareDropManager.WelfareType welfareType, Sprite sprite, float value, Vector3 spawnPoint)
         {
+            Vector3 randomSpherePoint = Random.insideUnitSphere;
+
             _WelfareType = welfareType;
 
             _SpriteRenderer.sprite = sprite;
+            _SpriteRenderer.color = Color.white;
 
             _Value = value;
 
@@ -82,7 +84,10 @@ namespace NeedsVsWants.WelfareSystem
             
             _Rigidbody.useGravity = true;
             _Rigidbody.position = spawnPoint;
-            _Rigidbody.AddForce(Random.insideUnitSphere * 5, ForceMode.Impulse);
+
+            randomSpherePoint.y = -Mathf.Abs(randomSpherePoint.y);
+
+            _Rigidbody.AddForce(randomSpherePoint * 10, ForceMode.Impulse);
         }
 
         public void OnClick()
@@ -100,7 +105,7 @@ namespace NeedsVsWants.WelfareSystem
             switch(_WelfareType)
             {
                 case WelfareDropManager.WelfareType.Social:
-                PlayerStatManager.instance.currentHappinessWelfare = AddValue(PlayerStatManager.instance.currentSocialWelfare);
+                PlayerStatManager.instance.currentSocialWelfare = AddValue(PlayerStatManager.instance.currentSocialWelfare);
                 break;
                 
                 case WelfareDropManager.WelfareType.Happiness:
@@ -108,11 +113,11 @@ namespace NeedsVsWants.WelfareSystem
                 break;
                 
                 case WelfareDropManager.WelfareType.Health:
-                PlayerStatManager.instance.currentHappinessWelfare = AddValue(PlayerStatManager.instance.currentHealthWelfare);
+                PlayerStatManager.instance.currentHealthWelfare = AddValue(PlayerStatManager.instance.currentHealthWelfare);
                 break;
                 
                 case WelfareDropManager.WelfareType.Hunger:
-                PlayerStatManager.instance.currentHappinessWelfare = AddValue(PlayerStatManager.instance.currentHungerWelfare);
+                PlayerStatManager.instance.currentHungerWelfare = AddValue(PlayerStatManager.instance.currentHungerWelfare);
                 break;
             }
         }

@@ -5,11 +5,12 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.EventSystems;
 
+using NeedsVsWants.Player;
 using NeedsVsWants.Patterns;
 
 namespace NeedsVsWants.WelfareSystem
 {
-    public class WelfareDropManager : MonoBehaviour
+    public class WelfareDropManager : SimpleSingleton<WelfareDropManager>
     {
         [SerializeField]
         LayerMask _HitLayer;
@@ -98,16 +99,53 @@ namespace NeedsVsWants.WelfareSystem
             return sprite;
         }
 
-        public void SpawnDrops(WelfareType welfareType, float valuePerDrop, int dropCount, Vector3 spawnPoint)
+        void SpawnDrops(WelfareType welfareType, float valuePerDrop, int dropCount, Vector3 spawnPoint)
         {
             for(int i = 0; i < dropCount; i++)
                 ObjectPoolManager.instance.GetObject("Welfare Drop").GetComponent<WelfareDrop>().
                     SetDrop(welfareType, GetSprite(welfareType), valuePerDrop, spawnPoint);
         }
-        
-        public void SpawnDropsOnAnne(WelfareType welfareType, float valuePerDrop, int dropCount)
+
+        public void SpawnWelfareDrops(WelfareOperator welfareOperator, int dropCount, Vector3 spawnPoint)
         {
-            SpawnDrops(welfareType, valuePerDrop, dropCount, _AnneTransform.position);
+            float valueDifference;
+
+            if(welfareOperator.healthValue > 0)
+            {
+                valueDifference = welfareOperator.GetHealth(PlayerStatManager.instance.currentHealthWelfare).value - 
+                    PlayerStatManager.instance.currentHealthWelfare.value;
+
+                SpawnDrops(WelfareType.Health, valueDifference / dropCount, dropCount, spawnPoint);
+            }
+
+            if(welfareOperator.hungerValue > 0)
+            {
+                valueDifference = welfareOperator.GetHunger(PlayerStatManager.instance.currentHungerWelfare).value - 
+                    PlayerStatManager.instance.currentHungerWelfare.value;
+
+                SpawnDrops(WelfareType.Hunger, valueDifference / dropCount, dropCount, spawnPoint);
+            }
+            
+            if(welfareOperator.happinessValue > 0)
+            {
+                valueDifference = welfareOperator.GetHappiness(PlayerStatManager.instance.currentHappinessWelfare).value - 
+                    PlayerStatManager.instance.currentHappinessWelfare.value;
+
+                SpawnDrops(WelfareType.Happiness, valueDifference / dropCount, dropCount, spawnPoint);
+            }
+            
+            if(welfareOperator.socialValue > 0)
+            {
+                valueDifference = welfareOperator.GetSocial(PlayerStatManager.instance.currentSocialWelfare).value - 
+                    PlayerStatManager.instance.currentSocialWelfare.value;
+
+                SpawnDrops(WelfareType.Social, valueDifference / dropCount, dropCount, spawnPoint);
+            }
+        }
+        
+        public void SpawnWelfareDropsOnAnne(WelfareOperator welfareOperator, int dropCount)
+        {
+            SpawnWelfareDrops(welfareOperator, dropCount, _AnneTransform.position);
         }
     }
 }
