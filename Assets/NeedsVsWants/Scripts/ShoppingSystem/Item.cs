@@ -24,7 +24,7 @@ namespace NeedsVsWants.ShoppingSystem
 
         public virtual void OnBuy() 
         { 
-            PlayerStatManager.instance.CalculateWelfare(onBuyWelfareEffects);
+            WelfareDropManager.instance.SpawnWelfareDropsOnAnne(onBuyWelfareEffects, 5);
         }
     }
 }

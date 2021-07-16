@@ -6,6 +6,7 @@ using UnityEngine;
 using UnityEditor;
 
 using NeedsVsWants.Player;
+using NeedsVsWants.WelfareSystem;
 
 namespace NeedsVsWants.ShoppingSystem
 {
@@ -29,9 +30,11 @@ namespace NeedsVsWants.ShoppingSystem
 
         public override void OnBuy()
         {
-            base.OnBuy();
+            GameObject shopItem = FindGameObject();
 
-            FindGameObject()?.SetActive(true);
+            WelfareDropManager.instance.SpawnWelfareDrops(onBuyWelfareEffects, 5, shopItem.transform.position);
+
+            shopItem.SetActive(true);
 
             PlayerStatManager.instance.RemoveShopItem(this);
         }
