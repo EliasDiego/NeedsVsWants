@@ -14,6 +14,10 @@ namespace NeedsVsWants.WelfareSystem
         float _ValueChangeSpeed = 1;
         [SerializeField]
         WelfareEmote _Emote;
+        [SerializeField]
+        Image _FillImage;
+        [SerializeField]
+        Gradient _Gradient;
         
         bool _IsValueChanged = false;
 
@@ -56,6 +60,8 @@ namespace NeedsVsWants.WelfareSystem
 
                 if(Mathf.Approximately(_Slider.value, _NewValue))
                     _IsValueChanged = false;
+
+                _FillImage.color = _Gradient.Evaluate(_Slider.value / _Slider.maxValue);
             }
         }
     }
