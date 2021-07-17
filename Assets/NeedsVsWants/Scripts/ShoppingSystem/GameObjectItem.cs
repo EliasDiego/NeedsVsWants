@@ -6,7 +6,7 @@ using UnityEngine;
 using UnityEditor;
 
 using NeedsVsWants.Player;
-using NeedsVsWants.WelfareSystem;
+using NeedsVsWants.DropSystem;
 
 namespace NeedsVsWants.ShoppingSystem
 {
@@ -32,7 +32,7 @@ namespace NeedsVsWants.ShoppingSystem
         {
             GameObject shopItem = FindGameObject();
 
-            WelfareDropManager.instance.SpawnWelfareDrops(onBuyWelfareEffects, 5, shopItem.transform.position);
+            DropManager.instance.SpawnDrops(onBuyWelfareEffects, 5, shopItem.transform.position);
 
             shopItem.SetActive(true);
 

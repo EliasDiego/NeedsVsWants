@@ -82,9 +82,13 @@ namespace NeedsVsWants.MessagingSystem
 
             if(chatChoice.applyEffects)
             {
-                PlayerStatManager.instance.currentMoney += chatChoice.moneyOnChoice;
+                if(chatChoice.moneyOnChoice > 0)
+                    DropSystem.DropManager.instance.SpawnDropsOnAnne(chatChoice.moneyOnChoice, 5);
+                
+                else
+                    PlayerStatManager.instance.currentMoney += chatChoice.moneyOnChoice;
 
-                WelfareSystem.WelfareDropManager.instance.SpawnWelfareDropsOnAnne(chatChoice.welfareOnChoice, 5);
+                DropSystem.DropManager.instance.SpawnDropsOnAnne(chatChoice.welfareOnChoice, 5);
 
                 chatChoice.onChoiceEvent?.Invoke();
             }

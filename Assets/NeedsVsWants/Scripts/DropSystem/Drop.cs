@@ -5,10 +5,11 @@ using UnityEngine;
 using UnityEngine.Events;
 
 using NeedsVsWants.Player;
+using NeedsVsWants.WelfareSystem;
 
-namespace NeedsVsWants.WelfareSystem
+namespace NeedsVsWants.DropSystem
 {
-    public class WelfareDrop : MonoBehaviour
+    public class Drop : MonoBehaviour
     {
         [SerializeField]
         float _SlowdownDeltaValue;
@@ -22,9 +23,9 @@ namespace NeedsVsWants.WelfareSystem
         SpriteRenderer _SpriteRenderer;
         Rigidbody _Rigidbody;
 
-        WelfareDropManager.WelfareType _WelfareType;
+        DropType _DropType;
             
-        float _Value;
+        double _Value;
 
         bool _IsClicked = false;
 
@@ -52,7 +53,7 @@ namespace NeedsVsWants.WelfareSystem
 
         WelfareValue AddValue(WelfareValue welfareValue)
         {
-            welfareValue.value += _Value;
+            welfareValue.value += (float)_Value;
 
             return welfareValue;
         }
@@ -69,11 +70,9 @@ namespace NeedsVsWants.WelfareSystem
             gameObject.SetActive(false);
         }
 
-        public void SetDrop(WelfareDropManager.WelfareType welfareType, Sprite sprite, float value, Vector3 spawnPoint)
+        public void SetDrop(DropType dropType, Sprite sprite, double value, Vector3 spawnPoint)
         {
-            Vector3 randomSpherePoint = Random.insideUnitSphere;
-
-            _WelfareType = welfareType;
+            _DropType = dropType;
 
             _SpriteRenderer.sprite = sprite;
             _SpriteRenderer.color = Color.white;
@@ -85,9 +84,7 @@ namespace NeedsVsWants.WelfareSystem
             _Rigidbody.useGravity = true;
             _Rigidbody.position = spawnPoint;
 
-            randomSpherePoint.y = Mathf.Abs(randomSpherePoint.y);
-
-            _Rigidbody.AddForce(randomSpherePoint * 10, ForceMode.Impulse);
+            _Rigidbody.AddForce(Random.insideUnitSphere * 5, ForceMode.Impulse);
         }
 
         public void OnClick()
@@ -102,22 +99,27 @@ namespace NeedsVsWants.WelfareSystem
 
             StartCoroutine(AlphaShift());
 
-            switch(_WelfareType)
+            switch(_DropType)
             {
-                case WelfareDropManager.WelfareType.Social:
+                case DropType.Social:
                 PlayerStatManager.instance.currentSocialWelfare = AddValue(PlayerStatManager.instance.currentSocialWelfare);
                 break;
                 
-                case WelfareDropManager.WelfareType.Happiness:
+                case DropType.Happiness:
                 PlayerStatManager.instance.currentHappinessWelfare = AddValue(PlayerStatManager.instance.currentHappinessWelfare);
                 break;
                 
-                case WelfareDropManager.WelfareType.Health:
+                case DropType.Health:
                 PlayerStatManager.instance.currentHealthWelfare = AddValue(PlayerStatManager.instance.currentHealthWelfare);
                 break;
                 
-                case WelfareDropManager.WelfareType.Hunger:
+                case DropType.Hunger:
                 PlayerStatManager.instance.currentHungerWelfare = AddValue(PlayerStatManager.instance.currentHungerWelfare);
+                break;
+                
+                
+                case DropType.Money:
+                PlayerStatManager.instance.currentMoney += _Value;
                 break;
             }
         }

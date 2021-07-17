@@ -7,10 +7,11 @@ using UnityEngine.EventSystems;
 
 using NeedsVsWants.Player;
 using NeedsVsWants.Patterns;
+using NeedsVsWants.WelfareSystem;
 
-namespace NeedsVsWants.WelfareSystem
+namespace NeedsVsWants.DropSystem
 {
-    public class WelfareDropManager : SimpleSingleton<WelfareDropManager>
+    public class DropManager : SimpleSingleton<DropManager>
     {
         [SerializeField]
         LayerMask _HitLayer;
@@ -32,11 +33,8 @@ namespace NeedsVsWants.WelfareSystem
         Sprite _HealthDropSprite;
         [SerializeField]
         Sprite _SocialDropSprite;
-
-        public enum WelfareType
-        {
-            Social, Happiness, Hunger, Health
-        }
+        [SerializeField]
+        Sprite _MoneyDropSprite;
 
         void Start() 
         {
@@ -63,7 +61,7 @@ namespace NeedsVsWants.WelfareSystem
             {
                 foreach(RaycastHit hit in Physics.RaycastAll(ray, float.MaxValue, _HitLayer))
                 {
-                    if(hit.collider.gameObject.TryGetComponent<WelfareDrop>(out WelfareDrop drop) && !drop.isClicked)
+                    if(hit.collider.gameObject.TryGetComponent<Drop>(out Drop drop) && !drop.isClicked)
                     {
                         drop.OnClick();
                         
@@ -73,40 +71,49 @@ namespace NeedsVsWants.WelfareSystem
             }
         }
 
-        Sprite GetSprite(WelfareType welfareType)
+        Sprite GetSprite(DropType dropType)
         {
             Sprite sprite = null;
 
-            switch(welfareType)
+            switch(dropType)
             {
-                case WelfareDropManager.WelfareType.Social:
+                case DropType.Social:
                 sprite = _SocialDropSprite;
                 break;
                 
-                case WelfareDropManager.WelfareType.Happiness:
+                case DropType.Happiness:
                 sprite = _HappinessDropSprite;
                 break;
                 
-                case WelfareDropManager.WelfareType.Health:
+                case DropType.Health:
                 sprite = _HealthDropSprite;
                 break;
                 
-                case WelfareDropManager.WelfareType.Hunger:
+                case DropType.Hunger:
                 sprite = _HungerDropSprite;
+                break;
+                
+                case DropType.Money:
+                sprite = _MoneyDropSprite;
                 break;
             }
 
             return sprite;
         }
 
-        void SpawnDrops(WelfareType welfareType, float valuePerDrop, int dropCount, Vector3 spawnPoint)
+        void Spawn(DropType DropType, double valuePerDrop, int dropCount, Vector3 spawnPoint)
         {
             for(int i = 0; i < dropCount; i++)
-                ObjectPoolManager.instance.GetObject("Welfare Drop").GetComponent<WelfareDrop>().
-                    SetDrop(welfareType, GetSprite(welfareType), valuePerDrop, spawnPoint);
+                ObjectPoolManager.instance.GetObject("Welfare Drop").GetComponent<Drop>().
+                    SetDrop(DropType, GetSprite(DropType), valuePerDrop, spawnPoint);
         }
 
-        public void SpawnWelfareDrops(WelfareOperator welfareOperator, int dropCount, Vector3 spawnPoint)
+        public void SpawnDropsOnAnne(double money, int dropCount)
+        {
+            Spawn(DropType.Money, money / (double)dropCount, dropCount, _AnneTransform.transform.position);
+        }
+
+        public void SpawnDrops(WelfareOperator welfareOperator, int dropCount, Vector3 spawnPoint)
         {
             float valueDifference;
 
@@ -115,7 +122,7 @@ namespace NeedsVsWants.WelfareSystem
                 valueDifference = welfareOperator.GetHealth(PlayerStatManager.instance.currentHealthWelfare).value - 
                     PlayerStatManager.instance.currentHealthWelfare.value;
 
-                SpawnDrops(WelfareType.Health, valueDifference / dropCount, dropCount, spawnPoint);
+                Spawn(DropType.Health, valueDifference / dropCount, dropCount, spawnPoint);
             }
 
             if(welfareOperator.hungerValue > 0)
@@ -123,7 +130,7 @@ namespace NeedsVsWants.WelfareSystem
                 valueDifference = welfareOperator.GetHunger(PlayerStatManager.instance.currentHungerWelfare).value - 
                     PlayerStatManager.instance.currentHungerWelfare.value;
 
-                SpawnDrops(WelfareType.Hunger, valueDifference / dropCount, dropCount, spawnPoint);
+                Spawn(DropType.Hunger, valueDifference / dropCount, dropCount, spawnPoint);
             }
             
             if(welfareOperator.happinessValue > 0)
@@ -131,7 +138,7 @@ namespace NeedsVsWants.WelfareSystem
                 valueDifference = welfareOperator.GetHappiness(PlayerStatManager.instance.currentHappinessWelfare).value - 
                     PlayerStatManager.instance.currentHappinessWelfare.value;
 
-                SpawnDrops(WelfareType.Happiness, valueDifference / dropCount, dropCount, spawnPoint);
+                Spawn(DropType.Happiness, valueDifference / dropCount, dropCount, spawnPoint);
             }
             
             if(welfareOperator.socialValue > 0)
@@ -139,13 +146,13 @@ namespace NeedsVsWants.WelfareSystem
                 valueDifference = welfareOperator.GetSocial(PlayerStatManager.instance.currentSocialWelfare).value - 
                     PlayerStatManager.instance.currentSocialWelfare.value;
 
-                SpawnDrops(WelfareType.Social, valueDifference / dropCount, dropCount, spawnPoint);
+                Spawn(DropType.Social, valueDifference / dropCount, dropCount, spawnPoint);
             }
         }
         
-        public void SpawnWelfareDropsOnAnne(WelfareOperator welfareOperator, int dropCount)
+        public void SpawnDropsOnAnne(WelfareOperator welfareOperator, int dropCount)
         {
-            SpawnWelfareDrops(welfareOperator, dropCount, _AnneTransform.position);
+            SpawnDrops(welfareOperator, dropCount, _AnneTransform.position);
         }
     }
 }
