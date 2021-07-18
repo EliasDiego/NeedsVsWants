@@ -130,7 +130,7 @@ namespace NeedsVsWants.MessagingSystem
                         _IsShowingChoice = true;
                     }
 
-                    else // If At the end of the conversation
+                    else if(!chat.hasRead)// If At the end of the conversation
                     {
                         chat.hasRead = true;
 
