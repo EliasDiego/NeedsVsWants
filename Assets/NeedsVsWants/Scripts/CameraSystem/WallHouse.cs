@@ -13,7 +13,7 @@ namespace NeedsVsWants.CameraSystem
 
 
         public GameObject Roof = null;
-        public GameObject Character = null;
+        public GameObject Phaser = null;
 
 
         void OnTriggerEnter(Collider collider)
@@ -23,6 +23,7 @@ namespace NeedsVsWants.CameraSystem
             if (IsCharacter(collider))
 
             {
+                  
 
                 SetMaterialTransparent();
 
@@ -37,9 +38,9 @@ namespace NeedsVsWants.CameraSystem
         private bool IsCharacter(Collider collider)
 
         {
+            GameObject Phaser = collider.gameObject.GetComponent<GameObject>();
             
-
-            return true;
+            return true;  
 
         }
 
@@ -70,6 +71,8 @@ namespace NeedsVsWants.CameraSystem
                 m.renderQueue = 3000;
 
             }
+
+            
 
         }
 

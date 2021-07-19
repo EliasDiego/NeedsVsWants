@@ -1574,7 +1574,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Roof: {fileID: 78032049}
-  Character: {fileID: 676982704}
+  Phaser: {fileID: 676982704}
 --- !u!1 &719515320
 GameObject:
   m_ObjectHideFlags: 0
@@ -11908,7 +11908,39 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c977269202fd2724ba123c2b32201348, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _Slider: {fileID: 0}
   _ValueChangeSpeed: 1
+  _Emote: {fileID: 0}
+  _FillImage: {fileID: 0}
+  _Gradient:
+    serializedVersion: 2
+    key0: {r: 1, g: 1, b: 1, a: 1}
+    key1: {r: 1, g: 1, b: 1, a: 1}
+    key2: {r: 0, g: 0, b: 0, a: 0}
+    key3: {r: 0, g: 0, b: 0, a: 0}
+    key4: {r: 0, g: 0, b: 0, a: 0}
+    key5: {r: 0, g: 0, b: 0, a: 0}
+    key6: {r: 0, g: 0, b: 0, a: 0}
+    key7: {r: 0, g: 0, b: 0, a: 0}
+    ctime0: 0
+    ctime1: 65535
+    ctime2: 0
+    ctime3: 0
+    ctime4: 0
+    ctime5: 0
+    ctime6: 0
+    ctime7: 0
+    atime0: 0
+    atime1: 65535
+    atime2: 0
+    atime3: 0
+    atime4: 0
+    atime5: 0
+    atime6: 0
+    atime7: 0
+    m_Mode: 0
+    m_NumColorKeys: 2
+    m_NumAlphaKeys: 2
 --- !u!114 &2879423601709977836
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12817,7 +12849,39 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c977269202fd2724ba123c2b32201348, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _Slider: {fileID: 0}
   _ValueChangeSpeed: 1
+  _Emote: {fileID: 0}
+  _FillImage: {fileID: 0}
+  _Gradient:
+    serializedVersion: 2
+    key0: {r: 1, g: 1, b: 1, a: 1}
+    key1: {r: 1, g: 1, b: 1, a: 1}
+    key2: {r: 0, g: 0, b: 0, a: 0}
+    key3: {r: 0, g: 0, b: 0, a: 0}
+    key4: {r: 0, g: 0, b: 0, a: 0}
+    key5: {r: 0, g: 0, b: 0, a: 0}
+    key6: {r: 0, g: 0, b: 0, a: 0}
+    key7: {r: 0, g: 0, b: 0, a: 0}
+    ctime0: 0
+    ctime1: 65535
+    ctime2: 0
+    ctime3: 0
+    ctime4: 0
+    ctime5: 0
+    ctime6: 0
+    ctime7: 0
+    atime0: 0
+    atime1: 65535
+    atime2: 0
+    atime3: 0
+    atime4: 0
+    atime5: 0
+    atime6: 0
+    atime7: 0
+    m_Mode: 0
+    m_NumColorKeys: 2
+    m_NumAlphaKeys: 2
 --- !u!1 &2879423602689684744
 GameObject:
   m_ObjectHideFlags: 0
@@ -13272,7 +13336,39 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c977269202fd2724ba123c2b32201348, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _Slider: {fileID: 0}
   _ValueChangeSpeed: 1
+  _Emote: {fileID: 0}
+  _FillImage: {fileID: 0}
+  _Gradient:
+    serializedVersion: 2
+    key0: {r: 1, g: 1, b: 1, a: 1}
+    key1: {r: 1, g: 1, b: 1, a: 1}
+    key2: {r: 0, g: 0, b: 0, a: 0}
+    key3: {r: 0, g: 0, b: 0, a: 0}
+    key4: {r: 0, g: 0, b: 0, a: 0}
+    key5: {r: 0, g: 0, b: 0, a: 0}
+    key6: {r: 0, g: 0, b: 0, a: 0}
+    key7: {r: 0, g: 0, b: 0, a: 0}
+    ctime0: 0
+    ctime1: 65535
+    ctime2: 0
+    ctime3: 0
+    ctime4: 0
+    ctime5: 0
+    ctime6: 0
+    ctime7: 0
+    atime0: 0
+    atime1: 65535
+    atime2: 0
+    atime3: 0
+    atime4: 0
+    atime5: 0
+    atime6: 0
+    atime7: 0
+    m_Mode: 0
+    m_NumColorKeys: 2
+    m_NumAlphaKeys: 2
 --- !u!222 &2879423603451851544
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -15218,6 +15314,7 @@ MonoBehaviour:
   _ProcessingImage: {fileID: 4978200328235498314}
   _SufficientFundsText: Checkout Complete!
   _InsufficientFundsText: You do not have enough funds!
+  _PanelPopUp: {fileID: 0}
 --- !u!1 &4978200327643943871
 GameObject:
   m_ObjectHideFlags: 0
@@ -18999,6 +19096,7 @@ MonoBehaviour:
   _ProcessingImage: {fileID: 4978200329579228375}
   _SufficientFundsText: Checkout Complete!
   _InsufficientFundsText: You do not have enough funds!
+  _PanelPopUp: {fileID: 0}
 --- !u!224 &4978200327839763138
 RectTransform:
   m_ObjectHideFlags: 0
@@ -20258,6 +20356,7 @@ MonoBehaviour:
   _ProcessingImage: {fileID: 4978200329283107294}
   _SufficientFundsText: Checkout Complete!
   _InsufficientFundsText: You do not have enough funds!
+  _PanelPopUp: {fileID: 0}
 --- !u!222 &4978200327931378730
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -45380,6 +45479,7 @@ MonoBehaviour:
   _ProcessingImage: {fileID: 4978200328412446569}
   _SufficientFundsText: Checkout Complete!
   _InsufficientFundsText: You do not have enough funds!
+  _PanelPopUp: {fileID: 0}
 --- !u!1 &4978200329325805379
 GameObject:
   m_ObjectHideFlags: 0
@@ -51189,6 +51289,7 @@ MonoBehaviour:
   _ProcessingImage: {fileID: 4978200328936967700}
   _SufficientFundsText: Checkout Complete!
   _InsufficientFundsText: You do not have enough funds!
+  _PanelPopUp: {fileID: 0}
 --- !u!1 &4978200329612583361
 GameObject:
   m_ObjectHideFlags: 0
@@ -52605,9 +52706,11 @@ MonoBehaviour:
   _ItemViewerMenu: {fileID: 5731941980700226144}
   _LoadingPopUp: {fileID: 4978200328574067606}
   _ButtonClickAsset: {fileID: 0}
-  _Text: {fileID: 4978200329542136479}
+  _SaleText: {fileID: 0}
+  _ShopText: {fileID: 0}
   _SaleLeftList: {fileID: 4978200328894551774}
   _SaleRightList: {fileID: 4978200328306729478}
+  _SaleSFXAsset: {fileID: 0}
   _ShopLeftList: {fileID: 1903263985410222344}
   _ShopRightList: {fileID: 7422349288827134991}
 --- !u!82 &5731941979636489483
@@ -58003,6 +58106,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _ActiveOnStart: 0
   _ChatViewerMenu: {fileID: 5731941981015483889}
+  _ScrollRect: {fileID: 0}
   _ContentTransform: {fileID: 5731941980573448353}
   _ButtonClickAsset: {fileID: 0}
   _Indicator: {fileID: 0}
@@ -58337,6 +58441,8 @@ MonoBehaviour:
   _MessageSFXAsset: {fileID: 0}
   _ButtonClickAsset: {fileID: 0}
   _Indicator: {fileID: 0}
+  _LeftClickText: {fileID: 0}
+  _PopUpPanel: {fileID: 0}
 --- !u!1 &5731941981015483891
 GameObject:
   m_ObjectHideFlags: 0
@@ -64858,7 +64964,39 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c977269202fd2724ba123c2b32201348, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _Slider: {fileID: 0}
   _ValueChangeSpeed: 1
+  _Emote: {fileID: 0}
+  _FillImage: {fileID: 0}
+  _Gradient:
+    serializedVersion: 2
+    key0: {r: 1, g: 1, b: 1, a: 1}
+    key1: {r: 1, g: 1, b: 1, a: 1}
+    key2: {r: 0, g: 0, b: 0, a: 0}
+    key3: {r: 0, g: 0, b: 0, a: 0}
+    key4: {r: 0, g: 0, b: 0, a: 0}
+    key5: {r: 0, g: 0, b: 0, a: 0}
+    key6: {r: 0, g: 0, b: 0, a: 0}
+    key7: {r: 0, g: 0, b: 0, a: 0}
+    ctime0: 0
+    ctime1: 65535
+    ctime2: 0
+    ctime3: 0
+    ctime4: 0
+    ctime5: 0
+    ctime6: 0
+    ctime7: 0
+    atime0: 0
+    atime1: 65535
+    atime2: 0
+    atime3: 0
+    atime4: 0
+    atime5: 0
+    atime6: 0
+    atime7: 0
+    m_Mode: 0
+    m_NumColorKeys: 2
+    m_NumAlphaKeys: 2
 --- !u!224 &6643012406699752087
 RectTransform:
   m_ObjectHideFlags: 0
@@ -69249,6 +69387,7 @@ MonoBehaviour:
   _ProcessingImage: {fileID: 7082852709242089883}
   _SufficientFundsText: Checkout Complete!
   _InsufficientFundsText: You do not have enough funds!
+  _PanelPopUp: {fileID: 0}
 --- !u!114 &7082852709680731655
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -69273,6 +69412,7 @@ MonoBehaviour:
   _ProcessingImage: {fileID: 7082852709422787990}
   _SufficientFundsText: Checkout Complete!
   _InsufficientFundsText: You do not have enough funds!
+  _PanelPopUp: {fileID: 0}
 --- !u!222 &7082852709680731656
 CanvasRenderer:
   m_ObjectHideFlags: 0
