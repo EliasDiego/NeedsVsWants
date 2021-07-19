@@ -188,7 +188,7 @@ namespace NeedsVsWants.InvestmentSystem
             {
                 overallCapital -= parsedAmount;
 
-                PlayerStatManager.instance.currentMoney += parsedAmount;
+                DropSystem.DropManager.instance.SpawnDropsOnAnne(parsedAmount, 10);
 
                 capital = overallCapital;
                 capitalGainLoss = 0;
@@ -215,7 +215,7 @@ namespace NeedsVsWants.InvestmentSystem
             checkoutPopUp.hasSufficientFunds = overallCapital > 0;
             checkoutPopUp.onAfterProcessing = () => 
             {
-                PlayerStatManager.instance.currentMoney += overallCapital;
+                DropSystem.DropManager.instance.SpawnDropsOnAnne(overallCapital, 5);
 
                 capital = 0;
                 capitalGainLoss = 0;

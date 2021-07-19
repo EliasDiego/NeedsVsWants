@@ -18,6 +18,13 @@ namespace NeedsVsWants.WelfareSystem
         [SerializeField]
         int _SocialValue = 0;
 
+        public AmountType amountType => _AmountType;
+
+        public int healthValue => _HealthValue;
+        public int happinessValue => _HappinessValue;
+        public int hungerValue => _HungerValue;
+        public int socialValue => _SocialValue;
+
         WelfareValue CalculateWelfare(WelfareValue welfareValue, int value)
         {
             switch(_AmountType)

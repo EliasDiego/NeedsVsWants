@@ -27,6 +27,8 @@ namespace NeedsVsWants.MenuSystem
         protected virtual bool controlSetActive => false;
         protected virtual bool hasEnabledColorTransition => true;
         protected virtual bool hasDisabledColorTransition => true;
+
+        protected Image panel => _Panel;
     
         public bool isActive => _IsActive;
 

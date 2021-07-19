@@ -30,6 +30,10 @@ namespace NeedsVsWants.PhoneSystem
         [SerializeField][Multiline]
         string _InsufficientFundsText;
 
+        [Space]
+        [SerializeField]
+        PopUp _PanelPopUp;
+
         Coroutine _BoxScaleAnimation;
         Coroutine _ProcessingRotationAnimation;
 
@@ -112,6 +116,8 @@ namespace NeedsVsWants.PhoneSystem
             
             transform.SetActiveChildren(true);
 
+            _PanelPopUp.EnablePopUp();
+
             if(hasSufficientFunds)
                 OnSufficientFunds();
 
@@ -122,6 +128,8 @@ namespace NeedsVsWants.PhoneSystem
         protected override void onDisablePopUp()
         {
             base.onDisablePopUp();
+
+            _PanelPopUp.DisablePopUp();
 
             if(hasSufficientFunds)
             {

@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 
 using UnityEngine;
+using UnityEngine.UI;
 
 using NeedsVsWants.Player;
 using NeedsVsWants.Patterns;
@@ -15,6 +16,8 @@ namespace NeedsVsWants.MessagingSystem
     {
         [SerializeField]
         ChatViewerMenu _ChatViewerMenu;
+        [SerializeField]
+        ScrollRect _ScrollRect;
         [SerializeField]
         Transform _ContentTransform;
         [SerializeField]
@@ -78,6 +81,8 @@ namespace NeedsVsWants.MessagingSystem
             transform.SetActiveChildren(true);
             
             UpdateChatList();
+
+            _ScrollRect.verticalNormalizedPosition = 1;
         }
 
         protected override void OnReturn()

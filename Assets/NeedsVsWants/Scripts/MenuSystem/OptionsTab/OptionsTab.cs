@@ -20,8 +20,6 @@ namespace NeedsVsWants.MenuSystem
 
                 else
                     EnableTab();
-
-                Debug.Log("Blah");
             });
         }
 

@@ -34,6 +34,10 @@ namespace NeedsVsWants.MessagingSystem
         AudioAsset _ButtonClickAsset;
         [SerializeField]
         Indicator _Indicator;
+        [SerializeField]
+        TMP_Text _LeftClickText;
+        [SerializeField]
+        PopUp _PopUpPanel;
 
         Conversation _CurrentConversation;
 
@@ -78,11 +82,13 @@ namespace NeedsVsWants.MessagingSystem
 
             if(chatChoice.applyEffects)
             {
-                PlayerStatManager.instance.currentMoney += chatChoice.moneyOnChoice;
-                PlayerStatManager.instance.currentHealthWelfare = chatChoice.welfareOnChoice.GetHealth(PlayerStatManager.instance.currentHealthWelfare);
-                PlayerStatManager.instance.currentHappinessWelfare = chatChoice.welfareOnChoice.GetHealth(PlayerStatManager.instance.currentHappinessWelfare);
-                PlayerStatManager.instance.currentHungerWelfare = chatChoice.welfareOnChoice.GetHealth(PlayerStatManager.instance.currentHungerWelfare);
-                PlayerStatManager.instance.currentSocialWelfare = chatChoice.welfareOnChoice.GetHealth(PlayerStatManager.instance.currentSocialWelfare);
+                if(chatChoice.moneyOnChoice > 0)
+                    DropSystem.DropManager.instance.SpawnDropsOnAnne(chatChoice.moneyOnChoice, 5);
+                
+                else
+                    PlayerStatManager.instance.currentMoney += chatChoice.moneyOnChoice;
+
+                DropSystem.DropManager.instance.SpawnDropsOnAnne(chatChoice.welfareOnChoice, 5);
 
                 chatChoice.onChoiceEvent?.Invoke();
             }
@@ -95,6 +101,8 @@ namespace NeedsVsWants.MessagingSystem
                 chat.hasRead = true;
 
                 Phone.instance.EnablePlayerControl();
+                
+                _PopUpPanel.DisablePopUp();
             }
         }
 
@@ -122,11 +130,13 @@ namespace NeedsVsWants.MessagingSystem
                         _IsShowingChoice = true;
                     }
 
-                    else // If At the end of the conversation
+                    else if(!chat.hasRead)// If At the end of the conversation
                     {
                         chat.hasRead = true;
 
                         Phone.instance.EnablePlayerControl();
+
+                        _PopUpPanel.DisablePopUp();
 
                         chat.currentMessageIndex--;
                     }
@@ -145,6 +155,9 @@ namespace NeedsVsWants.MessagingSystem
 
                 _MessageSFXAsset.PlayOneShot(audioSource);
             }
+            
+            if(_LeftClickText.gameObject.activeSelf)
+                _LeftClickText.gameObject.SetActive(false);
         }
 
         async void ScrollToBottom()
@@ -306,6 +319,10 @@ namespace NeedsVsWants.MessagingSystem
                 Phone.instance.DisablePlayerControl();
 
                 _MessageSFXAsset.PlayOneShot(audioSource);
+
+                _PopUpPanel.EnablePopUp();
+
+                _LeftClickText.gameObject.SetActive(true);
             }
         }
 
