@@ -10,12 +10,12 @@ namespace NeedsVsWants.PhoneSystem
 {
     public class AppPopUp : PopUp
     {
-        protected override void onEnablePopUp()
+        protected override void OnEnablePopUp()
         {
             Phone.instance.DisablePlayerControl();
         }
 
-        protected override void onDisablePopUp()
+        protected override void OnDisablePopUp()
         {
             Phone.instance.EnablePlayerControl();
         }

@@ -52,7 +52,7 @@ namespace NeedsVsWants.TutorialSystem
             onAfterScale?.Invoke();
         }
 
-        protected override void onEnablePopUp()
+        protected override void OnEnablePopUp()
         {
             if(_BoxScaleAnimation != null)
                 StopCoroutine(_BoxScaleAnimation);
@@ -64,7 +64,7 @@ namespace NeedsVsWants.TutorialSystem
             _OnEnable?.Invoke();
         }
 
-        protected override void onDisablePopUp()
+        protected override void OnDisablePopUp()
         {
             if(_BoxScaleAnimation != null)
                 StopCoroutine(_BoxScaleAnimation);
