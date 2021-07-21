@@ -26,6 +26,8 @@ namespace NeedsVsWants.ShoppingSystem
         LoadingPopUp _LoadingPopUp;
         [SerializeField]
         AudioAsset _ButtonClickAsset;
+        [SerializeField]
+        GameObject _TutorialSequence;
 
         [Header("Sale")]
         [SerializeField]
@@ -134,6 +136,8 @@ namespace NeedsVsWants.ShoppingSystem
             transform.SetActiveChildren(true);
 
             _UpdateListCoroutine = StartCoroutine(UpdateItemList());
+            
+            _TutorialSequence.SetActive(true);
         }
 
         protected override void OnDisableMenu() 
@@ -142,6 +146,8 @@ namespace NeedsVsWants.ShoppingSystem
 
             if(_UpdateListCoroutine != null)
                 StopCoroutine(_UpdateListCoroutine);
+            
+            _TutorialSequence.SetActive(false);
         }
 
         protected override void OnReturn() { }

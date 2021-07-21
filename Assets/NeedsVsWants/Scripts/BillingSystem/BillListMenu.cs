@@ -15,14 +15,20 @@ namespace NeedsVsWants.BillingSystem
 {
     public class BillListMenu : Menu
     {
+        [SerializeField]
+        GameObject _TutorialSequence;
         protected override void OnDisableMenu()
         {
             transform.SetActiveChildren(false);
+
+            _TutorialSequence.SetActive(false);
         }
 
         protected override void OnEnableMenu()
         {
             transform.SetActiveChildren(true);
+
+            _TutorialSequence.SetActive(true);
         }
 
         protected override void OnReturn()

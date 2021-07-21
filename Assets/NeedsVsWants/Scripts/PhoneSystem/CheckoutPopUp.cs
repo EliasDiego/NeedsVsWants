@@ -108,9 +108,9 @@ namespace NeedsVsWants.PhoneSystem
             hasColorTransition = true;
         }
 
-        protected override void onEnablePopUp()
+        protected override void OnEnablePopUp()
         {
-            base.onEnablePopUp();
+            base.OnEnablePopUp();
 
             _BoxScaleAnimation = StartCoroutine(AnimateScale(_BoxImage.rectTransform, Vector3.one, _ScaleSpeed, null));
             
@@ -125,9 +125,9 @@ namespace NeedsVsWants.PhoneSystem
                 OnInsufficientFunds();
         }
 
-        protected override void onDisablePopUp()
+        protected override void OnDisablePopUp()
         {
-            base.onDisablePopUp();
+            base.OnDisablePopUp();
 
             _PanelPopUp.DisablePopUp();
 

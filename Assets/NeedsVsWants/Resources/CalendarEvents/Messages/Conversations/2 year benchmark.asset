@@ -20,4 +20,29 @@ MonoBehaviour:
     text: Hi! Congratulations for reaching the 2 year benchmark! We are still developing
       the ending scene of our game. We hope you have enjoyed our game. Thank you
       for playing!
-  choices: []
+  choices:
+  - name: 
+    nextConversation: {fileID: 0}
+    applyEffects: 0
+    moneyOnChoice: 0
+    welfareOnChoice:
+      _AmountType: 0
+      _HealthValue: 0
+      _HappinessValue: 0
+      _HungerValue: 0
+      _SocialValue: 0
+    onChoiceEvent:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 11400000, guid: 7d6002265ff4cf14e94daa3165fc8533, type: 2}
+          m_TargetAssemblyTypeName: NeedsVsWants.SceneLoader, Assembly-CSharp
+          m_MethodName: LoadScene
+          m_Mode: 3
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 4
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2

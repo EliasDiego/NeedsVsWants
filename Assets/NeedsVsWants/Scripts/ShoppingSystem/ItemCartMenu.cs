@@ -24,6 +24,8 @@ namespace NeedsVsWants.ShoppingSystem
         Toggle _SelectAllToggle;
         [SerializeField]
         TMP_Text _TotalPriceText;
+        [SerializeField]
+        GameObject _TutorialSequence;
         
         [Header("Cart Indication")]
         [SerializeField]
@@ -265,6 +267,8 @@ namespace NeedsVsWants.ShoppingSystem
 
             //_BlockOnSelectAll = true;
             _SelectAllToggle.isOn = false;
+
+            _TutorialSequence.SetActive(true);
         }
 
         protected override void OnDisableMenu() 
@@ -274,6 +278,8 @@ namespace NeedsVsWants.ShoppingSystem
             UpdateDictionary();
 
             _ItemSlotList.Clear();
+            
+            _TutorialSequence.SetActive(false);
         }
 
         protected override void OnReturn() { }

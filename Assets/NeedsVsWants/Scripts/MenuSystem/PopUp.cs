@@ -19,6 +19,8 @@ namespace NeedsVsWants.MenuSystem
         Color _DisabledColor;
         [SerializeField]
         float _TransitionSpeed;
+        [SerializeField]
+        bool _IsDeltaTimeScaled = true;
 
         bool _IsActive = false;
 
@@ -27,6 +29,8 @@ namespace NeedsVsWants.MenuSystem
         protected virtual bool controlSetActive => false;
         protected virtual bool hasEnabledColorTransition => true;
         protected virtual bool hasDisabledColorTransition => true;
+
+        protected bool isDeltaTimeScaled => _IsDeltaTimeScaled;
 
         protected Image panel => _Panel;
     
@@ -41,7 +45,7 @@ namespace NeedsVsWants.MenuSystem
         {
             while(image.color != color)
             {
-                image.color = Color.Lerp(image.color, color, delta * Time.deltaTime);
+                image.color = Color.Lerp(image.color, color, delta * (_IsDeltaTimeScaled ? Time.deltaTime : Time.unscaledDeltaTime));
 
                 yield return new WaitForEndOfFrame();
             }
@@ -49,8 +53,8 @@ namespace NeedsVsWants.MenuSystem
             onAfterColor?.Invoke();
         }
 
-        protected virtual void onEnablePopUp() { }
-        protected virtual void onDisablePopUp() { }
+        protected virtual void OnEnablePopUp() { }
+        protected virtual void OnDisablePopUp() { }
 
         public void EnablePopUp()
         {
@@ -71,7 +75,7 @@ namespace NeedsVsWants.MenuSystem
 
             _Panel.raycastTarget = true;
 
-            onEnablePopUp();
+            OnEnablePopUp();
         }
 
         public void DisablePopUp()
@@ -95,7 +99,7 @@ namespace NeedsVsWants.MenuSystem
 
             _Panel.raycastTarget = false;
             
-            onDisablePopUp();
+            OnDisablePopUp();
         }
     }
 }
