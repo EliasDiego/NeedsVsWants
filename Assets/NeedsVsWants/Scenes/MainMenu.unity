@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028334, g: 0.2257134, b: 0.30692226, a: 1}
+  m_IndirectSpecularColor: {r: 0, g: 0.99999905, b: 0.99999905, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -589,18 +589,18 @@ MonoBehaviour:
     m_PressedTrigger: Pressed
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
-  m_Interactable: 0
+  m_Interactable: 1
   m_TargetGraphic: {fileID: 835246429}
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1474565947}
-        m_TargetAssemblyTypeName: NeedsVsWants.MenuSystem.Menu, Assembly-CSharp
-        m_MethodName: SwitchTo
-        m_Mode: 2
+      - m_Target: {fileID: 1816967837}
+        m_TargetAssemblyTypeName: NeedsVsWants.MenuSystem.PopUp, Assembly-CSharp
+        m_MethodName: EnablePopUp
+        m_Mode: 1
         m_Arguments:
-          m_ObjectArgument: {fileID: 1816967837}
-          m_ObjectArgumentAssemblyTypeName: NeedsVsWants.MenuSystem.Menu, Assembly-CSharp
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 

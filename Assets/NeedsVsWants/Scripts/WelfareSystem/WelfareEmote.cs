@@ -27,7 +27,7 @@ namespace NeedsVsWants.WelfareSystem
             }
         }
 
-        protected override void onDisablePopUp()
+        protected override void OnDisablePopUp()
         {
             transform.SetActiveChildren(true);
         }

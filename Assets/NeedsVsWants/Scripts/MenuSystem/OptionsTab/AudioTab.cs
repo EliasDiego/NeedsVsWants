@@ -47,5 +47,12 @@ namespace NeedsVsWants.MenuSystem
                 _AudioMixer.SetFloat("SfxVolume", VolumeClamp(volume));
             });
         }
+
+        public override void SetSettings()
+        {
+            _AudioMixer.SetFloat("MasterVolume", VolumeClamp(PlayerPrefs.GetFloat("MasterVolume", 0.5f)));
+            _AudioMixer.SetFloat("MusicVolume", VolumeClamp(PlayerPrefs.GetFloat("MusicVolume", 0.5f)));
+            _AudioMixer.SetFloat("SfxVolume", VolumeClamp(PlayerPrefs.GetFloat("SfxVolume", 0.5f)));
+        }
     }
 }
