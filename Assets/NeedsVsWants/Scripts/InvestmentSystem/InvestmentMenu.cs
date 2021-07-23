@@ -23,6 +23,8 @@ namespace NeedsVsWants.InvestmentSystem
         TMP_Text _CapitalText;
         [SerializeField]
         TMP_Text _ErrorText;
+        [SerializeField]
+        GameObject _TutorialSequence;
 
         InvestmentEvent _InvestmentEvent;
 
@@ -80,11 +82,15 @@ namespace NeedsVsWants.InvestmentSystem
             capitalText.text = StringFormat.ToPriceFormat(capital + capitalGainLoss);
 
             _ErrorText.gameObject.SetActive(false);
+
+            _TutorialSequence.SetActive(true);
         }
 
         protected override void OnDisableMenu()
         {
             transform.SetActiveChildren(false);
+            
+            _TutorialSequence.SetActive(false);
         }
 
         protected virtual bool HasReachedMinReq()

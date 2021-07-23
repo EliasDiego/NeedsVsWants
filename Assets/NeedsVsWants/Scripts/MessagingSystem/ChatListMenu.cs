@@ -24,6 +24,8 @@ namespace NeedsVsWants.MessagingSystem
         Audio.AudioAsset _ButtonClickAsset;
         [SerializeField]
         Indicator _Indicator;
+        [SerializeField]
+        GameObject _TutorialSequence;
 
         protected override void Start()
         {
@@ -74,6 +76,8 @@ namespace NeedsVsWants.MessagingSystem
         protected override void OnDisableMenu()
         {
             transform.SetActiveChildren(false);
+            
+            _TutorialSequence.SetActive(false);
         }
 
         protected override void OnEnableMenu()
@@ -83,6 +87,8 @@ namespace NeedsVsWants.MessagingSystem
             UpdateChatList();
 
             _ScrollRect.verticalNormalizedPosition = 1;
+            
+            _TutorialSequence.SetActive(true);
         }
 
         protected override void OnReturn()
