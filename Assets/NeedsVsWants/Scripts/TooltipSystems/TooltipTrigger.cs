@@ -10,11 +10,11 @@ namespace NeedsVsWants.TooltipSystems
         public string content;
         public string header;
 
-        public void OnPointerExit(PointerEventData eventData)
+        public virtual void OnPointerExit(PointerEventData eventData)
         {
             TooltipSystem.Hide();
         }
-        public void OnPointerEnter(PointerEventData eventData)
+        public virtual void OnPointerEnter(PointerEventData eventData)
         {
             TooltipSystem.Show(content, header);
         }
