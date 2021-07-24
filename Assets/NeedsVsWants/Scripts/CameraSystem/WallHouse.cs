@@ -20,27 +20,30 @@ namespace NeedsVsWants.CameraSystem
 
         {
 
-            if (IsCharacter(collider))
 
-            {
-                  
 
-                SetMaterialTransparent();
 
-                iTween.FadeTo(Roof, 0, 1);
 
-            }
+                Debug.Log("Hits!");
+               // SetMaterialTransparent();
+
+                //iTween.FadeTo(Roof, 0, 1);
+
+            
 
         }
 
-
+        private void Update()
+        {
+            
+        }
 
         private bool IsCharacter(Collider collider)
 
         {
             GameObject Phaser = collider.gameObject.GetComponent<GameObject>();
             
-            return true;  
+            return gameObject == collider.gameObject;  
 
         }
 
