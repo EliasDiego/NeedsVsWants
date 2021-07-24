@@ -12,22 +12,17 @@ namespace NeedsVsWants.CameraSystem
 
 
 
-        public GameObject Roof = null;
+        public MeshRenderer Roof = null;
         public GameObject Phaser = null;
-
+        
 
         void OnTriggerEnter(Collider collider)
 
         {
 
-
-
-            collider.gameObject.SetActive(false);
-
-                //Debug.Log("Hits!");
-               // SetMaterialTransparent();
-
-                //iTween.FadeTo(Roof, 0, 1);
+            Roof.enabled = false;
+            
+            
 
             
 
@@ -36,8 +31,9 @@ namespace NeedsVsWants.CameraSystem
         void OnTriggerExit(Collider collider)
 
         {
+            Roof.enabled = true;
 
-            collider.gameObject.SetActive(true);
+            // collider.gameObject.SetActive(true);
 
         }
 

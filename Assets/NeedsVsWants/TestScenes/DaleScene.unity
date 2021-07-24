@@ -226,6 +226,25 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 7923064176252973733, guid: afdcd0821b54c0745a0b0f5234d4f44b, type: 3}
   m_PrefabInstance: {fileID: 608285883}
   m_PrefabAsset: {fileID: 0}
+--- !u!23 &78032051 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 3698398804462587132, guid: afdcd0821b54c0745a0b0f5234d4f44b, type: 3}
+  m_PrefabInstance: {fileID: 608285883}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &78032052
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 78032049}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e31156602dc4fac4d9a6f158f6cbe051, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Roof: {fileID: 78032051}
+  Phaser: {fileID: 676982704}
 --- !u!65 &78032053
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2773,6 +2792,25 @@ Transform:
   m_CorrespondingSourceObject: {fileID: -5425150209629016298, guid: afdcd0821b54c0745a0b0f5234d4f44b, type: 3}
   m_PrefabInstance: {fileID: 608285883}
   m_PrefabAsset: {fileID: 0}
+--- !u!23 &518942595 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: -2243591395768579722, guid: afdcd0821b54c0745a0b0f5234d4f44b, type: 3}
+  m_PrefabInstance: {fileID: 608285883}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &518942596
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 518942593}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e31156602dc4fac4d9a6f158f6cbe051, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Roof: {fileID: 518942595}
+  Phaser: {fileID: 676982704}
 --- !u!65 &518942597
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2920,6 +2958,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -6452076736436044314, guid: afdcd0821b54c0745a0b0f5234d4f44b, type: 3}
+      propertyPath: m_Name
+      value: Wall_3 //Also Merge all children into one mesh for same purpose
+      objectReference: {fileID: 0}
+    - target: {fileID: 275953113564819894, guid: afdcd0821b54c0745a0b0f5234d4f44b, type: 3}
+      propertyPath: m_Name
+      value: 'wall_1 //Merge all children into one mesh for seethrough '
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: afdcd0821b54c0745a0b0f5234d4f44b, type: 3}
       propertyPath: m_Name
       value: Room Seperated Walls
@@ -3008,7 +3054,6 @@ GameObject:
   - component: {fileID: 676982707}
   - component: {fileID: 676982706}
   - component: {fileID: 676982705}
-  - component: {fileID: 676982709}
   - component: {fileID: 676982710}
   m_Layer: 0
   m_Name: SeeThroughCollider
@@ -3093,20 +3138,6 @@ Transform:
   m_Father: {fileID: 111114712}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &676982709
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 676982704}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e31156602dc4fac4d9a6f158f6cbe051, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Roof: {fileID: 78032049}
-  Phaser: {fileID: 676982704}
 --- !u!54 &676982710
 Rigidbody:
   m_ObjectHideFlags: 0
