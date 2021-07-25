@@ -1,11 +1,9 @@
 using System;
-using System.Collections.Generic;
-using System.Globalization;
 using System.Linq;
+using System.Globalization;
 
 using UnityEngine;
 
-using NeedsVsWants;
 using NeedsVsWants.Player;
 
 using TMPro;
@@ -145,26 +143,39 @@ namespace NeedsVsWants.CalendarSystem
             {
                 // Save a copy of the date to CalendarDay
                 day.dateTime = tempDate;
+
                 
                 // If not current month
                 if(tempDate.Month != currentMonth)
-                    day.color = _NotInMonthColor;
-
-                else if(tempDate.IsOnSameDay(currentDisplayDate, true))
                 {
-                    day.color = _CurrentDayColor;
+                    day.isWithinMonth = false;
 
-                    _MarkedCurrentDay = day;
+                    day.color = _NotInMonthColor;
                 }
 
                 else
                 {
-                    if(IsThereEvent(tempDate) && tempDate > _CurrentDisplayDate) // If there is an event and has not yet passed the current displayed date
-                        day.color = _HasEventsColor;
+                    day.isWithinMonth = true;
+
+                    day.calendarEvents = PlayerStatManager.instance.calendarEvents.Where(calendarEvent => calendarEvent.showOnCalendar && 
+                        calendarEvent.IsWithinDate(day.dateTime))?.ToArray();
+                    
+                    if(tempDate.IsOnSameDay(currentDisplayDate, true))
+                    {
+                        day.color = _CurrentDayColor;
+
+                        _MarkedCurrentDay = day;
+                    }
 
                     else
-                        day.color = _InMonthColor;
-                }
+                    {
+                        if(day.calendarEvents.Length > 0 && tempDate > _CurrentDisplayDate) // If there is an event and has not yet passed the current displayed date
+                            day.color = _HasEventsColor;
+
+                        else
+                            day.color = _InMonthColor;
+                    } 
+                } 
 
                 // Go to next day
                 tempDate = tempDate.AddDays(1);

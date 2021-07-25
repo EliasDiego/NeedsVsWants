@@ -10,8 +10,8 @@ namespace NeedsVsWants.TooltipSystems
     [ExecuteInEditMode()]
     public class Tooltip : MonoBehaviour
     {
-       
-    
+        [SerializeField] InputActionReference HoverPoint;
+
         public TextMeshProUGUI headerField;
 
         public TextMeshProUGUI contentField;
@@ -19,6 +19,13 @@ namespace NeedsVsWants.TooltipSystems
         public LayoutElement layoutElement;
 
         public int characterWrapLimit;
+
+        public RectTransform rectTransform;
+
+        private void Awake()
+        {
+            rectTransform = GetComponent<RectTransform>();
+        }
 
         public void SetText(string content, string header = "")
         {
@@ -50,8 +57,15 @@ namespace NeedsVsWants.TooltipSystems
                 layoutElement.enabled = (headerLength > characterWrapLimit || contentLength > characterWrapLimit) ? true : false;
             }
 
+            transform.position = HoverPoint.action.ReadValue<Vector2>();
+
+            float pivotX = HoverPoint.action.ReadValue<Vector2>().x/Screen.width;
+            float pivotY = HoverPoint.action.ReadValue<Vector2>().y/Screen.height;
+            rectTransform.pivot = new Vector2(pivotY, pivotX);
+            
         }
 
+        
         
 
     }
