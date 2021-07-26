@@ -262,6 +262,26 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7563c1cf9ebacc441b0689c443bb2d97, type: 3}
+--- !u!1 &185452997 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4023336157379714974, guid: 94ec9da883dd7d04999075eafc968485, type: 3}
+  m_PrefabInstance: {fileID: 760336206}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &185453002
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 185452997}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6de2bb1fa5f3d8541acb33ee8c3586ec, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  content: This investment will guarantee a 3% increase each year, but has a minimum
+    requirement of P100,000.
+  header: Time Deposit
 --- !u!1 &225432605 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 4023336158714720609, guid: 94ec9da883dd7d04999075eafc968485, type: 3}
@@ -4522,6 +4542,18 @@ PrefabInstance:
     - target: {fileID: 804857109830736203, guid: e41fe1ab918daeb4abd43601c0cbde31, type: 3}
       propertyPath: m_RootOrder
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 804857109830736203, guid: e41fe1ab918daeb4abd43601c0cbde31, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 804857109830736203, guid: e41fe1ab918daeb4abd43601c0cbde31, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 804857109830736203, guid: e41fe1ab918daeb4abd43601c0cbde31, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 804857109830736203, guid: e41fe1ab918daeb4abd43601c0cbde31, type: 3}
       propertyPath: m_LocalPosition.x
