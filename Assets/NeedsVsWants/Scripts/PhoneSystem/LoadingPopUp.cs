@@ -29,7 +29,7 @@ namespace NeedsVsWants.PhoneSystem
             onAfterRotation?.Invoke();
         }
 
-        protected override void onEnablePopUp()
+        protected override void OnEnablePopUp()
         {
             if(_AnimateRotationCoroutine != null)
                 StopCoroutine(_AnimateRotationCoroutine);
@@ -37,7 +37,7 @@ namespace NeedsVsWants.PhoneSystem
             _AnimateRotationCoroutine = StartCoroutine(AnimateRotation(_LoadingScreen.rectTransform, Quaternion.Euler(0, 0, 1), 2f, null));
         }
 
-        protected override void onDisablePopUp()
+        protected override void OnDisablePopUp()
         {
             if(_AnimateRotationCoroutine != null)
                 StopCoroutine(_AnimateRotationCoroutine);

@@ -26,10 +26,14 @@ namespace NeedsVsWants.MoneySystem
 
         public override void Invoke(DateTime dateTime)
         {
-            if(dateTime.Month == 12)
-                PlayerStatManager.instance.currentMoney += GetThirteenthMonthPay();
+            double income = 0;
 
-            PlayerStatManager.instance.currentMoney += incomeRate;
+            if(dateTime.Month == 12)
+                income += GetThirteenthMonthPay();
+
+            income += incomeRate;
+
+            DropSystem.DropManager.instance.SpawnDropsOnAnne(income, 5);
         }
 
         public override bool IsWithinDate(DateTime dateTime) => 

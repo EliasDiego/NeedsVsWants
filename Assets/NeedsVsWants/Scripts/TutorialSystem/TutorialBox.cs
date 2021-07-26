@@ -52,7 +52,7 @@ namespace NeedsVsWants.TutorialSystem
             onAfterScale?.Invoke();
         }
 
-        protected override void onEnablePopUp()
+        protected override void OnEnablePopUp()
         {
             if(_BoxScaleAnimation != null)
                 StopCoroutine(_BoxScaleAnimation);
@@ -64,7 +64,7 @@ namespace NeedsVsWants.TutorialSystem
             _OnEnable?.Invoke();
         }
 
-        protected override void onDisablePopUp()
+        protected override void OnDisablePopUp()
         {
             if(_BoxScaleAnimation != null)
                 StopCoroutine(_BoxScaleAnimation);
@@ -76,6 +76,16 @@ namespace NeedsVsWants.TutorialSystem
                 _NextTutorialBox?.gameObject.SetActive(true);
                 
                 _OnDisable?.Invoke();
+            }
+
+            else
+            {
+                TutorialBox currentTutorialBox = this;
+
+                while(currentTutorialBox._NextTutorialBox)
+                    currentTutorialBox = currentTutorialBox._NextTutorialBox;
+
+                currentTutorialBox._OnDisable?.Invoke();
             }
         }
 

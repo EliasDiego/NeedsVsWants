@@ -23,6 +23,8 @@ namespace NeedsVsWants.InvestmentSystem
         TMP_Text _CapitalText;
         [SerializeField]
         TMP_Text _ErrorText;
+        [SerializeField]
+        GameObject _TutorialSequence;
 
         InvestmentEvent _InvestmentEvent;
 
@@ -80,11 +82,15 @@ namespace NeedsVsWants.InvestmentSystem
             capitalText.text = StringFormat.ToPriceFormat(capital + capitalGainLoss);
 
             _ErrorText.gameObject.SetActive(false);
+
+            _TutorialSequence.SetActive(true);
         }
 
         protected override void OnDisableMenu()
         {
             transform.SetActiveChildren(false);
+            
+            _TutorialSequence.SetActive(false);
         }
 
         protected virtual bool HasReachedMinReq()
@@ -188,7 +194,7 @@ namespace NeedsVsWants.InvestmentSystem
             {
                 overallCapital -= parsedAmount;
 
-                PlayerStatManager.instance.currentMoney += parsedAmount;
+                DropSystem.DropManager.instance.SpawnDropsOnAnne(parsedAmount, 10);
 
                 capital = overallCapital;
                 capitalGainLoss = 0;
@@ -215,7 +221,7 @@ namespace NeedsVsWants.InvestmentSystem
             checkoutPopUp.hasSufficientFunds = overallCapital > 0;
             checkoutPopUp.onAfterProcessing = () => 
             {
-                PlayerStatManager.instance.currentMoney += overallCapital;
+                DropSystem.DropManager.instance.SpawnDropsOnAnne(overallCapital, 5);
 
                 capital = 0;
                 capitalGainLoss = 0;

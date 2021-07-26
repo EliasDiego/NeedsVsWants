@@ -26,14 +26,20 @@ namespace NeedsVsWants.ShoppingSystem
         LoadingPopUp _LoadingPopUp;
         [SerializeField]
         AudioAsset _ButtonClickAsset;
+        [SerializeField]
+        GameObject _TutorialSequence;
 
         [Header("Sale")]
         [SerializeField]
-        TMP_Text _Text;
+        TMP_Text _SaleText;
+        [SerializeField]
+        TMP_Text _ShopText;
         [SerializeField]
         VerticalLayoutGroup _SaleLeftList;
         [SerializeField]
         VerticalLayoutGroup _SaleRightList;
+        [SerializeField]
+        AudioAsset _SaleSFXAsset;
 
         [Header("Shop")]
         [SerializeField]
@@ -53,8 +59,11 @@ namespace NeedsVsWants.ShoppingSystem
             {
                 if(isActive)
                 {
-                    _ContentLayoutGroup.gameObject.SetActive(false);
-                    _ContentLayoutGroup.gameObject.SetActive(true);
+                    _ShopLeftList.transform.SetActiveChildren(false);
+                    _ShopRightList.transform.SetActiveChildren(false);
+
+                    _SaleLeftList.transform.SetActiveChildren(false);
+                    _SaleRightList.transform.SetActiveChildren(false);
 
                     StartCoroutine(UpdateItemList());
                 }
@@ -62,6 +71,7 @@ namespace NeedsVsWants.ShoppingSystem
 
             ObjectPoolManager.instance.Instantiate("Item Button");    
 
+            PlayerStatManager.instance.onAddItems += items => _SaleSFXAsset.PlayOneShot(audioSource);
             PlayerStatManager.instance.onEditItems += onItemListChange;
             PlayerStatManager.instance.onRemoveItems += onItemListChange;
         }
@@ -71,26 +81,44 @@ namespace NeedsVsWants.ShoppingSystem
             Item[] saleItems = Player.PlayerStatManager.instance.ShopItems.Where(items => items.isDiscounted).ToArray();
             Item[] shopItems = Player.PlayerStatManager.instance.ShopItems.Where(items => !items.isDiscounted).ToArray();
 
-            ItemButton[] shopItemButtons = ObjectPoolManager.instance.GetObjects("Item Button", shopItems.Length).
-                Select(g => g.GetComponent<ItemButton>()).ToArray();
-            ItemButton[] saleItemButtons = ObjectPoolManager.instance.GetObjects("Item Button", saleItems.Length).
-                Select(g => g.GetComponent<ItemButton>()).ToArray();
+            ItemButton itemButton;
 
             _LoadingPopUp.EnablePopUp();
 
-            _Text.transform.parent.gameObject.SetActive(saleItems.Length > 0);
+            _SaleText.transform.parent.gameObject.SetActive(saleItems.Length > 0);
 
-            for(int i = 0; i < shopItemButtons.Length; i++)
+            if(saleItems.Length > 0)
             {
-                shopItemButtons[i].AssignItem(shopItems[i], menuGroup as AppMenuGroup, _ItemViewerMenu, () => _ButtonClickAsset.PlayOneShot(audioSource));
-                shopItemButtons[i].transform.SetParent(i % 2 == 0 ? _ShopLeftList.transform : _ShopRightList.transform, false);
+                _SaleText.transform.parent.gameObject.SetActive(true);
+
+                for(int i = 0; i < saleItems.Length; i++)
+                {
+                    itemButton = ObjectPoolManager.instance.GetObject("Item Button").GetComponent<ItemButton>();
+
+                    itemButton.AssignItem(saleItems[i], menuGroup as AppMenuGroup, _ItemViewerMenu, () => _ButtonClickAsset.PlayOneShot(audioSource));
+                    itemButton.transform.SetParent(i % 2 == 0 ? _SaleLeftList.transform :_SaleRightList.transform, false);
+                }
             }
+
+            else
+                _SaleText.transform.parent.gameObject.SetActive(false);
+
+            if(shopItems.Length > 0)
+            {
+                _ShopText.transform.parent.gameObject.SetActive(true);
+                
+                for(int i = 0; i < shopItems.Length; i++)
+                {
+                    itemButton = ObjectPoolManager.instance.GetObject("Item Button").GetComponent<ItemButton>();
+
+                    itemButton.AssignItem(shopItems[i], menuGroup as AppMenuGroup, _ItemViewerMenu, () => _ButtonClickAsset.PlayOneShot(audioSource));
+                    itemButton.transform.SetParent(i % 2 == 0 ? _ShopLeftList.transform :_ShopRightList.transform, false);
+                }
+            }
+
+            else
+                _ShopText.transform.parent.gameObject.SetActive(false);
             
-            for(int i = 0; i < saleItemButtons.Length; i++)
-            {
-                saleItemButtons[i].AssignItem(saleItems[i], menuGroup as AppMenuGroup, _ItemViewerMenu, () => _ButtonClickAsset.PlayOneShot(audioSource));
-                saleItemButtons[i].transform.SetParent(i % 2 == 0 ? _SaleLeftList.transform : _SaleRightList.transform, false);
-            }
 
             _ContentLayoutGroup.enabled = false;
 
@@ -108,6 +136,8 @@ namespace NeedsVsWants.ShoppingSystem
             transform.SetActiveChildren(true);
 
             _UpdateListCoroutine = StartCoroutine(UpdateItemList());
+            
+            _TutorialSequence.SetActive(true);
         }
 
         protected override void OnDisableMenu() 
@@ -116,6 +146,8 @@ namespace NeedsVsWants.ShoppingSystem
 
             if(_UpdateListCoroutine != null)
                 StopCoroutine(_UpdateListCoroutine);
+            
+            _TutorialSequence.SetActive(false);
         }
 
         protected override void OnReturn() { }

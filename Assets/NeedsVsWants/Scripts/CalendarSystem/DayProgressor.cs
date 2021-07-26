@@ -3,8 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 
 using UnityEngine;
-
-using NeedsVsWants.Patterns;
+using UnityEngine.UI;
 
 using TMPro;
 
@@ -16,9 +15,9 @@ namespace NeedsVsWants.CalendarSystem
     {
         [Header("Day Speed")]
         [SerializeField]
-        double _HourTimeDelta = 1;
+        float _HourTimeDelta = 1;
         [SerializeField]
-        double _HourTimeScale = 1;
+        float _HourTimeScale = 1;
         
         int _CurrentMonth;
         int _CurrentDay;
@@ -27,11 +26,17 @@ namespace NeedsVsWants.CalendarSystem
         
         DateTime _CurrentDateTime;
 
+        Action _CurrentEvent;
+
         TMP_Text _TimeText;
+
+        public static float hourTimeScale { get; set; }
 
         void Awake()
         {
             _TimeText = GetComponentInChildren<TMP_Text>();
+
+            Unpause();
         }
 
         void Start() 
@@ -98,18 +103,39 @@ namespace NeedsVsWants.CalendarSystem
             PlayerStatManager.instance.currentDate = _CurrentDateTime;
         }
 
-        public void SetTimeScale(float scale) => _HourTimeScale = scale;
+        public void Skip()
+        {
+            _IsPaused = false;
+
+            hourTimeScale = _HourTimeScale = 2;
+
+            _CurrentEvent = Skip;
+        }
 
         public void Pause()
         {
             _IsPaused = true;
+
+            _CurrentEvent = Pause;
         }
 
         public void Unpause()
         {
             _IsPaused = false;
 
-            _HourTimeScale = 1;
+            hourTimeScale = _HourTimeScale = 1;
+            
+            _CurrentEvent = Unpause;
+        }
+
+        public void Stop()
+        {
+            _IsPaused = true;
+        }
+        
+        public void Resume()
+        {
+            _CurrentEvent?.Invoke();
         }
     }
 }

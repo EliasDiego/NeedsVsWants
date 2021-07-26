@@ -26,7 +26,7 @@ namespace NeedsVsWants.MenuSystem
 
             onAfterScale?.Invoke();
         }
-        protected override void onEnablePopUp()
+        protected override void OnEnablePopUp()
         {
             if(_BoxScaleAnimation != null)
                 StopCoroutine(_BoxScaleAnimation);
@@ -36,7 +36,7 @@ namespace NeedsVsWants.MenuSystem
             transform.SetActiveChildren(true);
         }
 
-        protected override void onDisablePopUp()
+        protected override void OnDisablePopUp()
         {
             if(_BoxScaleAnimation != null)
                 StopCoroutine(_BoxScaleAnimation);

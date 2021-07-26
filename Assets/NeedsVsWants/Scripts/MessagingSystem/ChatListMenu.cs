@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 
 using UnityEngine;
+using UnityEngine.UI;
 
 using NeedsVsWants.Player;
 using NeedsVsWants.Patterns;
@@ -16,11 +17,15 @@ namespace NeedsVsWants.MessagingSystem
         [SerializeField]
         ChatViewerMenu _ChatViewerMenu;
         [SerializeField]
+        ScrollRect _ScrollRect;
+        [SerializeField]
         Transform _ContentTransform;
         [SerializeField]
         Audio.AudioAsset _ButtonClickAsset;
         [SerializeField]
         Indicator _Indicator;
+        [SerializeField]
+        GameObject _TutorialSequence;
 
         protected override void Start()
         {
@@ -71,6 +76,8 @@ namespace NeedsVsWants.MessagingSystem
         protected override void OnDisableMenu()
         {
             transform.SetActiveChildren(false);
+            
+            _TutorialSequence.SetActive(false);
         }
 
         protected override void OnEnableMenu()
@@ -78,6 +85,10 @@ namespace NeedsVsWants.MessagingSystem
             transform.SetActiveChildren(true);
             
             UpdateChatList();
+
+            _ScrollRect.verticalNormalizedPosition = 1;
+            
+            _TutorialSequence.SetActive(true);
         }
 
         protected override void OnReturn()

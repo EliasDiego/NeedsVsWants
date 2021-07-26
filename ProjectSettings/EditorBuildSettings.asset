@@ -14,4 +14,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/NeedsVsWants/Scenes/EndMenu.unity
     guid: f8516317abdf734498301c912d8ffbbe
+  - enabled: 1
+    path: Assets/NeedsVsWants/Scenes/VictoryMenu.unity
+    guid: 5fd8b5086db722741af603cb3993a735
   m_configObjects: {}

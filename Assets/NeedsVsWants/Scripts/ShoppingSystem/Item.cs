@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 using UnityEngine;
 
-using NeedsVsWants.Player;
+using NeedsVsWants.DropSystem;
 using NeedsVsWants.WelfareSystem;
 
 namespace NeedsVsWants.ShoppingSystem
@@ -24,7 +24,7 @@ namespace NeedsVsWants.ShoppingSystem
 
         public virtual void OnBuy() 
         { 
-            PlayerStatManager.instance.CalculateWelfare(onBuyWelfareEffects);
+            DropManager.instance.SpawnDropsOnAnne(onBuyWelfareEffects, 5);
         }
     }
 }
