@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 2138677392}
-  m_IndirectSpecularColor: {r: 0.28462094, g: 0.37121028, b: 0.4988079, a: 1}
+  m_IndirectSpecularColor: {r: 0.284621, g: 0.3712107, b: 0.4988094, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -2415,7 +2415,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4023336158426826973, guid: 94ec9da883dd7d04999075eafc968485, type: 3}
       propertyPath: m_text
-      value: "IIn the Messages app, you can see messages from \nfamily and friends,
+      value: "In the Messages app, you can see messages from \nfamily and friends,
         and announcements for upcoming\n events. You will be notified by a sound
         and a pop-up \non your screen. Your friends or family will ask you to \njoin
         them for an event and say its cost. It\u2019s up to you\nwhether to go to
@@ -4988,7 +4988,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 36386732621869e4fb9175001cd91841, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 19.89
+      value: 19.51
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 36386732621869e4fb9175001cd91841, type: 3}
       propertyPath: m_LocalPosition.y
