@@ -14,16 +14,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   title: Reaching two years!
   characters:
-  - {fileID: 11400000, guid: 31ae858fb22c3f141a2b7a27060e2443, type: 2}
+  - {fileID: 11400000, guid: d50b51d4b556f7848b575e15a4b4104b, type: 2}
+  - {fileID: 11400000, guid: 4c03642d09e198548b6f62adf821e0c7, type: 2}
   messages:
   - characterIndex: 0
-    text: Hi! Congratulations for reaching the 2 year benchmark! We are still developing
-      the ending scene of our game. We hope you have enjoyed our game. Thank you
-      for playing!
+    text: Hi dear! Congrats on being indenpendent for two years!
+  - characterIndex: 0
+    text: Even though you're all grown-up, you're still our baby girl.
+  - characterIndex: 0
+    text: I hope you visit us every now and again okay?
+  - characterIndex: 1
+    text: Of course Ma!
   choices:
-  - name: 
+  - name: End Game
     nextConversation: {fileID: 0}
-    applyEffects: 0
+    applyEffects: 1
     moneyOnChoice: 0
     welfareOnChoice:
       _AmountType: 0
@@ -41,7 +46,7 @@ MonoBehaviour:
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
             m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 4
+            m_IntArgument: 3
             m_FloatArgument: 0
             m_StringArgument: 
             m_BoolArgument: 0
